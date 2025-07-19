@@ -108,27 +108,6 @@ function App() {
           }
         />
 
-        {/* Authentication Pages */}
-        <Route
-          path="/signin"
-          element={
-            <PlaceholderPage
-              title="Sign In"
-              description="Access your Transfermarbell account to manage bookings, view trip history, and update your preferences."
-            />
-          }
-        />
-
-        <Route
-          path="/signup"
-          element={
-            <PlaceholderPage
-              title="Create Account"
-              description="Join Transfermarbell and start booking premium private transfers. Choose your account type: Client, Driver, or Fleet Manager."
-            />
-          }
-        />
-
         {/* Catch-all route for 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
