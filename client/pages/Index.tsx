@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 
 export default function Index() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [bookingData, setBookingData] = useState({
     origin: "",
     destination: "",
