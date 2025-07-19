@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
 import {
   CalendarIcon,
   ClockIcon,
