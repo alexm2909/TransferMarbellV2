@@ -213,16 +213,16 @@ export default function Index() {
 
               <form onSubmit={handlePreBookingSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                  <div className="space-y-2">
+                                    <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <MapPinIcon className="w-4 h-4 text-ocean" />
                       From
                     </label>
-                    <Input
+                    <AddressAutocomplete
                       placeholder="Airport, hotel, address..."
                       value={preBookingData.origin}
-                      onChange={(e) =>
-                        setPreBookingData({ ...preBookingData, origin: e.target.value })
+                      onChange={(value) =>
+                        setPreBookingData({ ...preBookingData, origin: value })
                       }
                       className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
                       required
