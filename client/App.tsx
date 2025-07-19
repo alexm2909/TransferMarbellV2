@@ -22,6 +22,13 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
+        {/* Booking Flow */}
+        <Route path="/book" element={<BookingForm />} />
+
+        {/* Authentication */}
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+
         {/* User Role Pages */}
         <Route
           path="/driver"
