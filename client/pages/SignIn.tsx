@@ -26,6 +26,40 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Test credentials for different user roles
+  const testCredentials = {
+    "cliente@test.com": {
+      password: "123456",
+      role: "client",
+      name: "Ana García",
+      phone: "+34 600 123 456",
+    },
+    "conductor@test.com": {
+      password: "123456",
+      role: "driver",
+      name: "Carlos Rodríguez",
+      phone: "+34 600 654 321",
+    },
+    "flota@test.com": {
+      password: "123456",
+      role: "fleet-manager",
+      name: "María López",
+      phone: "+34 600 789 012",
+    },
+    "admin@test.com": {
+      password: "123456",
+      role: "admin",
+      name: "José Martínez",
+      phone: "+34 600 345 678",
+    },
+    "empresa@test.com": {
+      password: "123456",
+      role: "business",
+      name: "Hotel Majestic",
+      phone: "+34 952 123 456",
+    },
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -34,27 +68,56 @@ export default function SignIn() {
       // Mock authentication - replace with real authentication
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Set authentication status
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("userRole", "client");
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          email: formData.email,
-          name: "John Doe",
-          role: "client",
-        }),
-      );
+      // Check if it's a test credential
+      const testUser =
+        testCredentials[
+          formData.email.toLowerCase() as keyof typeof testCredentials
+        ];
 
-      // Redirect based on the redirect parameter or default to dashboard
-      if (redirectPath === "book") {
-        navigate("/book");
+      if (testUser && formData.password === testUser.password) {
+        // Set authentication status with test user data
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("userRole", testUser.role);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: formData.email,
+            name: testUser.name,
+            role: testUser.role,
+            phone: testUser.phone,
+          }),
+        );
+
+        // Redirect based on the redirect parameter or default to dashboard
+        if (redirectPath === "book") {
+          navigate("/book");
+        } else {
+          navigate("/dashboard");
+        }
+      } else if (formData.email && formData.password) {
+        // Default user for any other email/password combination
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("userRole", "client");
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: formData.email,
+            name: "Usuario Demo",
+            role: "client",
+          }),
+        );
+
+        if (redirectPath === "book") {
+          navigate("/book");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
-        navigate("/dashboard");
+        throw new Error("Invalid credentials");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please try again.");
+      alert("Login failed. Please check your credentials and try again.");
     } finally {
       setIsLoading(false);
     }
