@@ -1,52 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
-  UsersIcon,
-  LuggageIcon,
   CarIcon,
-  PlaneIcon,
   ShieldCheckIcon,
   StarIcon,
   MessageSquareIcon,
   MenuIcon,
   XIcon,
+  ArrowRightIcon,
 } from "lucide-react";
 
 export default function Index() {
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [bookingData, setBookingData] = useState({
+  const [preBookingData, setPreBookingData] = useState({
     origin: "",
     destination: "",
     date: "",
     time: "",
-    passengers: "1",
-    children: "0",
-    luggage: "1",
-    vehicleType: "",
-    flightNumber: "",
   });
-
-  const vehicleTypes = [
-    { id: "economy", name: "Economy", capacity: "1-3", price: "From €25" },
-    { id: "comfort", name: "Comfort", capacity: "1-3", price: "From €35" },
-    { id: "premium", name: "Premium", capacity: "1-3", price: "From €50" },
-    { id: "van", name: "Van", capacity: "4-8", price: "From €65" },
-    { id: "luxury", name: "Luxury", capacity: "1-3", price: "From €80" },
-  ];
 
   const features = [
     {
@@ -65,6 +43,18 @@ export default function Index() {
       desc: "Chat with your driver",
     },
   ];
+
+  const handlePreBookingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Store pre-booking data in localStorage for later use
+    localStorage.setItem('preBookingData', JSON.stringify(preBookingData));
+    
+    // Navigate to complete booking form
+    navigate('/book');
+  };
+
+  const isPreFormValid = preBookingData.origin && preBookingData.destination && preBookingData.date && preBookingData.time;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-ocean-light via-sky to-coral-light">
@@ -115,9 +105,9 @@ export default function Index() {
                   Sign In
                 </Button>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/signup">
                 <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                  Book Now
+                  Register
                 </Button>
               </Link>
             </div>
@@ -180,12 +170,12 @@ export default function Index() {
                       Sign In
                     </Button>
                   </Link>
-                  <Link to="/dashboard" className="flex-1">
+                  <Link to="/signup" className="flex-1">
                     <Button
                       className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Book Now
+                      Register
                     </Button>
                   </Link>
                 </div>
@@ -212,210 +202,101 @@ export default function Index() {
             </p>
           </div>
 
-          {/* Booking Form */}
+          {/* Simplified Pre-Booking Form */}
           <Card className="max-w-4xl mx-auto shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
             <CardContent className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <MapPinIcon className="w-4 h-4 text-ocean" />
-                    From
-                  </label>
-                  <Input
-                    placeholder="Airport, hotel, address..."
-                    value={bookingData.origin}
-                    onChange={(e) =>
-                      setBookingData({ ...bookingData, origin: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <MapPinIcon className="w-4 h-4 text-coral" />
-                    To
-                  </label>
-                  <Input
-                    placeholder="Airport, hotel, address..."
-                    value={bookingData.destination}
-                    onChange={(e) =>
-                      setBookingData({
-                        ...bookingData,
-                        destination: e.target.value,
-                      })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <CalendarIcon className="w-4 h-4 text-ocean" />
-                    Date
-                  </label>
-                  <Input
-                    type="date"
-                    value={bookingData.date}
-                    onChange={(e) =>
-                      setBookingData({ ...bookingData, date: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <ClockIcon className="w-4 h-4 text-ocean" />
-                    Time
-                  </label>
-                  <Input
-                    type="time"
-                    value={bookingData.time}
-                    onChange={(e) =>
-                      setBookingData({ ...bookingData, time: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                  />
-                </div>
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-navy mb-2">Book Your Transfer</h2>
+                <p className="text-gray-600">Enter your journey details to get started</p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <UsersIcon className="w-4 h-4 text-ocean" />
-                    Passengers
-                  </label>
-                  <Select
-                    value={bookingData.passengers}
-                    onValueChange={(value) =>
-                      setBookingData({ ...bookingData, passengers: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                        <SelectItem key={num} value={num.toString()}>
-                          {num}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+              <form onSubmit={handlePreBookingSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                      <MapPinIcon className="w-4 h-4 text-ocean" />
+                      From
+                    </label>
+                    <Input
+                      placeholder="Airport, hotel, address..."
+                      value={preBookingData.origin}
+                      onChange={(e) =>
+                        setPreBookingData({ ...preBookingData, origin: e.target.value })
+                      }
+                      className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
+                      required
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Children
-                  </label>
-                  <Select
-                    value={bookingData.children}
-                    onValueChange={(value) =>
-                      setBookingData({ ...bookingData, children: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {[0, 1, 2, 3, 4].map((num) => (
-                        <SelectItem key={num} value={num.toString()}>
-                          {num}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <LuggageIcon className="w-4 h-4 text-ocean" />
-                    Luggage
-                  </label>
-                  <Select
-                    value={bookingData.luggage}
-                    onValueChange={(value) =>
-                      setBookingData({ ...bookingData, luggage: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {[0, 1, 2, 3, 4, 5, 6].map((num) => (
-                        <SelectItem key={num} value={num.toString()}>
-                          {num}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <PlaneIcon className="w-4 h-4 text-ocean" />
-                    Flight (optional)
-                  </label>
-                  <Input
-                    placeholder="IB1234"
-                    value={bookingData.flightNumber}
-                    onChange={(e) =>
-                      setBookingData({
-                        ...bookingData,
-                        flightNumber: e.target.value,
-                      })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                  />
-                </div>
-              </div>
-
-              {/* Vehicle Selection */}
-              <div className="space-y-4 mb-6">
-                <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                  <CarIcon className="w-4 h-4 text-ocean" />
-                  Select Vehicle Type
-                </label>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                  {vehicleTypes.map((vehicle) => (
-                    <div
-                      key={vehicle.id}
-                      className={`border-2 rounded-lg p-4 cursor-pointer transition-all hover:border-ocean ${
-                        bookingData.vehicleType === vehicle.id
-                          ? "border-ocean bg-ocean-light"
-                          : "border-gray-200"
-                      }`}
-                      onClick={() =>
-                        setBookingData({
-                          ...bookingData,
-                          vehicleType: vehicle.id,
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                      <MapPinIcon className="w-4 h-4 text-coral" />
+                      To
+                    </label>
+                    <Input
+                      placeholder="Airport, hotel, address..."
+                      value={preBookingData.destination}
+                      onChange={(e) =>
+                        setPreBookingData({
+                          ...preBookingData,
+                          destination: e.target.value,
                         })
                       }
-                    >
-                      <div className="text-center">
-                        <CarIcon className="w-8 h-8 mx-auto mb-2 text-ocean" />
-                        <h3 className="font-semibold text-gray-900">
-                          {vehicle.name}
-                        </h3>
-                        <p className="text-xs text-gray-500">
-                          {vehicle.capacity} pax
-                        </p>
-                        <Badge variant="secondary" className="mt-1 text-xs">
-                          {vehicle.price}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                      className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
+                      required
+                    />
+                  </div>
 
-              <Button
-                size="lg"
-                className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-4 text-lg"
-              >
-                Search Available Transfers
-              </Button>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                      <CalendarIcon className="w-4 h-4 text-ocean" />
+                      Date
+                    </label>
+                    <Input
+                      type="date"
+                      value={preBookingData.date}
+                      min={new Date().toISOString().split('T')[0]}
+                      onChange={(e) =>
+                        setPreBookingData({ ...preBookingData, date: e.target.value })
+                      }
+                      className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                      <ClockIcon className="w-4 h-4 text-ocean" />
+                      Time
+                    </label>
+                    <Input
+                      type="time"
+                      value={preBookingData.time}
+                      onChange={(e) =>
+                        setPreBookingData({ ...preBookingData, time: e.target.value })
+                      }
+                      className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={!isPreFormValid}
+                  className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Continue Booking
+                  <ArrowRightIcon className="w-5 h-5 ml-2" />
+                </Button>
+              </form>
+
+              <div className="mt-4 text-center">
+                <p className="text-sm text-gray-500">
+                  Next: Select vehicle type, passengers, and complete your booking
+                </p>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -451,6 +332,36 @@ export default function Index() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Additional Info Section */}
+      <div className="bg-gradient-to-r from-ocean-light to-coral-light py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-navy mb-4">
+            Ready to Book Your Transfer?
+          </h2>
+          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+            Join thousands of satisfied customers who trust Transfermarbell for their private transportation needs across Costa del Sol.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold px-8"
+              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Book Now
+            </Button>
+            <Link to="/fleet">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-ocean text-ocean hover:bg-ocean hover:text-white font-semibold px-8"
+              >
+                View Our Fleet
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -506,7 +417,7 @@ export default function Index() {
             <p>&copy; 2024 Transfermarbell. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }
