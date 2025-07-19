@@ -47,15 +47,19 @@ export default function Index() {
 
   const handlePreBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Store pre-booking data in localStorage for later use
-    localStorage.setItem('preBookingData', JSON.stringify(preBookingData));
-    
+    localStorage.setItem("preBookingData", JSON.stringify(preBookingData));
+
     // Navigate to complete booking form
-    navigate('/book');
+    navigate("/book");
   };
 
-  const isPreFormValid = preBookingData.origin && preBookingData.destination && preBookingData.date && preBookingData.time;
+  const isPreFormValid =
+    preBookingData.origin &&
+    preBookingData.destination &&
+    preBookingData.date &&
+    preBookingData.time;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-ocean-light via-sky to-coral-light">
@@ -207,13 +211,17 @@ export default function Index() {
           <Card className="max-w-4xl mx-auto shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
             <CardContent className="p-8">
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-navy mb-2">Book Your Transfer</h2>
-                <p className="text-gray-600">Enter your journey details to get started</p>
+                <h2 className="text-2xl font-bold text-navy mb-2">
+                  Book Your Transfer
+                </h2>
+                <p className="text-gray-600">
+                  Enter your journey details to get started
+                </p>
               </div>
 
               <form onSubmit={handlePreBookingSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                                    <div className="space-y-2">
+                  <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <MapPinIcon className="w-4 h-4 text-ocean" />
                       From
@@ -234,13 +242,13 @@ export default function Index() {
                       <MapPinIcon className="w-4 h-4 text-coral" />
                       To
                     </label>
-                    <Input
+                    <AddressAutocomplete
                       placeholder="Airport, hotel, address..."
                       value={preBookingData.destination}
-                      onChange={(e) =>
+                      onChange={(value) =>
                         setPreBookingData({
                           ...preBookingData,
-                          destination: e.target.value,
+                          destination: value,
                         })
                       }
                       className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
@@ -256,9 +264,12 @@ export default function Index() {
                     <Input
                       type="date"
                       value={preBookingData.date}
-                      min={new Date().toISOString().split('T')[0]}
+                      min={new Date().toISOString().split("T")[0]}
                       onChange={(e) =>
-                        setPreBookingData({ ...preBookingData, date: e.target.value })
+                        setPreBookingData({
+                          ...preBookingData,
+                          date: e.target.value,
+                        })
                       }
                       className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
                       required
@@ -274,7 +285,10 @@ export default function Index() {
                       type="time"
                       value={preBookingData.time}
                       onChange={(e) =>
-                        setPreBookingData({ ...preBookingData, time: e.target.value })
+                        setPreBookingData({
+                          ...preBookingData,
+                          time: e.target.value,
+                        })
                       }
                       className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
                       required
@@ -295,7 +309,8 @@ export default function Index() {
 
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-500">
-                  Next: Select vehicle type, passengers, and complete your booking
+                  Next: Select vehicle type, passengers, and complete your
+                  booking
                 </p>
               </div>
             </CardContent>
@@ -344,13 +359,18 @@ export default function Index() {
             Ready to Book Your Transfer?
           </h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust Transfermarbell for their private transportation needs across Costa del Sol.
+            Join thousands of satisfied customers who trust Transfermarbell for
+            their private transportation needs across Costa del Sol.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
               className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold px-8"
-              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .querySelector("form")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             >
               Book Now
             </Button>
@@ -418,7 +438,7 @@ export default function Index() {
             <p>&copy; 2024 Transfermarbell. All rights reserved.</p>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
