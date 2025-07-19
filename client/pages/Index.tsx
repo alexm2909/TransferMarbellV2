@@ -72,50 +72,126 @@ export default function Index() {
       <nav className="bg-white/95 backdrop-blur-sm border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
                 <CarIcon className="w-5 h-5 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
                 Transfermarbell
               </span>
-            </div>
+            </Link>
+
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6">
-              <a
-                href="#"
+              <Link
+                to="/services"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
                 Services
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/fleet"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
                 Fleet
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/business"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
                 Business
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/support"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
                 Support
-              </a>
+              </Link>
+              <Link to="/signin">
+                <Button
+                  variant="outline"
+                  className="border-ocean text-ocean hover:bg-ocean hover:text-white"
+                >
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/dashboard">
+                <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                  Book Now
+                </Button>
+              </Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
               <Button
-                variant="outline"
-                className="border-ocean text-ocean hover:bg-ocean hover:text-white"
+                variant="ghost"
+                size="sm"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
-                Sign In
-              </Button>
-              <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                Book Now
+                {mobileMenuOpen ? (
+                  <XIcon className="w-6 h-6" />
+                ) : (
+                  <MenuIcon className="w-6 h-6" />
+                )}
               </Button>
             </div>
           </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t bg-white/95 backdrop-blur-sm">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <Link
+                  to="/services"
+                  className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Services
+                </Link>
+                <Link
+                  to="/fleet"
+                  className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Fleet
+                </Link>
+                <Link
+                  to="/business"
+                  className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Business
+                </Link>
+                <Link
+                  to="/support"
+                  className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Support
+                </Link>
+                <div className="flex space-x-3 px-3 pt-2">
+                  <Link to="/signin" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/dashboard" className="flex-1">
+                    <Button
+                      className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Book Now
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
