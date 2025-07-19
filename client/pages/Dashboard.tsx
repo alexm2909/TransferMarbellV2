@@ -112,9 +112,11 @@ export default function Dashboard() {
                   <p className="text-gray-600 mb-6">
                     Ready to book your first transfer? Let's get started!
                   </p>
-                  <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                    Book New Transfer
-                  </Button>
+                  <Link to="/book">
+                    <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                      Book New Transfer
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
