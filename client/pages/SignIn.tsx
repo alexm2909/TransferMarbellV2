@@ -309,6 +309,45 @@ export default function SignIn() {
               </div>
             </div>
 
+            {/* Test Credentials Section */}
+            <div className="mt-6 p-4 bg-gradient-to-r from-ocean-light to-coral-light rounded-lg">
+              <h3 className="text-sm font-semibold text-navy mb-3 text-center">
+                🧪 Credenciales de Prueba
+              </h3>
+              <div className="grid grid-cols-1 gap-2 text-xs">
+                <div className="flex justify-between items-center py-1">
+                  <span className="font-medium text-gray-700">👤 Cliente:</span>
+                  <span className="text-gray-600">
+                    cliente@test.com / 123456
+                  </span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span className="font-medium text-gray-700">
+                    🚗 Conductor:
+                  </span>
+                  <span className="text-gray-600">
+                    conductor@test.com / 123456
+                  </span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span className="font-medium text-gray-700">
+                    👥 Jefe Flota:
+                  </span>
+                  <span className="text-gray-600">flota@test.com / 123456</span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span className="font-medium text-gray-700">⚙️ Admin:</span>
+                  <span className="text-gray-600">admin@test.com / 123456</span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span className="font-medium text-gray-700">🏢 Empresa:</span>
+                  <span className="text-gray-600">
+                    empresa@test.com / 123456
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Don't have an account?{" "}
