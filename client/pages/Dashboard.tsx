@@ -13,29 +13,67 @@ import {
 } from "lucide-react";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout, isLoading } = useAuth();
+
+  // Redirect to signin if not authenticated
+  if (!isLoading && !isAuthenticated) {
+    navigate("/signin");
+    return null;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center mx-auto mb-4">
+            <CarIcon className="w-5 h-5 text-white" />
+          </div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  const getRoleBadge = (role: string) => {
+    const roleMap = {
+      client: "Client Dashboard",
+      driver: "Driver Dashboard",
+      "fleet-manager": "Fleet Manager Dashboard",
+      admin: "Admin Dashboard",
+      business: "Business Dashboard",
+    };
+    return roleMap[role as keyof typeof roleMap] || "Dashboard";
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
                 <CarIcon className="w-5 h-5 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
                 Transfermarbell
               </span>
-            </div>
+            </Link>
             <div className="flex items-center space-x-4">
               <Badge variant="outline" className="border-ocean text-ocean">
-                Client Dashboard
+                {getRoleBadge(user?.role || "")}
               </Badge>
               <Button variant="ghost" size="sm">
                 <SettingsIcon className="w-4 h-4 mr-2" />
                 Settings
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
                 <LogOutIcon className="w-4 h-4 mr-2" />
                 Sign Out
               </Button>
@@ -46,7 +84,9 @@ export default function Dashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-navy">Welcome back, John!</h1>
+          <h1 className="text-3xl font-bold text-navy">
+            Welcome back, {user?.name?.split(" ")[0] || "User"}!
+          </h1>
           <p className="text-gray-600 mt-2">
             Manage your bookings and account settings
           </p>
