@@ -145,13 +145,15 @@ export default function Dashboard() {
                 <CardTitle>Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
-                >
-                  <CarIcon className="w-4 h-4 mr-2" />
-                  Book Transfer
-                </Button>
+                <Link to="/book">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
+                  >
+                    <CarIcon className="w-4 h-4 mr-2" />
+                    Book Transfer
+                  </Button>
+                </Link>
                 <Button variant="outline" className="w-full justify-start">
                   <CalendarIcon className="w-4 h-4 mr-2" />
                   View Bookings
