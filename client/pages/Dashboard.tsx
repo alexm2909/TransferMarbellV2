@@ -649,19 +649,21 @@ export default function Dashboard() {
                 )}
                 {user?.role === "business" && (
                   <>
-                    <Link to="/book">
+                    <Link to="/business-panel">
                       <Button
                         variant="outline"
                         className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
                       >
+                        <BuildingIcon className="w-4 h-4 mr-2" />
+                        Panel Empresarial
+                      </Button>
+                    </Link>
+                    <Link to="/book">
+                      <Button variant="outline" className="w-full justify-start">
                         <CarIcon className="w-4 h-4 mr-2" />
                         Nueva Reserva
                       </Button>
                     </Link>
-                    <Button variant="outline" className="w-full justify-start">
-                      <CalendarIcon className="w-4 h-4 mr-2" />
-                      Calendario
-                    </Button>
                     <Button variant="outline" className="w-full justify-start">
                       <EuroIcon className="w-4 h-4 mr-2" />
                       Facturación
