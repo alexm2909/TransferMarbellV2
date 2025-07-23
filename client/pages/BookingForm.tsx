@@ -153,11 +153,16 @@ export default function BookingForm() {
 
     // Process booking
     console.log("Booking submitted:", bookingData);
+    console.log("Child seats:", childSeats);
+
+    // Generate booking ID
+    const bookingId = "TM" + Date.now().toString().slice(-6);
+
     // Here you would typically send the data to your backend
-    alert(
-      "Booking submitted successfully! You will receive a confirmation email shortly.",
-    );
-    navigate("/dashboard");
+    // For demo, we'll simulate a successful booking
+    setTimeout(() => {
+      navigate(`/booking-confirmation?id=${bookingId}`);
+    }, 1000);
   };
 
   const handleChildSeatsChange = (seats: ChildSeat[]) => {
