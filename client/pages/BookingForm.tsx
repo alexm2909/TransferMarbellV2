@@ -284,6 +284,13 @@ export default function BookingForm() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Route Map */}
+              <RouteMap
+                origin={bookingData.origin}
+                destination={bookingData.destination}
+                className="w-full"
+              />
+
               {/* Journey Details */}
               <Card>
                 <CardHeader>
