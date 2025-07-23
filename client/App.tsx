@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import BookingForm from "./pages/BookingForm";
+import BookingConfirmation from "./pages/BookingConfirmation";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Fleet from "./pages/Fleet";
