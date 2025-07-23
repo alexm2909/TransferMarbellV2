@@ -259,40 +259,44 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 text-ocean" />
-                      Date
+                      Fecha
                     </label>
-                    <Input
-                      type="date"
-                      value={preBookingData.date}
-                      min={new Date().toISOString().split("T")[0]}
-                      onChange={(e) =>
-                        setPreBookingData({
-                          ...preBookingData,
-                          date: e.target.value,
-                        })
-                      }
-                      className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
-                      required
-                    />
+                    <div className="relative">
+                      <Input
+                        type="date"
+                        value={preBookingData.date}
+                        min={new Date().toISOString().split("T")[0]}
+                        onChange={(e) =>
+                          setPreBookingData({
+                            ...preBookingData,
+                            date: e.target.value,
+                          })
+                        }
+                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12 text-gray-700 bg-white hover:border-ocean/60 transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:bg-ocean [&::-webkit-calendar-picker-indicator]:rounded-md [&::-webkit-calendar-picker-indicator]:p-1"
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 text-ocean" />
-                      Time
+                      Hora
                     </label>
-                    <Input
-                      type="time"
-                      value={preBookingData.time}
-                      onChange={(e) =>
-                        setPreBookingData({
-                          ...preBookingData,
-                          time: e.target.value,
-                        })
-                      }
-                      className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
-                      required
-                    />
+                    <div className="relative">
+                      <Input
+                        type="time"
+                        value={preBookingData.time}
+                        onChange={(e) =>
+                          setPreBookingData({
+                            ...preBookingData,
+                            time: e.target.value,
+                          })
+                        }
+                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12 text-gray-700 bg-white hover:border-ocean/60 transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
 
