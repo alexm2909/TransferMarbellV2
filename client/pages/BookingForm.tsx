@@ -29,6 +29,14 @@ import {
   CreditCardIcon,
 } from "lucide-react";
 
+interface ChildSeat {
+  childIndex: number;
+  age: number;
+  seatType: string;
+  description: string;
+  price: number;
+}
+
 interface BookingData {
   origin: string;
   destination: string;
