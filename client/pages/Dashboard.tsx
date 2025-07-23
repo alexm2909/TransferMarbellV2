@@ -628,13 +628,15 @@ export default function Dashboard() {
                 )}
                 {user?.role === "admin" && (
                   <>
-                    <Button
-                      variant="outline"
-                      className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
-                    >
-                      <SettingsIcon className="w-4 h-4 mr-2" />
-                      Panel Admin
-                    </Button>
+                    <Link to="/admin-panel">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
+                      >
+                        <SettingsIcon className="w-4 h-4 mr-2" />
+                        Panel Admin
+                      </Button>
+                    </Link>
                     <Button variant="outline" className="w-full justify-start">
                       <UsersIcon className="w-4 h-4 mr-2" />
                       Usuarios
