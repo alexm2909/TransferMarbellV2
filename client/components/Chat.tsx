@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
+import { useChat } from "@/hooks/useChat";
 import {
   MessageSquareIcon,
   SendIcon,
@@ -14,18 +15,8 @@ import {
   CheckIcon,
   CheckCheckIcon,
   XIcon,
+  NavigationIcon,
 } from "lucide-react";
-
-interface Message {
-  id: string;
-  senderId: string;
-  senderName: string;
-  senderRole: "client" | "driver";
-  content: string;
-  timestamp: Date;
-  type: "text" | "location" | "system";
-  read: boolean;
-}
 
 interface ChatProps {
   tripId?: string;
