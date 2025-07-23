@@ -34,15 +34,20 @@ export default function ChatPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-navy mb-2">Chat con tu Conductor</h1>
+          <h1 className="text-3xl font-bold text-navy mb-2">
+            {user?.role === "driver" ? "Chat con el Cliente" : "Chat con tu Conductor"}
+          </h1>
           <p className="text-gray-600">
-            Mantente en contacto con tu conductor en tiempo real
+            {user?.role === "driver"
+              ? "Mantente en contacto con tu cliente durante el viaje"
+              : "Mantente en contacto con tu conductor en tiempo real"
+            }
           </p>
         </div>
 
         <div className="h-[600px]">
-          <Chat 
-            tripId="TM123456"
+          <Chat
+            tripId={tripId}
             driverName="Carlos Rodríguez"
             driverPhone="+34 600 123 456"
             isActive={true}
