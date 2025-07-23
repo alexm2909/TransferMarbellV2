@@ -570,6 +570,12 @@ export default function Dashboard() {
                         Reservar Traslado
                       </Button>
                     </Link>
+                    <Link to="/chat">
+                      <Button variant="outline" className="w-full justify-start">
+                        <MessageSquareIcon className="w-4 h-4 mr-2" />
+                        Chat con Conductor
+                      </Button>
+                    </Link>
                     <Button variant="outline" className="w-full justify-start">
                       <CalendarIcon className="w-4 h-4 mr-2" />
                       Ver Reservas
