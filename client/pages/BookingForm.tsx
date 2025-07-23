@@ -295,36 +295,38 @@ export default function BookingForm() {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        From
+                      <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                        <MapPinIcon className="w-4 h-4 text-green-500" />
+                        Origen
                       </label>
-                      <Input
-                        placeholder="Airport, hotel, address..."
+                      <AddressAutocomplete
+                        placeholder="Aeropuerto, hotel, dirección..."
                         value={bookingData.origin}
-                        onChange={(e) =>
+                        onChange={(value) =>
                           setBookingData({
                             ...bookingData,
-                            origin: e.target.value,
+                            origin: value,
                           })
                         }
-                        className="border-gray-200 focus:border-ocean focus:ring-ocean"
+                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        To
+                      <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                        <MapPinIcon className="w-4 h-4 text-red-500" />
+                        Destino
                       </label>
-                      <Input
-                        placeholder="Airport, hotel, address..."
+                      <AddressAutocomplete
+                        placeholder="Aeropuerto, hotel, dirección..."
                         value={bookingData.destination}
-                        onChange={(e) =>
+                        onChange={(value) =>
                           setBookingData({
                             ...bookingData,
-                            destination: e.target.value,
+                            destination: value,
                           })
                         }
-                        className="border-gray-200 focus:border-ocean focus:ring-ocean"
+                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12"
                         required
                       />
                     </div>
