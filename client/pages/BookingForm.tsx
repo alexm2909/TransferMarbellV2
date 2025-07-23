@@ -127,16 +127,6 @@ export default function BookingForm() {
   ];
 
   useEffect(() => {
-    // Check if user is authenticated (mock check for now)
-    const authStatus = localStorage.getItem("isAuthenticated");
-    const userData = localStorage.getItem("user");
-
-    if (authStatus === "true" && userData) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-
     // Load pre-booking data from localStorage
     const preBookingData = localStorage.getItem("preBookingData");
     if (preBookingData) {
