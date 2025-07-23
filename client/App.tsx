@@ -37,6 +37,12 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
 
+        {/* Chat and Advanced Panels */}
+        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/admin-panel" element={<AdminPanel />} />
+        <Route path="/fleet-panel" element={<FleetManagerPanel />} />
+        <Route path="/business-panel" element={<BusinessPanel />} />
+
         {/* User Role Pages */}
         <Route
           path="/driver"
