@@ -160,11 +160,19 @@ export default function BookingForm() {
     navigate("/dashboard");
   };
 
+  const handleChildSeatsChange = (seats: ChildSeat[]) => {
+    setChildSeats(seats);
+    setBookingData(prev => ({
+      ...prev,
+      childSeats: seats.length.toString()
+    }));
+  };
+
   const calculateEstimatedPrice = () => {
-    const basePrice =
-      vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price ||
-      "€25";
-    return basePrice;
+    const basePrice = vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price || "€25";
+    const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ''));
+    const childSeatsPrice = childSeats.reduce((total, seat) => total + seat.price, 0);
+    return `€${basePriceNum + childSeatsPrice}`;
   };
 
   if (!isAuthenticated) {
