@@ -496,6 +496,16 @@ export default function BookingForm() {
                       </Select>
                     </div>
                   </div>
+
+                  {/* Children Age Selector */}
+                  {parseInt(bookingData.children) > 0 && (
+                    <div className="mt-6">
+                      <ChildrenAgeSelector
+                        numberOfChildren={parseInt(bookingData.children)}
+                        onChildSeatsChange={handleChildSeatsChange}
+                      />
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
