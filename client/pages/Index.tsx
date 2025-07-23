@@ -243,7 +243,7 @@ export default function Index() {
                       To
                     </label>
                     <AddressAutocomplete
-                      placeholder="Airport, hotel, address..."
+                      placeholder="Aeropuerto, hotel, dirección..."
                       value={preBookingData.destination}
                       onChange={(value) =>
                         setPreBookingData({
