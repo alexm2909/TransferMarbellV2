@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Chat from "@/components/Chat";
+import { useAuth } from "@/hooks/useAuth";
 import { ArrowLeftIcon, CarIcon } from "lucide-react";
 
 export default function ChatPage() {
+  const [searchParams] = useSearchParams();
+  const { user } = useAuth();
+  const tripId = searchParams.get('transfer') || 'TM123456';
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
