@@ -85,6 +85,7 @@ export default function Dashboard() {
               <Badge variant="outline" className="border-ocean text-ocean">
                 {getRoleIcon(user?.role || "")} {getRoleBadge(user?.role || "")}
               </Badge>
+              <NotificationCenter userRole={user?.role || "client"} />
               <Button variant="ghost" size="sm">
                 <SettingsIcon className="w-4 h-4 mr-2" />
                 Settings
