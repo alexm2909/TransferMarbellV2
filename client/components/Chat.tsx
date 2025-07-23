@@ -158,6 +158,10 @@ export default function Chat({
               <PhoneIcon className="w-4 h-4 mr-1" />
               Llamar
             </Button>
+            <Button variant="outline" size="sm" onClick={handleShareLocation}>
+              <NavigationIcon className="w-4 h-4 mr-1" />
+              Ubicación
+            </Button>
             {onClose && (
               <Button variant="ghost" size="sm" onClick={onClose}>
                 <XIcon className="w-4 h-4" />
