@@ -55,6 +55,7 @@ interface BookingData {
 export default function BookingForm() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [childSeats, setChildSeats] = useState<ChildSeat[]>([]);
   const [bookingData, setBookingData] = useState<BookingData>({
     origin: "",
     destination: "",
