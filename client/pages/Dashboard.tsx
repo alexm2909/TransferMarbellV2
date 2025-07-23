@@ -589,10 +589,16 @@ export default function Dashboard() {
                 )}
                 {user?.role === "driver" && (
                   <>
-                    <Button
-                      variant="outline"
-                      className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
-                    >
+                    <Link to="/driver-panel">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
+                      >
+                        <CarIcon className="w-4 h-4 mr-2" />
+                        Panel de Conductor
+                      </Button>
+                    </Link>
+                    <Button variant="outline" className="w-full justify-start">
                       <MapPinIcon className="w-4 h-4 mr-2" />
                       Ver Mapa
                     </Button>
