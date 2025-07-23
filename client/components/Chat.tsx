@@ -135,16 +135,21 @@ export default function Chat({
             </div>
             <div>
               <CardTitle className="text-lg">
-                {user?.role === "driver" ? user.name?.split(' ')[0] : driverName}
+                {user?.role === "driver" ? getOtherParticipantName() : (getOtherParticipantName() || driverName)}
               </CardTitle>
               <div className="flex items-center space-x-2">
-                <Badge 
-                  variant="outline" 
+                <Badge
+                  variant="outline"
                   className={`text-xs ${isActive ? 'border-green-500 text-green-600 bg-green-50' : 'border-gray-300'}`}
                 >
                   {isActive ? '🟢 En línea' : '⚫ Desconectado'}
                 </Badge>
                 <span className="text-xs text-gray-500">Viaje #{tripId}</span>
+                {getUnreadCount() > 0 && (
+                  <Badge className="bg-red-500 text-white text-xs">
+                    {getUnreadCount()}
+                  </Badge>
+                )}
               </div>
             </div>
           </div>
