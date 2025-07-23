@@ -79,16 +79,7 @@ function App() {
 
         <Route path="/fleet" element={<Fleet />} />
 
-        <Route
-          path="/services"
-          element={
-            <PlaceholderPage
-              title="Our Services"
-              description="Comprehensive private transfer services including airport transfers, city rides, business transport, and special occasion transfers."
-              icon={SettingsIcon}
-            />
-          }
-        />
+        <Route path="/services" element={<Services />} />
 
         <Route
           path="/support"
