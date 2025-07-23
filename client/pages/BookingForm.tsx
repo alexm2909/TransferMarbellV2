@@ -478,28 +478,7 @@ export default function BookingForm() {
                       </Select>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Child Seats
-                      </label>
-                      <Select
-                        value={bookingData.childSeats}
-                        onValueChange={(value) =>
-                          setBookingData({ ...bookingData, childSeats: value })
-                        }
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {[0, 1, 2, 3].map((num) => (
-                            <SelectItem key={num} value={num.toString()}>
-                              {num}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+
                   </div>
 
                   {/* Children Age Selector */}
