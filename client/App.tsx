@@ -11,6 +11,7 @@ import ChatPage from "./pages/ChatPage";
 import AdminPanel from "./pages/AdminPanel";
 import FleetManagerPanel from "./pages/FleetManagerPanel";
 import BusinessPanel from "./pages/BusinessPanel";
+import DriverPanel from "./pages/DriverPanel";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
