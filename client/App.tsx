@@ -40,6 +40,7 @@ function App() {
 
         {/* Chat and Advanced Panels */}
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/driver-panel" element={<DriverPanel />} />
         <Route path="/admin-panel" element={<AdminPanel />} />
         <Route path="/fleet-panel" element={<FleetManagerPanel />} />
         <Route path="/business-panel" element={<BusinessPanel />} />
