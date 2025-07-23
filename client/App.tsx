@@ -5,6 +5,7 @@ import BookingForm from "./pages/BookingForm";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Fleet from "./pages/Fleet";
+import Services from "./pages/Services";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
