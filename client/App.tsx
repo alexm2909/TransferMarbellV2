@@ -27,6 +27,7 @@ function App() {
 
         {/* Booking Flow */}
         <Route path="/book" element={<BookingForm />} />
+        <Route path="/booking-confirmation" element={<BookingConfirmation />} />
 
         {/* Authentication */}
         <Route path="/signin" element={<SignIn />} />
