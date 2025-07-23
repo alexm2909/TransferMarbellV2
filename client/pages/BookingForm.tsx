@@ -305,7 +305,7 @@ export default function BookingForm() {
                   My Account
                 </Button>
               </Link>
-              <Button variant="ghost" size="sm" onClick={logout}>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
                 <LogOutIcon className="w-4 h-4 mr-2" />
                 Sign Out
               </Button>
