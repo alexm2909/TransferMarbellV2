@@ -18,7 +18,7 @@ import {
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+            <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
@@ -75,16 +75,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/fleet"
-          element={
-            <PlaceholderPage
-              title="Our Fleet"
-              description="Explore our diverse range of vehicles from economy to luxury. Find the perfect vehicle for your transfer needs."
-              icon={CarIcon}
-            />
-          }
-        />
+        <Route path="/fleet" element={<Fleet />} />
 
         <Route
           path="/services"
@@ -108,7 +99,7 @@ function App() {
           }
         />
 
-        {/* Catch-all route for 404 */}
+                {/* Catch-all route for 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
