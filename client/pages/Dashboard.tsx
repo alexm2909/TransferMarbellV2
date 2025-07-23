@@ -607,13 +607,15 @@ export default function Dashboard() {
                 )}
                 {user?.role === "fleet-manager" && (
                   <>
-                    <Button
-                      variant="outline"
-                      className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
-                    >
-                      <UsersIcon className="w-4 h-4 mr-2" />
-                      Gestionar Flota
-                    </Button>
+                    <Link to="/fleet-panel">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
+                      >
+                        <UsersIcon className="w-4 h-4 mr-2" />
+                        Panel de Flota
+                      </Button>
+                    </Link>
                     <Button variant="outline" className="w-full justify-start">
                       <TrendingUpIcon className="w-4 h-4 mr-2" />
                       Estadísticas
