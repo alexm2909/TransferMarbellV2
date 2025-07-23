@@ -227,7 +227,7 @@ export default function Index() {
                       From
                     </label>
                     <AddressAutocomplete
-                      placeholder="Airport, hotel, address..."
+                      placeholder="Aeropuerto, hotel, dirección..."
                       value={preBookingData.origin}
                       onChange={(value) =>
                         setPreBookingData({ ...preBookingData, origin: value })
