@@ -15,6 +15,7 @@ import {
   ClockIcon,
   MapPinIcon,
   EuroIcon,
+  BuildingIcon,
 } from "lucide-react";
 
 export default function Dashboard() {
