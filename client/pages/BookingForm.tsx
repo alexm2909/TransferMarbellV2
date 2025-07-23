@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import RouteMap from "@/components/RouteMap";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
+import { useAuth } from "@/hooks/useAuth";
 import {
   CalendarIcon,
   ClockIcon,
@@ -27,6 +28,8 @@ import {
   ShieldIcon,
   ArrowLeftIcon,
   CreditCardIcon,
+  SettingsIcon,
+  LogOutIcon,
 } from "lucide-react";
 
 interface ChildSeat {
