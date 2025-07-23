@@ -130,7 +130,10 @@ export default function Chat({
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
               <span className="text-sm font-bold text-ocean">
-                {user?.role === "driver" ? user.name?.split(' ').map(n => n[0]).join('') : "CR"}
+                {user?.role === "driver" ?
+                  getOtherParticipantName().split(' ').map(n => n[0]).join('') :
+                  (getOtherParticipantName() || "CR").split(' ').map(n => n[0]).join('')
+                }
               </span>
             </div>
             <div>
