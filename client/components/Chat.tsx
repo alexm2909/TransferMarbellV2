@@ -34,61 +34,17 @@ export default function Chat({
   onClose,
 }: ChatProps) {
   const { user } = useAuth();
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      senderId: "system",
-      senderName: "Sistema",
-      senderRole: "driver",
-      content: "Chat iniciado. Tu conductor Carlos te contactará pronto.",
-      timestamp: new Date(Date.now() - 3600000),
-      type: "system",
-      read: true,
-    },
-    {
-      id: "2",
-      senderId: "driver_001",
-      senderName: "Carlos Rodríguez",
-      senderRole: "driver",
-      content: "¡Hola! Soy Carlos, tu conductor para mañana. Ya estoy preparando el vehículo.",
-      timestamp: new Date(Date.now() - 1800000),
-      type: "text",
-      read: true,
-    },
-    {
-      id: "3",
-      senderId: "client_001",
-      senderName: user?.name || "Cliente",
-      senderRole: "client",
-      content: "Perfecto, gracias. ¿A qué hora estarás en el aeropuerto?",
-      timestamp: new Date(Date.now() - 1500000),
-      type: "text",
-      read: true,
-    },
-    {
-      id: "4",
-      senderId: "driver_001",
-      senderName: "Carlos Rodríguez",
-      senderRole: "driver",
-      content: "Estaré allí 15 minutos antes de tu hora de recogida. Te enviaré mi ubicación cuando llegue.",
-      timestamp: new Date(Date.now() - 900000),
-      type: "text",
-      read: true,
-    },
-    {
-      id: "5",
-      senderId: "driver_001",
-      senderName: "Carlos Rodríguez",
-      senderRole: "driver",
-      content: "📍 Ubicación compartida: Terminal 3, Zona de Llegadas",
-      timestamp: new Date(Date.now() - 300000),
-      type: "location",
-      read: false,
-    },
-  ]);
+  const {
+    messages,
+    sendMessage,
+    markMessagesAsRead,
+    shareLocation,
+    getUnreadCount,
+    getOtherParticipantName,
+    isTyping,
+  } = useChat(tripId);
 
   const [newMessage, setNewMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
