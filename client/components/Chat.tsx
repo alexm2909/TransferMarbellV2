@@ -57,61 +57,27 @@ export default function Chat({
 
   useEffect(() => {
     // Mark messages as read when chat is opened
-    setMessages(prev => prev.map(msg => ({ ...msg, read: true })));
-  }, []);
-
-  // Simulate typing indicator
-  useEffect(() => {
-    if (isTyping) {
-      const timeout = setTimeout(() => setIsTyping(false), 3000);
-      return () => clearTimeout(timeout);
-    }
-  }, [isTyping]);
+    markMessagesAsRead();
+  }, [markMessagesAsRead]);
 
   const handleSendMessage = () => {
     if (!newMessage.trim()) return;
 
-    const message: Message = {
-      id: Date.now().toString(),
-      senderId: user?.role === "driver" ? "driver_001" : "client_001",
-      senderName: user?.name || "Usuario",
-      senderRole: user?.role === "driver" ? "driver" : "client",
-      content: newMessage,
-      timestamp: new Date(),
-      type: "text",
-      read: false,
-    };
-
-    setMessages(prev => [...prev, message]);
+    sendMessage(newMessage);
     setNewMessage("");
+  };
 
-    // Simulate driver response (only if user is client)
-    if (user?.role !== "driver") {
-      setIsTyping(true);
-      setTimeout(() => {
-        const responses = [
-          "Perfecto, nos vemos entonces.",
-          "Entendido, estaré atento.",
-          "Gracias por la información.",
-          "De acuerdo, sin problema.",
-          "Te mantendré informado.",
-        ];
-        
-        const response: Message = {
-          id: (Date.now() + 1).toString(),
-          senderId: "driver_001",
-          senderName: "Carlos Rodríguez", 
-          senderRole: "driver",
-          content: responses[Math.floor(Math.random() * responses.length)],
-          timestamp: new Date(),
-          type: "text",
-          read: false,
-        };
+  const handleShareLocation = () => {
+    const locations = [
+      "Terminal 3, Zona de Llegadas",
+      "Puerta Principal del Hotel",
+      "Aparcamiento Norte",
+      "Zona de Recogida de Taxis",
+      "Marbella Centro",
+    ];
 
-        setMessages(prev => [...prev, response]);
-        setIsTyping(false);
-      }, 2000);
-    }
+    const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+    shareLocation(randomLocation);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
