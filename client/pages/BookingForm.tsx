@@ -275,9 +275,21 @@ export default function BookingForm() {
               <Badge variant="outline" className="border-ocean text-ocean">
                 Completing Booking
               </Badge>
+              {user && (
+                <Badge variant="outline" className="border-gray-300 text-gray-700">
+                  {user.name}
+                </Badge>
+              )}
               <Link to="/dashboard">
-                <Button variant="ghost">My Account</Button>
+                <Button variant="ghost" size="sm">
+                  <SettingsIcon className="w-4 h-4 mr-2" />
+                  My Account
+                </Button>
               </Link>
+              <Button variant="ghost" size="sm" onClick={logout}>
+                <LogOutIcon className="w-4 h-4 mr-2" />
+                Sign Out
+              </Button>
             </div>
           </div>
         </div>
