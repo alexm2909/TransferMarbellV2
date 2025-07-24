@@ -95,6 +95,8 @@ export default function BookingForm() {
       id: "economy",
       name: "Economy",
       capacity: "1-3 passengers",
+      maxPassengers: 3,
+      maxLuggage: 2,
       price: "From €25",
       description: "Comfortable sedan for city transfers",
       features: ["Air conditioning", "Professional driver", "Free Wi-Fi"],
@@ -103,6 +105,8 @@ export default function BookingForm() {
       id: "comfort",
       name: "Comfort",
       capacity: "1-3 passengers",
+      maxPassengers: 3,
+      maxLuggage: 3,
       price: "From €35",
       description: "Premium comfort with extra space",
       features: [
@@ -116,6 +120,8 @@ export default function BookingForm() {
       id: "premium",
       name: "Premium",
       capacity: "1-3 passengers",
+      maxPassengers: 3,
+      maxLuggage: 3,
       price: "From €50",
       description: "Luxury vehicles for special occasions",
       features: ["Luxury sedan", "Premium amenities", "Concierge service"],
@@ -124,6 +130,8 @@ export default function BookingForm() {
       id: "van",
       name: "Van",
       capacity: "4-8 passengers",
+      maxPassengers: 8,
+      maxLuggage: 8,
       price: "From €65",
       description: "Spacious van for groups and families",
       features: [
@@ -136,11 +144,20 @@ export default function BookingForm() {
       id: "luxury",
       name: "Luxury",
       capacity: "1-3 passengers",
+      maxPassengers: 3,
+      maxLuggage: 2,
       price: "From €80",
       description: "Ultimate luxury experience",
       features: ["Premium luxury car", "VIP treatment", "Red carpet service"],
     },
   ];
+
+  const isVehicleCompatible = (vehicle: typeof vehicleTypes[0]) => {
+    const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
+    const totalLuggage = parseInt(bookingData.luggage);
+
+    return totalPassengers <= vehicle.maxPassengers && totalLuggage <= vehicle.maxLuggage;
+  };
 
   useEffect(() => {
     // Load pre-booking data from localStorage
