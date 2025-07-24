@@ -117,3 +117,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Estilos personalizados para inputs de fecha y hora */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="time"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
