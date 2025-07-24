@@ -210,12 +210,12 @@ export default function BookingForm() {
     const basePrice = vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price || "€25";
     const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ''));
     const childSeatsPrice = childSeats.reduce((total, seat) => total + seat.price, 0);
-    const luggagePrice = luggageItems.reduce((total, luggage) => total + luggage.price, 0);
+    // Las maletas ya no tienen coste extra, solo sirven para indicar el tipo de vehículo necesario
 
     // Añadir precio del viaje de vuelta si está seleccionado
     const returnTripPrice = bookingData.hasReturnTrip ? basePriceNum : 0;
 
-    const totalPrice = basePriceNum + childSeatsPrice + luggagePrice + returnTripPrice;
+    const totalPrice = basePriceNum + childSeatsPrice + returnTripPrice;
     return `€${totalPrice}`;
   };
 
@@ -843,7 +843,7 @@ export default function BookingForm() {
                           ? bookingData.origin.substring(0, 15) +
                             (bookingData.origin.length > 15 ? "..." : "")
                           : "Origin"}{" "}
-                        →{" "}
+                        ��{" "}
                         {bookingData.destination
                           ? bookingData.destination.substring(0, 15) +
                             (bookingData.destination.length > 15 ? "..." : "")
