@@ -95,21 +95,110 @@ export default function PaymentSuccess() {
   };
 
   const handleDownloadReceipt = () => {
-    // In a real app, this would generate and download a PDF receipt
-    alert("Funcionalidad de descarga disponible próximamente");
+    if (!booking) return;
+
+    // Create a comprehensive receipt content
+    const receiptContent = `
+TRANSFERMARBELL - RECIBO DE RESERVA
+====================================
+
+Número de Reserva: ${booking.bookingId}
+Fecha de Emisión: ${new Date().toLocaleDateString('es-ES')}
+Cliente: ${user?.name || 'Cliente'}
+Email: ${user?.email || ''}
+
+DETALLES DEL VIAJE
+------------------
+Origen: ${booking.origin}
+Destino: ${booking.destination}
+Fecha: ${booking.date}
+Hora: ${booking.time}
+
+${booking.hasReturnTrip ? `VIAJE DE VUELTA
+------------------
+Fecha de vuelta: ${booking.returnDate}
+Hora de vuelta: ${booking.returnTime}
+` : ''}
+
+PASAJEROS
+---------
+Adultos: ${booking.passengers}
+Niños: ${booking.children}
+Maletas: ${booking.luggage}
+
+VEHÍCULO
+--------
+Tipo: ${getVehicleDetails(booking.vehicleType).name}
+Descripción: ${getVehicleDetails(booking.vehicleType).description}
+
+${booking.flightNumber ? `Número de vuelo: ${booking.flightNumber}` : ''}
+
+${booking.childSeats && booking.childSeats.length > 0 ? `
+SILLAS INFANTILES
+-----------------
+${booking.childSeats.map(seat => `- ${seat.description}: €${seat.price}`).join('\n')}
+` : ''}
+
+RESUMEN ECONÓMICO
+-----------------
+Total Pagado: €${booking.paymentAmount}
+Método de Pago: ${booking.paymentMethod === 'card' ? 'Tarjeta de Crédito' : 'Efectivo'}
+Estado: ${booking.paymentStatus === 'completed' ? 'Completado' : 'Pendiente'}
+
+INFORMACIÓN DE CONTACTO
+-----------------------
+Transfermarbell
+Teléfono: +34 952 123 456
+Email: info@transfermarbell.com
+Web: www.transfermarbell.com
+
+¡Gracias por confiar en Transfermarbell!
+    `;
+
+    // Create and download the file
+    const blob = new Blob([receiptContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Recibo_Transfermarbell_${booking.bookingId}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const handleShareBooking = () => {
-    if (navigator.share && booking) {
-      navigator.share({
-        title: `Reserva Transfermarbell #${booking.bookingId}`,
-        text: `Mi reserva de transfer desde ${booking.origin} hasta ${booking.destination} el ${booking.date}`,
-        url: window.location.href,
+    if (!booking) return;
+
+    const shareData = {
+      title: `Reserva Transfermarbell #${booking.bookingId}`,
+      text: `Mi reserva de transfer desde ${booking.origin} hasta ${booking.destination} el ${booking.date} a las ${booking.time}. Total: €${booking.paymentAmount}`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData).catch((error) => {
+        console.log('Error sharing:', error);
+        fallbackShare();
       });
     } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href);
-      alert("Enlace copiado al portapapeles");
+      fallbackShare();
+    }
+
+    function fallbackShare() {
+      const textToShare = `${shareData.title}\n\n${shareData.text}\n\nVer detalles: ${shareData.url}`;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToShare).then(() => {
+          alert("📋 Detalles de la reserva copiados al portapapeles");
+        }).catch(() => {
+          // If clipboard fails, show the text in a modal or alert
+          prompt("Copia este texto para compartir tu reserva:", textToShare);
+        });
+      } else {
+        // Fallback for older browsers
+        prompt("Copia este texto para compartir tu reserva:", textToShare);
+      }
     }
   };
 
