@@ -168,88 +168,47 @@ export default function ChildrenAgeSelector({
         ))}
       </div>
 
-      {/* Child Seats Information Cards */}
+      {/* Resumen compacto de sillas requeridas */}
       {childrenAges.some((age) => age !== null) && (
-        <div className="mt-6">
-          <h4 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-            <ShieldIcon className="w-4 h-4 text-ocean" />
-            Sillas infantiles requeridas
-          </h4>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {childrenAges.map((age, index) => {
-              if (age === null) return null;
-              
-              const seatInfo = getSeatInfo(age);
-              
-              return (
-                <Card
-                  key={index}
-                  className="border border-gray-200 hover:border-ocean/30 transition-colors"
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <BabyIcon className="w-4 h-4 text-ocean" />
-                        <span className="text-sm font-medium">
-                          Niño {index + 1}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          ({age} {age === 1 ? "año" : "años"})
-                        </span>
-                      </div>
-                      {seatInfo.price > 0 && (
-                        <Badge variant="outline" className="text-xs">
-                          +€{seatInfo.price}
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Badge
-                        className={`text-xs ${getSeatTypeColor(seatInfo.seatType)}`}
-                        variant="outline"
-                      >
-                        {seatInfo.seatType}
-                      </Badge>
-                      
-                      <p className="text-xs text-gray-600 leading-relaxed">
-                        {seatInfo.description}
-                      </p>
-                      
-                      {seatInfo.price === 0 && (
-                        <div className="flex items-center gap-1 text-xs text-success">
-                          <InfoIcon className="w-3 h-3" />
-                          <span>Sin costo adicional</span>
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-
-          {/* Total child seats cost */}
-          {childrenAges.some((age) => age !== null && getSeatInfo(age).price > 0) && (
-            <div className="mt-4 p-3 bg-ocean-light/10 rounded-lg border border-ocean/20">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">
-                  Costo total sillas infantiles:
-                </span>
-                <span className="text-sm font-bold text-ocean">
-                  +€
-                  {childrenAges.reduce((total, age) => {
-                    if (age === null) return total;
-                    return total + getSeatInfo(age).price;
-                  }, 0)}
-                </span>
-              </div>
-              <p className="text-xs text-gray-600 mt-1">
-                Sillas instaladas y revisadas por nuestros profesionales
-              </p>
+        <div className="mt-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <ShieldIcon className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-blue-800">
+                Sillas infantiles incluidas
+              </span>
             </div>
-          )}
+
+            <div className="space-y-1">
+              {childrenAges.map((age, index) => {
+                if (age === null) return null;
+                const seatInfo = getSeatInfo(age);
+
+                return (
+                  <div key={index} className="flex items-center justify-between text-xs">
+                    <span className="text-blue-700">
+                      Niño {index + 1} ({age} {age === 1 ? "año" : "años"}) - {seatInfo.seatType}
+                    </span>
+                    <span className="font-medium text-blue-800">€{seatInfo.price}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="flex items-center justify-between mt-2 pt-2 border-t border-blue-200">
+              <span className="text-sm font-medium text-blue-800">Total sillas:</span>
+              <span className="text-sm font-bold text-blue-800">
+                +€{childrenAges.reduce((total, age) => {
+                  if (age === null) return total;
+                  return total + getSeatInfo(age).price;
+                }, 0)}
+              </span>
+            </div>
+
+            <p className="text-xs text-blue-700 mt-2 opacity-90">
+              Obligatorias por ley • Instalación incluida • Normativa ECE R44/04
+            </p>
+          </div>
         </div>
       )}
     </div>
