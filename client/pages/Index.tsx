@@ -262,7 +262,7 @@ export default function Index() {
                       <CalendarIcon className="w-4 h-4 text-ocean" />
                       Fecha
                     </label>
-                    <div className="relative">
+                    <div className="relative custom-date-input">
                       <Input
                         type="date"
                         value={preBookingData.date}
@@ -273,7 +273,7 @@ export default function Index() {
                             date: e.target.value,
                           })
                         }
-                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12 text-gray-700 bg-white hover:border-ocean/60 transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:bg-ocean [&::-webkit-calendar-picker-indicator]:rounded-md [&::-webkit-calendar-picker-indicator]:p-1"
+                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12 text-gray-700 bg-white hover:border-ocean/60 transition-all cursor-pointer"
                         required
                       />
                     </div>
