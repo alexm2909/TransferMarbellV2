@@ -509,10 +509,12 @@ export default function BookingForm() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Adults
+                  {/* Compact passenger/luggage selector */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-ocean/40 transition-colors">
+                      <UsersIcon className="w-6 h-6 text-ocean mb-2" />
+                      <label className="text-sm font-medium text-gray-700 mb-2">
+                        Adultos
                       </label>
                       <Select
                         value={bookingData.passengers}
@@ -520,22 +522,23 @@ export default function BookingForm() {
                           setBookingData({ ...bookingData, passengers: value })
                         }
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full min-w-[80px]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                             <SelectItem key={num} value={num.toString()}>
-                              {num}
+                              {num} {num === 1 ? 'adulto' : 'adultos'}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Children
+                    <div className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-ocean/40 transition-colors">
+                      <BabyIcon className="w-6 h-6 text-coral mb-2" />
+                      <label className="text-sm font-medium text-gray-700 mb-2">
+                        Niños
                       </label>
                       <Select
                         value={bookingData.children}
@@ -543,22 +546,23 @@ export default function BookingForm() {
                           setBookingData({ ...bookingData, children: value })
                         }
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full min-w-[80px]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           {[0, 1, 2, 3, 4].map((num) => (
                             <SelectItem key={num} value={num.toString()}>
-                              {num}
+                              {num} {num === 1 ? 'niño' : 'niños'}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Luggage
+                    <div className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-ocean/40 transition-colors">
+                      <LuggageIcon className="w-6 h-6 text-navy mb-2" />
+                      <label className="text-sm font-medium text-gray-700 mb-2">
+                        Maletas
                       </label>
                       <Select
                         value={bookingData.luggage}
@@ -566,20 +570,18 @@ export default function BookingForm() {
                           setBookingData({ ...bookingData, luggage: value })
                         }
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full min-w-[80px]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           {[0, 1, 2, 3, 4, 5, 6].map((num) => (
                             <SelectItem key={num} value={num.toString()}>
-                              {num}
+                              {num} {num === 1 ? 'maleta' : 'maletas'}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
-
-
                   </div>
 
                   {/* Children Age Selector */}
