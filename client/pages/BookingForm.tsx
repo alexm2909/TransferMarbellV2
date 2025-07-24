@@ -53,6 +53,9 @@ interface BookingData {
   childSeats: string;
   specialRequests: string;
   paymentPreference: string;
+  hasReturnTrip: boolean;
+  returnDate: string;
+  returnTime: string;
 }
 
 export default function BookingForm() {
