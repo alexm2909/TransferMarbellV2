@@ -166,11 +166,14 @@ export default function LuggageSizeSelector({
       <div className="text-xs text-gray-500 bg-blue-50 p-3 rounded-lg">
         <div className="font-medium text-blue-800 mb-1">Información sobre tamaños:</div>
         <ul className="space-y-1">
-          <li>• <strong>Pequeña:</strong> Equipaje de mano, sin coste extra</li>
-          <li>• <strong>Mediana:</strong> Maleta estándar, sin coste extra</li>
-          <li>• <strong>Grande:</strong> Maleta grande, +€3 por espacio adicional</li>
-          <li>• <strong>Extra Grande:</strong> Maleta muy grande, +€5 por manejo especial</li>
+          <li>• <strong>Pequeña:</strong> Equipaje de mano (≤ 55cm)</li>
+          <li>• <strong>Mediana:</strong> Maleta estándar (≤ 70cm)</li>
+          <li>• <strong>Grande:</strong> Maleta grande (≤ 80cm)</li>
+          <li>• <strong>Extra Grande:</strong> Maleta muy grande (&gt; 80cm)</li>
         </ul>
+        <p className="mt-2 text-blue-700 font-medium">
+          Esta información nos ayuda a seleccionar el vehículo más adecuado para tu equipaje.
+        </p>
       </div>
     </div>
   );
