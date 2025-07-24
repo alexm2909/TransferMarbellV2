@@ -99,10 +99,7 @@ export function useChat(tripId: string) {
       messages: [...prev.messages, message],
     }));
 
-    // Simulate auto-response from the other party (for demo purposes)
-    if (type === "text") {
-      simulateResponse(message);
-    }
+    // Note: Auto-response removed - now requires manual interaction between real users
 
     return message.id;
   };
