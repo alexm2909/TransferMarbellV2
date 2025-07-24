@@ -131,24 +131,32 @@ export default function ChildrenAgeSelector({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Layout vertical compacto */}
+      <div className="space-y-2">
         {Array.from({ length: numberOfChildren }, (_, index) => (
-          <div key={index} className="space-y-2">
-            <label className="text-xs font-medium text-gray-600">
-              Niño {index + 1}
-            </label>
+          <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border">
+            <div className="w-6 h-6 bg-ocean rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+              {index + 1}
+            </div>
+
+            <div className="flex-1">
+              <span className="text-sm font-medium text-gray-700">
+                Niño {index + 1}
+              </span>
+            </div>
+
             <Select
               value={childrenAges[index]?.toString() || ""}
               onValueChange={(value) => handleAgeChange(index, value)}
             >
-              <SelectTrigger className="h-10 border-gray-200 focus:border-ocean">
+              <SelectTrigger className="w-32 h-9 border-gray-200 focus:border-ocean">
                 <SelectValue placeholder="Edad" />
               </SelectTrigger>
               <SelectContent>
                 {Array.from({ length: 16 }, (_, i) => (
                   <SelectItem key={i} value={i.toString()}>
                     {i === 0
-                      ? "Bebé (0-11 meses)"
+                      ? "Bebé (0-11m)"
                       : i === 1
                       ? "1 año"
                       : `${i} años`}
