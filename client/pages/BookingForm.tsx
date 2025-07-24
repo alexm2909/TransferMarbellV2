@@ -180,7 +180,12 @@ export default function BookingForm() {
     const basePrice = vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price || "€25";
     const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ''));
     const childSeatsPrice = childSeats.reduce((total, seat) => total + seat.price, 0);
-    return `€${basePriceNum + childSeatsPrice}`;
+
+    // Añadir precio del viaje de vuelta si está seleccionado
+    const returnTripPrice = bookingData.hasReturnTrip ? basePriceNum : 0;
+
+    const totalPrice = basePriceNum + childSeatsPrice + returnTripPrice;
+    return `€${totalPrice}`;
   };
 
   const handleLogout = () => {
