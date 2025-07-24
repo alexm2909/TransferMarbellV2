@@ -185,6 +185,10 @@ export default function BookingForm() {
     }));
   };
 
+  const handleLuggageChange = (luggage: LuggageItem[]) => {
+    setLuggageItems(luggage);
+  };
+
   const calculateEstimatedPrice = () => {
     const basePrice = vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price || "€25";
     const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ''));
