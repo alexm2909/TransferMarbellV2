@@ -134,11 +134,6 @@ export default function LuggageSizeSelector({
             </div>
 
             <div className="flex items-center gap-2">
-              {item.price > 0 && (
-                <span className="text-xs font-medium text-orange-600">
-                  +€{item.price}
-                </span>
-              )}
               <Select
                 value={item.size}
                 onValueChange={(size: keyof typeof luggageSizes) =>
@@ -157,11 +152,6 @@ export default function LuggageSizeSelector({
                           <div className="text-sm font-medium">
                             {info.name}
                           </div>
-                          {info.price > 0 && (
-                            <div className="text-xs text-orange-600">
-                              +€{info.price}
-                            </div>
-                          )}
                         </div>
                       </div>
                     </SelectItem>
