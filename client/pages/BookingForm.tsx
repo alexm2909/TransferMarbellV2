@@ -656,53 +656,96 @@ export default function BookingForm() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {vehicleTypes.map((vehicle) => (
-                      <div
-                        key={vehicle.id}
-                        className={`border-2 rounded-lg p-4 cursor-pointer transition-all hover:border-ocean ${
-                          bookingData.vehicleType === vehicle.id
-                            ? "border-ocean bg-ocean-light/20"
-                            : "border-gray-200"
-                        }`}
-                        onClick={() =>
-                          setBookingData({
-                            ...bookingData,
-                            vehicleType: vehicle.id,
-                          })
-                        }
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <h3 className="font-semibold text-gray-900">
-                              {vehicle.name}
-                            </h3>
-                            <p className="text-sm text-gray-500">
-                              {vehicle.capacity}
-                            </p>
-                          </div>
-                          <Badge
-                            variant="secondary"
-                            className="bg-ocean/10 text-ocean"
-                          >
-                            {vehicle.price}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-3">
-                          {vehicle.description}
-                        </p>
-                        <div className="space-y-1">
-                          {vehicle.features.map((feature, index) => (
-                            <div
-                              key={index}
-                              className="flex items-center text-xs text-gray-500"
-                            >
-                              <div className="w-1 h-1 bg-ocean rounded-full mr-2"></div>
-                              {feature}
+                    {vehicleTypes.map((vehicle) => {
+                      const isCompatible = isVehicleCompatible(vehicle);
+                      const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
+                      const totalLuggage = parseInt(bookingData.luggage);
+
+                      return (
+                        <div
+                          key={vehicle.id}
+                          className={`border-2 rounded-lg p-4 transition-all relative ${
+                            !isCompatible
+                              ? "border-red-200 bg-red-50/50 cursor-not-allowed opacity-60"
+                              : bookingData.vehicleType === vehicle.id
+                              ? "border-ocean bg-ocean-light/20 cursor-pointer hover:border-ocean"
+                              : "border-gray-200 cursor-pointer hover:border-ocean"
+                          }`}
+                          onClick={() => {
+                            if (isCompatible) {
+                              setBookingData({
+                                ...bookingData,
+                                vehicleType: vehicle.id,
+                              });
+                            }
+                          }}
+                        >
+                          {/* Overlay para vehículos no compatibles */}
+                          {!isCompatible && (
+                            <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                              No Compatible
                             </div>
-                          ))}
+                          )}
+
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <h3 className={`font-semibold ${
+                                isCompatible ? "text-gray-900" : "text-gray-500"
+                              }`}>
+                                {vehicle.name}
+                              </h3>
+                              <p className="text-sm text-gray-500">
+                                {vehicle.capacity}
+                              </p>
+                              <div className="text-xs text-gray-500 mt-1">
+                                Max: {vehicle.maxPassengers} pasajeros, {vehicle.maxLuggage} maletas
+                              </div>
+                            </div>
+                            <Badge
+                              variant="secondary"
+                              className={isCompatible ? "bg-ocean/10 text-ocean" : "bg-gray-100 text-gray-500"}
+                            >
+                              {vehicle.price}
+                            </Badge>
+                          </div>
+
+                          <p className={`text-sm mb-3 ${
+                            isCompatible ? "text-gray-600" : "text-gray-500"
+                          }`}>
+                            {vehicle.description}
+                          </p>
+
+                          {/* Mostrar problemas de compatibilidad */}
+                          {!isCompatible && (
+                            <div className="mb-3 p-2 bg-red-100 border border-red-200 rounded text-xs text-red-700">
+                              <div className="font-medium mb-1">Requisitos no cumplidos:</div>
+                              {totalPassengers > vehicle.maxPassengers && (
+                                <div>• Demasiados pasajeros ({totalPassengers} &gt; {vehicle.maxPassengers})</div>
+                              )}
+                              {totalLuggage > vehicle.maxLuggage && (
+                                <div>• Demasiadas maletas ({totalLuggage} &gt; {vehicle.maxLuggage})</div>
+                              )}
+                            </div>
+                          )}
+
+                          <div className="space-y-1">
+                            {vehicle.features.map((feature, index) => (
+                              <div
+                                key={index}
+                                className={`flex items-center text-xs ${
+                                  isCompatible ? "text-gray-500" : "text-gray-400"
+                                }`}
+                              >
+                                <div className={`w-1 h-1 rounded-full mr-2 ${
+                                  isCompatible ? "bg-ocean" : "bg-gray-400"
+                                }`}></div>
+                                {feature}
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>
