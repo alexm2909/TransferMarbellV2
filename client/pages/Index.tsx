@@ -284,20 +284,18 @@ export default function Index() {
                       <ClockIcon className="w-4 h-4 text-ocean" />
                       Hora
                     </label>
-                    <div className="relative">
-                      <Input
-                        type="time"
-                        value={preBookingData.time}
-                        onChange={(e) =>
-                          setPreBookingData({
-                            ...preBookingData,
-                            time: e.target.value,
-                          })
-                        }
-                        className="border-gray-200 focus:border-ocean focus:ring-ocean h-12 text-gray-700 bg-white hover:border-ocean/60 transition-all cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                        required
-                      />
-                    </div>
+                    <TimeSelector
+                      value={preBookingData.time}
+                      onChange={(value) =>
+                        setPreBookingData({
+                          ...preBookingData,
+                          time: value,
+                        })
+                      }
+                      className="border-gray-200 focus:border-ocean focus:ring-ocean"
+                      placeholder="Seleccionar hora"
+                      required
+                    />
                   </div>
                 </div>
 
