@@ -155,18 +155,17 @@ export default function BookingForm() {
       return;
     }
 
-    // Process booking
-    console.log("Booking submitted:", bookingData);
-    console.log("Child seats:", childSeats);
+    // Save booking data to localStorage for the payment process
+    const fullBookingData = {
+      ...bookingData,
+      childSeats: childSeats,
+      timestamp: new Date().toISOString(),
+    };
 
-    // Generate booking ID
-    const bookingId = "TM" + Date.now().toString().slice(-6);
+    localStorage.setItem("pendingBooking", JSON.stringify(fullBookingData));
 
-    // Here you would typically send the data to your backend
-    // For demo, we'll simulate a successful booking
-    setTimeout(() => {
-      navigate(`/booking-confirmation?id=${bookingId}`);
-    }, 1000);
+    // Redirect to payment summary page
+    navigate("/payment-summary");
   };
 
   const handleChildSeatsChange = (seats: ChildSeat[]) => {
