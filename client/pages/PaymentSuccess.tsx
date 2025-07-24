@@ -1,0 +1,429 @@
+import { useEffect, useState } from "react";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  CarIcon,
+  CheckCircleIcon,
+  CalendarIcon,
+  ClockIcon,
+  MapPinIcon,
+  UsersIcon,
+  LuggageIcon,
+  CreditCardIcon,
+  DownloadIcon,
+  ShareIcon,
+  MessageSquareIcon,
+  HomeIcon,
+} from "lucide-react";
+
+interface CompletedBooking {
+  bookingId: string;
+  origin: string;
+  destination: string;
+  date: string;
+  time: string;
+  passengers: string;
+  children: string;
+  luggage: string;
+  vehicleType: string;
+  flightNumber: string;
+  hasReturnTrip: boolean;
+  returnDate: string;
+  returnTime: string;
+  paymentAmount: number;
+  paymentStatus: string;
+  paymentMethod: string;
+  confirmedAt: string;
+  childSeats: Array<{
+    childIndex: number;
+    age: number;
+    seatType: string;
+    description: string;
+    price: number;
+  }>;
+}
+
+export default function PaymentSuccess() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { isAuthenticated, user, isLoading } = useAuth();
+  const [booking, setBooking] = useState<CompletedBooking | null>(null);
+  const bookingId = searchParams.get("id");
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate("/signin");
+      return;
+    }
+
+    if (!bookingId) {
+      navigate("/");
+      return;
+    }
+
+    const completedBooking = localStorage.getItem("completedBooking");
+    if (!completedBooking) {
+      navigate("/");
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(completedBooking);
+      if (parsed.bookingId === bookingId) {
+        setBooking(parsed);
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error parsing booking data:", error);
+      navigate("/");
+    }
+  }, [isAuthenticated, isLoading, navigate, bookingId]);
+
+  const getVehicleDetails = (type: string) => {
+    const vehicles = {
+      economy: { name: "Economy", description: "Comfortable sedan" },
+      comfort: { name: "Comfort", description: "Premium comfort vehicle" },
+      premium: { name: "Premium", description: "Luxury sedan" },
+      van: { name: "Van", description: "Spacious family van" },
+      luxury: { name: "Luxury", description: "Ultimate luxury experience" },
+    };
+    return vehicles[type as keyof typeof vehicles] || vehicles.economy;
+  };
+
+  const handleDownloadReceipt = () => {
+    // In a real app, this would generate and download a PDF receipt
+    alert("Funcionalidad de descarga disponible próximamente");
+  };
+
+  const handleShareBooking = () => {
+    if (navigator.share && booking) {
+      navigator.share({
+        title: `Reserva Transfermarbell #${booking.bookingId}`,
+        text: `Mi reserva de transfer desde ${booking.origin} hasta ${booking.destination} el ${booking.date}`,
+        url: window.location.href,
+      });
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(window.location.href);
+      alert("Enlace copiado al portapapeles");
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center mx-auto mb-4">
+            <CarIcon className="w-5 h-5 text-white" />
+          </div>
+          <p className="text-gray-600">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!booking) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="max-w-md">
+          <CardContent className="text-center p-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              Reserva no encontrada
+            </h2>
+            <p className="text-gray-600 mb-6">
+              No se pudo encontrar la información de la reserva.
+            </p>
+            <Link to="/">
+              <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                Ir al Inicio
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  const vehicle = getVehicleDetails(booking.vehicleType);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-ocean-light via-sky to-coral-light">
+      {/* Navigation */}
+      <nav className="bg-white/95 backdrop-blur-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <Link to="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
+                <CarIcon className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
+                Transfermarbell
+              </span>
+            </Link>
+            <div className="flex items-center space-x-4">
+              <Badge className="bg-green-600 text-white">
+                Pago Completado
+              </Badge>
+              {user && (
+                <Badge variant="outline" className="border-gray-300 text-gray-700">
+                  {user.name}
+                </Badge>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Success Header */}
+        <div className="text-center mb-12">
+          <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircleIcon className="w-12 h-12 text-white" />
+          </div>
+          <h1 className="text-4xl font-bold text-navy mb-4">
+            ¡Pago Completado!
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Tu reserva ha sido confirmada exitosamente. Recibirás un email de confirmación en breve.
+          </p>
+          <div className="mt-6">
+            <Badge className="bg-ocean text-white text-lg px-4 py-2">
+              Reserva #{booking.bookingId}
+            </Badge>
+          </div>
+        </div>
+
+        {/* Booking Details */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Details */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Trip Information */}
+            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MapPinIcon className="w-5 h-5 text-ocean" />
+                  Información del Viaje
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                    <div>
+                      <div className="font-semibold text-green-800">Origen</div>
+                      <div className="text-green-700">{booking.origin}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                    <div>
+                      <div className="font-semibold text-red-800">Destino</div>
+                      <div className="text-red-700">{booking.destination}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2 p-3 bg-ocean-light/20 rounded-lg">
+                    <CalendarIcon className="w-4 h-4 text-ocean" />
+                    <div>
+                      <div className="font-medium">Fecha</div>
+                      <div className="text-sm text-gray-600">{booking.date}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-ocean-light/20 rounded-lg">
+                    <ClockIcon className="w-4 h-4 text-ocean" />
+                    <div>
+                      <div className="font-medium">Hora</div>
+                      <div className="text-sm text-gray-600">{booking.time}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {booking.hasReturnTrip && (
+                  <div className="p-4 bg-coral-light/20 border border-coral/30 rounded-lg">
+                    <div className="font-semibold text-coral mb-2">Viaje de Vuelta</div>
+                    <div className="text-sm text-gray-700">
+                      {booking.returnDate} a las {booking.returnTime}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Service Details */}
+            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CarIcon className="w-5 h-5 text-ocean" />
+                  Detalles del Servicio
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div className="text-center p-4 bg-ocean-light/20 rounded-lg">
+                    <UsersIcon className="w-8 h-8 text-ocean mx-auto mb-2" />
+                    <div className="font-bold text-lg">{booking.passengers}</div>
+                    <div className="text-sm text-gray-600">Adultos</div>
+                  </div>
+                  <div className="text-center p-4 bg-coral-light/20 rounded-lg">
+                    <div className="text-2xl mb-2">👶</div>
+                    <div className="font-bold text-lg">{booking.children}</div>
+                    <div className="text-sm text-gray-600">Niños</div>
+                  </div>
+                  <div className="text-center p-4 bg-navy/10 rounded-lg">
+                    <LuggageIcon className="w-8 h-8 text-navy mx-auto mb-2" />
+                    <div className="font-bold text-lg">{booking.luggage}</div>
+                    <div className="text-sm text-gray-600">Maletas</div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="font-medium">Vehículo:</span>
+                    <span className="text-gray-600">{vehicle.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Descripción:</span>
+                    <span className="text-gray-600">{vehicle.description}</span>
+                  </div>
+                  {booking.flightNumber && (
+                    <div className="flex justify-between">
+                      <span className="font-medium">Número de vuelo:</span>
+                      <span className="text-gray-600">{booking.flightNumber}</span>
+                    </div>
+                  )}
+                </div>
+
+                {booking.childSeats && booking.childSeats.length > 0 && (
+                  <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div className="font-medium mb-2">Sillas Infantiles Incluidas:</div>
+                    <div className="space-y-1">
+                      {booking.childSeats.map((seat, index) => (
+                        <div key={index} className="text-sm flex justify-between">
+                          <span>{seat.description}</span>
+                          <span className="font-medium">€{seat.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Payment & Actions */}
+          <div className="space-y-6">
+            {/* Payment Summary */}
+            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CreditCardIcon className="w-5 h-5 text-ocean" />
+                  Resumen de Pago
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-center p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="text-3xl font-bold text-green-600 mb-1">
+                    €{booking.paymentAmount}
+                  </div>
+                  <div className="text-sm text-green-700">Pagado exitosamente</div>
+                </div>
+
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Método de pago:</span>
+                    <span className="font-medium">Tarjeta</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Estado:</span>
+                    <Badge className="bg-green-600 text-white">Completado</Badge>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Procesado:</span>
+                    <span className="font-medium">
+                      {new Date(booking.confirmedAt).toLocaleString('es-ES')}
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Actions */}
+            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle>Acciones</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button
+                  onClick={handleDownloadReceipt}
+                  variant="outline"
+                  className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
+                >
+                  <DownloadIcon className="w-4 h-4 mr-2" />
+                  Descargar Recibo
+                </Button>
+                <Button
+                  onClick={handleShareBooking}
+                  variant="outline"
+                  className="w-full justify-start"
+                >
+                  <ShareIcon className="w-4 h-4 mr-2" />
+                  Compartir Reserva
+                </Button>
+                <Link to="/chat" className="block">
+                  <Button variant="outline" className="w-full justify-start">
+                    <MessageSquareIcon className="w-4 h-4 mr-2" />
+                    Chat con Conductor
+                  </Button>
+                </Link>
+                <Link to="/" className="block">
+                  <Button className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                    <HomeIcon className="w-4 h-4 mr-2" />
+                    Volver al Inicio
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* Next Steps */}
+            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle>Próximos Pasos</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-ocean rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                    <div>
+                      <div className="font-medium">Confirmación por email</div>
+                      <div className="text-gray-600">Recibirás todos los detalles en tu correo</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-ocean rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                    <div>
+                      <div className="font-medium">Contacto del conductor</div>
+                      <div className="text-gray-600">Te contactaremos 24h antes del viaje</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-ocean rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                    <div>
+                      <div className="font-medium">Día del viaje</div>
+                      <div className="text-gray-600">Tu conductor estará esperándote</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
