@@ -16,6 +16,7 @@ import AddressAutocomplete from "@/components/AddressAutocomplete";
 import RouteMap from "@/components/RouteMap";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
 import TimeSelector from "@/components/TimeSelector";
+import LuggageSizeSelector from "@/components/LuggageSizeSelector";
 import { useAuth } from "@/hooks/useAuth";
 import {
   CalendarIcon,
@@ -122,7 +123,7 @@ export default function BookingForm() {
       id: "van",
       name: "Van",
       capacity: "4-8 passengers",
-      price: "From ��65",
+      price: "From €65",
       description: "Spacious van for groups and families",
       features: [
         "Large trunk space",
