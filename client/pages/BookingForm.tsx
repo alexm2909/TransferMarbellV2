@@ -602,13 +602,28 @@ export default function BookingForm() {
                     </div>
                   </div>
 
-                  {/* Children Age Selector */}
-                  {parseInt(bookingData.children) > 0 && (
-                    <div className="mt-6">
-                      <ChildrenAgeSelector
-                        numberOfChildren={parseInt(bookingData.children)}
-                        onChildSeatsChange={handleChildSeatsChange}
-                      />
+                  {/* Segunda fila: Configuración detallada dividida en dos columnas */}
+                  {(parseInt(bookingData.children) > 0 || parseInt(bookingData.luggage) > 0) && (
+                    <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {/* Columna 1: Selector de edad de niños */}
+                      {parseInt(bookingData.children) > 0 && (
+                        <div>
+                          <ChildrenAgeSelector
+                            numberOfChildren={parseInt(bookingData.children)}
+                            onChildSeatsChange={handleChildSeatsChange}
+                          />
+                        </div>
+                      )}
+
+                      {/* Columna 2: Selector de tamaño de maletas */}
+                      {parseInt(bookingData.luggage) > 0 && (
+                        <div>
+                          <LuggageSizeSelector
+                            numberOfLuggage={parseInt(bookingData.luggage)}
+                            onLuggageChange={handleLuggageChange}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </CardContent>
