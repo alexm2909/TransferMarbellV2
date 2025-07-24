@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import RouteMap from "@/components/RouteMap";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
+import TimeSelector from "@/components/TimeSelector";
 import { useAuth } from "@/hooks/useAuth";
 import {
   CalendarIcon,
@@ -85,7 +86,7 @@ export default function BookingForm() {
       id: "economy",
       name: "Economy",
       capacity: "1-3 passengers",
-      price: "From ��25",
+      price: "From €25",
       description: "Comfortable sedan for city transfers",
       features: ["Air conditioning", "Professional driver", "Free Wi-Fi"],
     },
