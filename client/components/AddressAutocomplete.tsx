@@ -178,9 +178,11 @@ export default function AddressAutocomplete({
                     <div className="font-medium text-gray-900 text-sm truncate group-hover:text-ocean transition-colors">
                       {prediction.structured_formatting?.main_text || prediction.description.split(',')[0]}
                     </div>
-                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full flex-shrink-0">
-                      {getLocationCategory(prediction)}
-                    </span>
+                    {getLocationCategory(prediction) && (
+                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full flex-shrink-0">
+                        {getLocationCategory(prediction)}
+                      </span>
+                    )}
                   </div>
                   <div className="text-xs text-gray-500 truncate">
                     {prediction.structured_formatting?.secondary_text || 
