@@ -37,6 +37,11 @@ function App() {
         <Route path="/book" element={<BookingForm />} />
         <Route path="/booking-confirmation" element={<BookingConfirmation />} />
 
+        {/* Payment Flow */}
+        <Route path="/payment-summary" element={<PaymentSummary />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-error" element={<PaymentError />} />
+
         {/* Authentication */}
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
