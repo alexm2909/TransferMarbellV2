@@ -29,7 +29,7 @@ const luggageSizes = {
     icon: "🎒",
   },
   medium: {
-    name: "Mediana", 
+    name: "Mediana",
     description: "Maleta estándar (≤ 70cm)",
     price: 0,
     icon: "🧳",
@@ -37,13 +37,13 @@ const luggageSizes = {
   large: {
     name: "Grande",
     description: "Maleta grande (≤ 80cm)",
-    price: 3,
+    price: 0,
     icon: "🧳",
   },
   xlarge: {
     name: "Extra Grande",
     description: "Maleta extra grande (> 80cm)",
-    price: 5,
+    price: 0,
     icon: "🧳",
   },
 };
