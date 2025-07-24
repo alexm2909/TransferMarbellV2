@@ -135,7 +135,7 @@ export default function AddressAutocomplete({
     if (prediction.isAirport) return "Aeropuerto";
     if (prediction.isHotel) return "Hotel";
     if (prediction.isTransitStation) return "Estación";
-    return "Ubicación";
+    return null; // No mostrar etiqueta para ubicaciones generales
   };
 
   return (
