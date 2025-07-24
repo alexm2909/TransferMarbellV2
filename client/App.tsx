@@ -55,6 +55,10 @@ function App() {
         <Route path="/fleet-panel" element={<FleetManagerPanel />} />
         <Route path="/business-panel" element={<BusinessPanel />} />
 
+        {/* Client Features */}
+        <Route path="/my-bookings" element={<ViewBookings />} />
+        <Route path="/refer-friends" element={<ReferFriends />} />
+
         {/* User Role Pages */}
         <Route
           path="/driver"
