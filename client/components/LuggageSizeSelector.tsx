@@ -108,11 +108,9 @@ export default function LuggageSizeSelector({
           <LuggageIcon className="w-4 h-4 text-ocean" />
           Tamaño de Maletas
         </h4>
-        {getTotalExtraPrice() > 0 && (
-          <Badge className="bg-orange-100 text-orange-700 border-orange-200">
-            +€{getTotalExtraPrice()} extra
-          </Badge>
-        )}
+        <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+          Sin coste extra
+        </Badge>
       </div>
 
       <div className="space-y-3">
