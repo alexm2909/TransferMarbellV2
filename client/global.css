@@ -119,11 +119,17 @@
 }
 
 /* Estilos personalizados para inputs de fecha y hora */
+/* Mantener la funcionalidad del calendario de fecha pero mejorar su apariencia */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none !important;
-  visibility: hidden !important;
+  cursor: pointer;
+  opacity: 0.7;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Ocultar solo los iconos de hora ya que usamos TimeSelector personalizado */
 input[type="time"]::-webkit-calendar-picker-indicator {
   display: none !important;
   visibility: hidden !important;
