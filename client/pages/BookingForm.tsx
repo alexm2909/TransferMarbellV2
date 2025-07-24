@@ -59,6 +59,13 @@ interface BookingData {
   returnTime: string;
 }
 
+interface LuggageItem {
+  index: number;
+  size: "small" | "medium" | "large" | "xlarge";
+  description: string;
+  price: number;
+}
+
 export default function BookingForm() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isLoading, logout } = useAuth();
@@ -115,7 +122,7 @@ export default function BookingForm() {
       id: "van",
       name: "Van",
       capacity: "4-8 passengers",
-      price: "From €65",
+      price: "From ��65",
       description: "Spacious van for groups and families",
       features: [
         "Large trunk space",
