@@ -577,14 +577,18 @@ export default function Dashboard() {
                         Chat con Conductor
                       </Button>
                     </Link>
-                    <Button variant="outline" className="w-full justify-start">
-                      <CalendarIcon className="w-4 h-4 mr-2" />
-                      Ver Reservas
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start">
-                      <UsersIcon className="w-4 h-4 mr-2" />
-                      Referir Amigos
-                    </Button>
+                    <Link to="/my-bookings">
+                      <Button variant="outline" className="w-full justify-start">
+                        <CalendarIcon className="w-4 h-4 mr-2" />
+                        Ver Reservas
+                      </Button>
+                    </Link>
+                    <Link to="/refer-friends">
+                      <Button variant="outline" className="w-full justify-start">
+                        <UsersIcon className="w-4 h-4 mr-2" />
+                        Referir Amigos
+                      </Button>
+                    </Link>
                   </>
                 )}
                 {user?.role === "driver" && (
