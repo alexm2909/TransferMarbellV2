@@ -33,11 +33,13 @@ export function useAuth() {
   };
 
   const logout = () => {
+    // Solo limpiar datos de autenticación, mantener datos de reserva
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("user");
     localStorage.removeItem("userRole");
-    localStorage.removeItem("preBookingData");
-    localStorage.removeItem("bookingData");
+    // Comentamos estas líneas para mantener los datos de reserva durante navegación
+    // localStorage.removeItem("preBookingData");
+    // localStorage.removeItem("bookingData");
     setIsAuthenticated(false);
     setUser(null);
   };
