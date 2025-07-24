@@ -417,19 +417,85 @@ export default function BookingForm() {
                       <label className="text-sm font-medium text-gray-700">
                         Time
                       </label>
-                      <Input
-                        type="time"
+                      <TimeSelector
                         value={bookingData.time}
-                        onChange={(e) =>
+                        onChange={(value) =>
                           setBookingData({
                             ...bookingData,
-                            time: e.target.value,
+                            time: value,
                           })
                         }
                         className="border-gray-200 focus:border-ocean focus:ring-ocean"
                         required
                       />
                     </div>
+                  </div>
+
+                  {/* Return Trip Option */}
+                  <div className="border-t pt-4 mt-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <Checkbox
+                        id="returnTrip"
+                        checked={bookingData.hasReturnTrip}
+                        onCheckedChange={(checked) =>
+                          setBookingData({
+                            ...bookingData,
+                            hasReturnTrip: checked as boolean,
+                            returnDate: "",
+                            returnTime: "",
+                          })
+                        }
+                        className="border-ocean data-[state=checked]:bg-ocean"
+                      />
+                      <label
+                        htmlFor="returnTrip"
+                        className="text-sm font-medium text-gray-700 cursor-pointer"
+                      >
+                        ¿Añadir viaje de vuelta?
+                      </label>
+                    </div>
+
+                    {bookingData.hasReturnTrip && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-ocean-light/10 border border-ocean/20 rounded-lg">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                            <CalendarIcon className="w-4 h-4 text-ocean" />
+                            Fecha de Vuelta
+                          </label>
+                          <Input
+                            type="date"
+                            value={bookingData.returnDate}
+                            min={bookingData.date || new Date().toISOString().split("T")[0]}
+                            onChange={(e) =>
+                              setBookingData({
+                                ...bookingData,
+                                returnDate: e.target.value,
+                              })
+                            }
+                            className="border-gray-200 focus:border-ocean focus:ring-ocean custom-date-input"
+                            required={bookingData.hasReturnTrip}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                            <ClockIcon className="w-4 h-4 text-ocean" />
+                            Hora de Vuelta
+                          </label>
+                          <TimeSelector
+                            value={bookingData.returnTime}
+                            onChange={(value) =>
+                              setBookingData({
+                                ...bookingData,
+                                returnTime: value,
+                              })
+                            }
+                            className="border-gray-200 focus:border-ocean focus:ring-ocean"
+                            placeholder="Seleccionar hora de vuelta"
+                            required={bookingData.hasReturnTrip}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
