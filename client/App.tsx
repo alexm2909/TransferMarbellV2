@@ -12,6 +12,9 @@ import AdminPanel from "./pages/AdminPanel";
 import FleetManagerPanel from "./pages/FleetManagerPanel";
 import BusinessPanel from "./pages/BusinessPanel";
 import DriverPanel from "./pages/DriverPanel";
+import PaymentSummary from "./pages/PaymentSummary";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentError from "./pages/PaymentError";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
