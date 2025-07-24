@@ -15,6 +15,8 @@ import DriverPanel from "./pages/DriverPanel";
 import PaymentSummary from "./pages/PaymentSummary";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentError from "./pages/PaymentError";
+import ViewBookings from "./pages/ViewBookings";
+import ReferFriends from "./pages/ReferFriends";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
