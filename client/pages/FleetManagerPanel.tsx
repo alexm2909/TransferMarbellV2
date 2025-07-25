@@ -778,6 +778,131 @@ export default function FleetManagerPanel() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Assignment Modal */}
+      {showAssignModal && selectedTrip && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <UsersIcon className="w-5 h-5 text-ocean" />
+                  Asignar Viaje a Conductor
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setShowAssignModal(false);
+                    setSelectedTrip(null);
+                  }}
+                >
+                  <XCircleIcon className="w-5 h-5" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {(() => {
+                const trip = unassignedTrips.find(t => t.id === selectedTrip);
+                if (!trip) return null;
+
+                return (
+                  <div className="space-y-6">
+                    {/* Trip Details */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h3 className="font-semibold text-navy mb-3">{trip.route}</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div>
+                          <span className="text-gray-600">Cliente:</span>
+                          <p className="font-medium">{trip.client}</p>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Fecha/Hora:</span>
+                          <p className="font-medium">{trip.date} {trip.time}</p>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Pasajeros:</span>
+                          <p className="font-medium">{trip.passengers} pax, {trip.luggage} maletas</p>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Precio:</span>
+                          <p className="font-medium text-green-600">€{trip.price}</p>
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Tipo vehículo:</span>
+                          <p className="font-medium">{getVehicleTypeLabel(trip.vehicleType)}</p>
+                        </div>
+                        {trip.flightNumber && (
+                          <div>
+                            <span className="text-gray-600">Vuelo:</span>
+                            <p className="font-medium">{trip.flightNumber}</p>
+                          </div>
+                        )}
+                      </div>
+                      {trip.specialRequests && (
+                        <div className="mt-3 p-3 bg-blue-50 rounded">
+                          <span className="font-medium text-blue-800">Solicitudes especiales:</span>
+                          <p className="text-blue-700 text-sm">{trip.specialRequests}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Available Drivers */}
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">Conductores Disponibles</h4>
+                      <div className="space-y-3 max-h-60 overflow-y-auto">
+                        {drivers
+                          .filter(driver => canDriverTakeTrip(driver, trip))
+                          .map((driver) => (
+                            <Card
+                              key={driver.id}
+                              className="border border-gray-200 hover:border-ocean cursor-pointer transition-colors"
+                              onClick={() => assignTrip(driver.id, trip.id)}
+                            >
+                              <CardContent className="p-4">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
+                                      <span className="text-sm font-bold text-ocean">
+                                        {driver.name.split(' ').map(n => n[0]).join('')}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <h3 className="font-semibold text-navy">{driver.name}</h3>
+                                      <p className="text-sm text-gray-600">{driver.vehicle}</p>
+                                      <div className="flex items-center mt-1">
+                                        <StarIcon className="w-4 h-4 text-yellow-500 fill-current mr-1" />
+                                        <span className="text-sm">{driver.rating}</span>
+                                        <span className="text-xs text-gray-500 ml-2">{driver.totalTrips} viajes</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="text-right">
+                                    <Badge className="bg-green-100 text-green-800 mb-1">
+                                      Disponible
+                                    </Badge>
+                                    <p className="text-xs text-gray-500">{driver.location}</p>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        {drivers.filter(driver => canDriverTakeTrip(driver, trip)).length === 0 && (
+                          <div className="text-center py-6 text-gray-500">
+                            <XCircleIcon className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                            <p>No hay conductores disponibles para este viaje</p>
+                            <p className="text-sm mt-1">Tipo de vehículo requerido: {getVehicleTypeLabel(trip.vehicleType)}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
