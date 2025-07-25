@@ -232,123 +232,96 @@ export default function NotificationCenter({ userRole }: NotificationCenterProps
   };
 
   return (
-    <div className="relative">
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => setIsOpen(!isOpen)}
-        className="relative"
-      >
-        <BellIcon className="w-5 h-5" />
-        {unreadCount > 0 && (
-          <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-red-500 text-white text-xs">
-            {unreadCount > 9 ? "9+" : unreadCount}
-          </Badge>
-        )}
-      </Button>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="relative">
+          <BellIcon className="w-5 h-5" />
+          {unreadCount > 0 && (
+            <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-red-500 text-white text-xs">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </Badge>
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-80 max-w-[calc(100vw-2rem)]" align="end">
+        <DropdownMenuLabel className="flex items-center justify-between">
+          <span>Notificaciones</span>
+          {unreadCount > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={markAllAsRead}
+              className="text-xs h-6"
+            >
+              Marcar todas
+            </Button>
+          )}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
 
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setIsOpen(false)}
-          />
-          
-          {/* Notification Panel */}
-          <div className="absolute right-0 top-full mt-2 w-80 z-50">
-            <Card className="shadow-xl border">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Notificaciones</CardTitle>
-                  <div className="flex items-center space-x-2">
-                    {unreadCount > 0 && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={markAllAsRead}
-                        className="text-xs"
+        <div className="max-h-96 overflow-y-auto">
+          {notifications.length === 0 ? (
+            <div className="p-6 text-center text-gray-500">
+              <BellIcon className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+              <p className="text-sm">No hay notificaciones</p>
+            </div>
+          ) : (
+            notifications.map((notification) => (
+              <DropdownMenuItem
+                key={notification.id}
+                className={`p-4 border-l-4 cursor-pointer ${
+                  getNotificationColor(notification.type)
+                } ${!notification.read ? 'bg-opacity-100' : 'bg-opacity-50'}`}
+                onClick={() => markAsRead(notification.id)}
+              >
+                <div className="w-full">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center space-x-2 min-w-0 flex-1">
+                      {getNotificationIcon(notification.type)}
+                      <h4 className="text-sm font-semibold text-gray-900 truncate">
+                        {notification.title}
+                      </h4>
+                    </div>
+                    <div className="flex items-center space-x-1 flex-shrink-0">
+                      {!notification.read && (
+                        <div className="w-2 h-2 bg-ocean rounded-full"></div>
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteNotification(notification.id);
+                        }}
+                        className="text-gray-400 hover:text-gray-600"
                       >
-                        Marcar todas
+                        <XIcon className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                    {notification.message}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-500">
+                      {notification.timestamp}
+                    </span>
+                    {notification.actionUrl && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-xs h-6 px-2"
+                      >
+                        Ver más
                       </Button>
                     )}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <XIcon className="w-4 h-4" />
-                    </Button>
                   </div>
                 </div>
-              </CardHeader>
-              
-              <CardContent className="p-0 max-h-96 overflow-y-auto">
-                {notifications.length === 0 ? (
-                  <div className="p-6 text-center text-gray-500">
-                    <BellIcon className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                    <p className="text-sm">No hay notificaciones</p>
-                  </div>
-                ) : (
-                  <div className="space-y-1">
-                    {notifications.map((notification) => (
-                      <div
-                        key={notification.id}
-                        className={`p-4 border-l-4 hover:bg-gray-50 transition-colors cursor-pointer ${
-                          getNotificationColor(notification.type)
-                        } ${!notification.read ? 'bg-opacity-100' : 'bg-opacity-50'}`}
-                        onClick={() => markAsRead(notification.id)}
-                      >
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="flex items-center space-x-2">
-                            {getNotificationIcon(notification.type)}
-                            <h4 className="text-sm font-semibold text-gray-900">
-                              {notification.title}
-                            </h4>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            {!notification.read && (
-                              <div className="w-2 h-2 bg-ocean rounded-full"></div>
-                            )}
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                deleteNotification(notification.id);
-                              }}
-                              className="text-gray-400 hover:text-gray-600"
-                            >
-                              <XIcon className="w-3 h-3" />
-                            </button>
-                          </div>
-                        </div>
-                        
-                        <p className="text-sm text-gray-600 mb-2">
-                          {notification.message}
-                        </p>
-                        
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-gray-500">
-                            {notification.timestamp}
-                          </span>
-                          {notification.actionUrl && (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="text-xs h-6 px-2"
-                            >
-                              Ver más
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </>
-      )}
-    </div>
+              </DropdownMenuItem>
+            ))
+          )}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
