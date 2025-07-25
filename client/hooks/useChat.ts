@@ -144,13 +144,13 @@ export function useChat(tripId: string) {
     }, 1500 + Math.random() * 2000); // Random delay between 1.5-3.5 seconds
   };
 
-  const markMessagesAsRead = () => {
+  const markMessagesAsRead = useCallback(() => {
     setChatState(prev => ({
       ...prev,
       messages: prev.messages.map(msg => ({ ...msg, read: true })),
       lastSeen: new Date(),
     }));
-  };
+  }, []);
 
   const shareLocation = (locationName: string) => {
     return sendMessage(`📍 Ubicación compartida: ${locationName}`, "location");
