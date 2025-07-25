@@ -79,7 +79,7 @@ export function useChat(tripId: string) {
     });
   };
 
-  const sendMessage = (content: string, type: "text" | "location" = "text") => {
+  const sendMessage = useCallback((content: string, type: "text" | "location" = "text") => {
     if (!content.trim() || !user) return;
 
     const message: Message = {
@@ -102,7 +102,7 @@ export function useChat(tripId: string) {
     // Note: Auto-response removed - now requires manual interaction between real users
 
     return message.id;
-  };
+  }, [user, tripId]);
 
   const simulateResponse = (originalMessage: Message) => {
     const isDriverResponding = originalMessage.senderRole === "client";
