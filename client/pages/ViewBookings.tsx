@@ -657,7 +657,7 @@ function BookingDetailsModal({ booking, onClose, getVehicleDetails }: BookingDet
           </div>
 
           {/* Actions */}
-          <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             {booking.status === "upcoming" && (
               <Link to={`/chat?transfer=${booking.id}`} className="flex-1">
                 <Button className="w-full bg-ocean hover:bg-ocean/90">
