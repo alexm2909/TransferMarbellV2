@@ -262,24 +262,24 @@ export default function DriverPanel() {
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
             Volver al Dashboard
           </Link>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-navy">
+              <h1 className="text-2xl sm:text-3xl font-bold text-navy">
                 Panel de Conductor
               </h1>
               <p className="text-gray-600 mt-2">
                 Gestiona tus traslados y ganancias
               </p>
             </div>
-            <div className="flex items-center space-x-4">
-              <Badge className={`${isOnline ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+              <Badge className={`${isOnline ? 'bg-green-500' : 'bg-red-500'} text-white w-fit`}>
                 <div className="w-2 h-2 bg-white rounded-full mr-2"></div>
                 {isOnline ? 'Disponible' : 'No Disponible'}
               </Badge>
               <Button
                 onClick={() => setIsOnline(!isOnline)}
                 variant={isOnline ? "destructive" : "default"}
-                className={isOnline ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}
+                className={`w-full sm:w-auto ${isOnline ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}
               >
                 {isOnline ? 'Desconectar' : 'Conectar'}
               </Button>
