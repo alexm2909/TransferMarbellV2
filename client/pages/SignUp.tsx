@@ -139,9 +139,7 @@ export default function SignUp() {
                 Transfermarbell
               </span>
             </Link>
-            <Link to="/support">
-              <Button variant="ghost">Need Help?</Button>
-            </Link>
+
           </div>
         </div>
       </nav>
