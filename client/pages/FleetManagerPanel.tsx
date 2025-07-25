@@ -38,6 +38,8 @@ export default function FleetManagerPanel() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [selectedDriver, setSelectedDriver] = useState<string | null>(null);
+  const [selectedTrip, setSelectedTrip] = useState<string | null>(null);
+  const [showAssignModal, setShowAssignModal] = useState(false);
 
   // Redirect if not fleet manager
   if (user?.role !== "fleet-manager") {
