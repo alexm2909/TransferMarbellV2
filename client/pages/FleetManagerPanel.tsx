@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatsWidget from "@/components/StatsWidget";
+import UserMenu from "@/components/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
 import {
   CarIcon,
