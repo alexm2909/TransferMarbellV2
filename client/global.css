@@ -116,6 +116,83 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Mobile optimization - prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Ensure containers don't overflow */
+  .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Mobile-friendly button groups */
+  @media (max-width: 768px) {
+    /* Prevent button overflow in cards */
+    .space-x-3 > *, .space-x-4 > *, .flex.space-x-3 > *, .flex.space-x-4 > * {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    /* Ensure text doesn't overflow */
+    .text-xl, .text-2xl, .text-3xl {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* Mobile navigation optimizations */
+    nav .flex.justify-between {
+      gap: 0.5rem;
+    }
+
+    /* Ensure cards don't overflow */
+    .grid {
+      overflow-x: hidden;
+    }
+
+    /* Make sure forms fit properly */
+    .grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4 {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .grid.grid-cols-1.md\\:grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid.grid-cols-1.md\\:grid-cols-3 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid.grid-cols-1.lg\\:grid-cols-3 {
+      grid-template-columns: 1fr;
+    }
+
+    /* Responsive padding and margins */
+    .px-8 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .py-8 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    /* Button groups in mobile */
+    .flex.flex-col.sm\\:flex-row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .flex.flex-col.sm\\:flex-row > * {
+      width: 100%;
+      text-align: center;
+    }
+  }
 }
 
 /* Estilos personalizados para inputs de fecha y hora */
