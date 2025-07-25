@@ -403,12 +403,24 @@ export default function FleetManagerPanel() {
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="drivers" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="drivers">Conductores</TabsTrigger>
-            <TabsTrigger value="trips">Viajes</TabsTrigger>
-            <TabsTrigger value="vehicles">Vehículos</TabsTrigger>
-            <TabsTrigger value="analytics">Análisis</TabsTrigger>
+        <Tabs defaultValue="drivers" className="space-y-4 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 h-auto p-1">
+            <TabsTrigger value="drivers" className="text-xs sm:text-sm py-2">
+              <span className="hidden sm:inline">Conductores</span>
+              <span className="sm:hidden">Drivers</span>
+            </TabsTrigger>
+            <TabsTrigger value="trips" className="text-xs sm:text-sm py-2">
+              <span className="hidden sm:inline">Viajes</span>
+              <span className="sm:hidden">Trips</span>
+            </TabsTrigger>
+            <TabsTrigger value="vehicles" className="text-xs sm:text-sm py-2">
+              <span className="hidden sm:inline">Vehículos</span>
+              <span className="sm:hidden">Cars</span>
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="text-xs sm:text-sm py-2">
+              <span className="hidden sm:inline">Análisis</span>
+              <span className="sm:hidden">Stats</span>
+            </TabsTrigger>
           </TabsList>
 
           {/* Drivers Tab */}
