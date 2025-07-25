@@ -25,21 +25,20 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
 
   // Load Google Maps script
   useEffect(() => {
-    if (window.google) {
+    if (isGoogleMapsLoaded()) {
       initializeMap();
       return;
     }
 
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places,geometry&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-
-    window.initMap = () => {
-      initializeMap();
-    };
-
-    document.head.appendChild(script);
+    loadGoogleMaps(['places', 'geometry'])
+      .then(() => {
+        initializeMap();
+      })
+      .catch((error) => {
+        console.error('Failed to load Google Maps:', error);
+        setError('Failed to load map');
+        setIsLoading(false);
+      });
 
     return () => {
       if (script.parentNode) {
