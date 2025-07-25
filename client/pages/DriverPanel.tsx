@@ -442,35 +442,37 @@ export default function DriverPanel() {
                         )}
                       </div>
 
-                      <div className="flex justify-between items-center">
-                        <div className="flex space-x-3">
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex flex-col sm:flex-row gap-2 flex-1">
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => setSelectedTransfer(transfer)}
+                            className="w-full sm:w-auto"
                           >
                             <EyeIcon className="w-4 h-4 mr-2" />
                             Ver Detalles
                           </Button>
-                          <Link to={`/chat?transfer=${transfer.id}`}>
-                            <Button size="sm" variant="outline">
+                          <Link to={`/chat?transfer=${transfer.id}`} className="w-full sm:w-auto">
+                            <Button size="sm" variant="outline" className="w-full">
                               <MessageSquareIcon className="w-4 h-4 mr-2" />
                               Chat
                             </Button>
                           </Link>
                         </div>
-                        <div className="flex space-x-2">
+                        <div className="flex gap-2">
                           <Button
                             size="sm"
                             variant="destructive"
                             onClick={() => handleDeclineTransfer(transfer.id)}
+                            className="flex-1 sm:flex-none"
                           >
                             <XIcon className="w-4 h-4 mr-2" />
                             Rechazar
                           </Button>
                           <Button
                             size="sm"
-                            className="bg-green-600 hover:bg-green-700"
+                            className="bg-green-600 hover:bg-green-700 flex-1 sm:flex-none"
                             onClick={() => handleAcceptTransfer(transfer.id)}
                           >
                             <CheckIcon className="w-4 h-4 mr-2" />
