@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatsWidget from "@/components/StatsWidget";
 import { useAuth } from "@/hooks/useAuth";
+import UserMenu from "@/components/UserMenu";
 import {
   CarIcon,
   UsersIcon,
@@ -395,7 +396,7 @@ export default function AdminPanel() {
                               Precio Actual
                             </p>
                             <p className="text-xl font-bold text-red-600">
-                              €{request.currentPrice}
+                              ��{request.currentPrice}
                             </p>
                           </div>
                           <div className="p-3 bg-green-50 rounded-lg border border-green-200">
