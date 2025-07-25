@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { MapPinIcon, SearchIcon, LoaderIcon } from "lucide-react";
+import { loadGoogleMaps, isGoogleMapsLoaded } from "@/lib/googleMapsLoader";
 
 interface AddressAutocompleteProps {
   placeholder: string;
@@ -9,14 +10,6 @@ interface AddressAutocompleteProps {
   className?: string;
   required?: boolean;
 }
-
-declare global {
-  interface Window {
-    google: any;
-  }
-}
-
-const GOOGLE_MAPS_API_KEY = "AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ";
 
 export default function AddressAutocomplete({
   placeholder,
