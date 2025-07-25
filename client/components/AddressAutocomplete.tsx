@@ -27,21 +27,18 @@ export default function AddressAutocomplete({
 
   // Load Google Maps script and initialize services
   useEffect(() => {
-    if (window.google) {
+    if (isGoogleMapsLoaded()) {
       initializeServices();
       return;
     }
 
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`;
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = () => {
-      initializeServices();
-    };
-
-    document.head.appendChild(script);
+    loadGoogleMaps(['places'])
+      .then(() => {
+        initializeServices();
+      })
+      .catch((error) => {
+        console.error('Failed to load Google Maps:', error);
+      });
 
     return () => {
       if (script.parentNode) {
