@@ -164,7 +164,7 @@ export function useChat(tripId: string) {
     ).length;
   }, [chatState.messages, user?.role]);
 
-  const getOtherParticipantName = () => {
+  const getOtherParticipantName = useCallback(() => {
     if (user?.role === "driver") {
       const clientMessage = chatState.messages.find(msg => msg.senderRole === "client");
       return clientMessage?.senderName || "Cliente";
@@ -172,7 +172,7 @@ export function useChat(tripId: string) {
       const driverMessage = chatState.messages.find(msg => msg.senderRole === "driver");
       return driverMessage?.senderName || "Conductor";
     }
-  };
+  }, [user?.role, chatState.messages]);
 
   const isOtherPartyTyping = () => {
     return chatState.isTyping;
