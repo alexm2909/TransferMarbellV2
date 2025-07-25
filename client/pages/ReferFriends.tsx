@@ -242,7 +242,7 @@ ${user?.name || 'Tu amigo'}`);
                   <label className="text-sm font-medium text-gray-700 mb-2 block">
                     Tu Enlace de Referido
                   </label>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-2">
                     <Input
                       value={referralLink}
                       readOnly
@@ -251,9 +251,10 @@ ${user?.name || 'Tu amigo'}`);
                     <Button
                       onClick={copyToClipboard}
                       variant="outline"
-                      className={isCopied ? "border-green-500 text-green-600" : ""}
+                      className={`w-full sm:w-auto ${isCopied ? "border-green-500 text-green-600" : ""}`}
                     >
-                      {isCopied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
+                      {isCopied ? <CheckIcon className="w-4 h-4 mr-2 sm:mr-0" /> : <CopyIcon className="w-4 h-4 mr-2 sm:mr-0" />}
+                      <span className="sm:hidden">{isCopied ? "Copiado" : "Copiar"}</span>
                     </Button>
                   </div>
                   {isCopied && (
