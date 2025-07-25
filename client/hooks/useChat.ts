@@ -156,13 +156,13 @@ export function useChat(tripId: string) {
     return sendMessage(`📍 Ubicación compartida: ${locationName}`, "location");
   }, [sendMessage]);
 
-  const getUnreadCount = () => {
-    return chatState.messages.filter(msg => 
-      !msg.read && 
+  const getUnreadCount = useCallback(() => {
+    return chatState.messages.filter(msg =>
+      !msg.read &&
       msg.senderRole !== user?.role &&
       msg.type !== "system"
     ).length;
-  };
+  }, [chatState.messages, user?.role]);
 
   const getOtherParticipantName = () => {
     if (user?.role === "driver") {
