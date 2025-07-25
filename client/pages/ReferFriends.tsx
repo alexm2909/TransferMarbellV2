@@ -267,7 +267,7 @@ ${user?.name || 'Tu amigo'}`);
                   <label className="text-sm font-medium text-gray-700 mb-2 block">
                     Invitar por Email
                   </label>
-                  <form onSubmit={handleEmailInvite} className="flex items-center space-x-2">
+                  <form onSubmit={handleEmailInvite} className="flex flex-col sm:flex-row gap-2 sm:gap-2">
                     <Input
                       type="email"
                       placeholder="email@ejemplo.com"
@@ -275,7 +275,7 @@ ${user?.name || 'Tu amigo'}`);
                       onChange={(e) => setEmail(e.target.value)}
                       className="flex-1"
                     />
-                    <Button type="submit" disabled={!email}>
+                    <Button type="submit" disabled={!email} className="w-full sm:w-auto">
                       <MailIcon className="w-4 h-4 mr-2" />
                       Enviar
                     </Button>
