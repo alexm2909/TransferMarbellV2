@@ -467,22 +467,22 @@ export default function FleetManagerPanel() {
                         </div>
 
                         <div className="space-y-2 mb-4">
-                          <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center justify-between text-xs sm:text-sm">
                             <span className="text-gray-600">Ubicación:</span>
-                            <span className="font-medium">{driver.location}</span>
+                            <span className="font-medium text-right text-xs sm:text-sm truncate ml-2">{driver.location}</span>
                           </div>
-                          <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center justify-between text-xs sm:text-sm">
                             <span className="text-gray-600">Rating:</span>
                             <div className="flex items-center">
-                              <StarIcon className="w-4 h-4 text-yellow-500 fill-current mr-1" />
-                              <span className="font-medium">{driver.rating}</span>
+                              <StarIcon className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-current mr-1" />
+                              <span className="font-medium text-xs sm:text-sm">{driver.rating}</span>
                             </div>
                           </div>
-                          <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center justify-between text-xs sm:text-sm">
                             <span className="text-gray-600">Viajes hoy:</span>
                             <span className="font-medium">{driver.todayTrips}</span>
                           </div>
-                          <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center justify-between text-xs sm:text-sm">
                             <span className="text-gray-600">Ganado hoy:</span>
                             <span className="font-medium text-green-600">€{driver.todayEarnings}</span>
                           </div>
@@ -491,18 +491,18 @@ export default function FleetManagerPanel() {
                         {/* Document Status */}
                         <div className="mb-4">
                           <h4 className="text-xs font-medium text-gray-700 mb-2">Documentos:</h4>
-                          <div className="grid grid-cols-3 gap-1">
-                            <div className={`text-center p-1 rounded text-xs ${
+                          <div className="flex gap-1 justify-between">
+                            <div className={`flex-1 text-center p-1 rounded text-xs ${
                               driver.documents.license.valid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                             }`}>
-                              Licencia
+                              Lic.
                             </div>
-                            <div className={`text-center p-1 rounded text-xs ${
+                            <div className={`flex-1 text-center p-1 rounded text-xs ${
                               driver.documents.insurance.valid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                             }`}>
-                              Seguro
+                              Seg.
                             </div>
-                            <div className={`text-center p-1 rounded text-xs ${
+                            <div className={`flex-1 text-center p-1 rounded text-xs ${
                               driver.documents.itv.valid ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                             }`}>
                               ITV
@@ -510,33 +510,37 @@ export default function FleetManagerPanel() {
                           </div>
                         </div>
 
-                        <div className="flex space-x-2">
+                        <div className="flex flex-col sm:flex-row gap-2">
                           {driver.availability === "available" && (
                             <Button
                               size="sm"
                               onClick={() => assignTrip(driver.id)}
-                              className="flex-1 bg-ocean hover:bg-ocean/90"
+                              className="w-full sm:flex-1 bg-ocean hover:bg-ocean/90 text-xs sm:text-sm"
                             >
                               Asignar Viaje
                             </Button>
                           )}
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => contactDriver(driver.id, 'call')}
-                          >
-                            <PhoneIcon className="w-3 h-3" />
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => contactDriver(driver.id, 'message')}
-                          >
-                            <MessageSquareIcon className="w-3 h-3" />
-                          </Button>
-                          <Button size="sm" variant="outline">
-                            <EditIcon className="w-3 h-3" />
-                          </Button>
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => contactDriver(driver.id, 'call')}
+                              className="flex-1 sm:flex-none"
+                            >
+                              <PhoneIcon className="w-3 h-3" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => contactDriver(driver.id, 'message')}
+                              className="flex-1 sm:flex-none"
+                            >
+                              <MessageSquareIcon className="w-3 h-3" />
+                            </Button>
+                            <Button size="sm" variant="outline" className="flex-1 sm:flex-none">
+                              <EditIcon className="w-3 h-3" />
+                            </Button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
