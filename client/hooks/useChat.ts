@@ -152,9 +152,9 @@ export function useChat(tripId: string) {
     }));
   }, []);
 
-  const shareLocation = (locationName: string) => {
+  const shareLocation = useCallback((locationName: string) => {
     return sendMessage(`📍 Ubicación compartida: ${locationName}`, "location");
-  };
+  }, [sendMessage]);
 
   const getUnreadCount = () => {
     return chatState.messages.filter(msg => 
