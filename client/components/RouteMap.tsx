@@ -2,21 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPinIcon, ClockIcon, RouteIcon, NavigationIcon } from "lucide-react";
+import { loadGoogleMaps, isGoogleMapsLoaded } from "@/lib/googleMapsLoader";
 
 interface RouteMapProps {
   origin: string;
   destination: string;
   className?: string;
 }
-
-declare global {
-  interface Window {
-    google: any;
-    initMap: () => void;
-  }
-}
-
-const GOOGLE_MAPS_API_KEY = "AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ";
 
 export default function RouteMap({ origin, destination, className = "" }: RouteMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
