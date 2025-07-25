@@ -166,8 +166,8 @@ export default function Index() {
                 >
                   Support
                 </Link>
-                <div className="flex space-x-3 px-3 pt-2">
-                  <Link to="/signin" className="flex-1">
+                <div className="flex flex-col gap-3 px-3 pt-2">
+                  <Link to="/signin" className="w-full">
                     <Button
                       variant="outline"
                       className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
@@ -176,7 +176,7 @@ export default function Index() {
                       Sign In
                     </Button>
                   </Link>
-                  <Link to="/signup" className="flex-1">
+                  <Link to="/signup" className="w-full">
                     <Button
                       className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90"
                       onClick={() => setMobileMenuOpen(false)}
