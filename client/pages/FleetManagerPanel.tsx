@@ -551,7 +551,104 @@ export default function FleetManagerPanel() {
           </TabsContent>
 
           {/* Trips Tab */}
-          <TabsContent value="trips" className="space-y-6">
+          <TabsContent value="trips" className="space-y-4 sm:space-y-6">
+            {/* Unassigned Trips */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <AlertTriangleIcon className="w-5 h-5 text-orange-500" />
+                  Viajes Sin Asignar ({unassignedTrips.length})
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {unassignedTrips.map((trip) => (
+                    <Card key={trip.id} className="border border-orange-200 bg-orange-50/50">
+                      <CardContent className="p-4">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
+                              <h3 className="font-semibold text-navy text-sm sm:text-base pr-2 mb-1 sm:mb-0">{trip.route}</h3>
+                              <div className="flex items-center gap-2">
+                                <Badge className="bg-orange-100 text-orange-800 text-xs">
+                                  {getVehicleTypeLabel(trip.vehicleType)}
+                                </Badge>
+                                <Badge variant="outline" className="text-xs">
+                                  €{trip.price}
+                                </Badge>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs sm:text-sm">
+                              <div>
+                                <span className="text-gray-600">Cliente:</span>
+                                <p className="font-medium">{trip.client}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">Fecha/Hora:</span>
+                                <p className="font-medium">{trip.date} {trip.time}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">Pasajeros:</span>
+                                <p className="font-medium">{trip.passengers} pax, {trip.luggage} maletas</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">Teléfono:</span>
+                                <p className="font-medium text-xs">{trip.clientPhone}</p>
+                              </div>
+                            </div>
+                            {trip.specialRequests && (
+                              <div className="mt-2 p-2 bg-blue-50 rounded text-xs">
+                                <span className="font-medium text-blue-800">Solicitudes:</span>
+                                <p className="text-blue-700">{trip.specialRequests}</p>
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex flex-col gap-2 w-full sm:w-auto">
+                            <Button
+                              size="sm"
+                              onClick={() => {
+                                setSelectedTrip(trip.id);
+                                setShowAssignModal(true);
+                              }}
+                              className="bg-ocean hover:bg-ocean/90 w-full sm:w-auto text-xs sm:text-sm"
+                            >
+                              Asignar a Conductor
+                            </Button>
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => alert(`Llamando a ${trip.client}: ${trip.clientPhone}`)}
+                                className="flex-1 sm:flex-none text-xs"
+                              >
+                                <PhoneIcon className="w-3 h-3 mr-1" />
+                                <span className="hidden sm:inline">Llamar</span>
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="flex-1 sm:flex-none text-xs"
+                              >
+                                <MessageSquareIcon className="w-3 h-3 mr-1" />
+                                <span className="hidden sm:inline">Chat</span>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                  {unassignedTrips.length === 0 && (
+                    <div className="text-center py-8 text-gray-500">
+                      <CheckCircleIcon className="w-12 h-12 text-green-500 mx-auto mb-2" />
+                      <p>No hay viajes sin asignar</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Recent Trips */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -564,10 +661,10 @@ export default function FleetManagerPanel() {
                   {recentTrips.map((trip) => (
                     <Card key={trip.id} className="border border-gray-200">
                       <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between mb-2">
-                              <h3 className="font-semibold text-navy">{trip.route}</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                              <h3 className="font-semibold text-navy text-sm sm:text-base pr-2">{trip.route}</h3>
                               <Badge
                                 className={
                                   trip.status === "completed"
@@ -582,7 +679,7 @@ export default function FleetManagerPanel() {
                                 {trip.status === "pending" && "Pendiente"}
                               </Badge>
                             </div>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs sm:text-sm">
                               <div>
                                 <span className="text-gray-600">Conductor:</span>
                                 <p className="font-medium">{trip.driver}</p>
@@ -602,19 +699,19 @@ export default function FleetManagerPanel() {
                             </div>
                             {trip.rating && (
                               <div className="mt-2 flex items-center">
-                                <span className="text-sm text-gray-600 mr-2">Valoración:</span>
+                                <span className="text-xs sm:text-sm text-gray-600 mr-2">Valoración:</span>
                                 <div className="flex items-center">
                                   {Array.from({ length: 5 }, (_, i) => (
                                     <StarIcon
                                       key={i}
-                                      className={`w-4 h-4 ${
+                                      className={`w-3 h-3 sm:w-4 sm:h-4 ${
                                         i < trip.rating!
                                           ? "text-yellow-500 fill-current"
                                           : "text-gray-300"
                                       }`}
                                     />
                                   ))}
-                                  <span className="ml-1 text-sm font-medium">{trip.rating}/5</span>
+                                  <span className="ml-1 text-xs sm:text-sm font-medium">{trip.rating}/5</span>
                                 </div>
                               </div>
                             )}
