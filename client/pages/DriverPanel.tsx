@@ -323,25 +323,33 @@ export default function DriverPanel() {
         </div>
 
         <Tabs defaultValue="available" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="available" className="relative">
-              Disponibles
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 h-auto p-1">
+            <TabsTrigger value="available" className="relative flex-col h-auto py-2 px-1 text-xs sm:text-sm">
+              <span className="hidden sm:inline">Disponibles</span>
+              <span className="sm:hidden">Disp.</span>
               {availableTransfers.length > 0 && (
-                <Badge className="ml-2 bg-ocean text-white text-xs">
+                <Badge className="mt-1 sm:ml-2 sm:mt-0 bg-ocean text-white text-xs">
                   {availableTransfers.length}
                 </Badge>
               )}
             </TabsTrigger>
-            <TabsTrigger value="active" className="relative">
-              Activos
+            <TabsTrigger value="active" className="relative flex-col h-auto py-2 px-1 text-xs sm:text-sm">
+              <span className="hidden sm:inline">Activos</span>
+              <span className="sm:hidden">Act.</span>
               {activeTransfers.length > 0 && (
-                <Badge className="ml-2 bg-coral text-white text-xs">
+                <Badge className="mt-1 sm:ml-2 sm:mt-0 bg-coral text-white text-xs">
                   {activeTransfers.length}
                 </Badge>
               )}
             </TabsTrigger>
-            <TabsTrigger value="completed">Completados</TabsTrigger>
-            <TabsTrigger value="earnings">Ganancias</TabsTrigger>
+            <TabsTrigger value="completed" className="flex-col h-auto py-2 px-1 text-xs sm:text-sm">
+              <span className="hidden sm:inline">Completados</span>
+              <span className="sm:hidden">Comp.</span>
+            </TabsTrigger>
+            <TabsTrigger value="earnings" className="flex-col h-auto py-2 px-1 text-xs sm:text-sm">
+              <span className="hidden sm:inline">Ganancias</span>
+              <span className="sm:hidden">Gan.</span>
+            </TabsTrigger>
           </TabsList>
 
           {/* Available Transfers */}
