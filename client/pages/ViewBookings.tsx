@@ -502,32 +502,33 @@ function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
           </div>
         )}
 
-        <div className="flex justify-between items-center">
-          <div className="flex space-x-2">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
+          <div className="flex flex-col sm:flex-row gap-2">
             <Button
               size="sm"
               variant="outline"
               onClick={() => onViewDetails(booking)}
+              className="w-full sm:w-auto"
             >
               <EyeIcon className="w-4 h-4 mr-2" />
               Ver Detalles
             </Button>
             {booking.status === "upcoming" && (
-              <Link to={`/chat?transfer=${booking.id}`}>
-                <Button size="sm" variant="outline">
+              <Link to={`/chat?transfer=${booking.id}`} className="w-full sm:w-auto">
+                <Button size="sm" variant="outline" className="w-full">
                   <MessageSquareIcon className="w-4 h-4 mr-2" />
                   Chat
                 </Button>
               </Link>
             )}
           </div>
-          <div className="flex space-x-2">
+          <div className="flex gap-2">
             {booking.status === "completed" && (
               <Button
                 size="sm"
                 variant="outline"
                 onClick={() => onRepeat(booking)}
-                className="border-ocean text-ocean hover:bg-ocean hover:text-white"
+                className="w-full sm:w-auto border-ocean text-ocean hover:bg-ocean hover:text-white"
               >
                 <RepeatIcon className="w-4 h-4 mr-2" />
                 Repetir
