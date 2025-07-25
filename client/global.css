@@ -219,7 +219,26 @@
     nav .flex.justify-between > *:last-child {
       flex-shrink: 0;
     }
+
+    /* Mobile tabs optimization */
+    [data-orientation="horizontal"] {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    [data-orientation="horizontal"]::-webkit-scrollbar {
+      display: none;
+    }
   }
+}
+
+/* Utility classes */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Estilos personalizados para inputs de fecha y hora */
