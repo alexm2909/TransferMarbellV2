@@ -785,10 +785,10 @@ export default function DriverPanel() {
               </div>
 
               {selectedTransfer.status === 'available' && (
-                <div className="flex space-x-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Button
                     variant="destructive"
-                    className="flex-1"
+                    className="flex-1 w-full"
                     onClick={() => {
                       handleDeclineTransfer(selectedTransfer.id);
                       setSelectedTransfer(null);
@@ -798,7 +798,7 @@ export default function DriverPanel() {
                     Rechazar Traslado
                   </Button>
                   <Button
-                    className="flex-1 bg-green-600 hover:bg-green-700"
+                    className="flex-1 w-full bg-green-600 hover:bg-green-700"
                     onClick={() => {
                       handleAcceptTransfer(selectedTransfer.id);
                       setSelectedTransfer(null);
