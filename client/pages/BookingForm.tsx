@@ -325,15 +325,17 @@ export default function BookingForm() {
       <nav className="bg-white border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
+            <Link to="/" className="flex items-center space-x-2 min-w-0">
+              <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center flex-shrink-0">
                 <CarIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
+              <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent truncate">
                 Transfermarbell
               </span>
             </Link>
-            <div className="flex items-center space-x-4">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-4">
               <Badge variant="outline" className="border-ocean text-ocean">
                 Completing Booking
               </Badge>
@@ -352,6 +354,11 @@ export default function BookingForm() {
                 <LogOutIcon className="w-4 h-4 mr-2" />
                 Sign Out
               </Button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden flex items-center space-x-2">
+              <UserMenu />
             </div>
           </div>
         </div>
