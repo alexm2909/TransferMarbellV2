@@ -26,38 +26,38 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Test credentials for different user roles
+    // Test credentials for different user roles
   const testCredentials = {
     "cliente@test.com": {
       password: "123456",
       role: "client",
       name: "Ana García",
-      phone: "+34 600 123 456",
+      phone: "+34 600 123 456"
     },
     "conductor@test.com": {
       password: "123456",
       role: "driver",
       name: "Carlos Rodríguez",
-      phone: "+34 600 654 321",
+      phone: "+34 600 654 321"
     },
     "flota@test.com": {
       password: "123456",
       role: "fleet-manager",
       name: "María López",
-      phone: "+34 600 789 012",
+      phone: "+34 600 789 012"
     },
     "admin@test.com": {
       password: "123456",
       role: "admin",
       name: "José Martínez",
-      phone: "+34 600 345 678",
+      phone: "+34 600 345 678"
     },
     "empresa@test.com": {
       password: "123456",
       role: "business",
       name: "Hotel Majestic",
-      phone: "+34 952 123 456",
-    },
+      phone: "+34 952 123 456"
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,10 +69,7 @@ export default function SignIn() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Check if it's a test credential
-      const testUser =
-        testCredentials[
-          formData.email.toLowerCase() as keyof typeof testCredentials
-        ];
+      const testUser = testCredentials[formData.email.toLowerCase() as keyof typeof testCredentials];
 
       if (testUser && formData.password === testUser.password) {
         // Set authentication status with test user data
@@ -137,9 +134,7 @@ export default function SignIn() {
                 Transfermarbell
               </span>
             </Link>
-            <Link to="/support">
-              <Button variant="ghost">Need Help?</Button>
-            </Link>
+
           </div>
         </div>
       </nav>
@@ -309,7 +304,7 @@ export default function SignIn() {
               </div>
             </div>
 
-            {/* Test Credentials Section */}
+                        {/* Test Credentials Section */}
             <div className="mt-6 p-4 bg-gradient-to-r from-ocean-light to-coral-light rounded-lg">
               <h3 className="text-sm font-semibold text-navy mb-3 text-center">
                 🧪 Credenciales de Prueba
@@ -317,22 +312,14 @@ export default function SignIn() {
               <div className="grid grid-cols-1 gap-2 text-xs">
                 <div className="flex justify-between items-center py-1">
                   <span className="font-medium text-gray-700">👤 Cliente:</span>
-                  <span className="text-gray-600">
-                    cliente@test.com / 123456
-                  </span>
+                  <span className="text-gray-600">cliente@test.com / 123456</span>
                 </div>
                 <div className="flex justify-between items-center py-1">
-                  <span className="font-medium text-gray-700">
-                    🚗 Conductor:
-                  </span>
-                  <span className="text-gray-600">
-                    conductor@test.com / 123456
-                  </span>
+                  <span className="font-medium text-gray-700">🚗 Conductor:</span>
+                  <span className="text-gray-600">conductor@test.com / 123456</span>
                 </div>
                 <div className="flex justify-between items-center py-1">
-                  <span className="font-medium text-gray-700">
-                    👥 Jefe Flota:
-                  </span>
+                  <span className="font-medium text-gray-700">👥 Jefe Flota:</span>
                   <span className="text-gray-600">flota@test.com / 123456</span>
                 </div>
                 <div className="flex justify-between items-center py-1">
@@ -341,9 +328,7 @@ export default function SignIn() {
                 </div>
                 <div className="flex justify-between items-center py-1">
                   <span className="font-medium text-gray-700">🏢 Empresa:</span>
-                  <span className="text-gray-600">
-                    empresa@test.com / 123456
-                  </span>
+                  <span className="text-gray-600">empresa@test.com / 123456</span>
                 </div>
               </div>
             </div>
