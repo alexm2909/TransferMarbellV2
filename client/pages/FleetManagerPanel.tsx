@@ -439,30 +439,30 @@ export default function FleetManagerPanel() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {drivers.map((driver) => (
                     <Card key={driver.id} className="border border-gray-200 hover:shadow-lg transition-shadow">
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-start space-x-3">
-                            <div className="w-12 h-12 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
+                      <CardContent className="p-4 sm:p-6">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
+                          <div className="flex items-start space-x-3 mb-3 sm:mb-0">
+                            <div className="w-12 h-12 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center flex-shrink-0">
                               <span className="text-sm font-bold text-ocean">
                                 {driver.name.split(' ').map(n => n[0]).join('')}
                               </span>
                             </div>
-                            <div>
-                              <h3 className="font-semibold text-navy">{driver.name}</h3>
-                              <p className="text-sm text-gray-600">{driver.vehicle}</p>
+                            <div className="min-w-0 flex-1">
+                              <h3 className="font-semibold text-navy text-sm sm:text-base">{driver.name}</h3>
+                              <p className="text-xs sm:text-sm text-gray-600 break-words">{driver.vehicle}</p>
                               <p className="text-xs text-gray-500">{driver.plate}</p>
                             </div>
                           </div>
                           <Badge
-                            className={getStatusColor(driver.availability)}
+                            className={`${getStatusColor(driver.availability)} text-xs px-2 py-1 whitespace-nowrap self-start`}
                             variant="outline"
                           >
                             {driver.availability === "available" && "Disponible"}
                             {driver.availability === "busy" && "Ocupado"}
-                            {driver.availability === "offline" && "Desconectado"}
+                            {driver.availability === "offline" && "Offline"}
                           </Badge>
                         </div>
 
