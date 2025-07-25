@@ -39,12 +39,6 @@ export default function AddressAutocomplete({
       .catch((error) => {
         console.error('Failed to load Google Maps:', error);
       });
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
   }, []);
 
   const initializeServices = () => {
