@@ -856,19 +856,25 @@ export default function BookingForm() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Route</span>
-                      <span className="font-medium text-right">
-                        {bookingData.origin
-                          ? bookingData.origin.substring(0, 15) +
-                            (bookingData.origin.length > 15 ? "..." : "")
-                          : "Origin"}{" "}
-                        ��{" "}
-                        {bookingData.destination
-                          ? bookingData.destination.substring(0, 15) +
-                            (bookingData.destination.length > 15 ? "..." : "")
-                          : "Destination"}
-                      </span>
+                    <div className="space-y-2">
+                      <span className="text-sm text-gray-600">Route</span>
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <div className="flex items-start space-x-2">
+                          <div className="flex flex-col items-center mt-1">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <div className="w-0.5 h-6 bg-gray-300"></div>
+                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                          </div>
+                          <div className="flex-1 min-w-0 space-y-2">
+                            <div className="text-sm font-medium text-gray-900 break-words">
+                              {bookingData.origin || "Origen"}
+                            </div>
+                            <div className="text-sm font-medium text-gray-900 break-words">
+                              {bookingData.destination || "Destino"}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Date & Time</span>
