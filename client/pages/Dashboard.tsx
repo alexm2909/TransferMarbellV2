@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
 import NotificationCenter from "@/components/NotificationCenter";
+import UserMenu from "@/components/UserMenu";
 import {
   CarIcon,
   UsersIcon,
