@@ -270,8 +270,47 @@ export default function FleetManagerPanel() {
     }
   };
 
-  const assignTrip = (driverId: string) => {
-    alert(`Asignar viaje al conductor ${driverId}`);
+  const assignTrip = (driverId: string, tripId?: string) => {
+    if (tripId) {
+      // Assign specific trip to driver
+      const driver = drivers.find(d => d.id === driverId);
+      const trip = unassignedTrips.find(t => t.id === tripId);
+      if (driver && trip) {
+        alert(`Viaje ${trip.route} asignado a ${driver.name}`);
+        setShowAssignModal(false);
+        setSelectedTrip(null);
+      }
+    } else {
+      // Show available trips for assignment
+      setSelectedDriver(driverId);
+      setShowAssignModal(true);
+    }
+  };
+
+  const getVehicleTypeLabel = (type: string) => {
+    const types = {
+      economy: "Económico",
+      comfort: "Confort",
+      premium: "Premium",
+      luxury: "Lujo"
+    };
+    return types[type as keyof typeof types] || type;
+  };
+
+  const canDriverTakeTrip = (driver: any, trip: any) => {
+    // Check if driver is available and meets trip requirements
+    if (driver.availability !== "available") return false;
+
+    // Add logic for vehicle type compatibility
+    const driverVehicleTypes = {
+      "BMW Serie 5": ["comfort", "premium"],
+      "Mercedes E-Class": ["comfort", "premium", "luxury"],
+      "Audi A6": ["comfort", "premium"],
+      "Volkswagen Passat": ["economy", "comfort"]
+    };
+
+    const compatibleTypes = driverVehicleTypes[driver.vehicle.split('(')[0].trim() as keyof typeof driverVehicleTypes] || ["economy"];
+    return compatibleTypes.includes(trip.vehicleType);
   };
 
   const contactDriver = (driverId: string, method: 'call' | 'message') => {
