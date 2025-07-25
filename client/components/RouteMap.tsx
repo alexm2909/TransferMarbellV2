@@ -39,13 +39,6 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         setError('Failed to load map');
         setIsLoading(false);
       });
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-      delete window.initMap;
-    };
   }, []);
 
   // Update route when origin or destination changes
