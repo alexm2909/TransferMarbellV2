@@ -199,6 +199,26 @@
       width: 100%;
       text-align: center;
     }
+
+    /* Mobile dropdown menu optimizations */
+    [data-radix-popper-content-wrapper] {
+      max-width: calc(100vw - 2rem) !important;
+    }
+
+    /* Ensure text in small screens is readable */
+    .truncate {
+      min-width: 0;
+    }
+
+    /* Mobile navigation improvements */
+    nav .flex.justify-between > *:first-child {
+      min-width: 0;
+      flex: 1;
+    }
+
+    nav .flex.justify-between > *:last-child {
+      flex-shrink: 0;
+    }
   }
 }
 
