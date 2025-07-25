@@ -291,7 +291,7 @@ export default function BookingForm() {
                   </p>
                 </div>
               </div>
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link to="/signin?redirect=book" className="flex-1">
                   <Button className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
                     Sign In
