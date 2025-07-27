@@ -285,6 +285,36 @@ const translations = {
     'chat': 'Chat',
     'repeat': 'Répéter',
     'download': 'Télécharger',
+    'book_now': 'Réserver Maintenant',
+    'logout': 'Se Déconnecter',
+    'profile': 'Profil',
+
+    // Dashboard & Bookings
+    'welcome_back': 'Bon Retour',
+    'recent_bookings': 'Réservations Récentes',
+    'next_trip': 'Prochain Voyage',
+    'trip_history': 'Historique des Voyages',
+    'quick_actions': 'Actions Rapides',
+    'active_trips': 'Voyages Actifs',
+    'available_transfers': 'Transferts Disponibles',
+    'total_available': 'Total Disponible',
+    'accept': 'Accepter',
+    'reject': 'Rejeter',
+    'distance': 'Distance',
+    'duration': 'Durée',
+    'estimated_cost': 'Coût Estimé',
+    'route_details': 'Détails de l\'Itinéraire',
+
+    // Driver specific
+    'driver_panel': 'Panneau Chauffeur',
+    'earnings': 'Revenus',
+    'trips_completed': 'Voyages Terminés',
+    'rating': 'Évaluation',
+    'vehicle_status': 'État du Véhicule',
+    'go_online': 'Se Connecter',
+    'go_offline': 'Se Déconnecter',
+    'online': 'En Ligne',
+    'offline': 'Hors Ligne',
     
     // User roles
     'client': 'Client',
