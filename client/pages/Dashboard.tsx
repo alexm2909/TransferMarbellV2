@@ -84,24 +84,8 @@ export default function Dashboard() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Badge variant="outline" className="border-ocean text-ocean">
-                {getRoleIcon(user?.role || "")} {getRoleBadge(user?.role || "")}
-              </Badge>
-              <NotificationCenter userRole={user?.role || "client"} />
-              <Button variant="ghost" size="sm">
-                <SettingsIcon className="w-4 h-4 mr-2" />
-                Settings
-              </Button>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOutIcon className="w-4 h-4 mr-2" />
-                Sign Out
-              </Button>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            {/* Desktop and Mobile Navigation */}
+            <div className="flex items-center space-x-2">
               <NotificationCenter userRole={user?.role || "client"} />
               <UserMenu />
             </div>
