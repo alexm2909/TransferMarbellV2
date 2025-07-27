@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserMenu from "@/components/UserMenu";
+import ServiceRating from "@/components/ServiceRating";
 import {
   CarIcon,
   ArrowLeftIcon,
