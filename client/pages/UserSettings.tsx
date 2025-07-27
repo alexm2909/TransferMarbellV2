@@ -16,6 +16,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import UserMenu from "@/components/UserMenu";
+import PaymentMethods from "@/components/PaymentMethods";
 import {
   CarIcon,
   ArrowLeftIcon,
@@ -322,7 +323,7 @@ export default function UserSettings() {
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Compartir Ubicaci��n</Label>
+                  <Label>Compartir Ubicación</Label>
                   <p className="text-sm text-gray-500">
                     Comparte tu ubicación para mejorar el servicio
                   </p>
