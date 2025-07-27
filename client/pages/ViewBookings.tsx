@@ -144,7 +144,7 @@ export default function ViewBookings() {
         id: "TM001236",
         status: "completed",
         origin: "Puerto Banús",
-        destination: "Estación AVE Málaga",
+        destination: "Estaci��n AVE Málaga",
         date: "2024-12-15",
         time: "11:45",
         passengers: 1,
@@ -607,15 +607,26 @@ function BookingCard({ booking, onRepeat, onViewDetails, onRatingSubmit }: Booki
           </div>
           <div className="flex gap-2">
             {booking.status === "completed" && (
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => onRepeat(booking)}
-                className="w-full sm:w-auto border-ocean text-ocean hover:bg-ocean hover:text-white"
-              >
-                <RepeatIcon className="w-4 h-4 mr-2" />
-                Repetir
-              </Button>
+              <>
+                <ServiceRating
+                  bookingId={booking.id}
+                  userRole="client"
+                  targetName={booking.driverName}
+                  targetPhone={booking.driverPhone}
+                  vehicleInfo={`${vehicle.icon} ${vehicle.name}`}
+                  onSubmitRating={onRatingSubmit}
+                  existingRating={booking.rating}
+                />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => onRepeat(booking)}
+                  className="w-full sm:w-auto border-ocean text-ocean hover:bg-ocean hover:text-white"
+                >
+                  <RepeatIcon className="w-4 h-4 mr-2" />
+                  Repetir
+                </Button>
+              </>
             )}
           </div>
         </div>
