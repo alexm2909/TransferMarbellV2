@@ -124,6 +124,51 @@
     max-width: 100vw;
   }
 
+  /* Dark mode improvements */
+  .dark {
+    color-scheme: dark;
+  }
+
+  .dark nav {
+    @apply bg-card border-border;
+  }
+
+  .dark .bg-gray-50 {
+    @apply bg-background;
+  }
+
+  .dark .bg-gray-100 {
+    @apply bg-muted;
+  }
+
+  .dark .bg-white {
+    @apply bg-card;
+  }
+
+  .dark .text-gray-600 {
+    @apply text-muted-foreground;
+  }
+
+  .dark .text-gray-700 {
+    @apply text-foreground;
+  }
+
+  .dark .text-gray-800 {
+    @apply text-foreground;
+  }
+
+  .dark .text-gray-900 {
+    @apply text-foreground;
+  }
+
+  .dark .border-gray-200 {
+    @apply border-border;
+  }
+
+  .dark .border-gray-300 {
+    @apply border-border;
+  }
+
   /* Ensure containers don't overflow */
   .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl {
     max-width: 100%;
