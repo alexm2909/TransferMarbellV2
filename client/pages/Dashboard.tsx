@@ -157,68 +157,7 @@ export default function Dashboard() {
             {/* DRIVER DASHBOARD */}
             {user?.role === "driver" && (
               <>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <CarIcon className="w-5 h-5 text-ocean" />
-                      Traslados Disponibles
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <h3 className="font-semibold">
-                              Aeropuerto → Hotel Majestic
-                            </h3>
-                            <p className="text-sm text-gray-600 flex items-center gap-1">
-                              <ClockIcon className="w-3 h-3" />
-                              Mañana 14:30
-                            </p>
-                          </div>
-                          <span className="text-lg font-bold text-ocean">
-                            €35
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-500 mb-3">
-                          2 pasajeros, 1 maleta • Distancia: 25km
-                        </p>
-                        <Button
-                          size="sm"
-                          className="bg-ocean hover:bg-ocean/90"
-                        >
-                          Aceptar Traslado
-                        </Button>
-                      </div>
-                      <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <h3 className="font-semibold">
-                              Marbella → Aeropuerto Gibraltar
-                            </h3>
-                            <p className="text-sm text-gray-600 flex items-center gap-1">
-                              <ClockIcon className="w-3 h-3" />
-                              28 Dic, 09:00
-                            </p>
-                          </div>
-                          <span className="text-lg font-bold text-ocean">
-                            €80
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-500 mb-3">
-                          4 pasajeros, 3 maletas • Distancia: 45km
-                        </p>
-                        <Button
-                          size="sm"
-                          className="bg-ocean hover:bg-ocean/90"
-                        >
-                          Aceptar Traslado
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <AvailableTransfersCard />
 
                 <Card>
                   <CardHeader>
