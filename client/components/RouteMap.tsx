@@ -307,7 +307,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t">
           <span>Powered by Google Maps</span>
           <Badge variant="secondary" className="text-xs">
-            Ubicaciones marcadas
+            Ruta óptima
           </Badge>
         </div>
       </CardContent>
