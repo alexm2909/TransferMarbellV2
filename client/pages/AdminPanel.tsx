@@ -166,18 +166,8 @@ export default function AdminPanel() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Badge variant="outline" className="border-ocean text-ocean">
-                ⚙️ Panel de Administración
-              </Badge>
-              <Link to="/dashboard">
-                <Button variant="outline">Dashboard</Button>
-              </Link>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            {/* Desktop and Mobile Navigation */}
+            <div className="flex items-center space-x-2">
               <UserMenu />
             </div>
           </div>
