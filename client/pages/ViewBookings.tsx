@@ -457,6 +457,17 @@ interface BookingCardProps {
   booking: Booking;
   onRepeat: (booking: Booking) => void;
   onViewDetails: (booking: Booking) => void;
+  onRatingSubmit: (ratingData: {
+    bookingId: string;
+    stars: number;
+    comment: string;
+    aspects: {
+      punctuality: number;
+      vehicle: number;
+      service: number;
+      communication: number;
+    };
+  }) => void;
 }
 
 function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
