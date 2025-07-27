@@ -322,7 +322,7 @@ export default function UserSettings() {
               <Separator />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Compartir Ubicación</Label>
+                  <Label>Compartir Ubicaci��n</Label>
                   <p className="text-sm text-gray-500">
                     Comparte tu ubicación para mejorar el servicio
                   </p>
@@ -335,6 +335,33 @@ export default function UserSettings() {
                       privacy: { ...prev.privacy, shareLocation: checked }
                     }))
                   }
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Appearance */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <EyeIcon className="w-5 h-5" />
+                <span>{t('appearance')}</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label>{darkMode ? t('dark_mode') : t('light_mode')}</Label>
+                  <p className="text-sm text-gray-500">
+                    {darkMode
+                      ? 'Cambia a un tema más oscuro para reducir el cansancio visual'
+                      : 'Cambia a un tema más claro y brillante'
+                    }
+                  </p>
+                </div>
+                <Switch
+                  checked={darkMode}
+                  onCheckedChange={setDarkMode}
                 />
               </div>
             </CardContent>
