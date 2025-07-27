@@ -287,7 +287,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
             <div className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-lg">
               <div className="text-center">
                 <div className="animate-spin w-6 h-6 border-2 border-ocean border-t-transparent rounded-full mx-auto mb-2"></div>
-                <p className="text-sm text-gray-600">Localizando puntos...</p>
+                <p className="text-sm text-gray-600">Calculando ruta...</p>
               </div>
             </div>
           )}
