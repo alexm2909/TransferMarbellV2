@@ -197,12 +197,14 @@ export default function UserMenu({ className }: UserMenuProps) {
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
-        
-        <DropdownMenuItem className="cursor-pointer">
-          <SettingsIcon className="w-4 h-4 mr-2" />
-          Settings
+
+        <DropdownMenuItem asChild>
+          <Link to="/settings" className="cursor-pointer">
+            <SettingsIcon className="w-4 h-4 mr-2" />
+            Configuración
+          </Link>
         </DropdownMenuItem>
-        
+
         <DropdownMenuSeparator />
         
         <DropdownMenuItem 
