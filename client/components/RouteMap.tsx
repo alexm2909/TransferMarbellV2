@@ -167,6 +167,8 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     setIsLoading(true);
     setError(null);
 
+    console.log('Calculating route from', origin, 'to', destination);
+
     directionsService.route(
       {
         origin: origin,
