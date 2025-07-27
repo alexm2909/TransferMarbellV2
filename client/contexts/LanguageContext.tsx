@@ -178,6 +178,36 @@ const translations = {
     'chat': 'Chat',
     'repeat': 'Repeat',
     'download': 'Download',
+    'book_now': 'Book Now',
+    'logout': 'Sign Out',
+    'profile': 'Profile',
+
+    // Dashboard & Bookings
+    'welcome_back': 'Welcome Back',
+    'recent_bookings': 'Recent Bookings',
+    'next_trip': 'Next Trip',
+    'trip_history': 'Trip History',
+    'quick_actions': 'Quick Actions',
+    'active_trips': 'Active Trips',
+    'available_transfers': 'Available Transfers',
+    'total_available': 'Total Available',
+    'accept': 'Accept',
+    'reject': 'Reject',
+    'distance': 'Distance',
+    'duration': 'Duration',
+    'estimated_cost': 'Estimated Cost',
+    'route_details': 'Route Details',
+
+    // Driver specific
+    'driver_panel': 'Driver Panel',
+    'earnings': 'Earnings',
+    'trips_completed': 'Trips Completed',
+    'rating': 'Rating',
+    'vehicle_status': 'Vehicle Status',
+    'go_online': 'Go Online',
+    'go_offline': 'Go Offline',
+    'online': 'Online',
+    'offline': 'Offline',
     
     // User roles
     'client': 'Client',
