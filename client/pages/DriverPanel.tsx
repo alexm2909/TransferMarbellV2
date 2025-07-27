@@ -296,6 +296,11 @@ export default function DriverPanel() {
           />
         </div>
 
+        {/* Available Transfers Card */}
+        <div className="mb-8">
+          <AvailableTransfersCard />
+        </div>
+
         <Tabs defaultValue="available" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 h-auto p-1">
             <TabsTrigger value="available" className="relative flex-col h-auto py-2 px-1 text-xs sm:text-sm">
