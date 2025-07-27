@@ -214,36 +214,8 @@ export default function DriverPanel() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Badge variant="outline" className="border-ocean text-ocean">
-                🚗 Conductor
-              </Badge>
-              {user && (
-                <Badge variant="outline" className="border-gray-300 text-gray-700">
-                  {user.name}
-                </Badge>
-              )}
-              <div className="flex items-center space-x-2">
-                <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                <span className="text-sm text-gray-600">
-                  {isOnline ? 'En Línea' : 'Desconectado'}
-                </span>
-              </div>
-              <Link to="/dashboard">
-                <Button variant="ghost" size="sm">
-                  <SettingsIcon className="w-4 h-4 mr-2" />
-                  Dashboard
-                </Button>
-              </Link>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOutIcon className="w-4 h-4 mr-2" />
-                Salir
-              </Button>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            {/* Desktop and Mobile Navigation */}
+            <div className="flex items-center space-x-2">
               <Badge className={`${isOnline ? 'bg-green-500' : 'bg-red-500'} text-white text-xs px-2 py-1`}>
                 {isOnline ? 'Online' : 'Offline'}
               </Badge>
