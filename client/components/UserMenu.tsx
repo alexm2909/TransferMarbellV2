@@ -35,6 +35,7 @@ interface UserMenuProps {
 
 export default function UserMenu({ className }: UserMenuProps) {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleLogout = () => {
