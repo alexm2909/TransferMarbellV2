@@ -14,7 +14,7 @@ import {
   ShieldCheckIcon,
   EyeIcon,
   EyeOffIcon,
-  BanknotesIcon,
+  Building2Icon,
 } from "lucide-react";
 
 interface PaymentMethod {
