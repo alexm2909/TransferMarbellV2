@@ -65,6 +65,35 @@ export default function ViewBookings() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
+  const handleRatingSubmit = (ratingData: {
+    bookingId: string;
+    stars: number;
+    comment: string;
+    aspects: {
+      punctuality: number;
+      vehicle: number;
+      service: number;
+      communication: number;
+    };
+  }) => {
+    // Update the booking with the rating
+    setBookings(prev => prev.map(booking =>
+      booking.id === ratingData.bookingId
+        ? {
+            ...booking,
+            rating: {
+              stars: ratingData.stars,
+              comment: ratingData.comment,
+              aspects: ratingData.aspects,
+            }
+          }
+        : booking
+    ));
+
+    // In a real app, this would also send to backend
+    console.log("Rating submitted:", ratingData);
+  };
+
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       navigate("/signin");
