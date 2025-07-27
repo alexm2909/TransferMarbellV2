@@ -7,7 +7,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatsWidget from "@/components/StatsWidget";
 import UserMenu from "@/components/UserMenu";
-import AvailableTransfersCard from "@/components/AvailableTransfersCard";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   CarIcon,
@@ -588,7 +587,7 @@ export default function DriverPanel() {
                             {transfer.origin} → {transfer.destination}
                           </h3>
                           <p className="text-gray-600">
-                            {transfer.date} • {transfer.clientName}
+                            {transfer.date} �� {transfer.clientName}
                           </p>
                         </div>
                         <div className="text-right">
