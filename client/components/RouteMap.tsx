@@ -136,17 +136,19 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       suppressMarkers: false,
       polylineOptions: {
         strokeColor: "#006d77", // Ocean color
-        strokeWeight: 4,
-        strokeOpacity: 0.8,
+        strokeWeight: 6,
+        strokeOpacity: 1,
+        zIndex: 1000,
       },
       markerOptions: {
         icon: {
           path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 8,
+          scale: 10,
           fillColor: "#006d77",
           fillOpacity: 1,
           strokeColor: "#ffffff",
-          strokeWeight: 2,
+          strokeWeight: 3,
+          zIndex: 1001,
         },
       },
     });
