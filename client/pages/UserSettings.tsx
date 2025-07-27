@@ -368,6 +368,9 @@ export default function UserSettings() {
             </CardContent>
           </Card>
 
+          {/* Payment Methods */}
+          <PaymentMethods />
+
           {/* Save Button */}
           <div className="flex justify-end space-x-4">
             <Button variant="outline" onClick={() => navigate("/dashboard")}>
