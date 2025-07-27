@@ -97,7 +97,7 @@ export default function UserMenu({ className }: UserMenuProps) {
               <DropdownMenuItem asChild>
                 <Link to="/my-bookings" className="cursor-pointer">
                   <CalendarIcon className="w-4 h-4 mr-2" />
-                  Ver Reservas
+                  {t('view_bookings')}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
