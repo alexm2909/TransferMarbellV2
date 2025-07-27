@@ -131,10 +131,31 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       },
     });
 
-    const geocoderInstance = new window.google.maps.Geocoder();
+    const directionsServiceInstance = new window.google.maps.DirectionsService();
+    const directionsRendererInstance = new window.google.maps.DirectionsRenderer({
+      suppressMarkers: false,
+      polylineOptions: {
+        strokeColor: "#006d77", // Ocean color
+        strokeWeight: 4,
+        strokeOpacity: 0.8,
+      },
+      markerOptions: {
+        icon: {
+          path: window.google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: "#006d77",
+          fillOpacity: 1,
+          strokeColor: "#ffffff",
+          strokeWeight: 2,
+        },
+      },
+    });
+
+    directionsRendererInstance.setMap(mapInstance);
 
     setMap(mapInstance);
-    setGeocoder(geocoderInstance);
+    setDirectionsService(directionsServiceInstance);
+    setDirectionsRenderer(directionsRendererInstance);
     setIsLoading(false);
   };
 
