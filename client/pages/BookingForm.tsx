@@ -334,30 +334,8 @@ export default function BookingForm() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Badge variant="outline" className="border-ocean text-ocean">
-                Completing Booking
-              </Badge>
-              {user && (
-                <Badge variant="outline" className="border-gray-300 text-gray-700">
-                  {user.name}
-                </Badge>
-              )}
-              <Link to="/dashboard">
-                <Button variant="ghost" size="sm">
-                  <SettingsIcon className="w-4 h-4 mr-2" />
-                  My Account
-                </Button>
-              </Link>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOutIcon className="w-4 h-4 mr-2" />
-                Sign Out
-              </Button>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            {/* Desktop and Mobile Navigation */}
+            <div className="flex items-center space-x-2">
               <UserMenu />
             </div>
           </div>
