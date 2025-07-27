@@ -91,7 +91,7 @@ export default function UserMenu({ className }: UserMenuProps) {
               <DropdownMenuItem asChild>
                 <Link to="/book" className="cursor-pointer">
                   <CarIcon className="w-4 h-4 mr-2" />
-                  Reservar Traslado
+                  {t('book_transfer')}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
