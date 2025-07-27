@@ -253,15 +253,8 @@ Web: www.transfermarbell.com
                 Transfermarbell
               </span>
             </Link>
-            <div className="flex items-center space-x-4">
-              <Badge className="bg-green-600 text-white">
-                Pago Completado
-              </Badge>
-              {user && (
-                <Badge variant="outline" className="border-gray-300 text-gray-700">
-                  {user.name}
-                </Badge>
-              )}
+            <div className="flex items-center space-x-2">
+              <UserMenu />
             </div>
           </div>
         </div>
