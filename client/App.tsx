@@ -60,6 +60,7 @@ function App() {
         {/* Client Features */}
         <Route path="/my-bookings" element={<ViewBookings />} />
         <Route path="/refer-friends" element={<ReferFriends />} />
+        <Route path="/settings" element={<UserSettings />} />
 
         {/* Driver/Fleet Manager Features */}
         <Route path="/trip-marketplace" element={<TripMarketplace />} />
