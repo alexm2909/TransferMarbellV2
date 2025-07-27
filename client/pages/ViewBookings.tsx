@@ -46,7 +46,16 @@ interface Booking {
   price: number;
   paymentStatus: "paid" | "pending" | "refunded";
   createdAt: string;
-  rating?: number;
+  rating?: {
+    stars: number;
+    comment: string;
+    aspects: {
+      punctuality: number;
+      vehicle: number;
+      service: number;
+      communication: number;
+    };
+  };
 }
 
 export default function ViewBookings() {
