@@ -470,7 +470,7 @@ interface BookingCardProps {
   }) => void;
 }
 
-function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
+function BookingCard({ booking, onRepeat, onViewDetails, onRatingSubmit }: BookingCardProps) {
   const getStatusBadge = (status: string) => {
     const statusMap = {
       upcoming: {
