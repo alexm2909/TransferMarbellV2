@@ -132,7 +132,7 @@ export default function PaymentMethods() {
       case 'paypal':
         return <div className="text-blue-600 font-bold text-sm">PP</div>;
       case 'bank':
-        return <BanknotesIcon className="w-5 h-5" />;
+        return <Building2Icon className="w-5 h-5" />;
       default:
         return <CreditCardIcon className="w-5 h-5" />;
     }
