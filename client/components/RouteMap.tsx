@@ -13,12 +13,13 @@ interface RouteMapProps {
 export default function RouteMap({ origin, destination, className = "" }: RouteMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<any>(null);
-  const [geocoder, setGeocoder] = useState<any>(null);
-  const [markers, setMarkers] = useState<any[]>([]);
-  const [locationInfo, setLocationInfo] = useState<{
-    origin: { lat: number; lng: number } | null;
-    destination: { lat: number; lng: number } | null;
-  }>({ origin: null, destination: null });
+  const [directionsService, setDirectionsService] = useState<any>(null);
+  const [directionsRenderer, setDirectionsRenderer] = useState<any>(null);
+  const [routeInfo, setRouteInfo] = useState<{
+    distance: string;
+    duration: string;
+    estimatedCost: string;
+  } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
