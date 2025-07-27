@@ -261,29 +261,22 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Route Info */}
-        {routeInfo && (
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="text-center p-3 bg-ocean-light/20 rounded-lg">
-              <div className="flex items-center justify-center mb-1">
-                <NavigationIcon className="w-4 h-4 text-ocean" />
+        {/* Location Info */}
+        {locationInfo.origin && locationInfo.destination && (
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="flex items-center justify-center mb-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               </div>
-              <div className="text-sm font-bold text-ocean">{routeInfo.distance}</div>
-              <div className="text-xs text-gray-600">Distancia</div>
+              <div className="text-xs text-gray-600">Punto de Origen</div>
+              <div className="text-sm font-bold text-green-700">Listo</div>
             </div>
-            <div className="text-center p-3 bg-coral-light/20 rounded-lg">
-              <div className="flex items-center justify-center mb-1">
-                <ClockIcon className="w-4 h-4 text-coral" />
+            <div className="text-center p-3 bg-red-50 rounded-lg border border-red-200">
+              <div className="flex items-center justify-center mb-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               </div>
-              <div className="text-sm font-bold text-coral">{routeInfo.duration}</div>
-              <div className="text-xs text-gray-600">Duración</div>
-            </div>
-            <div className="text-center p-3 bg-success/20 rounded-lg">
-              <div className="flex items-center justify-center mb-1">
-                <span className="text-sm">💰</span>
-              </div>
-              <div className="text-sm font-bold text-success">{routeInfo.estimatedCost}</div>
-              <div className="text-xs text-gray-600">Estimado</div>
+              <div className="text-xs text-gray-600">Punto de Destino</div>
+              <div className="text-sm font-bold text-red-700">Listo</div>
             </div>
           </div>
         )}
