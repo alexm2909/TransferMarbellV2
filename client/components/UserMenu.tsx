@@ -203,18 +203,18 @@ export default function UserMenu({ className }: UserMenuProps) {
         <DropdownMenuItem asChild>
           <Link to="/settings" className="cursor-pointer">
             <SettingsIcon className="w-4 h-4 mr-2" />
-            Configuración
+            {t('settings')}
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
-        
-        <DropdownMenuItem 
+
+        <DropdownMenuItem
           className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
           onClick={handleLogout}
         >
           <LogOutIcon className="w-4 h-4 mr-2" />
-          Sign Out
+          {t('logout')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
