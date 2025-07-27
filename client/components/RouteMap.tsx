@@ -40,12 +40,12 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       });
   }, []);
 
-  // Update route when origin or destination changes
+  // Update markers when origin or destination changes
   useEffect(() => {
-    if (map && directionsService && directionsRenderer && origin && destination) {
-      calculateAndDisplayRoute();
+    if (map && geocoder && origin && destination) {
+      addMarkersForLocations();
     }
-  }, [origin, destination, map, directionsService, directionsRenderer]);
+  }, [origin, destination, map, geocoder]);
 
   const initializeMap = () => {
     if (!mapRef.current || !window.google) return;
