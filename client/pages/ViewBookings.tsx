@@ -382,6 +382,7 @@ export default function ViewBookings() {
                   booking={booking}
                   onRepeat={handleRepeatBooking}
                   onViewDetails={setSelectedBooking}
+                  onRatingSubmit={handleRatingSubmit}
                 />
               ))
             )}
