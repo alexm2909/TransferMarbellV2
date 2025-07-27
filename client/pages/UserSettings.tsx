@@ -34,7 +34,7 @@ import {
 export default function UserSettings() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isLoading } = useAuth();
-  const { language, currency, setLanguage, setCurrency, formatCurrency } = useLanguage();
+  const { language, currency, darkMode, setLanguage, setCurrency, setDarkMode, formatCurrency, t } = useLanguage();
   
   const [formData, setFormData] = useState({
     name: "",
