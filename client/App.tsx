@@ -35,7 +35,8 @@ import {
 function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter>
+      <TripProvider>
+        <BrowserRouter>
             <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -132,7 +133,8 @@ function App() {
                 {/* Catch-all route for 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
+      </TripProvider>
     </LanguageProvider>
   );
 }
