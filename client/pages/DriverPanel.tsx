@@ -7,6 +7,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatsWidget from "@/components/StatsWidget";
 import UserMenu from "@/components/UserMenu";
+import AvailableTransfersCard from "@/components/AvailableTransfersCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   CarIcon,
   MapPinIcon,
