@@ -145,20 +145,8 @@ ${user?.name || 'Tu amigo'}`);
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Badge variant="outline" className="border-ocean text-ocean">
-                Programa de Referidos
-              </Badge>
-              {user && (
-                <Badge variant="outline" className="border-gray-300 text-gray-700">
-                  {user.name}
-                </Badge>
-              )}
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            {/* Desktop and Mobile Navigation */}
+            <div className="flex items-center space-x-2">
               <UserMenu />
             </div>
           </div>
