@@ -159,98 +159,44 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     setIsLoading(false);
   };
 
-  const addMarkersForLocations = () => {
-    if (!origin || !destination || !map || !geocoder) return;
+  const calculateAndDisplayRoute = () => {
+    if (!origin || !destination) return;
 
     setIsLoading(true);
     setError(null);
 
-    // Clear existing markers
-    markers.forEach(marker => marker.setMap(null));
-    setMarkers([]);
+    directionsService.route(
+      {
+        origin: origin,
+        destination: destination,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+        unitSystem: window.google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false,
+      },
+      (response: any, status: any) => {
+        if (status === "OK") {
+          directionsRenderer.setDirections(response);
 
-    const newMarkers: any[] = [];
-    let completedRequests = 0;
-    const totalRequests = 2;
+          const route = response.routes[0];
+          const leg = route.legs[0];
 
-    // Geocode origin
-    geocoder.geocode({ address: origin }, (results: any, status: any) => {
-      if (status === 'OK' && results[0]) {
-        const originLocation = results[0].geometry.location;
+          // Calculate estimated cost based on distance (€1.5 per km + base €15)
+          const distanceKm = parseFloat(leg.distance.text.replace(/[^\d.]/g, ''));
+          const estimatedCost = Math.round(15 + (distanceKm * 1.5));
 
-        const originMarker = new window.google.maps.Marker({
-          position: originLocation,
-          map: map,
-          title: 'Origen',
-          icon: {
-            path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 12,
-            fillColor: '#10b981', // Green for origin
-            fillOpacity: 1,
-            strokeColor: '#ffffff',
-            strokeWeight: 3,
-          }
-        });
-
-        newMarkers.push(originMarker);
-        setLocationInfo(prev => ({ ...prev, origin: { lat: originLocation.lat(), lng: originLocation.lng() } }));
+          setRouteInfo({
+            distance: leg.distance.text,
+            duration: leg.duration.text,
+            estimatedCost: `€${estimatedCost}`,
+          });
+          setIsLoading(false);
+        } else {
+          setError("No se pudo calcular la ruta. Verifica las direcciones.");
+          setIsLoading(false);
+        }
       }
-
-      completedRequests++;
-      if (completedRequests === totalRequests) {
-        finishAddingMarkers(newMarkers);
-      }
-    });
-
-    // Geocode destination
-    geocoder.geocode({ address: destination }, (results: any, status: any) => {
-      if (status === 'OK' && results[0]) {
-        const destLocation = results[0].geometry.location;
-
-        const destMarker = new window.google.maps.Marker({
-          position: destLocation,
-          map: map,
-          title: 'Destino',
-          icon: {
-            path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 12,
-            fillColor: '#ef4444', // Red for destination
-            fillOpacity: 1,
-            strokeColor: '#ffffff',
-            strokeWeight: 3,
-          }
-        });
-
-        newMarkers.push(destMarker);
-        setLocationInfo(prev => ({ ...prev, destination: { lat: destLocation.lat(), lng: destLocation.lng() } }));
-      }
-
-      completedRequests++;
-      if (completedRequests === totalRequests) {
-        finishAddingMarkers(newMarkers);
-      }
-    });
-  };
-
-  const finishAddingMarkers = (newMarkers: any[]) => {
-    setMarkers(newMarkers);
-
-    // Fit map to show both markers
-    if (newMarkers.length > 0) {
-      const bounds = new window.google.maps.LatLngBounds();
-      newMarkers.forEach(marker => {
-        bounds.extend(marker.getPosition());
-      });
-      map.fitBounds(bounds);
-
-      // Ensure minimum zoom level
-      const listener = window.google.maps.event.addListener(map, 'idle', () => {
-        if (map.getZoom() > 15) map.setZoom(15);
-        window.google.maps.event.removeListener(listener);
-      });
-    }
-
-    setIsLoading(false);
+    );
   };
 
   if (!origin || !destination) {
