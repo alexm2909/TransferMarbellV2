@@ -18,6 +18,7 @@ import PaymentError from "./pages/PaymentError";
 import ViewBookings from "./pages/ViewBookings";
 import ReferFriends from "./pages/ReferFriends";
 import TripMarketplace from "./pages/TripMarketplace";
+import UserSettings from "./pages/UserSettings";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 import {
