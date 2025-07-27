@@ -179,8 +179,10 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         avoidTolls: false,
       },
       (response: any, status: any) => {
+        console.log('Route calculation result:', status, response);
         if (status === "OK") {
           directionsRenderer.setDirections(response);
+          console.log('Route set successfully');
 
           const route = response.routes[0];
           const leg = route.legs[0];
