@@ -23,6 +23,7 @@ import {
   StarIcon,
   EyeIcon,
   MoreHorizontalIcon,
+  XIcon,
 } from "lucide-react";
 
 interface Booking {
