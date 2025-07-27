@@ -256,7 +256,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
           </div>
         )}
 
-        {/* Location Details */}
+        {/* Route Details */}
         <div className="space-y-2 mb-4">
           <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg border border-green-200">
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
