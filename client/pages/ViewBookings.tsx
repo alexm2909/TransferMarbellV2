@@ -152,10 +152,22 @@ export default function ViewBookings() {
 
   const getStatusBadge = (status: string) => {
     const statusMap = {
-      upcoming: { label: "Próximo", className: "bg-blue-100 text-blue-700 border-blue-200" },
-      in_progress: { label: "En Curso", className: "bg-green-100 text-green-700 border-green-200" },
-      completed: { label: "Completado", className: "bg-gray-100 text-gray-700 border-gray-200" },
-      cancelled: { label: "Cancelado", className: "bg-red-100 text-red-700 border-red-200" },
+      upcoming: {
+        label: "Próximo",
+        className: "bg-blue-100 text-blue-700 border-blue-200",
+      },
+      in_progress: {
+        label: "En Curso",
+        className: "bg-green-100 text-green-700 border-green-200",
+      },
+      completed: {
+        label: "Completado",
+        className: "bg-gray-100 text-gray-700 border-gray-200",
+      },
+      cancelled: {
+        label: "Cancelado",
+        className: "bg-red-100 text-red-700 border-red-200",
+      },
     };
     return statusMap[status as keyof typeof statusMap] || statusMap.upcoming;
   };
@@ -163,21 +175,34 @@ export default function ViewBookings() {
   const getPaymentStatusBadge = (status: string) => {
     const statusMap = {
       paid: { label: "Pagado", className: "bg-green-100 text-green-700" },
-      pending: { label: "Pendiente", className: "bg-yellow-100 text-yellow-700" },
-      refunded: { label: "Reembolsado", className: "bg-blue-100 text-blue-700" },
+      pending: {
+        label: "Pendiente",
+        className: "bg-yellow-100 text-yellow-700",
+      },
+      refunded: {
+        label: "Reembolsado",
+        className: "bg-blue-100 text-blue-700",
+      },
     };
     return statusMap[status as keyof typeof statusMap] || statusMap.pending;
   };
 
-  const filteredBookings = bookings.filter(booking =>
-    booking.origin.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    booking.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    booking.id.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBookings = bookings.filter(
+    (booking) =>
+      booking.origin.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      booking.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      booking.id.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  const upcomingBookings = filteredBookings.filter(b => b.status === "upcoming" || b.status === "in_progress");
-  const completedBookings = filteredBookings.filter(b => b.status === "completed");
-  const cancelledBookings = filteredBookings.filter(b => b.status === "cancelled");
+  const upcomingBookings = filteredBookings.filter(
+    (b) => b.status === "upcoming" || b.status === "in_progress",
+  );
+  const completedBookings = filteredBookings.filter(
+    (b) => b.status === "completed",
+  );
+  const cancelledBookings = filteredBookings.filter(
+    (b) => b.status === "cancelled",
+  );
 
   const handleRepeatBooking = (booking: Booking) => {
     // Pre-fill booking form with previous booking data
@@ -225,7 +250,10 @@ export default function ViewBookings() {
                 Mis Reservas
               </Badge>
               {user && (
-                <Badge variant="outline" className="border-gray-300 text-gray-700">
+                <Badge
+                  variant="outline"
+                  className="border-gray-300 text-gray-700"
+                >
                   {user.name}
                 </Badge>
               )}
@@ -248,9 +276,7 @@ export default function ViewBookings() {
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
             Volver al Dashboard
           </Link>
-          <h1 className="text-3xl font-bold text-navy">
-            Mis Reservas
-          </h1>
+          <h1 className="text-3xl font-bold text-navy">Mis Reservas</h1>
           <p className="text-gray-600 mt-2">
             Historial completo de tus traslados con Transfermarbell
           </p>
@@ -412,10 +438,22 @@ interface BookingCardProps {
 function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
   const getStatusBadge = (status: string) => {
     const statusMap = {
-      upcoming: { label: "Próximo", className: "bg-blue-100 text-blue-700 border-blue-200" },
-      in_progress: { label: "En Curso", className: "bg-green-100 text-green-700 border-green-200" },
-      completed: { label: "Completado", className: "bg-gray-100 text-gray-700 border-gray-200" },
-      cancelled: { label: "Cancelado", className: "bg-red-100 text-red-700 border-red-200" },
+      upcoming: {
+        label: "Próximo",
+        className: "bg-blue-100 text-blue-700 border-blue-200",
+      },
+      in_progress: {
+        label: "En Curso",
+        className: "bg-green-100 text-green-700 border-green-200",
+      },
+      completed: {
+        label: "Completado",
+        className: "bg-gray-100 text-gray-700 border-gray-200",
+      },
+      cancelled: {
+        label: "Cancelado",
+        className: "bg-red-100 text-red-700 border-red-200",
+      },
     };
     return statusMap[status as keyof typeof statusMap] || statusMap.upcoming;
   };
@@ -487,7 +525,9 @@ function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
           <div className="mb-4 p-3 bg-ocean-light/10 border border-ocean/20 rounded-lg">
             <div className="flex items-center gap-2 text-sm text-ocean">
               <RepeatIcon className="w-4 h-4" />
-              <span className="font-medium">Viaje de vuelta: {booking.returnDate} a las {booking.returnTime}</span>
+              <span className="font-medium">
+                Viaje de vuelta: {booking.returnDate} a las {booking.returnTime}
+              </span>
             </div>
           </div>
         )}
@@ -495,7 +535,8 @@ function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
         {booking.driverName && (
           <div className="mb-4 p-3 bg-gray-50 rounded-lg">
             <div className="text-sm">
-              <span className="font-medium">Conductor:</span> {booking.driverName}
+              <span className="font-medium">Conductor:</span>{" "}
+              {booking.driverName}
             </div>
             {booking.driverPhone && (
               <div className="text-sm text-gray-600">{booking.driverPhone}</div>
@@ -515,7 +556,10 @@ function BookingCard({ booking, onRepeat, onViewDetails }: BookingCardProps) {
               Ver Detalles
             </Button>
             {booking.status === "upcoming" && (
-              <Link to={`/chat?transfer=${booking.id}`} className="w-full sm:w-auto">
+              <Link
+                to={`/chat?transfer=${booking.id}`}
+                className="w-full sm:w-auto"
+              >
                 <Button size="sm" variant="outline" className="w-full">
                   <MessageSquareIcon className="w-4 h-4 mr-2" />
                   Chat
@@ -548,7 +592,11 @@ interface BookingDetailsModalProps {
   getVehicleDetails: (type: string) => { name: string; icon: string };
 }
 
-function BookingDetailsModal({ booking, onClose, getVehicleDetails }: BookingDetailsModalProps) {
+function BookingDetailsModal({
+  booking,
+  onClose,
+  getVehicleDetails,
+}: BookingDetailsModalProps) {
   const vehicle = getVehicleDetails(booking.vehicleType);
 
   return (
@@ -557,11 +605,7 @@ function BookingDetailsModal({ booking, onClose, getVehicleDetails }: BookingDet
         <CardHeader>
           <div className="flex justify-between items-start">
             <CardTitle>Detalles de Reserva #{booking.id}</CardTitle>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-            >
+            <Button variant="ghost" size="sm" onClick={onClose}>
               <XIcon className="w-4 h-4" />
             </Button>
           </div>
@@ -581,17 +625,23 @@ function BookingDetailsModal({ booking, onClose, getVehicleDetails }: BookingDet
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Fecha y Hora:</span>
-                <span className="font-medium">{booking.date} a las {booking.time}</span>
+                <span className="font-medium">
+                  {booking.date} a las {booking.time}
+                </span>
               </div>
               {booking.returnDate && (
                 <div className="flex justify-between">
                   <span className="text-gray-600">Vuelta:</span>
-                  <span className="font-medium">{booking.returnDate} a las {booking.returnTime}</span>
+                  <span className="font-medium">
+                    {booking.returnDate} a las {booking.returnTime}
+                  </span>
                 </div>
               )}
               <div className="flex justify-between">
                 <span className="text-gray-600">Vehículo:</span>
-                <span className="font-medium">{vehicle.icon} {vehicle.name}</span>
+                <span className="font-medium">
+                  {vehicle.icon} {vehicle.name}
+                </span>
               </div>
             </div>
           </div>
@@ -625,7 +675,9 @@ function BookingDetailsModal({ booking, onClose, getVehicleDetails }: BookingDet
               <div className="p-4 bg-gray-50 rounded-lg">
                 <div className="font-medium">{booking.driverName}</div>
                 {booking.driverPhone && (
-                  <div className="text-sm text-gray-600">{booking.driverPhone}</div>
+                  <div className="text-sm text-gray-600">
+                    {booking.driverPhone}
+                  </div>
                 )}
               </div>
             </div>
@@ -641,13 +693,20 @@ function BookingDetailsModal({ booking, onClose, getVehicleDetails }: BookingDet
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Estado:</span>
-                <Badge className={
-                  booking.paymentStatus === "paid" ? "bg-green-100 text-green-700" :
-                  booking.paymentStatus === "pending" ? "bg-yellow-100 text-yellow-700" :
-                  "bg-blue-100 text-blue-700"
-                }>
-                  {booking.paymentStatus === "paid" ? "Pagado" :
-                   booking.paymentStatus === "pending" ? "Pendiente" : "Reembolsado"}
+                <Badge
+                  className={
+                    booking.paymentStatus === "paid"
+                      ? "bg-green-100 text-green-700"
+                      : booking.paymentStatus === "pending"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-blue-100 text-blue-700"
+                  }
+                >
+                  {booking.paymentStatus === "paid"
+                    ? "Pagado"
+                    : booking.paymentStatus === "pending"
+                      ? "Pendiente"
+                      : "Reembolsado"}
                 </Badge>
               </div>
               <div className="flex justify-between">
