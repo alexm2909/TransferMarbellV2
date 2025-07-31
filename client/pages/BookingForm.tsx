@@ -177,10 +177,27 @@ export default function BookingForm() {
   ];
 
   const isVehicleCompatible = (vehicle: typeof vehicleTypes[0]) => {
+    if (multiCarMode) return true; // In multi-car mode, all vehicles are available
+
     const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
     const totalLuggage = parseInt(bookingData.luggage);
 
     return totalPassengers <= vehicle.maxPassengers && totalLuggage <= vehicle.maxLuggage;
+  };
+
+  const getTotalCapacityFromMultiVehicles = () => {
+    let totalPassengers = 0;
+    let totalLuggage = 0;
+
+    selectedVehicles.forEach(selection => {
+      const vehicle = vehicleTypes.find(v => v.id === selection.vehicleId);
+      if (vehicle) {
+        totalPassengers += vehicle.maxPassengers * selection.quantity;
+        totalLuggage += vehicle.maxLuggage * selection.quantity;
+      }
+    });
+
+    return { totalPassengers, totalLuggage };
   };
 
   const toggleMultiCarMode = () => {
