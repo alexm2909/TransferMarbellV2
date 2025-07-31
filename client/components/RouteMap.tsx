@@ -141,9 +141,9 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       suppressMarkers: false,
       polylineOptions: {
         strokeColor: "#006d77", // Ocean color - same as markers
-        strokeWeight: 5,
-        strokeOpacity: 0.8,
-        zIndex: 100,
+        strokeWeight: 4,
+        strokeOpacity: 1,
+        zIndex: 1000,
       },
       markerOptions: {
         icon: {
