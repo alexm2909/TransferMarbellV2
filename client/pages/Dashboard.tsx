@@ -184,74 +184,7 @@ export default function Dashboard() {
               </>
             )}
 
-            {/* FLEET MANAGER DASHBOARD */}
-            {user?.role === "fleet-manager" && (
-              <>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <UsersIcon className="w-5 h-5 text-ocean" />
-                      Resumen de Flota
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                      <div className="text-center p-4 bg-ocean-light/20 rounded-lg">
-                        <div className="text-2xl font-bold text-ocean">8</div>
-                        <div className="text-sm text-gray-600">
-                          Conductores Activos
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-coral-light/20 rounded-lg">
-                        <div className="text-2xl font-bold text-coral">12</div>
-                        <div className="text-sm text-gray-600">
-                          Traslados Hoy
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-success/20 rounded-lg">
-                        <div className="text-2xl font-bold text-success">
-                          €420
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Ingresos Hoy
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 border rounded-lg">
-                        <div>
-                          <span className="font-medium">Carlos Rodríguez</span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            BMW Serie 5
-                          </span>
-                        </div>
-                        <Badge className="bg-success text-white">Activo</Badge>
-                      </div>
-                      <div className="flex justify-between items-center p-3 border rounded-lg">
-                        <div>
-                          <span className="font-medium">Ana Fernández</span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Mercedes E-Class
-                          </span>
-                        </div>
-                        <Badge className="bg-warning text-white">
-                          En Servicio
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center p-3 border rounded-lg">
-                        <div>
-                          <span className="font-medium">Miguel Torres</span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Audi A6
-                          </span>
-                        </div>
-                        <Badge variant="secondary">Descanso</Badge>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </>
-            )}
+
 
             {/* ADMIN DASHBOARD */}
             {user?.role === "admin" && (
