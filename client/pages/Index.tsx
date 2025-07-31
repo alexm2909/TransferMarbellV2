@@ -55,7 +55,8 @@ export default function Index() {
     // Store pre-booking data in localStorage for later use
     localStorage.setItem("preBookingData", JSON.stringify(preBookingData));
 
-    // Navigate to complete booking form
+    // If user is authenticated, go directly to booking
+    // If not authenticated, they'll be redirected to sign in from the booking page
     navigate("/book");
   };
 
