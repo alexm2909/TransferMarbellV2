@@ -753,115 +753,167 @@ export default function BookingForm() {
                   )}
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {vehicleTypes.map((vehicle) => {
-                      const isCompatible = isVehicleCompatible(vehicle);
-                      const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
-                      const totalLuggage = parseInt(bookingData.luggage);
-
-                      const isSelected = multiCarMode
-                        ? selectedVehicles.includes(vehicle.id)
-                        : bookingData.vehicleType === vehicle.id;
-
-                      return (
-                        <div
-                          key={vehicle.id}
-                          className={`border-2 rounded-lg p-4 transition-all relative ${
-                            multiCarMode
-                              ? isSelected
-                                ? "border-purple bg-purple/10 cursor-pointer"
-                                : "border-gray-200 cursor-pointer hover:border-purple"
-                              : !isCompatible
-                              ? "border-red-200 bg-red-50/50 cursor-not-allowed opacity-60"
-                              : isSelected
-                              ? "border-ocean bg-ocean/10 cursor-pointer"
-                              : "border-gray-200 cursor-pointer hover:border-ocean"
-                          }`}
-                          onClick={() => {
-                            if (multiCarMode) {
-                              handleMultiVehicleSelection(vehicle.id);
-                            } else if (isCompatible) {
-                              setBookingData({
-                                ...bookingData,
-                                vehicleType: vehicle.id,
-                              });
-                            }
-                          }}
-                        >
-                          {/* Overlay para vehículos no compatibles (solo en modo individual) */}
-                          {!multiCarMode && !isCompatible && (
-                            <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-                              No Compatible
-                            </div>
-                          )}
-
-                          {/* Indicator for multi-car mode */}
-                          {multiCarMode && isSelected && (
-                            <div className="absolute top-2 right-2 bg-purple text-white text-xs px-2 py-1 rounded-full font-medium">
-                              Seleccionado
-                            </div>
-                          )}
-
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <h3 className={`font-semibold ${
-                                isCompatible ? "text-gray-900" : "text-gray-500"
-                              }`}>
-                                {vehicle.name}
-                              </h3>
-                              <p className="text-sm text-gray-500">
-                                {vehicle.capacity}
-                              </p>
-                              <div className="text-xs text-gray-500 mt-1">
-                                Max: {vehicle.maxPassengers} pasajeros, {vehicle.maxLuggage} maletas
-                              </div>
-                            </div>
-                            <Badge
-                              variant="secondary"
-                              className={isCompatible ? "bg-ocean/10 text-ocean" : "bg-gray-100 text-gray-500"}
-                            >
-                              {vehicle.price}
-                            </Badge>
-                          </div>
-
-                          <p className={`text-sm mb-3 ${
-                            isCompatible ? "text-gray-600" : "text-gray-500"
-                          }`}>
-                            {vehicle.description}
+                  {multiCarMode ? (
+                    <div className="space-y-4">
+                      {selectedVehicles.length === 0 ? (
+                        <div className="text-center py-8">
+                          <CarIcon className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+                          <p className="text-gray-500 mb-4">
+                            No has seleccionado ningún vehículo aún
                           </p>
+                          <Button
+                            onClick={() => setShowMultiVehicleSelector(true)}
+                            className="bg-purple hover:bg-purple/90 text-white"
+                          >
+                            Seleccionar Vehículos
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-semibold text-gray-900">
+                              Vehículos Seleccionados
+                            </h4>
+                            <Button
+                              onClick={() => setShowMultiVehicleSelector(true)}
+                              variant="outline"
+                              size="sm"
+                              className="text-purple border-purple hover:bg-purple hover:text-white"
+                            >
+                              Modificar Selección
+                            </Button>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {selectedVehicles.map((selection) => {
+                              const vehicle = vehicleTypes.find(v => v.id === selection.vehicleId);
+                              if (!vehicle) return null;
 
-                          {/* Mostrar problemas de compatibilidad */}
-                          {!isCompatible && (
-                            <div className="mb-3 p-2 bg-red-100 border border-red-200 rounded text-xs text-red-700">
-                              <div className="font-medium mb-1">Requisitos no cumplidos:</div>
-                              {totalPassengers > vehicle.maxPassengers && (
-                                <div>• Demasiados pasajeros ({totalPassengers} &gt; {vehicle.maxPassengers})</div>
-                              )}
-                              {totalLuggage > vehicle.maxLuggage && (
-                                <div>• Demasiadas maletas ({totalLuggage} &gt; {vehicle.maxLuggage})</div>
-                              )}
-                            </div>
-                          )}
-
-                          <div className="space-y-1">
-                            {vehicle.features.map((feature, index) => (
-                              <div
-                                key={index}
-                                className={`flex items-center text-xs ${
-                                  isCompatible ? "text-gray-500" : "text-gray-400"
-                                }`}
-                              >
-                                <div className={`w-1 h-1 rounded-full mr-2 ${
-                                  isCompatible ? "bg-ocean" : "bg-gray-400"
-                                }`}></div>
-                                {feature}
-                              </div>
-                            ))}
+                              return (
+                                <div
+                                  key={selection.vehicleId}
+                                  className="border-2 border-purple bg-purple/5 rounded-lg p-3"
+                                >
+                                  <div className="flex items-center justify-between mb-2">
+                                    <h3 className="font-semibold text-gray-900">
+                                      {vehicle.name}
+                                    </h3>
+                                    <Badge className="bg-purple text-white">
+                                      x{selection.quantity}
+                                    </Badge>
+                                  </div>
+                                  <p className="text-sm text-gray-600 mb-2">
+                                    {vehicle.description}
+                                  </p>
+                                  <div className="text-xs text-gray-500">
+                                    Capacidad total: {vehicle.maxPassengers * selection.quantity} pasajeros,{' '}
+                                    {vehicle.maxLuggage * selection.quantity} maletas
+                                  </div>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
-                      );
-                    })}
-                  </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {vehicleTypes.map((vehicle) => {
+                        const isCompatible = isVehicleCompatible(vehicle);
+                        const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
+                        const totalLuggage = parseInt(bookingData.luggage);
+
+                        const isSelected = bookingData.vehicleType === vehicle.id;
+
+                        return (
+                          <div
+                            key={vehicle.id}
+                            className={`border-2 rounded-lg p-4 transition-all relative ${
+                              !isCompatible
+                                ? "border-red-200 bg-red-50/50 cursor-not-allowed opacity-60"
+                                : isSelected
+                                ? "border-ocean bg-ocean/10 cursor-pointer"
+                                : "border-gray-200 cursor-pointer hover:border-ocean"
+                            }`}
+                            onClick={() => {
+                              if (isCompatible) {
+                                setBookingData({
+                                  ...bookingData,
+                                  vehicleType: vehicle.id,
+                                });
+                              }
+                            }}
+                          >
+                            {/* Overlay para vehículos no compatibles */}
+                            {!isCompatible && (
+                              <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                                No Compatible
+                              </div>
+                            )}
+
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h3 className={`font-semibold ${
+                                  isCompatible ? "text-gray-900" : "text-gray-500"
+                                }`}>
+                                  {vehicle.name}
+                                </h3>
+                                <p className="text-sm text-gray-500">
+                                  {vehicle.capacity}
+                                </p>
+                                <div className="text-xs text-gray-500 mt-1">
+                                  Max: {vehicle.maxPassengers} pasajeros, {vehicle.maxLuggage} maletas
+                                </div>
+                              </div>
+                              <Badge
+                                variant="secondary"
+                                className={isCompatible ? "bg-ocean/10 text-ocean" : "bg-gray-100 text-gray-500"}
+                              >
+                                {vehicle.price}
+                              </Badge>
+                            </div>
+
+                            <p className={`text-sm mb-3 ${
+                              isCompatible ? "text-gray-600" : "text-gray-500"
+                            }`}>
+                              {vehicle.description}
+                            </p>
+
+                            {/* Mostrar problemas de compatibilidad */}
+                            {!isCompatible && (
+                              <div className="mb-3 p-2 bg-red-100 border border-red-200 rounded text-xs text-red-700">
+                                <div className="font-medium mb-1">Requisitos no cumplidos:</div>
+                                {totalPassengers > vehicle.maxPassengers && (
+                                  <div>• Demasiados pasajeros ({totalPassengers} &gt; {vehicle.maxPassengers})</div>
+                                )}
+                                {totalLuggage > vehicle.maxLuggage && (
+                                  <div>• Demasiadas maletas ({totalLuggage} &gt; {vehicle.maxLuggage})</div>
+                                )}
+                                <div className="mt-1 text-purple-600 font-medium">
+                                  💡 Prueba el modo "Reservar Varios Coches"
+                                </div>
+                              </div>
+                            )}
+
+                            <div className="space-y-1">
+                              {vehicle.features.map((feature, index) => (
+                                <div
+                                  key={index}
+                                  className={`flex items-center text-xs ${
+                                    isCompatible ? "text-gray-500" : "text-gray-400"
+                                  }`}
+                                >
+                                  <div className={`w-1 h-1 rounded-full mr-2 ${
+                                    isCompatible ? "bg-ocean" : "bg-gray-400"
+                                  }`}></div>
+                                  {feature}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
