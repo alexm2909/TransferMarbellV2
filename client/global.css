@@ -48,15 +48,17 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 194 100% 28%;
 
-    /* Transfermarbell brand colors */
-    --ocean: 194 100% 28%;
-    --ocean-light: 194 100% 85%;
-    --coral: 30 100% 50%;
-    --coral-light: 30 100% 90%;
-    --navy: 222 84% 4.9%;
-    --sky: 200 100% 90%;
-    --success: 142 71% 45%;
-    --warning: 48 96% 53%;
+    /* Transfermarbell brand colors - Solid and Vivid */
+    --ocean: 210 100% 50%;     /* Bright Blue */
+    --ocean-light: 210 100% 85%;
+    --coral: 15 100% 60%;      /* Bright Orange/Red */
+    --coral-light: 15 100% 90%;
+    --navy: 240 100% 20%;      /* Deep Blue */
+    --sky: 195 100% 75%;       /* Light Blue */
+    --success: 120 100% 40%;   /* Bright Green */
+    --warning: 45 100% 50%;    /* Bright Yellow */
+    --purple: 270 100% 60%;    /* Bright Purple */
+    --pink: 330 100% 60%;      /* Bright Pink */
   }
 
   .dark {
