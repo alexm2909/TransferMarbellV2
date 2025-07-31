@@ -747,8 +747,8 @@ export default function BookingForm() {
                   </div>
                   {multiCarMode && (
                     <p className="text-sm text-gray-600 mt-2">
-                      Modo empresarial: Selecciona múltiples vehículos para grandes grupos.
-                      Vehículos seleccionados: {selectedVehicles.length}
+                      Modo empresarial: Múltiples vehículos seleccionados.
+                      Total de vehículos: {selectedVehicles.reduce((total, sel) => total + sel.quantity, 0)}
                     </p>
                   )}
                 </CardHeader>
