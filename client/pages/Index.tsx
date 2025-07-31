@@ -187,25 +187,44 @@ export default function Index() {
                 >
                   Support
                 </Link>
-                <div className="flex flex-col gap-3 px-3 pt-2">
-                  <Link to="/signin" className="w-full">
-                    <Button
-                      variant="outline"
-                      className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link to="/signup" className="w-full">
-                    <Button
-                      className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Register
-                    </Button>
-                  </Link>
-                </div>
+
+                {/* Show different buttons based on authentication status */}
+                {isAuthenticated ? (
+                  <div className="flex flex-col gap-3 px-3 pt-2">
+                    <Link to="/dashboard" className="w-full">
+                      <Button
+                        variant="outline"
+                        className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Dashboard
+                      </Button>
+                    </Link>
+                    <div className="flex justify-center pt-2">
+                      <UserMenu />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-3 px-3 pt-2">
+                    <Link to="/signin" className="w-full">
+                      <Button
+                        variant="outline"
+                        className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link to="/signup" className="w-full">
+                      <Button
+                        className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Register
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           )}
