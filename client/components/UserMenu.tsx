@@ -134,25 +134,6 @@ export default function UserMenu({ className }: UserMenuProps) {
             </>
           )}
 
-          {user?.role === "fleet-manager" && (
-            <>
-              <DropdownMenuItem asChild>
-                <Link to="/fleet-panel" className="cursor-pointer">
-                  <UsersIcon className="w-4 h-4 mr-2" />
-                  Panel de Flota
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <TrendingUpIcon className="w-4 h-4 mr-2" />
-                Estadísticas
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <SettingsIcon className="w-4 h-4 mr-2" />
-                Configuración
-              </DropdownMenuItem>
-            </>
-          )}
-
           {user?.role === "admin" && (
             <>
               <DropdownMenuItem asChild>
@@ -168,27 +149,6 @@ export default function UserMenu({ className }: UserMenuProps) {
               <DropdownMenuItem className="cursor-pointer">
                 <TrendingUpIcon className="w-4 h-4 mr-2" />
                 Reportes
-              </DropdownMenuItem>
-            </>
-          )}
-
-          {user?.role === "business" && (
-            <>
-              <DropdownMenuItem asChild>
-                <Link to="/business-panel" className="cursor-pointer">
-                  <BuildingIcon className="w-4 h-4 mr-2" />
-                  Panel Empresarial
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/book" className="cursor-pointer">
-                  <CarIcon className="w-4 h-4 mr-2" />
-                  Nueva Reserva
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <EuroIcon className="w-4 h-4 mr-2" />
-                Facturación
               </DropdownMenuItem>
             </>
           )}
