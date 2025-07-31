@@ -781,12 +781,20 @@ export default function BookingForm() {
                                 )}
                               </div>
                             </div>
-                            <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                            <div className={`px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm ${
                               isCompatible
                                 ? "bg-gradient-to-r from-ocean to-coral text-white"
                                 : "bg-gray-100 text-gray-500"
                             }`}>
-                              {vehicle.price}
+                              {carsCount > 1 ? (
+                                <div className="text-center">
+                                  <div className="text-xs opacity-90">desde</div>
+                                  <div>{vehicle.price}</div>
+                                  <div className="text-xs opacity-90">× {carsCount}</div>
+                                </div>
+                              ) : (
+                                vehicle.price
+                              )}
                             </div>
                           </div>
 
