@@ -148,7 +148,7 @@ export default function AdminPanel() {
     {
       id: "DP001",
       bookingId: "TM123456",
-      client: "Juan Pérez",
+      client: "Juan P��rez",
       driver: "Luis González",
       issue: "El conductor llegó 30 minutos tarde",
       amount: "€45",
@@ -608,18 +608,60 @@ export default function AdminPanel() {
                           </p>
                         </div>
 
-                        <div className="flex space-x-3">
-                          <Button className="bg-ocean hover:bg-ocean/90">
+                        <div className="flex space-x-3 flex-wrap gap-2">
+                          <Button
+                            onClick={() => contactParties(dispute)}
+                            className="bg-ocean hover:bg-ocean/90"
+                            size="sm"
+                          >
                             <MessageSquareIcon className="w-4 h-4 mr-2" />
                             Contactar Partes
                           </Button>
-                          <Button variant="outline">
+                          <Button
+                            onClick={() => {
+                              setSelectedDispute(dispute);
+                              setShowDisputeModal(true);
+                            }}
+                            variant="outline"
+                            size="sm"
+                          >
                             <FileTextIcon className="w-4 h-4 mr-2" />
                             Ver Detalles
                           </Button>
-                          <Button variant="outline">
-                            Resolver Disputa
-                          </Button>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm">
+                                <CheckCircleIcon className="w-4 h-4 mr-2" />
+                                Resolver Disputa
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Resolver Disputa #{dispute.id}</DialogTitle>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <div>
+                                  <Label htmlFor="resolution">Resolución de la disputa</Label>
+                                  <Textarea
+                                    id="resolution"
+                                    value={disputeResolution}
+                                    onChange={(e) => setDisputeResolution(e.target.value)}
+                                    placeholder="Describe la resolución de la disputa..."
+                                    rows={4}
+                                  />
+                                </div>
+                                <div className="flex space-x-2">
+                                  <Button
+                                    onClick={() => resolveDispute(dispute.id, disputeResolution)}
+                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                    disabled={!disputeResolution.trim()}
+                                  >
+                                    Confirmar Resolución
+                                  </Button>
+                                </div>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
                         </div>
                       </CardContent>
                     </Card>
