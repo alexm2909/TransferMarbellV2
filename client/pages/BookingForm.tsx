@@ -201,23 +201,40 @@ export default function BookingForm() {
   };
 
   const toggleMultiCarMode = () => {
-    setMultiCarMode(!multiCarMode);
     if (!multiCarMode) {
-      // Entering multi-car mode - clear single vehicle selection
-      setBookingData({ ...bookingData, vehicleType: "" });
-      setSelectedVehicles([]);
+      // Entering multi-car mode - show selector
+      setShowMultiVehicleSelector(true);
     } else {
       // Exiting multi-car mode - clear multi-vehicle selection
+      setMultiCarMode(false);
       setSelectedVehicles([]);
+      setBookingData({ ...bookingData, vehicleType: "" });
     }
   };
 
-  const handleMultiVehicleSelection = (vehicleId: string) => {
-    if (selectedVehicles.includes(vehicleId)) {
-      setSelectedVehicles(selectedVehicles.filter(id => id !== vehicleId));
-    } else {
-      setSelectedVehicles([...selectedVehicles, vehicleId]);
+  const handleMultiVehicleConfirm = (selections: VehicleSelection[]) => {
+    setSelectedVehicles(selections);
+    setMultiCarMode(true);
+    setBookingData({ ...bookingData, vehicleType: "" }); // Clear single selection
+
+    // Auto-adjust passenger and luggage limits based on total capacity
+    const { totalPassengers, totalLuggage } = getTotalCapacityFromMultiVehicles();
+    if (selections.length > 0) {
+      const currentPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
+      const currentLuggage = parseInt(bookingData.luggage);
+
+      // If current selection exceeds single vehicle limits, increase if within multi-vehicle capacity
+      if (currentPassengers > 8 && currentPassengers <= totalPassengers) {
+        // Keep current selection
+      }
+      if (currentLuggage > 8 && currentLuggage <= totalLuggage) {
+        // Keep current selection
+      }
     }
+  };
+
+  const handleMultiVehicleSelectorClose = () => {
+    setShowMultiVehicleSelector(false);
   };
 
   useEffect(() => {
