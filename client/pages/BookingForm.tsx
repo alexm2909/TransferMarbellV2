@@ -569,7 +569,7 @@ export default function BookingForm() {
                           Adultos
                         </label>
                       </div>
-                      <div className="w-20 sm:w-full">
+                      <div className="w-28 sm:w-full">
                         <Select
                           value={bookingData.passengers}
                           onValueChange={(value) =>
@@ -597,7 +597,7 @@ export default function BookingForm() {
                           Niños
                         </label>
                       </div>
-                      <div className="w-20 sm:w-full">
+                      <div className="w-28 sm:w-full">
                         <Select
                           value={bookingData.children}
                           onValueChange={(value) =>
@@ -625,7 +625,7 @@ export default function BookingForm() {
                           Maletas
                         </label>
                       </div>
-                      <div className="w-20 sm:w-full">
+                      <div className="w-28 sm:w-full">
                         <Select
                           value={bookingData.luggage}
                           onValueChange={(value) =>
@@ -653,7 +653,7 @@ export default function BookingForm() {
                           Coches
                         </label>
                       </div>
-                      <div className="w-20 sm:w-full">
+                      <div className="w-28 sm:w-full">
                         <Select
                           value={bookingData.cars}
                           onValueChange={(value) =>
