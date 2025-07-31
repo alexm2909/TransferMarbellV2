@@ -159,6 +159,13 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     setDirectionsService(directionsServiceInstance);
     setDirectionsRenderer(directionsRendererInstance);
     setIsLoading(false);
+
+    // Calculate route immediately if origin and destination are available
+    if (origin && destination) {
+      setTimeout(() => {
+        calculateRoute(directionsServiceInstance, directionsRendererInstance);
+      }, 100);
+    }
   };
 
   const calculateAndDisplayRoute = () => {
