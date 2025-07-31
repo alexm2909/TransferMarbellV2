@@ -764,24 +764,18 @@ export default function BookingForm() {
               {/* Vehicle Selection */}
               <Card>
                 <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2">
-                      <CarIcon className="w-5 h-5 text-ocean" />
-                      {multiCarMode ? "Seleccionar Varios Vehículos" : "Select Vehicle"}
-                    </CardTitle>
-                    <Button
-                      onClick={toggleMultiCarMode}
-                      variant={multiCarMode ? "default" : "outline"}
-                      size="sm"
-                      className={multiCarMode ? "bg-purple text-white" : "border-purple text-purple hover:bg-purple hover:text-white"}
-                    >
-                      {multiCarMode ? "Modo Individual" : "Reservar Varios Coches"}
-                    </Button>
-                  </div>
-                  {multiCarMode && (
+                  <CardTitle className="flex items-center gap-2">
+                    <CarIcon className="w-5 h-5 text-ocean" />
+                    Select Vehicle
+                    {parseInt(bookingData.cars) > 1 && (
+                      <Badge variant="secondary" className="bg-purple/10 text-purple">
+                        {bookingData.cars} coches
+                      </Badge>
+                    )}
+                  </CardTitle>
+                  {parseInt(bookingData.cars) > 1 && (
                     <p className="text-sm text-gray-600 mt-2">
-                      Modo empresarial: Múltiples vehículos seleccionados.
-                      Total de vehículos: {selectedVehicles.reduce((total, sel) => total + sel.quantity, 0)}
+                      Capacidad total con {bookingData.cars} vehículos del tipo seleccionado
                     </p>
                   )}
                 </CardHeader>
