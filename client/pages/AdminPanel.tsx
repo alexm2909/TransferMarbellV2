@@ -34,6 +34,16 @@ import {
   SettingsIcon,
   ShieldIcon,
   MessageSquareIcon,
+  EyeIcon,
+  EditIcon,
+  TrashIcon,
+  PhoneIcon,
+  MailIcon,
+  MapPinIcon,
+  CalendarIcon,
+  StarIcon,
+  CreditCardIcon,
+  BuildingIcon,
 } from "lucide-react";
 
 export default function AdminPanel() {
