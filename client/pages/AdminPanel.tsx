@@ -278,7 +278,7 @@ export default function AdminPanel() {
           />
           <StatsWidget
             title="Ingresos Totales"
-            value="€45,230"
+            value="���45,230"
             change={{ value: "+18%", type: "increase", period: "este mes" }}
             icon={EuroIcon}
             color="success"
@@ -717,31 +717,91 @@ export default function AdminPanel() {
                   <Button
                     variant="outline"
                     className="w-full justify-start"
+                    onClick={() => {
+                      // Generate and download monthly income report
+                      alert("Generando reporte mensual de ingresos...");
+                    }}
                   >
                     <DownloadIcon className="w-4 h-4 mr-2" />
                     Reporte Mensual de Ingresos
+                    <Badge className="ml-auto bg-green-100 text-green-800">€45,230</Badge>
                   </Button>
                   <Button
                     variant="outline"
                     className="w-full justify-start"
+                    onClick={() => {
+                      // Generate driver statistics report
+                      alert("Generando estadísticas de conductores...");
+                    }}
                   >
                     <DownloadIcon className="w-4 h-4 mr-2" />
                     Estadísticas de Conductores
+                    <Badge className="ml-auto bg-blue-100 text-blue-800">89 activos</Badge>
                   </Button>
                   <Button
                     variant="outline"
                     className="w-full justify-start"
+                    onClick={() => {
+                      // Generate disputes report
+                      alert("Generando reporte de disputas...");
+                    }}
                   >
                     <DownloadIcon className="w-4 h-4 mr-2" />
                     Reporte de Disputas
+                    <Badge className="ml-auto bg-yellow-100 text-yellow-800">3 activas</Badge>
                   </Button>
                   <Button
                     variant="outline"
                     className="w-full justify-start"
+                    onClick={() => {
+                      // Generate ministry data report
+                      alert("Generando datos para el Ministerio...");
+                    }}
                   >
                     <DownloadIcon className="w-4 h-4 mr-2" />
                     Datos para Ministerio
+                    <Badge className="ml-auto bg-purple-100 text-purple-800">Mensual</Badge>
                   </Button>
+
+                  <Separator className="my-4" />
+
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">Acciones del Sistema</h4>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-blue-600"
+                      onClick={() => {
+                        alert("Enviando notificaciones push a todos los usuarios...");
+                      }}
+                    >
+                      <MessageSquareIcon className="w-4 h-4 mr-2" />
+                      Enviar Notificación Global
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-orange-600"
+                      onClick={() => {
+                        if (confirm("¿Estás seguro de que quieres realizar backup de la base de datos?")) {
+                          alert("Iniciando backup de la base de datos...");
+                        }
+                      }}
+                    >
+                      <DownloadIcon className="w-4 h-4 mr-2" />
+                      Backup Base de Datos
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-red-600"
+                      onClick={() => {
+                        if (confirm("¿Estás seguro de que quieres reiniciar el sistema? Esto afectará a todos los usuarios.")) {
+                          alert("Reiniciando sistema en modo mantenimiento...");
+                        }
+                      }}
+                    >
+                      <SettingsIcon className="w-4 h-4 mr-2" />
+                      Reiniciar Sistema
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
