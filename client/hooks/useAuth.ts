@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export interface User {
   email: string;
   name: string;
-  role: "client" | "driver" | "fleet-manager" | "admin" | "business";
+  role: "client" | "driver" | "admin";
   phone?: string;
 }
 
