@@ -78,6 +78,22 @@ export default function AdminPanel() {
       submitDate: "2024-12-20",
       status: "pending",
       documents: ["Licencia", "Seguro", "ITV", "Foto Vehículo"],
+      rating: 4.8,
+      tripsCompleted: 0,
+      joinDate: "2024-12-20",
+      vehicleYear: 2020,
+      vehicleColor: "Negro",
+      vehiclePlate: "1234-ABC",
+      bankAccount: "**** **** **** 1234",
+      address: "Calle Marina 123, Marbella",
+      emergencyContact: "Ana Torres - +34 600 123 456",
+      profilePhoto: "/placeholder-profile.jpg",
+      documentUrls: {
+        license: "/docs/license-dr001.pdf",
+        insurance: "/docs/insurance-dr001.pdf",
+        itv: "/docs/itv-dr001.pdf",
+        vehiclePhoto: "/docs/vehicle-dr001.jpg"
+      }
     },
     {
       id: "DR002", 
