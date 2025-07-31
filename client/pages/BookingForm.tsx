@@ -284,6 +284,10 @@ export default function BookingForm() {
     setLuggageItems(luggage);
   };
 
+  const handleLuggageCountChange = (counts: LuggageCount) => {
+    setLuggageCount(counts);
+  };
+
   const calculateEstimatedPrice = () => {
     const basePrice = vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price || "€25";
     const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ''));
