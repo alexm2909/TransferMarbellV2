@@ -701,6 +701,34 @@ export default function BookingForm() {
                         </Select>
                       </div>
                     </div>
+
+                    <div className="flex flex-row sm:flex-col items-center sm:items-center p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-ocean/40 transition-colors">
+                      <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col flex-1">
+                        <CarIcon className="w-5 h-5 sm:w-6 sm:h-6 text-purple sm:mb-2 flex-shrink-0" />
+                        <label className="text-sm font-medium text-gray-700 sm:mb-2 flex-1 sm:flex-none sm:text-center">
+                          Coches
+                        </label>
+                      </div>
+                      <div className="w-20 sm:w-full">
+                        <Select
+                          value={bookingData.cars}
+                          onValueChange={(value) =>
+                            setBookingData({ ...bookingData, cars: value })
+                          }
+                        >
+                          <SelectTrigger className="w-full min-w-[80px]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                              <SelectItem key={num} value={num.toString()}>
+                                {num} {num === 1 ? 'coche' : 'coches'}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Segunda fila: Configuración detallada */}
