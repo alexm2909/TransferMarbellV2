@@ -106,19 +106,37 @@ export default function Index() {
               >
                 Support
               </Link>
-              <Link to="/signin">
-                <Button
-                  variant="outline"
-                  className="border-ocean text-ocean hover:bg-ocean hover:text-white"
-                >
-                  Sign In
-                </Button>
-              </Link>
-              <Link to="/signup">
-                <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                  Register
-                </Button>
-              </Link>
+
+              {/* Show different buttons based on authentication status */}
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-4">
+                  <Link to="/dashboard">
+                    <Button
+                      variant="outline"
+                      className="border-ocean text-ocean hover:bg-ocean hover:text-white"
+                    >
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <UserMenu />
+                </div>
+              ) : (
+                <>
+                  <Link to="/signin">
+                    <Button
+                      variant="outline"
+                      className="border-ocean text-ocean hover:bg-ocean hover:text-white"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/signup">
+                    <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                      Register
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile menu button */}
