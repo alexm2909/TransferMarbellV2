@@ -162,6 +162,26 @@ export default function BookingForm() {
     return totalPassengers <= vehicle.maxPassengers && totalLuggage <= vehicle.maxLuggage;
   };
 
+  const toggleMultiCarMode = () => {
+    setMultiCarMode(!multiCarMode);
+    if (!multiCarMode) {
+      // Entering multi-car mode - clear single vehicle selection
+      setBookingData({ ...bookingData, vehicleType: "" });
+      setSelectedVehicles([]);
+    } else {
+      // Exiting multi-car mode - clear multi-vehicle selection
+      setSelectedVehicles([]);
+    }
+  };
+
+  const handleMultiVehicleSelection = (vehicleId: string) => {
+    if (selectedVehicles.includes(vehicleId)) {
+      setSelectedVehicles(selectedVehicles.filter(id => id !== vehicleId));
+    } else {
+      setSelectedVehicles([...selectedVehicles, vehicleId]);
+    }
+  };
+
   useEffect(() => {
     // Load pre-booking data from localStorage
     const preBookingData = localStorage.getItem("preBookingData");
