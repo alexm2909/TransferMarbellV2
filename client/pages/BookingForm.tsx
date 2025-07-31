@@ -1084,6 +1084,14 @@ export default function BookingForm() {
             </div>
           </div>
         </form>
+
+        {/* Multi Vehicle Selector Modal */}
+        <MultiVehicleSelector
+          isOpen={showMultiVehicleSelector}
+          onClose={handleMultiVehicleSelectorClose}
+          onConfirm={handleMultiVehicleConfirm}
+          vehicleTypes={vehicleTypes}
+        />
       </div>
     </div>
   );
