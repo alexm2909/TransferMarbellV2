@@ -263,76 +263,7 @@ export default function Dashboard() {
               </>
             )}
 
-            {/* BUSINESS DASHBOARD */}
-            {user?.role === "business" && (
-              <>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <UsersIcon className="w-5 h-5 text-ocean" />
-                      Reservas Corporativas
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                      <div className="text-center p-4 bg-ocean-light/20 rounded-lg">
-                        <div className="text-2xl font-bold text-ocean">45</div>
-                        <div className="text-sm text-gray-600">Este Mes</div>
-                      </div>
-                      <div className="text-center p-4 bg-coral-light/20 rounded-lg">
-                        <div className="text-2xl font-bold text-coral">8</div>
-                        <div className="text-sm text-gray-600">Esta Semana</div>
-                      </div>
-                      <div className="text-center p-4 bg-success/20 rounded-lg">
-                        <div className="text-2xl font-bold text-success">
-                          €1,240
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Gasto Mensual
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 border rounded-lg">
-                        <div>
-                          <span className="font-medium">
-                            Recogida Aeropuerto
-                          </span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Huésped: Sr. Johnson
-                          </span>
-                        </div>
-                        <Badge className="bg-success text-white">
-                          Confirmado
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center p-3 border rounded-lg">
-                        <div>
-                          <span className="font-medium">Tour Ejecutivo</span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Grupo VIP
-                          </span>
-                        </div>
-                        <Badge className="bg-warning text-white">
-                          En Curso
-                        </Badge>
-                      </div>
-                      <div className="flex justify-between items-center p-3 border rounded-lg">
-                        <div>
-                          <span className="font-medium">
-                            Transfer Conferencia
-                          </span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Mañana 09:00
-                          </span>
-                        </div>
-                        <Badge variant="secondary">Programado</Badge>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </>
-            )}
+
 
             {/* Messages Card for all users */}
             <Card>
