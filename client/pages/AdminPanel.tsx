@@ -390,29 +390,74 @@ export default function AdminPanel() {
                           </div>
                         </div>
 
-                        {driver.status === "pending" && (
-                          <div className="flex space-x-3">
-                            <Button
-                              onClick={() => approveDriver(driver.id)}
-                              className="bg-green-600 hover:bg-green-700 text-white"
-                            >
-                              <CheckCircleIcon className="w-4 h-4 mr-2" />
-                              Aprobar
-                            </Button>
-                            <Button
-                              onClick={() => rejectDriver(driver.id)}
-                              variant="outline"
-                              className="border-red-500 text-red-600 hover:bg-red-50"
-                            >
-                              <XCircleIcon className="w-4 h-4 mr-2" />
-                              Rechazar
-                            </Button>
-                            <Button variant="outline">
-                              <FileTextIcon className="w-4 h-4 mr-2" />
-                              Ver Documentos
-                            </Button>
-                          </div>
-                        )}
+                        <div className="flex space-x-3 flex-wrap gap-2">
+                          <Button
+                            onClick={() => viewDriverDetails(driver)}
+                            variant="outline"
+                            size="sm"
+                          >
+                            <EyeIcon className="w-4 h-4 mr-2" />
+                            Ver Detalles
+                          </Button>
+                          <Button
+                            onClick={() => viewDocuments(driver)}
+                            variant="outline"
+                            size="sm"
+                          >
+                            <FileTextIcon className="w-4 h-4 mr-2" />
+                            Ver Documentos
+                          </Button>
+                          {driver.status === "pending" && (
+                            <>
+                              <Button
+                                onClick={() => approveDriver(driver.id)}
+                                className="bg-green-600 hover:bg-green-700 text-white"
+                                size="sm"
+                              >
+                                <CheckCircleIcon className="w-4 h-4 mr-2" />
+                                Aprobar
+                              </Button>
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    variant="outline"
+                                    className="border-red-500 text-red-600 hover:bg-red-50"
+                                    size="sm"
+                                  >
+                                    <XCircleIcon className="w-4 h-4 mr-2" />
+                                    Rechazar
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Rechazar Solicitud de Conductor</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="space-y-4">
+                                    <div>
+                                      <Label htmlFor="reject-reason">Motivo del rechazo</Label>
+                                      <Textarea
+                                        id="reject-reason"
+                                        value={rejectReason}
+                                        onChange={(e) => setRejectReason(e.target.value)}
+                                        placeholder="Explica el motivo del rechazo..."
+                                        rows={3}
+                                      />
+                                    </div>
+                                    <div className="flex space-x-2">
+                                      <Button
+                                        onClick={() => rejectDriverWithReason(driver.id, rejectReason)}
+                                        className="bg-red-600 hover:bg-red-700 text-white"
+                                        disabled={!rejectReason.trim()}
+                                      >
+                                        Confirmar Rechazo
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                            </>
+                          )}
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
