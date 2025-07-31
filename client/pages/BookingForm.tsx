@@ -576,7 +576,7 @@ export default function BookingForm() {
                             setBookingData({ ...bookingData, passengers: value })
                           }
                         >
-                          <SelectTrigger className="w-full min-w-[80px]">
+                          <SelectTrigger className="w-full min-w-[100px]">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -604,7 +604,7 @@ export default function BookingForm() {
                             setBookingData({ ...bookingData, children: value })
                           }
                         >
-                          <SelectTrigger className="w-full min-w-[80px]">
+                          <SelectTrigger className="w-full min-w-[100px]">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -632,7 +632,7 @@ export default function BookingForm() {
                             setBookingData({ ...bookingData, luggage: value })
                           }
                         >
-                          <SelectTrigger className="w-full min-w-[80px]">
+                          <SelectTrigger className="w-full min-w-[100px]">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -660,7 +660,7 @@ export default function BookingForm() {
                             setBookingData({ ...bookingData, cars: value })
                           }
                         >
-                          <SelectTrigger className="w-full min-w-[80px]">
+                          <SelectTrigger className="w-full min-w-[100px]">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
