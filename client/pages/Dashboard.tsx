@@ -292,8 +292,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                 )}
-                {(user?.role === "driver" ||
-                  user?.role === "fleet-manager") && (
+                {user?.role === "driver" && (
                   <div className="space-y-3">
                     <div className="p-3 border rounded-lg">
                       <div className="flex justify-between items-start mb-1">
