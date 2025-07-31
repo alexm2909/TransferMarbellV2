@@ -51,6 +51,14 @@ export default function AdminPanel() {
   const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [selectedDriver, setSelectedDriver] = useState(null);
+  const [selectedDispute, setSelectedDispute] = useState(null);
+  const [selectedPriceRequest, setSelectedPriceRequest] = useState(null);
+  const [showDriverModal, setShowDriverModal] = useState(false);
+  const [showDisputeModal, setShowDisputeModal] = useState(false);
+  const [showDocumentsModal, setShowDocumentsModal] = useState(false);
+  const [rejectReason, setRejectReason] = useState("");
+  const [disputeResolution, setDisputeResolution] = useState("");
 
   // Redirect if not admin
   if (user?.role !== "admin") {
