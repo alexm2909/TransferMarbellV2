@@ -168,15 +168,18 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     }
   };
 
-  const calculateAndDisplayRoute = () => {
-    if (!origin || !destination) return;
+  const calculateRoute = (directionsServiceToUse?: any, directionsRendererToUse?: any) => {
+    const serviceToUse = directionsServiceToUse || directionsService;
+    const rendererToUse = directionsRendererToUse || directionsRenderer;
+
+    if (!origin || !destination || !serviceToUse || !rendererToUse) return;
 
     setIsLoading(true);
     setError(null);
 
     console.log('Calculating route from', origin, 'to', destination);
 
-    directionsService.route(
+    serviceToUse.route(
       {
         origin: origin,
         destination: destination,
@@ -187,29 +190,40 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       },
       (response: any, status: any) => {
         console.log('Route calculation result:', status, response);
-        if (status === "OK") {
-          directionsRenderer.setDirections(response);
-          console.log('Route set successfully');
+        if (status === "OK" && response.routes && response.routes.length > 0) {
+          try {
+            rendererToUse.setDirections(response);
+            console.log('Route set successfully');
 
-          const route = response.routes[0];
-          const leg = route.legs[0];
+            const route = response.routes[0];
+            const leg = route.legs[0];
 
-          // Calculate estimated cost based on distance (€1.5 per km + base €15)
-          const distanceKm = parseFloat(leg.distance.text.replace(/[^\d.]/g, ''));
-          const estimatedCost = Math.round(15 + (distanceKm * 1.5));
+            // Calculate estimated cost based on distance (€1.5 per km + base €15)
+            const distanceKm = parseFloat(leg.distance.text.replace(/[^\d.]/g, ''));
+            const estimatedCost = Math.round(15 + (distanceKm * 1.5));
 
-          setRouteInfo({
-            distance: leg.distance.text,
-            duration: leg.duration.text,
-            estimatedCost: `€${estimatedCost}`,
-          });
-          setIsLoading(false);
+            setRouteInfo({
+              distance: leg.distance.text,
+              duration: leg.duration.text,
+              estimatedCost: `€${estimatedCost}`,
+            });
+            setIsLoading(false);
+          } catch (error) {
+            console.error('Error setting directions:', error);
+            setError("Error al mostrar la ruta.");
+            setIsLoading(false);
+          }
         } else {
+          console.error('No route found or invalid status:', status);
           setError("No se pudo calcular la ruta. Verifica las direcciones.");
           setIsLoading(false);
         }
       }
     );
+  };
+
+  const calculateAndDisplayRoute = () => {
+    calculateRoute();
   };
 
   if (!origin || !destination) {
