@@ -88,7 +88,7 @@ export default function MultiVehicleSelector({
           <div className="bg-purple/10 p-4 rounded-lg border border-purple/20">
             <div className="flex items-center justify-between">
               <span className="font-medium text-gray-900">
-                Total de vehículos seleccionados: {getTotalVehicles()}
+                Total de veh��culos seleccionados: {getTotalVehicles()}
               </span>
               {getTotalVehicles() > 0 && (
                 <Button
@@ -162,6 +162,7 @@ export default function MultiVehicleSelector({
                       <Label className="text-sm font-medium">Cantidad</Label>
                       <div className="flex items-center gap-2">
                         <Button
+                          type="button"
                           onClick={() => handleQuantityChange(vehicle.id, quantity - 1)}
                           variant="outline"
                           size="sm"
@@ -181,6 +182,7 @@ export default function MultiVehicleSelector({
                           className="w-16 text-center"
                         />
                         <Button
+                          type="button"
                           onClick={() => handleQuantityChange(vehicle.id, quantity + 1)}
                           variant="outline"
                           size="sm"
