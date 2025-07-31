@@ -669,10 +669,26 @@ export default function BookingForm() {
               {/* Vehicle Selection */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CarIcon className="w-5 h-5 text-ocean" />
-                    Select Vehicle
-                  </CardTitle>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-2">
+                      <CarIcon className="w-5 h-5 text-ocean" />
+                      {multiCarMode ? "Seleccionar Varios Vehículos" : "Select Vehicle"}
+                    </CardTitle>
+                    <Button
+                      onClick={toggleMultiCarMode}
+                      variant={multiCarMode ? "default" : "outline"}
+                      size="sm"
+                      className={multiCarMode ? "bg-purple text-white" : "border-purple text-purple hover:bg-purple hover:text-white"}
+                    >
+                      {multiCarMode ? "Modo Individual" : "Reservar Varios Coches"}
+                    </Button>
+                  </div>
+                  {multiCarMode && (
+                    <p className="text-sm text-gray-600 mt-2">
+                      Modo empresarial: Selecciona múltiples vehículos para grandes grupos.
+                      Vehículos seleccionados: {selectedVehicles.length}
+                    </p>
+                  )}
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
