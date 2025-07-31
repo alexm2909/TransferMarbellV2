@@ -88,7 +88,7 @@ export default function MultiVehicleSelector({
           <div className="bg-purple/10 p-4 rounded-lg border border-purple/20">
             <div className="flex items-center justify-between">
               <span className="font-medium text-gray-900">
-                Total de veh��culos seleccionados: {getTotalVehicles()}
+                Total de vehículos seleccionados: {getTotalVehicles()}
               </span>
               {getTotalVehicles() > 0 && (
                 <Button
@@ -97,7 +97,7 @@ export default function MultiVehicleSelector({
                   size="sm"
                   className="text-gray-600 hover:text-gray-900"
                 >
-                  Limpiar selección
+                  Limpiar selecci��n
                 </Button>
               )}
             </div>
@@ -201,10 +201,11 @@ export default function MultiVehicleSelector({
 
           {/* Action Buttons */}
           <div className="flex items-center justify-end gap-3 pt-4 border-t">
-            <Button onClick={onClose} variant="outline">
+            <Button type="button" onClick={onClose} variant="outline">
               Cancelar
             </Button>
             <Button
+              type="button"
               onClick={handleConfirm}
               disabled={getTotalVehicles() === 0}
               className="bg-purple hover:bg-purple/90 text-white"
