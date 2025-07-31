@@ -70,6 +70,18 @@ interface LuggageItem {
   price: number;
 }
 
+interface LuggageCount {
+  small: number;
+  medium: number;
+  large: number;
+  xlarge: number;
+}
+
+interface VehicleSelection {
+  vehicleId: string;
+  quantity: number;
+}
+
 export default function BookingForm() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isLoading, logout } = useAuth();
