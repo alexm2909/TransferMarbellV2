@@ -1043,14 +1043,13 @@ export default function BookingForm() {
                         {bookingData.luggage} pieces
                       </span>
                     </div>
-                    {bookingData.vehicleType && (
+                    {(bookingData.vehicleType || selectedVehicles.length > 0) && (
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Vehicle</span>
                         <span className="font-medium">
-                          {
-                            vehicleTypes.find(
-                              (v) => v.id === bookingData.vehicleType,
-                            )?.name
+                          {multiCarMode
+                            ? `${selectedVehicles.reduce((total, sel) => total + sel.quantity, 0)} vehículos`
+                            : vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name
                           }
                         </span>
                       </div>
