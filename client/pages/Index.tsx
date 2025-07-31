@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
+import UserMenu from "@/components/UserMenu";
+import { useAuth } from "@/hooks/useAuth";
 import {
   CalendarIcon,
   ClockIcon,
