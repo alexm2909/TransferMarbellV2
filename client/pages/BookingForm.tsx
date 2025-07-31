@@ -106,6 +106,7 @@ export default function BookingForm() {
     children: "0",
     luggage: "1",
     vehicleType: "",
+    cars: "1",
     flightNumber: "",
     childSeats: "0",
     specialRequests: "",
