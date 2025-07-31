@@ -697,18 +697,28 @@ export default function BookingForm() {
                       const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
                       const totalLuggage = parseInt(bookingData.luggage);
 
+                      const isSelected = multiCarMode
+                        ? selectedVehicles.includes(vehicle.id)
+                        : bookingData.vehicleType === vehicle.id;
+
                       return (
                         <div
                           key={vehicle.id}
                           className={`border-2 rounded-lg p-4 transition-all relative ${
-                            !isCompatible
+                            multiCarMode
+                              ? isSelected
+                                ? "border-purple bg-purple/10 cursor-pointer"
+                                : "border-gray-200 cursor-pointer hover:border-purple"
+                              : !isCompatible
                               ? "border-red-200 bg-red-50/50 cursor-not-allowed opacity-60"
-                              : bookingData.vehicleType === vehicle.id
-                              ? "border-ocean bg-ocean-light/20 cursor-pointer hover:border-ocean"
+                              : isSelected
+                              ? "border-ocean bg-ocean/10 cursor-pointer"
                               : "border-gray-200 cursor-pointer hover:border-ocean"
                           }`}
                           onClick={() => {
-                            if (isCompatible) {
+                            if (multiCarMode) {
+                              handleMultiVehicleSelection(vehicle.id);
+                            } else if (isCompatible) {
                               setBookingData({
                                 ...bookingData,
                                 vehicleType: vehicle.id,
