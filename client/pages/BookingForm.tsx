@@ -1071,7 +1071,7 @@ export default function BookingForm() {
                   <Button
                     type="submit"
                     className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-3"
-                    disabled={!bookingData.vehicleType}
+                    disabled={!bookingData.vehicleType && selectedVehicles.length === 0}
                   >
                     Complete Booking
                   </Button>
