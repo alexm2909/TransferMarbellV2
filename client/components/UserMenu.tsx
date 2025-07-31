@@ -47,9 +47,7 @@ export default function UserMenu({ className }: UserMenuProps) {
     const roleMap = {
       client: "Cliente",
       driver: "Conductor",
-      "fleet-manager": "Jefe de Flota",
       admin: "Administrador",
-      business: "Empresa",
     };
     return roleMap[role as keyof typeof roleMap] || "Dashboard";
   };
@@ -58,9 +56,7 @@ export default function UserMenu({ className }: UserMenuProps) {
     const iconMap = {
       client: "👤",
       driver: "🚗",
-      "fleet-manager": "👥",
       admin: "⚙️",
-      business: "🏢",
     };
     return iconMap[role as keyof typeof iconMap] || "👤";
   };
