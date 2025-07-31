@@ -616,8 +616,8 @@ export default function BookingForm() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {/* Mobile-optimized passenger/luggage selector */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* Mobile-optimized passenger/luggage/cars selector */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                     <div className="flex flex-row sm:flex-col items-center sm:items-center p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-ocean/40 transition-colors">
                       <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col flex-1">
                         <UsersIcon className="w-5 h-5 sm:w-6 sm:h-6 text-ocean sm:mb-2 flex-shrink-0" />
