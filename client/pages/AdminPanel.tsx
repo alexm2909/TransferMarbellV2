@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import StatsWidget from "@/components/StatsWidget";
 import { useAuth } from "@/hooks/useAuth";
 import UserMenu from "@/components/UserMenu";
@@ -271,14 +272,14 @@ export default function AdminPanel() {
           <StatsWidget
             title="Disputas Activas"
             value="3"
-            change={{ value: "-2", type: "decrease", period: "última semana" }}
+            change={{ value: "-2", type: "decrease", period: "��ltima semana" }}
             icon={AlertTriangleIcon}
             color="coral"
             subtitle="2 abiertas, 1 investigando"
           />
           <StatsWidget
             title="Ingresos Totales"
-            value="���45,230"
+            value="€45,230"
             change={{ value: "+18%", type: "increase", period: "este mes" }}
             icon={EuroIcon}
             color="success"
@@ -646,7 +647,7 @@ export default function AdminPanel() {
                                     id="resolution"
                                     value={disputeResolution}
                                     onChange={(e) => setDisputeResolution(e.target.value)}
-                                    placeholder="Describe la resolución de la disputa..."
+                                    placeholder="Describe la resoluci��n de la disputa..."
                                     rows={4}
                                   />
                                 </div>
