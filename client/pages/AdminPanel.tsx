@@ -706,6 +706,211 @@ export default function AdminPanel() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Driver Details Modal */}
+      <Dialog open={showDriverModal} onOpenChange={setShowDriverModal}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-ocean to-coral rounded-full flex items-center justify-center">
+                <span className="text-white font-bold">
+                  {selectedDriver?.name?.split(' ').map(n => n[0]).join('')}
+                </span>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold">{selectedDriver?.name}</h3>
+                <p className="text-sm text-gray-600">Solicitud #{selectedDriver?.id}</p>
+              </div>
+            </DialogTitle>
+          </DialogHeader>
+
+          {selectedDriver && (
+            <div className="space-y-6">
+              {/* Personal Information */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Información Personal</CardTitle>
+                </CardHeader>
+                <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <MailIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">{selectedDriver.email}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <PhoneIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">{selectedDriver.phone}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <MapPinIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">{selectedDriver.address}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CalendarIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">Registro: {selectedDriver.submitDate}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <ShieldIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">Licencia: {selectedDriver.license}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CreditCardIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">Cuenta: {selectedDriver.bankAccount}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <PhoneIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">Emergencia: {selectedDriver.emergencyContact}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <StarIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">Rating: {selectedDriver.rating}/5</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Vehicle Information */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Información del Vehículo</CardTitle>
+                </CardHeader>
+                <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <CarIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">{selectedDriver.vehicle}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CalendarIcon className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm">Año: {selectedDriver.vehicleYear}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-4 h-4 text-gray-500">🎨</span>
+                      <span className="text-sm">Color: {selectedDriver.vehicleColor}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="w-4 h-4 text-gray-500">🔢</span>
+                      <span className="text-sm">Matrícula: {selectedDriver.vehiclePlate}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Documents Status */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Estado de Documentos</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {selectedDriver.documents?.map((doc, index) => (
+                      <div key={index} className="flex items-center space-x-2 p-2 bg-green-50 rounded-lg border border-green-200">
+                        <CheckCircleIcon className="w-4 h-4 text-green-600" />
+                        <span className="text-sm text-green-800">{doc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Action Buttons */}
+              <div className="flex space-x-3 pt-4 border-t">
+                <Button
+                  onClick={() => viewDocuments(selectedDriver)}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  <FileTextIcon className="w-4 h-4 mr-2" />
+                  Ver Documentos
+                </Button>
+                {selectedDriver.status === "pending" && (
+                  <>
+                    <Button
+                      onClick={() => approveDriver(selectedDriver.id)}
+                      className="bg-green-600 hover:bg-green-700 text-white flex-1"
+                    >
+                      <CheckCircleIcon className="w-4 h-4 mr-2" />
+                      Aprobar Conductor
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Documents Modal */}
+      <Dialog open={showDocumentsModal} onOpenChange={setShowDocumentsModal}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Documentos de {selectedDriver?.name}</DialogTitle>
+          </DialogHeader>
+
+          {selectedDriver && (
+            <div className="space-y-4">
+              {selectedDriver.documents?.map((doc, index) => (
+                <Card key={index}>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <FileTextIcon className="w-8 h-8 text-ocean" />
+                        <div>
+                          <h4 className="font-medium">{doc}</h4>
+                          <p className="text-sm text-gray-600">
+                            Subido el {selectedDriver.submitDate}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex space-x-2">
+                        <Button variant="outline" size="sm">
+                          <EyeIcon className="w-4 h-4 mr-2" />
+                          Ver
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <DownloadIcon className="w-4 h-4 mr-2" />
+                          Descargar
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {/* Document validation section */}
+              <Card className="mt-6">
+                <CardHeader>
+                  <CardTitle className="text-lg">Validación de Documentos</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                      <span className="text-sm font-medium">Licencia de Conducir</span>
+                      <Badge className="bg-green-600 text-white">Válida</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                      <span className="text-sm font-medium">Seguro del Vehículo</span>
+                      <Badge className="bg-green-600 text-white">Válida</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                      <span className="text-sm font-medium">ITV</span>
+                      <Badge className="bg-green-600 text-white">Válida</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                      <span className="text-sm font-medium">Foto del Vehículo</span>
+                      <Badge className="bg-yellow-600 text-white">Pendiente revisión</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
