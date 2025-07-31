@@ -179,6 +179,29 @@
     overflow-x: hidden;
   }
 
+  /* Remove card animations and enforce solid colors */
+  .card, [class*="Card"] {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .card:hover, [class*="Card"]:hover {
+    transform: none !important;
+    scale: none !important;
+  }
+
+  /* Remove gradients and use solid colors */
+  .bg-gradient-to-r, .bg-gradient-to-br, .bg-gradient-to-l, .bg-gradient-to-bl {
+    background: hsl(var(--ocean)) !important;
+  }
+
+  .text-transparent {
+    color: hsl(var(--navy)) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+  }
+
   /* Prevent any element from causing horizontal scroll */
   * {
     max-width: 100%;
