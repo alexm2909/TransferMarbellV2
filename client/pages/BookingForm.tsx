@@ -631,7 +631,7 @@ export default function BookingForm() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20].map((num) => (
                               <SelectItem key={num} value={num.toString()}>
                                 {num} {num === 1 ? 'adulto' : 'adultos'}
                               </SelectItem>
