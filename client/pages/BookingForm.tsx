@@ -781,12 +781,13 @@ export default function BookingForm() {
                                 )}
                               </div>
                             </div>
-                            <Badge
-                              variant="secondary"
-                              className={isCompatible ? "bg-ocean/10 text-ocean" : "bg-gray-100 text-gray-500"}
-                            >
+                            <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                              isCompatible
+                                ? "bg-gradient-to-r from-ocean to-coral text-white"
+                                : "bg-gray-100 text-gray-500"
+                            }`}>
                               {vehicle.price}
-                            </Badge>
+                            </div>
                           </div>
 
                           <p className={`text-sm mb-3 ${
