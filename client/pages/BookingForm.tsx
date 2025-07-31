@@ -87,9 +87,7 @@ export default function BookingForm() {
   const { isAuthenticated, user, isLoading, logout } = useAuth();
   const [childSeats, setChildSeats] = useState<ChildSeat[]>([]);
   const [luggageItems, setLuggageItems] = useState<LuggageItem[]>([]);
-  const [multiCarMode, setMultiCarMode] = useState(false);
-  const [selectedVehicles, setSelectedVehicles] = useState<VehicleSelection[]>([]);
-  const [showMultiVehicleSelector, setShowMultiVehicleSelector] = useState(false);
+
   const [luggageCount, setLuggageCount] = useState<LuggageCount>({
     small: 0,
     medium: 0,
