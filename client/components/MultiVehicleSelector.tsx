@@ -92,12 +92,13 @@ export default function MultiVehicleSelector({
               </span>
               {getTotalVehicles() > 0 && (
                 <Button
+                  type="button"
                   onClick={handleReset}
                   variant="outline"
                   size="sm"
                   className="text-gray-600 hover:text-gray-900"
                 >
-                  Limpiar selecci��n
+                  Limpiar selección
                 </Button>
               )}
             </div>
