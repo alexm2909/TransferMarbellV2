@@ -44,7 +44,12 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
   // Update route when origin or destination changes
   useEffect(() => {
     if (map && directionsService && directionsRenderer && origin && destination) {
-      calculateAndDisplayRoute();
+      // Add a small delay to ensure everything is properly initialized
+      const timer = setTimeout(() => {
+        calculateAndDisplayRoute();
+      }, 200);
+
+      return () => clearTimeout(timer);
     }
   }, [origin, destination, map, directionsService, directionsRenderer]);
 
