@@ -726,10 +726,17 @@ export default function BookingForm() {
                             }
                           }}
                         >
-                          {/* Overlay para vehículos no compatibles */}
-                          {!isCompatible && (
+                          {/* Overlay para vehículos no compatibles (solo en modo individual) */}
+                          {!multiCarMode && !isCompatible && (
                             <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
                               No Compatible
+                            </div>
+                          )}
+
+                          {/* Indicator for multi-car mode */}
+                          {multiCarMode && isSelected && (
+                            <div className="absolute top-2 right-2 bg-purple text-white text-xs px-2 py-1 rounded-full font-medium">
+                              Seleccionado
                             </div>
                           )}
 
