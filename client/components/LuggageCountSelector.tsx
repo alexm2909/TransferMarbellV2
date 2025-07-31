@@ -136,6 +136,7 @@ export default function LuggageCountSelector({
 
                 <div className="flex items-center justify-center gap-2">
                   <Button
+                    type="button"
                     onClick={() => handleCountChange(size as keyof LuggageCount, -1)}
                     variant="outline"
                     size="sm"
@@ -148,6 +149,7 @@ export default function LuggageCountSelector({
                     {count}
                   </span>
                   <Button
+                    type="button"
                     onClick={() => handleCountChange(size as keyof LuggageCount, 1)}
                     variant="outline"
                     size="sm"
