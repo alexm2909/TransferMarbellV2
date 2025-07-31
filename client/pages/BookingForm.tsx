@@ -54,6 +54,7 @@ interface BookingData {
   children: string;
   luggage: string;
   vehicleType: string;
+  cars: string;
   flightNumber: string;
   childSeats: string;
   specialRequests: string;
