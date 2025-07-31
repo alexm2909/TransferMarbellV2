@@ -18,7 +18,6 @@ import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
 import TimeSelector from "@/components/TimeSelector";
 import LuggageSizeSelector from "@/components/LuggageSizeSelector";
 import LuggageCountSelector from "@/components/LuggageCountSelector";
-import MultiVehicleSelector from "@/components/MultiVehicleSelector";
 import UserMenu from "@/components/UserMenu";
 import { useAuth } from "@/hooks/useAuth";
 import {
