@@ -170,22 +170,50 @@ export default function AdminPanel() {
   ];
 
   const approveDriver = (driverId: string) => {
+    // Update driver status in state
+    console.log(`Conductor ${driverId} aprobado exitosamente`);
+    // In real app, this would make API call to approve driver
     alert(`Conductor ${driverId} aprobado exitosamente`);
   };
 
-  const rejectDriver = (driverId: string) => {
-    const reason = prompt("Motivo del rechazo:");
-    if (reason) {
-      alert(`Conductor ${driverId} rechazado. Motivo: ${reason}`);
-    }
+  const rejectDriverWithReason = (driverId: string, reason: string) => {
+    // Update driver status in state with reason
+    console.log(`Conductor ${driverId} rechazado. Motivo: ${reason}`);
+    // In real app, this would make API call to reject driver
+    alert(`Conductor ${driverId} rechazado. Motivo: ${reason}`);
+    setRejectReason("");
   };
 
   const approvePrice = (requestId: string) => {
+    console.log(`Solicitud de precio ${requestId} aprobada`);
     alert(`Solicitud de precio ${requestId} aprobada`);
   };
 
   const rejectPrice = (requestId: string) => {
+    console.log(`Solicitud de precio ${requestId} rechazada`);
     alert(`Solicitud de precio ${requestId} rechazada`);
+  };
+
+  const viewDriverDetails = (driver: any) => {
+    setSelectedDriver(driver);
+    setShowDriverModal(true);
+  };
+
+  const viewDocuments = (driver: any) => {
+    setSelectedDriver(driver);
+    setShowDocumentsModal(true);
+  };
+
+  const resolveDispute = (disputeId: string, resolution: string) => {
+    console.log(`Disputa ${disputeId} resuelta: ${resolution}`);
+    alert(`Disputa ${disputeId} resuelta exitosamente`);
+    setDisputeResolution("");
+    setShowDisputeModal(false);
+  };
+
+  const contactParties = (dispute: any) => {
+    // In real app, this would open communication interface
+    alert(`Iniciando comunicación con ${dispute.client} y ${dispute.driver}`);
   };
 
   return (
