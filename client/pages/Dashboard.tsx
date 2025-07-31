@@ -449,9 +449,7 @@ export default function Dashboard() {
                       </div>
                     </>
                   )}
-                  {(user?.role === "fleet-manager" ||
-                    user?.role === "admin" ||
-                    user?.role === "business") && (
+                  {user?.role === "admin" && (
                     <>
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">
