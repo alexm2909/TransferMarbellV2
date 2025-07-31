@@ -77,10 +77,7 @@ interface LuggageCount {
   xlarge: number;
 }
 
-interface VehicleSelection {
-  vehicleId: string;
-  quantity: number;
-}
+
 
 export default function BookingForm() {
   const navigate = useNavigate();
