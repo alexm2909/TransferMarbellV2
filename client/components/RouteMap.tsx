@@ -135,7 +135,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     const directionsRendererInstance = new window.google.maps.DirectionsRenderer({
       suppressMarkers: false,
       polylineOptions: {
-        strokeColor: "#7C3AED", // Bright purple
+        strokeColor: "#006d77", // Ocean color - same as markers
         strokeWeight: 6,
         strokeOpacity: 1,
         zIndex: 1000,
@@ -143,8 +143,8 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       markerOptions: {
         icon: {
           path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 12,
-          fillColor: "#EF4444", // Bright red
+          scale: 10,
+          fillColor: "#006d77", // Ocean color - reverted
           fillOpacity: 1,
           strokeColor: "#ffffff",
           strokeWeight: 3,
