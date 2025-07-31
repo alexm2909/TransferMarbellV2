@@ -324,23 +324,6 @@ export default function Dashboard() {
                     </div>
                   </div>
                 )}
-                {user?.role === "business" && (
-                  <div className="space-y-3">
-                    <div className="p-3 border rounded-lg">
-                      <div className="flex justify-between items-start mb-1">
-                        <span className="font-medium text-sm">
-                          Transfermarbell
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          Hace 1 hora
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        Resumen mensual de servicios disponible para descarga.
-                      </p>
-                    </div>
-                  </div>
-                )}
               </CardContent>
             </Card>
           </div>
