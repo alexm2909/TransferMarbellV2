@@ -187,57 +187,7 @@ export default function BookingForm() {
     return totalPassengers <= totalVehicleCapacity && totalLuggage <= totalLuggageCapacity;
   };
 
-  const getTotalCapacityFromMultiVehicles = () => {
-    let totalPassengers = 0;
-    let totalLuggage = 0;
 
-    selectedVehicles.forEach(selection => {
-      const vehicle = vehicleTypes.find(v => v.id === selection.vehicleId);
-      if (vehicle) {
-        totalPassengers += vehicle.maxPassengers * selection.quantity;
-        totalLuggage += vehicle.maxLuggage * selection.quantity;
-      }
-    });
-
-    return { totalPassengers, totalLuggage };
-  };
-
-  const toggleMultiCarMode = () => {
-    if (!multiCarMode) {
-      // Entering multi-car mode - show selector
-      setShowMultiVehicleSelector(true);
-    } else {
-      // Exiting multi-car mode - clear multi-vehicle selection
-      setMultiCarMode(false);
-      setSelectedVehicles([]);
-      setBookingData({ ...bookingData, vehicleType: "" });
-    }
-  };
-
-  const handleMultiVehicleConfirm = (selections: VehicleSelection[]) => {
-    setSelectedVehicles(selections);
-    setMultiCarMode(true);
-    setBookingData({ ...bookingData, vehicleType: "" }); // Clear single selection
-
-    // Auto-adjust passenger and luggage limits based on total capacity
-    const { totalPassengers, totalLuggage } = getTotalCapacityFromMultiVehicles();
-    if (selections.length > 0) {
-      const currentPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
-      const currentLuggage = parseInt(bookingData.luggage);
-
-      // If current selection exceeds single vehicle limits, increase if within multi-vehicle capacity
-      if (currentPassengers > 8 && currentPassengers <= totalPassengers) {
-        // Keep current selection
-      }
-      if (currentLuggage > 8 && currentLuggage <= totalLuggage) {
-        // Keep current selection
-      }
-    }
-  };
-
-  const handleMultiVehicleSelectorClose = () => {
-    setShowMultiVehicleSelector(false);
-  };
 
   useEffect(() => {
     // Load pre-booking data from localStorage
