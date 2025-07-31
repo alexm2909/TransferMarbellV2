@@ -698,27 +698,30 @@ export default function BookingForm() {
                     </div>
                   </div>
 
-                  {/* Segunda fila: Configuración detallada dividida en dos columnas */}
+                  {/* Segunda fila: Configuración detallada */}
                   {(parseInt(bookingData.children) > 0 || parseInt(bookingData.luggage) > 0) && (
-                    <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {/* Columna 1: Selector de edad de niños */}
+                    <div className="mt-6 space-y-6">
+                      {/* Selector de edad de niños */}
                       {parseInt(bookingData.children) > 0 && (
-                        <div>
-                          <ChildrenAgeSelector
-                            numberOfChildren={parseInt(bookingData.children)}
-                            onChildSeatsChange={handleChildSeatsChange}
-                          />
-                        </div>
+                        <ChildrenAgeSelector
+                          numberOfChildren={parseInt(bookingData.children)}
+                          onChildSeatsChange={handleChildSeatsChange}
+                        />
                       )}
 
-                      {/* Columna 2: Selector de tamaño de maletas */}
+                      {/* Selector de maletas - modo simple o por cantidades */}
                       {parseInt(bookingData.luggage) > 0 && (
-                        <div>
+                        parseInt(bookingData.luggage) <= 3 ? (
                           <LuggageSizeSelector
                             numberOfLuggage={parseInt(bookingData.luggage)}
                             onLuggageChange={handleLuggageChange}
                           />
-                        </div>
+                        ) : (
+                          <LuggageCountSelector
+                            totalLuggage={parseInt(bookingData.luggage)}
+                            onLuggageCountChange={handleLuggageCountChange}
+                          />
+                        )
                       )}
                     </div>
                   )}
