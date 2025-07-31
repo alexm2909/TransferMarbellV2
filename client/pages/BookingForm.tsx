@@ -1015,14 +1015,12 @@ export default function BookingForm() {
                         {bookingData.luggage} pieces
                       </span>
                     </div>
-                    {(bookingData.vehicleType || selectedVehicles.length > 0) && (
+                    {bookingData.vehicleType && (
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Vehicle</span>
                         <span className="font-medium">
-                          {multiCarMode
-                            ? `${selectedVehicles.reduce((total, sel) => total + sel.quantity, 0)} vehículos`
-                            : vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name
-                          }
+                          {vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name}
+                          {parseInt(bookingData.cars) > 1 && ` (${bookingData.cars} coches)`}
                         </span>
                       </div>
                     )}
