@@ -148,7 +148,7 @@ export default function AdminPanel() {
     {
       id: "DP001",
       bookingId: "TM123456",
-      client: "Juan P��rez",
+      client: "Juan Pérez",
       driver: "Luis González",
       issue: "El conductor llegó 30 minutos tarde",
       amount: "€45",
@@ -949,6 +949,118 @@ export default function AdminPanel() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Dispute Details Modal */}
+      <Dialog open={showDisputeModal} onOpenChange={setShowDisputeModal}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Detalles de Disputa #{selectedDispute?.id}</DialogTitle>
+          </DialogHeader>
+
+          {selectedDispute && (
+            <div className="space-y-6">
+              {/* Dispute Overview */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Información General</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">ID de Reserva</p>
+                      <p className="text-sm">{selectedDispute.bookingId}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">Fecha</p>
+                      <p className="text-sm">{selectedDispute.date}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">Cliente</p>
+                      <p className="text-sm">{selectedDispute.client}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">Conductor</p>
+                      <p className="text-sm">{selectedDispute.driver}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">Monto en Disputa</p>
+                      <p className="text-sm font-bold text-ocean">{selectedDispute.amount}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">Prioridad</p>
+                      <Badge
+                        className={
+                          selectedDispute.priority === "high"
+                            ? "bg-red-100 text-red-800"
+                            : selectedDispute.priority === "medium"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-blue-100 text-blue-800"
+                        }
+                      >
+                        {selectedDispute.priority === "high" && "Alta"}
+                        {selectedDispute.priority === "medium" && "Media"}
+                        {selectedDispute.priority === "low" && "Baja"}
+                      </Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Issue Description */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Descripción del Problema</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm bg-gray-50 p-4 rounded-lg border">
+                    {selectedDispute.issue}
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Timeline */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Cronología de la Disputa</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg">
+                      <AlertTriangleIcon className="w-5 h-5 text-red-600" />
+                      <div>
+                        <p className="text-sm font-medium">Disputa reportada</p>
+                        <p className="text-xs text-gray-600">{selectedDispute.date} - Cliente reportó el problema</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                      <ClockIcon className="w-5 h-5 text-blue-600" />
+                      <div>
+                        <p className="text-sm font-medium">En investigación</p>
+                        <p className="text-xs text-gray-600">Equipo de soporte revisando el caso</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Actions */}
+              <div className="flex space-x-3 pt-4 border-t">
+                <Button
+                  onClick={() => contactParties(selectedDispute)}
+                  className="bg-ocean hover:bg-ocean/90 flex-1"
+                >
+                  <MessageSquareIcon className="w-4 h-4 mr-2" />
+                  Contactar Partes
+                </Button>
+                <Button variant="outline" className="flex-1">
+                  <DownloadIcon className="w-4 h-4 mr-2" />
+                  Generar Reporte
+                </Button>
+              </div>
             </div>
           )}
         </DialogContent>
