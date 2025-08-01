@@ -536,6 +536,15 @@ Web: www.transfermarbell.com
           </div>
         </div>
       </div>
+
+      {/* Voucher Modal */}
+      {generatedVoucher && (
+        <VoucherSystem
+          voucher={generatedVoucher}
+          showModal={showVoucher}
+          onClose={() => setShowVoucher(false)}
+        />
+      )}
     </div>
   );
 }
