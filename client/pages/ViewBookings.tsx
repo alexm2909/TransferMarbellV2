@@ -333,7 +333,7 @@ export default function ViewBookings() {
             <TabsTrigger value="upcoming" className="relative">
               Próximas
               {upcomingBookings.length > 0 && (
-                <Badge className="ml-2 bg-blue-600 text-white text-xs">
+                <Badge className="ml-2 bg-gradient-to-r from-ocean to-coral text-white text-xs">
                   {upcomingBookings.length}
                 </Badge>
               )}
