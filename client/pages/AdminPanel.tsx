@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import StatsWidget from "@/components/StatsWidget";
+import MinistryReporting from "@/components/MinistryReporting";
 import { useAuth } from "@/hooks/useAuth";
 import UserMenu from "@/components/UserMenu";
 import {
