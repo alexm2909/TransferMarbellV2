@@ -246,15 +246,13 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold text-navy mb-6">
-              Premium Private Transfers
+              {t("home.title")}
               <span className="block text-ocean">
-                Made Simple
+                {t("home.subtitle")}
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Book professional airport transfers, city rides, and private
-              transportation across Costa del Sol. Reliable, comfortable, and
-              always on time.
+              {t("home.description")}
             </p>
           </div>
 
