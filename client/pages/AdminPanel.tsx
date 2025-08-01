@@ -674,6 +674,11 @@ export default function AdminPanel() {
             </Card>
           </TabsContent>
 
+          {/* Ministry Reporting Tab */}
+          <TabsContent value="ministry" className="space-y-6">
+            <MinistryReporting />
+          </TabsContent>
+
           {/* System Settings Tab */}
           <TabsContent value="system" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
