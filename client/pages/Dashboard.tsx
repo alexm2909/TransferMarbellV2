@@ -334,92 +334,97 @@ export default function Dashboard() {
                   <CardContent>
                     <div className="space-y-4">
                       {/* Mock driver applications - replace with real data */}
-                      {[
-                        {
-                          id: "1",
-                          name: "Miguel Torres",
-                          email: "miguel@example.com",
-                          vehicle: "Mercedes Clase E 2020",
-                          submittedAt: "Hace 2 días",
-                          documents: ["VTC", "Seguro", "Permiso", "ITV", "Antecedentes"]
-                        },
-                        {
-                          id: "2",
-                          name: "Ana García",
-                          email: "ana@example.com",
-                          vehicle: "BMW Serie 5 2019",
-                          submittedAt: "Hace 1 día",
-                          documents: ["VTC", "Seguro", "Permiso", "ITV"]
-                        }
-                      ].map((application) => (
-                        <div key={application.id} className="border rounded-lg p-4 bg-purple/5">
-                          <div className="flex justify-between items-start mb-3">
-                            <div>
-                              <h4 className="font-semibold text-gray-900">{application.name}</h4>
-                              <p className="text-sm text-gray-600">{application.email}</p>
-                              <p className="text-sm text-gray-600">{application.vehicle}</p>
-                            </div>
-                            <div className="text-right">
-                              <Badge variant="secondary" className="mb-2">
-                                {application.submittedAt}
-                              </Badge>
-                              <div className="text-xs text-gray-500">
-                                {application.documents.length} documentos
+                      {(() => {
+                        const applications = [
+                          {
+                            id: "1",
+                            name: "Miguel Torres",
+                            email: "miguel@example.com",
+                            vehicle: "Mercedes Clase E 2020",
+                            submittedAt: "Hace 2 días",
+                            documents: ["VTC", "Seguro", "Permiso", "ITV", "Antecedentes"]
+                          },
+                          {
+                            id: "2",
+                            name: "Ana García",
+                            email: "ana@example.com",
+                            vehicle: "BMW Serie 5 2019",
+                            submittedAt: "Hace 1 día",
+                            documents: ["VTC", "Seguro", "Permiso", "ITV"]
+                          }
+                        ];
+
+                        return applications.length > 0 ? (
+                          applications.map((application) => (
+                            <div key={application.id} className="border rounded-lg p-4 bg-purple/5">
+                              <div className="flex justify-between items-start mb-3">
+                                <div>
+                                  <h4 className="font-semibold text-gray-900">{application.name}</h4>
+                                  <p className="text-sm text-gray-600">{application.email}</p>
+                                  <p className="text-sm text-gray-600">{application.vehicle}</p>
+                                </div>
+                                <div className="text-right">
+                                  <Badge variant="secondary" className="mb-2">
+                                    {application.submittedAt}
+                                  </Badge>
+                                  <div className="text-xs text-gray-500">
+                                    {application.documents.length} documentos
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="flex flex-wrap gap-2 mb-4">
+                                {application.documents.map((doc) => (
+                                  <Badge key={doc} variant="outline" className="text-xs">
+                                    {doc}
+                                  </Badge>
+                                ))}
+                              </div>
+
+                              <div className="flex gap-2">
+                                <Button
+                                  size="sm"
+                                  className="bg-green-600 hover:bg-green-700 text-white flex-1"
+                                  onClick={() => {
+                                    // Mock approval
+                                    alert(`Conductor ${application.name} aprobado exitosamente`);
+                                  }}
+                                >
+                                  Aprobar
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  className="border-red-300 text-red-600 hover:bg-red-50 flex-1"
+                                  onClick={() => {
+                                    // Mock rejection
+                                    const reason = prompt("Razón del rechazo:");
+                                    if (reason) {
+                                      alert(`Conductor ${application.name} rechazado: ${reason}`);
+                                    }
+                                  }}
+                                >
+                                  Rechazar
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => {
+                                    alert(`Ver detalles completos de ${application.name}`);
+                                  }}
+                                >
+                                  Ver Detalles
+                                </Button>
                               </div>
                             </div>
+                          ))
+                        ) : (
+                          <div className="text-center py-6 text-gray-500">
+                            <CarIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                            <p className="text-sm">No hay solicitudes pendientes</p>
                           </div>
-
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {application.documents.map((doc) => (
-                              <Badge key={doc} variant="outline" className="text-xs">
-                                {doc}
-                              </Badge>
-                            ))}
-                          </div>
-
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              className="bg-green-600 hover:bg-green-700 text-white flex-1"
-                              onClick={() => {
-                                // Mock approval
-                                alert(`Conductor ${application.name} aprobado exitosamente`);
-                              }}
-                            >
-                              Aprobar
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="border-red-300 text-red-600 hover:bg-red-50 flex-1"
-                              onClick={() => {
-                                // Mock rejection
-                                const reason = prompt("Razón del rechazo:");
-                                if (reason) {
-                                  alert(`Conductor ${application.name} rechazado: ${reason}`);
-                                }
-                              }}
-                            >
-                              Rechazar
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => {
-                                alert(`Ver detalles completos de ${application.name}`);
-                              }}
-                            >
-                              Ver Detalles
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-
-                      {/* No applications state */}
-                      <div className="text-center py-6 text-gray-500">
-                        <CarIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
-                        <p className="text-sm">No hay solicitudes pendientes</p>
-                      </div>
+                        );
+                      })()}
                     </div>
                   </CardContent>
                 </Card>
