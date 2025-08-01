@@ -68,15 +68,15 @@ export default function StatsWidget({
 
   return (
     <Card className={`hover:shadow-md transition-shadow duration-200 border ${colorClasses.accent}`}>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className={`p-3 rounded-lg ${colorClasses.bg}`}>
-            <Icon className={`w-6 h-6 ${colorClasses.icon}`} />
+      <CardContent className="p-3 md:p-6">
+        <div className="flex items-center justify-between mb-3 md:mb-4">
+          <div className={`p-2 md:p-3 rounded-lg ${colorClasses.bg}`}>
+            <Icon className={`w-4 h-4 md:w-6 md:h-6 ${colorClasses.icon}`} />
           </div>
           {change && (
             <Badge
               variant="outline"
-              className={`text-xs ${
+              className={`text-xs hidden sm:flex ${
                 change.type === "increase"
                   ? "text-green-600 border-green-200 bg-green-50"
                   : "text-red-600 border-red-200 bg-red-50"
@@ -93,15 +93,25 @@ export default function StatsWidget({
         </div>
 
         <div className="space-y-1">
-          <p className="text-2xl font-bold text-gray-900">{value}</p>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-lg md:text-2xl font-bold text-gray-900">{value}</p>
+          <p className="text-xs md:text-sm font-medium text-gray-600 leading-tight">{title}</p>
           {subtitle && (
-            <p className="text-xs text-gray-500">{subtitle}</p>
+            <p className="text-xs text-gray-500 hidden md:block">{subtitle}</p>
           )}
           {change && (
-            <p className="text-xs text-gray-500 mt-2">
-              vs {change.period}
-            </p>
+            <div className="flex items-center sm:hidden">
+              <Badge
+                variant="outline"
+                className={`text-xs ${
+                  change.type === "increase"
+                    ? "text-green-600 border-green-200 bg-green-50"
+                    : "text-red-600 border-red-200 bg-red-50"
+                }`}
+              >
+                {change.type === "increase" ? "+" : "-"}
+                {change.value}
+              </Badge>
+            </div>
           )}
         </div>
       </CardContent>
