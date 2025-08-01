@@ -486,8 +486,15 @@ Web: www.transfermarbell.com
                     Chat con Conductor
                   </Button>
                 </Link>
+                <Button
+                  onClick={() => setShowVoucher(true)}
+                  className="w-full bg-gradient-to-r from-purple to-ocean hover:from-purple/90 hover:to-ocean/90 text-white"
+                >
+                  <TicketIcon className="w-4 h-4 mr-2" />
+                  Ver Voucher (Obligatorio)
+                </Button>
                 <Link to="/" className="block">
-                  <Button className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                  <Button variant="outline" className="w-full justify-start">
                     <HomeIcon className="w-4 h-4 mr-2" />
                     Volver al Inicio
                   </Button>
