@@ -80,6 +80,23 @@ export default function PaymentSuccess() {
       const parsed = JSON.parse(completedBooking);
       if (parsed.bookingId === bookingId) {
         setBooking(parsed);
+
+        // Generate voucher for the booking
+        const voucher = generateVoucher({
+          date: parsed.date,
+          time: parsed.time,
+          origin: parsed.origin,
+          destination: parsed.destination,
+          passengers: parsed.passengers,
+          children: parsed.children,
+          luggage: parsed.luggage,
+          vehicleType: parsed.vehicleType,
+          estimatedPrice: `€${parsed.paymentAmount}`,
+          specialRequests: parsed.specialRequests || "",
+        });
+
+        addVoucher(voucher);
+        setGeneratedVoucher(voucher);
       } else {
         navigate("/");
       }
