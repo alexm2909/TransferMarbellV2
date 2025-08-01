@@ -408,28 +408,27 @@ export default function Index() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                  Become a Driver
+                  {t("driver.title")}
                 </h2>
                 <p className="text-lg mb-6 text-white/90">
-                  Join our network of professional drivers and start earning money with your vehicle.
-                  Flexible schedule, competitive rates, and support when you need it.
+                  {t("driver.description")}
                 </p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                    <span>Earn up to €2,000+ per month</span>
+                    <span>{t("driver.earnUpTo")}</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                    <span>Flexible working hours</span>
+                    <span>{t("driver.flexibleHours")}</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                    <span>Insurance and support included</span>
+                    <span>{t("driver.insuranceSupport")}</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                    <span>No upfront costs</span>
+                    <span>{t("driver.noUpfrontCosts")}</span>
                   </li>
                 </ul>
                 {isAuthenticated ? (
@@ -438,14 +437,14 @@ export default function Index() {
                       size="lg"
                       className="bg-white text-ocean hover:bg-gray-100 font-semibold px-8"
                     >
-                      Apply to Drive
+                      {t("driver.applyToDrive")}
                       <ArrowRightIcon className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
                 ) : (
                   <div className="space-y-4">
                     <p className="text-white/80 text-sm">
-                      You need an account to apply as a driver
+                      {t("driver.needAccount")}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Link to="/signup">
@@ -453,7 +452,7 @@ export default function Index() {
                           size="lg"
                           className="bg-white text-ocean hover:bg-gray-100 font-semibold px-6"
                         >
-                          Sign Up
+                          {t("driver.signUp")}
                         </Button>
                       </Link>
                       <Link to="/signin">
@@ -462,7 +461,7 @@ export default function Index() {
                           size="lg"
                           className="border-white text-white hover:bg-white hover:text-ocean font-semibold px-6"
                         >
-                          Sign In
+                          {t("driver.signIn")}
                         </Button>
                       </Link>
                     </div>
