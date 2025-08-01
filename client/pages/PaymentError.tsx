@@ -123,9 +123,9 @@ export default function PaymentError() {
             </Card>
 
             {/* Test Mode Info */}
-            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm border-l-4 border-l-blue-500">
+            <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm border-l-4 border-l-ocean">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-700">
+                <CardTitle className="flex items-center gap-2 text-ocean">
                   <CreditCardIcon className="w-5 h-5" />
                   Modo de Prueba - Stripe
                 </CardTitle>
