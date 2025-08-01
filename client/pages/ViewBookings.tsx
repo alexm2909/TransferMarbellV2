@@ -748,7 +748,7 @@ function BookingDetailsModal({
                       ? "bg-green-100 text-green-700"
                       : booking.paymentStatus === "pending"
                         ? "bg-yellow-100 text-yellow-700"
-                        : "bg-blue-100 text-blue-700"
+                        : "bg-ocean-light/20 text-ocean"
                   }
                 >
                   {booking.paymentStatus === "paid"
