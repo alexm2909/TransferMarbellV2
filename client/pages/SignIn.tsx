@@ -108,6 +108,8 @@ export default function SignIn() {
 
         if (redirectPath === "book") {
           navigate("/book");
+        } else if (redirectPath === "driver-registration") {
+          navigate("/driver-registration");
         } else {
           navigate("/dashboard");
         }
