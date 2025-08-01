@@ -107,6 +107,68 @@ export default function Dashboard() {
             {/* CLIENT DASHBOARD */}
             {user?.role === "client" && (
               <>
+                {/* Driver Application Status */}
+                {user?.driverStatus && (
+                  <Card className="mb-6">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <CarIcon className="w-5 h-5 text-purple" />
+                        Estado de Solicitud de Conductor
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <div>
+                          <p className="font-medium text-blue-900">
+                            {user.driverStatus === "pending" && "Solicitud Pendiente de Aprobación"}
+                            {user.driverStatus === "approved" && "¡Solicitud Aprobada!"}
+                            {user.driverStatus === "rejected" && "Solicitud Rechazada"}
+                          </p>
+                          <p className="text-sm text-blue-700 mt-1">
+                            {user.driverStatus === "pending" && "Tu solicitud está siendo revisada por nuestro equipo."}
+                            {user.driverStatus === "approved" && "Ya puedes comenzar a recibir solicitudes de viaje."}
+                            {user.driverStatus === "rejected" && "Contacta con soporte para más información."}
+                          </p>
+                        </div>
+                        <Badge
+                          className={
+                            user.driverStatus === "pending" ? "bg-amber-100 text-amber-800" :
+                            user.driverStatus === "approved" ? "bg-green-100 text-green-800" :
+                            "bg-red-100 text-red-800"
+                          }
+                        >
+                          {user.driverStatus === "pending" && "Pendiente"}
+                          {user.driverStatus === "approved" && "Aprobado"}
+                          {user.driverStatus === "rejected" && "Rechazado"}
+                        </Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Become a Driver CTA */}
+                {!user?.driverStatus && (
+                  <Card className="mb-6 bg-gradient-to-r from-purple/10 to-ocean/10 border-purple/20">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-semibold text-purple mb-2">
+                            ¿Quieres ser conductor?
+                          </h3>
+                          <p className="text-sm text-gray-600 mb-4">
+                            Únete a nuestro equipo de conductores profesionales y empieza a ganar dinero con tu vehículo.
+                          </p>
+                        </div>
+                        <Link to="/driver-registration">
+                          <Button className="bg-purple hover:bg-purple/90 text-white">
+                            Aplicar
+                          </Button>
+                        </Link>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
