@@ -15,6 +15,7 @@ import AdminPanel from "./pages/AdminPanel";
 import FleetManagerPanel from "./pages/FleetManagerPanel";
 import BusinessPanel from "./pages/BusinessPanel";
 import DriverPanel from "./pages/DriverPanel";
+import OptimizedDriverPanel from "./pages/OptimizedDriverPanel";
 import PaymentSummary from "./pages/PaymentSummary";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentError from "./pages/PaymentError";
