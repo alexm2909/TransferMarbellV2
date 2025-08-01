@@ -277,11 +277,11 @@ export default function DriverRegistration() {
                 </div>
               </div>
             </div>
-            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="mt-4 p-4 bg-ocean-light/20 border border-ocean/30 rounded-lg">
               <div className="flex items-start">
-                <InfoIcon className="w-5 h-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
-                <div className="text-sm text-blue-800">
-                  <p className="font-medium mb-1">Información importante:</p>
+                <InfoIcon className="w-5 h-5 text-ocean mt-0.5 mr-3 flex-shrink-0" />
+                <div className="text-sm text-gray-700">
+                  <p className="font-medium mb-1 text-ocean">Información importante:</p>
                   <p>Tu información personal ya está registrada. Solo necesitas completar los datos del vehículo y subir la documentación requerida.</p>
                 </div>
               </div>
