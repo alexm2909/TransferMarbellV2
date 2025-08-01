@@ -52,18 +52,6 @@ export default function SignUp() {
       icon: UserIcon,
     },
     {
-      id: "driver",
-      name: "Driver",
-      description: "Provide transfer services and earn money",
-      icon: CarIcon,
-    },
-    {
-      id: "fleet-manager",
-      name: "Fleet Manager",
-      description: "Manage drivers and fleet operations",
-      icon: UsersIcon,
-    },
-    {
       id: "business",
       name: "Business",
       description: "Corporate account for company transfers",
