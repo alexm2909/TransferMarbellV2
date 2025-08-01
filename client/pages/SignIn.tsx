@@ -226,7 +226,7 @@ export default function SignIn() {
                   </label>
                 </div>
                 <Link
-                  to="/forgot-password"
+                  to="/password-recovery"
                   className="text-sm text-ocean hover:text-coral transition-colors"
                 >
                   Forgot password?
