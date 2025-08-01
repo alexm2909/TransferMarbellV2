@@ -194,7 +194,7 @@
     box-sizing: border-box;
   }
 
-  /* Mobile-friendly button groups */
+  /* Enhanced mobile optimizations */
   @media (max-width: 768px) {
     /* Prevent button overflow in cards */
     .space-x-3 > *, .space-x-4 > *, .flex.space-x-3 > *, .flex.space-x-4 > * {
@@ -203,9 +203,10 @@
     }
 
     /* Ensure text doesn't overflow */
-    .text-xl, .text-2xl, .text-3xl {
+    .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
       word-break: break-word;
       overflow-wrap: break-word;
+      line-height: 1.2;
     }
 
     /* Mobile navigation optimizations */
@@ -236,6 +237,16 @@
       grid-template-columns: 1fr;
     }
 
+    .grid.grid-cols-2.md\\:grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .grid.grid-cols-3.md\\:grid-cols-6 {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.25rem;
+    }
+
     /* Responsive padding and margins */
     .px-8 {
       padding-left: 1rem;
@@ -247,6 +258,16 @@
       padding-bottom: 1.5rem;
     }
 
+    .py-16 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .py-24 {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
     /* Button groups in mobile */
     .flex.flex-col.sm\\:flex-row {
       flex-direction: column;
@@ -256,6 +277,15 @@
     .flex.flex-col.sm\\:flex-row > * {
       width: 100%;
       text-align: center;
+    }
+
+    /* Mobile card content padding */
+    .p-6 {
+      padding: 1rem;
+    }
+
+    .p-8 {
+      padding: 1.5rem;
     }
 
     /* Mobile dropdown menu optimizations */
@@ -287,6 +317,140 @@
 
     [data-orientation="horizontal"]::-webkit-scrollbar {
       display: none;
+    }
+
+    /* Better mobile form layout */
+    .space-y-4 > * {
+      margin-top: 1rem;
+    }
+
+    .space-y-6 > * {
+      margin-top: 1.5rem;
+    }
+
+    /* Mobile friendly modal dialogs */
+    [data-radix-dialog-content] {
+      max-width: calc(100vw - 2rem) !important;
+      max-height: calc(100vh - 2rem) !important;
+      margin: 1rem !important;
+    }
+
+    /* Mobile table improvements */
+    .overflow-x-auto {
+      scrollbar-width: thin;
+    }
+
+    /* Better mobile spacing for stats cards */
+    .grid.grid-cols-2.md\\:grid-cols-4 .text-center {
+      padding: 0.75rem;
+    }
+
+    .grid.grid-cols-2.md\\:grid-cols-4 .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .grid.grid-cols-2.md\\:grid-cols-4 .text-xs {
+      font-size: 0.625rem;
+    }
+  }
+
+  /* Medium screen optimizations */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid.grid-cols-1.md\\:grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .px-8 {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Enhanced focus styles for accessibility */
+  .focus-visible\\:ring-2:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  /* Better button hover states */
+  .hover\\:scale-105:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  /* Improved loading states */
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .5;
+    }
+  }
+
+  /* Better disabled states */
+  .disabled\\:opacity-50:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Enhanced form input styles */
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  /* Smooth transitions for interactive elements */
+  button, .cursor-pointer {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Better error and success states */
+  .border-red-500 {
+    border-color: rgb(239 68 68);
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .border-green-500 {
+    border-color: rgb(34 197 94);
+  }
+
+  /* Enhanced accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .bg-gradient-to-r, .bg-gradient-to-br {
+      background: hsl(var(--ocean)) !important;
+    }
+
+    .text-gray-600 {
+      color: hsl(var(--foreground)) !important;
+    }
+
+    .border-gray-200 {
+      border-color: hsl(var(--border)) !important;
     }
   }
 }
