@@ -36,7 +36,7 @@ export default function SignUp() {
     phone: "",
     password: "",
     confirmPassword: "",
-    role: "client",
+    role: "client", // Fixed as client
     agreeToTerms: false,
     agreeToMarketing: false,
   });
