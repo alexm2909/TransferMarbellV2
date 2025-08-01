@@ -400,42 +400,50 @@ export default function AdminPanel() {
                           </div>
                         </div>
 
-                        <div className="flex space-x-3 flex-wrap gap-2">
-                          <Button
-                            onClick={() => viewDriverDetails(driver)}
-                            variant="outline"
-                            size="sm"
-                          >
-                            <EyeIcon className="w-4 h-4 mr-2" />
-                            Ver Detalles
-                          </Button>
-                          <Button
-                            onClick={() => viewDocuments(driver)}
-                            variant="outline"
-                            size="sm"
-                          >
-                            <FileTextIcon className="w-4 h-4 mr-2" />
-                            Ver Documentos
-                          </Button>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                          <div className="flex gap-2 flex-1">
+                            <Button
+                              onClick={() => viewDriverDetails(driver)}
+                              variant="outline"
+                              size="sm"
+                              className="flex-1 sm:flex-none"
+                            >
+                              <EyeIcon className="w-4 h-4 mr-1 sm:mr-2" />
+                              <span className="hidden sm:inline">Ver Detalles</span>
+                              <span className="sm:hidden">Detalles</span>
+                            </Button>
+                            <Button
+                              onClick={() => viewDocuments(driver)}
+                              variant="outline"
+                              size="sm"
+                              className="flex-1 sm:flex-none"
+                            >
+                              <FileTextIcon className="w-4 h-4 mr-1 sm:mr-2" />
+                              <span className="hidden sm:inline">Ver Documentos</span>
+                              <span className="sm:hidden">Docs</span>
+                            </Button>
+                          </div>
                           {driver.status === "pending" && (
-                            <>
+                            <div className="flex gap-2">
                               <Button
                                 onClick={() => approveDriver(driver.id)}
-                                className="bg-green-600 hover:bg-green-700 text-white"
+                                className="bg-green-600 hover:bg-green-700 text-white flex-1 sm:flex-none"
                                 size="sm"
                               >
-                                <CheckCircleIcon className="w-4 h-4 mr-2" />
-                                Aprobar
+                                <CheckCircleIcon className="w-4 h-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Aprobar</span>
+                                <span className="sm:hidden">✓</span>
                               </Button>
                               <Dialog>
                                 <DialogTrigger asChild>
                                   <Button
                                     variant="outline"
-                                    className="border-red-500 text-red-600 hover:bg-red-50"
+                                    className="border-red-500 text-red-600 hover:bg-red-50 flex-1 sm:flex-none"
                                     size="sm"
                                   >
-                                    <XCircleIcon className="w-4 h-4 mr-2" />
-                                    Rechazar
+                                    <XCircleIcon className="w-4 h-4 mr-1 sm:mr-2" />
+                                    <span className="hidden sm:inline">Rechazar</span>
+                                    <span className="sm:hidden">✗</span>
                                   </Button>
                                 </DialogTrigger>
                                 <DialogContent>
@@ -465,7 +473,7 @@ export default function AdminPanel() {
                                   </div>
                                 </DialogContent>
                               </Dialog>
-                            </>
+                            </div>
                           )}
                         </div>
                       </CardContent>
