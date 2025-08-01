@@ -179,13 +179,20 @@
     overflow-x: hidden;
   }
 
-  /* Smooth card transitions */
+  /* Smooth card transitions without scaling */
   .card, [class*="Card"] {
     transition: box-shadow 0.2s ease-in-out;
+    transform: none !important;
   }
 
   .card:hover, [class*="Card"]:hover {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: none !important;
+  }
+
+  /* Prevent any scale transformations on cards */
+  .hover\:scale-105:hover {
+    transform: none !important;
   }
 
   /* Prevent any element from causing horizontal scroll */
