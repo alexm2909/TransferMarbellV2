@@ -67,16 +67,16 @@ export default function Index() {
     preBookingData.time;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ocean-light via-sky to-coral-light">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white/95 backdrop-blur-sm border-b sticky top-0 z-50">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-ocean rounded-lg flex items-center justify-center">
                 <CarIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-navy">
                 Transfermarbell
               </span>
             </Link>
@@ -132,7 +132,7 @@ export default function Index() {
                     </Button>
                   </Link>
                   <Link to="/signup">
-                    <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
+                    <Button className="bg-ocean text-white hover:bg-ocean/90">
                       Register
                     </Button>
                   </Link>
@@ -158,7 +158,7 @@ export default function Index() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className="md:hidden border-t bg-white/95 backdrop-blur-sm">
+            <div className="md:hidden border-t bg-white">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 <Link
                   to="/services"
@@ -218,7 +218,7 @@ export default function Index() {
                     </Link>
                     <Link to="/signup" className="w-full">
                       <Button
-                        className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90"
+                        className="w-full bg-ocean text-white hover:bg-ocean/90"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Register
@@ -233,12 +233,12 @@ export default function Index() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
+      <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold text-navy mb-6">
               Premium Private Transfers
-              <span className="block bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
+              <span className="block text-ocean">
                 Made Simple
               </span>
             </h1>
@@ -250,7 +250,7 @@ export default function Index() {
           </div>
 
           {/* Simplified Pre-Booking Form */}
-          <Card className="max-w-4xl mx-auto shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
+          <Card className="max-w-4xl mx-auto shadow-lg border-gray-200 bg-white">
             <CardContent className="p-8">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-navy mb-2">
@@ -269,7 +269,7 @@ export default function Index() {
                       From
                     </label>
                     <AddressAutocomplete
-                      placeholder="Aeropuerto, hotel, dirección..."
+                      placeholder="Airport, hotel, address..."
                       value={preBookingData.origin}
                       onChange={(value) =>
                         setPreBookingData({ ...preBookingData, origin: value })
@@ -285,7 +285,7 @@ export default function Index() {
                       To
                     </label>
                     <AddressAutocomplete
-                      placeholder="Aeropuerto, hotel, dirección..."
+                      placeholder="Airport, hotel, address..."
                       value={preBookingData.destination}
                       onChange={(value) =>
                         setPreBookingData({
@@ -301,7 +301,7 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 text-ocean" />
-                      Fecha
+                      Date
                     </label>
                     <div className="relative custom-date-input">
                       <Input
@@ -323,7 +323,7 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 text-ocean" />
-                      Hora
+                      Time
                     </label>
                     <TimeSelector
                       value={preBookingData.time}
@@ -334,7 +334,7 @@ export default function Index() {
                         })
                       }
                       className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                      placeholder="Seleccionar hora"
+                      placeholder="Select time"
                       required
                     />
                   </div>
@@ -344,7 +344,7 @@ export default function Index() {
                   type="submit"
                   size="lg"
                   disabled={!isPreFormValid}
-                  className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-ocean text-white hover:bg-ocean/90 font-semibold py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Continue Booking
                   <ArrowRightIcon className="w-5 h-5 ml-2" />
@@ -379,10 +379,10 @@ export default function Index() {
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow"
+                className="text-center border-gray-200 shadow-sm hover:shadow-md transition-shadow"
               >
                 <CardContent className="p-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-ocean-light rounded-full flex items-center justify-center mx-auto mb-4">
                     <feature.icon className="w-8 h-8 text-ocean" />
                   </div>
                   <h3 className="text-xl font-semibold text-navy mb-2">
@@ -397,9 +397,9 @@ export default function Index() {
       </div>
 
       {/* Become a Driver Section */}
-      <div className="bg-white py-16">
+      <div className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-ocean to-coral rounded-2xl p-8 lg:p-12 text-white">
+          <div className="bg-ocean rounded-2xl p-8 lg:p-12 text-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
@@ -475,7 +475,7 @@ export default function Index() {
       </div>
 
       {/* Additional Info Section */}
-      <div className="bg-gradient-to-r from-ocean-light to-coral-light py-16">
+      <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-navy mb-4">
             Ready to Book Your Transfer?
@@ -487,7 +487,7 @@ export default function Index() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold px-8"
+              className="bg-ocean text-white hover:bg-ocean/90 font-semibold px-8"
               onClick={() =>
                 document
                   .querySelector("form")
@@ -515,7 +515,7 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-ocean rounded-lg flex items-center justify-center">
                   <CarIcon className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-xl font-bold">Transfermarbell</span>
