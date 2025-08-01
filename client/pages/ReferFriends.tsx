@@ -295,7 +295,7 @@ ${user?.name || 'Tu amigo'}`);
                     </Button>
                     <Button
                       onClick={shareViaFacebook}
-                      className="bg-blue-800 hover:bg-blue-900 text-white"
+                      className="bg-gradient-to-r from-purple to-ocean hover:from-purple/90 hover:to-ocean/90 text-white"
                     >
                       <FacebookIcon className="w-4 h-4 mr-2" />
                       Facebook
