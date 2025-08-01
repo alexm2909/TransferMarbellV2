@@ -314,18 +314,18 @@ export default function AdminPanel() {
                     <UsersIcon className="w-5 h-5 text-ocean" />
                     Solicitudes de Conductores
                   </CardTitle>
-                  <div className="flex items-center space-x-2">
-                    <div className="relative">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:space-x-2">
+                    <div className="relative flex-1 min-w-0">
                       <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <Input
                         placeholder="Buscar conductor..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 w-64"
+                        className="pl-10 w-full"
                       />
                     </div>
                     <Select value={filterStatus} onValueChange={setFilterStatus}>
-                      <SelectTrigger className="w-40">
+                      <SelectTrigger className="w-full sm:w-40">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
