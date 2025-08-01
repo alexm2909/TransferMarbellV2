@@ -179,27 +179,13 @@
     overflow-x: hidden;
   }
 
-  /* Remove card animations and enforce solid colors */
+  /* Smooth card transitions */
   .card, [class*="Card"] {
-    transition: none !important;
-    transform: none !important;
+    transition: box-shadow 0.2s ease-in-out;
   }
 
   .card:hover, [class*="Card"]:hover {
-    transform: none !important;
-    scale: none !important;
-  }
-
-  /* Remove gradients and use solid colors */
-  .bg-gradient-to-r, .bg-gradient-to-br, .bg-gradient-to-l, .bg-gradient-to-bl {
-    background: hsl(var(--ocean)) !important;
-  }
-
-  .text-transparent {
-    color: hsl(var(--navy)) !important;
-    background: none !important;
-    -webkit-background-clip: unset !important;
-    background-clip: unset !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
   /* Prevent any element from causing horizontal scroll */
