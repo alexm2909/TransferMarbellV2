@@ -90,26 +90,28 @@ export default function Index() {
                 to="/services"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
-                Services
+                {t("nav.services")}
               </Link>
               <Link
                 to="/fleet"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
-                Fleet
+                {t("nav.fleet")}
               </Link>
               <Link
                 to="/business"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
-                Business
+                {t("nav.business")}
               </Link>
               <Link
                 to="/support"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
-                Support
+                {t("nav.support")}
               </Link>
+
+              <LanguageSelector variant="dropdown" size="sm" />
 
               {/* Show different buttons based on authentication status */}
               {isAuthenticated ? (
@@ -119,7 +121,7 @@ export default function Index() {
                       variant="outline"
                       className="border-ocean text-ocean hover:bg-ocean hover:text-white"
                     >
-                      Dashboard
+                      {t("nav.dashboard")}
                     </Button>
                   </Link>
                   <UserMenu />
@@ -131,12 +133,12 @@ export default function Index() {
                       variant="outline"
                       className="border-ocean text-ocean hover:bg-ocean hover:text-white"
                     >
-                      Sign In
+                      {t("nav.signin")}
                     </Button>
                   </Link>
                   <Link to="/signup">
                     <Button className="bg-ocean text-white hover:bg-ocean/90">
-                      Register
+                      {t("nav.register")}
                     </Button>
                   </Link>
                 </>
