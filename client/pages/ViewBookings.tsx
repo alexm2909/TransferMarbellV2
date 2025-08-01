@@ -220,7 +220,7 @@ export default function ViewBookings() {
       },
       refunded: {
         label: "Reembolsado",
-        className: "bg-blue-100 text-blue-700",
+        className: "bg-ocean-light/20 text-ocean",
       },
     };
     return statusMap[status as keyof typeof statusMap] || statusMap.pending;
