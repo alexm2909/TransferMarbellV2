@@ -482,11 +482,10 @@ export default function Index() {
       <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-navy mb-4">
-            Ready to Book Your Transfer?
+            {t("home.readyToBook")}
           </h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust Transfermarbell for
-            their private transportation needs across Costa del Sol.
+            {t("home.readyToBookDesc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -498,7 +497,7 @@ export default function Index() {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              Book Now
+              {t("home.bookNow")}
             </Button>
             <Link to="/fleet">
               <Button
@@ -506,7 +505,7 @@ export default function Index() {
                 size="lg"
                 className="border-ocean text-ocean hover:bg-ocean hover:text-white font-semibold px-8"
               >
-                View Our Fleet
+                {t("home.viewFleet")}
               </Button>
             </Link>
           </div>
