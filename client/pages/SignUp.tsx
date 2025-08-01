@@ -94,6 +94,8 @@ export default function SignUp() {
       // For all user types, proceed normally
       if (redirectPath === "book") {
         navigate("/book");
+      } else if (redirectPath === "driver-registration") {
+        navigate("/driver-registration");
       } else {
         navigate("/dashboard");
       }
