@@ -155,8 +155,8 @@ export default function SignUp() {
                         key={role.id}
                         className={`border-2 rounded-lg p-3 cursor-pointer transition-all hover:border-ocean ${
                           formData.role === role.id
-                            ? "border-ocean bg-ocean-light/20"
-                            : "border-gray-200"
+                            ? "border-ocean bg-gradient-to-br from-ocean/10 to-coral/10"
+                            : "border-gray-200 hover:bg-gray-50"
                         }`}
                         onClick={() =>
                           setFormData({ ...formData, role: role.id })
