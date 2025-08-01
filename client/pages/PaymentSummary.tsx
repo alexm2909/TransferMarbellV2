@@ -340,7 +340,7 @@ export default function PaymentSummary() {
                 )}
 
                 {bookingData.specialRequests && (
-                  <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="mt-4 p-3 bg-ocean-light/20 border border-ocean/30 rounded-lg">
                     <div className="font-medium text-sm mb-1">Solicitudes Especiales:</div>
                     <div className="text-xs text-gray-600">{bookingData.specialRequests}</div>
                   </div>
