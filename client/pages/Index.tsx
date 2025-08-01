@@ -25,6 +25,7 @@ import {
 export default function Index() {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [preBookingData, setPreBookingData] = useState({
     origin: "",
