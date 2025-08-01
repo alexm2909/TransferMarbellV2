@@ -261,10 +261,10 @@ export default function Index() {
             <CardContent className="p-8">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-navy mb-2">
-                  Book Your Transfer
+                  {t("home.bookingTitle")}
                 </h2>
                 <p className="text-gray-600">
-                  Enter your journey details to get started
+                  {t("home.bookingDescription")}
                 </p>
               </div>
 
@@ -273,7 +273,7 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <MapPinIcon className="w-4 h-4 text-ocean" />
-                      From
+                      {t("home.from")}
                     </label>
                     <AddressAutocomplete
                       placeholder="Airport, hotel, address..."
@@ -289,7 +289,7 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <MapPinIcon className="w-4 h-4 text-coral" />
-                      To
+                      {t("home.to")}
                     </label>
                     <AddressAutocomplete
                       placeholder="Airport, hotel, address..."
@@ -308,7 +308,7 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 text-ocean" />
-                      Date
+                      {t("home.date")}
                     </label>
                     <div className="relative custom-date-input">
                       <Input
@@ -330,7 +330,7 @@ export default function Index() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 text-ocean" />
-                      Time
+                      {t("home.time")}
                     </label>
                     <TimeSelector
                       value={preBookingData.time}
@@ -341,7 +341,7 @@ export default function Index() {
                         })
                       }
                       className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                      placeholder="Select time"
+                      placeholder={t("home.time")}
                       required
                     />
                   </div>
@@ -353,15 +353,14 @@ export default function Index() {
                   disabled={!isPreFormValid}
                   className="w-full bg-ocean text-white hover:bg-ocean/90 font-semibold py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Continue Booking
+                  {t("home.continue")}
                   <ArrowRightIcon className="w-5 h-5 ml-2" />
                 </Button>
               </form>
 
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-500">
-                  Next: Select vehicle type, passengers, and complete your
-                  booking
+                  {t("home.nextStep")}
                 </p>
               </div>
             </CardContent>
