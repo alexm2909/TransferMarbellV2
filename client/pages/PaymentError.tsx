@@ -131,11 +131,11 @@ export default function PaymentError() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="font-semibold text-blue-800 mb-2">
+                <div className="p-4 bg-ocean-light/20 border border-ocean/30 rounded-lg">
+                  <div className="font-semibold text-ocean mb-2">
                     Estás en modo de prueba
                   </div>
-                  <div className="text-blue-700 text-sm mb-3">
+                  <div className="text-gray-700 text-sm mb-3">
                     Para simular diferentes escenarios de pago, puedes usar estas tarjetas de prueba:
                   </div>
                   <div className="space-y-2 text-xs font-mono">
