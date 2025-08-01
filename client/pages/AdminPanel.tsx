@@ -290,8 +290,9 @@ export default function AdminPanel() {
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="drivers" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+        <Tabs defaultValue="trips" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="trips">Viajes</TabsTrigger>
             <TabsTrigger value="drivers">Conductores</TabsTrigger>
             <TabsTrigger value="pricing">Precios</TabsTrigger>
             <TabsTrigger value="disputes">Disputas</TabsTrigger>
