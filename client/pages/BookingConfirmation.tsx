@@ -100,7 +100,7 @@ export default function BookingConfirmation() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="max-w-md mx-auto">
           <CardContent className="p-8 text-center">
-            <div className="text-red-500 mb-4">⚠️</div>
+            <div className="text-red-500 mb-4">⚠���</div>
             <h2 className="text-xl font-bold text-gray-900 mb-2">
               Reserva no encontrada
             </h2>
@@ -140,7 +140,7 @@ export default function BookingConfirmation() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-ocean-light via-sky to-coral-light">
       {/* Navigation */}
       <nav className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -167,7 +167,7 @@ export default function BookingConfirmation() {
             <CheckCircleIcon className="w-12 h-12 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-navy mb-4">
-            ¡Reserva Confirmada!
+            ��Reserva Confirmada!
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Tu traslado ha sido reservado exitosamente. Hemos enviado los detalles 
@@ -391,7 +391,7 @@ export default function BookingConfirmation() {
             {/* Next Steps */}
             <Card>
               <CardHeader>
-                <CardTitle>Próximos Pasos</CardTitle>
+                <CardTitle>Pr��ximos Pasos</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="space-y-2 text-sm">
