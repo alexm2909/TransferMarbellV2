@@ -396,6 +396,84 @@ export default function Index() {
         </div>
       </div>
 
+      {/* Become a Driver Section */}
+      <div className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-ocean to-coral rounded-2xl p-8 lg:p-12 text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+                  Become a Driver
+                </h2>
+                <p className="text-lg mb-6 text-white/90">
+                  Join our network of professional drivers and start earning money with your vehicle.
+                  Flexible schedule, competitive rates, and support when you need it.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                    <span>Earn up to €2,000+ per month</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                    <span>Flexible working hours</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                    <span>Insurance and support included</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                    <span>No upfront costs</span>
+                  </li>
+                </ul>
+                {isAuthenticated ? (
+                  <Link to="/driver-registration">
+                    <Button
+                      size="lg"
+                      className="bg-white text-ocean hover:bg-gray-100 font-semibold px-8"
+                    >
+                      Apply to Drive
+                      <ArrowRightIcon className="w-5 h-5 ml-2" />
+                    </Button>
+                  </Link>
+                ) : (
+                  <div className="space-y-4">
+                    <p className="text-white/80 text-sm">
+                      You need an account to apply as a driver
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link to="/signup">
+                        <Button
+                          size="lg"
+                          className="bg-white text-ocean hover:bg-gray-100 font-semibold px-6"
+                        >
+                          Sign Up
+                        </Button>
+                      </Link>
+                      <Link to="/signin">
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="border-white text-white hover:bg-white hover:text-ocean font-semibold px-6"
+                        >
+                          Sign In
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="text-center lg:text-right">
+                <div className="w-64 h-64 mx-auto lg:mx-0 bg-white/10 rounded-full flex items-center justify-center">
+                  <CarIcon className="w-32 h-32 text-white/80" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Additional Info Section */}
       <div className="bg-gradient-to-r from-ocean-light to-coral-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
