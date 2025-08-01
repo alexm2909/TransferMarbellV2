@@ -343,27 +343,27 @@ export default function AdminPanel() {
                   {pendingDrivers.map((driver) => (
                     <Card key={driver.id} className="border border-gray-200">
                       <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-start space-x-4">
-                            <div className="w-12 h-12 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-3">
+                          <div className="flex items-start space-x-4 flex-1 min-w-0">
+                            <div className="w-12 h-12 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center flex-shrink-0">
                               <span className="text-sm font-bold text-ocean">
                                 {driver.name.split(' ').map(n => n[0]).join('')}
                               </span>
                             </div>
-                            <div>
-                              <h3 className="text-lg font-semibold text-navy">
+                            <div className="min-w-0 flex-1">
+                              <h3 className="text-lg font-semibold text-navy truncate">
                                 {driver.name}
                               </h3>
                               <div className="text-sm text-gray-600 space-y-1">
-                                <p>📧 {driver.email}</p>
+                                <p className="truncate">📧 {driver.email}</p>
                                 <p>📱 {driver.phone}</p>
                                 <p>📍 {driver.city}</p>
-                                <p>🚗 {driver.vehicle}</p>
+                                <p className="truncate">🚗 {driver.vehicle}</p>
                                 <p>🆔 Licencia: {driver.license}</p>
                               </div>
                             </div>
                           </div>
-                          <div className="text-right">
+                          <div className="text-right sm:text-right flex-shrink-0">
                             <Badge
                               className={
                                 driver.status === "pending"
