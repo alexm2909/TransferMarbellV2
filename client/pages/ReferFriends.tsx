@@ -288,7 +288,7 @@ ${user?.name || 'Tu amigo'}`);
                     </Button>
                     <Button
                       onClick={shareViaEmail}
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
+                      className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white"
                     >
                       <MailIcon className="w-4 h-4 mr-2" />
                       Email
