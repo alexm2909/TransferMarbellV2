@@ -145,7 +145,7 @@ export default function SignUp() {
                 <label className="text-sm font-medium text-gray-700">
                   Account Type
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {userRoles.map((role) => {
                     const IconComponent = role.icon;
                     return (
