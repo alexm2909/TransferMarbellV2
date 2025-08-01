@@ -317,10 +317,10 @@ export default function BookingConfirmation() {
                   </Button>
                 </div>
 
-                <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <div className="mt-4 p-3 bg-ocean-light/20 rounded-lg border border-ocean/30">
                   <div className="flex items-start space-x-2">
-                    <div className="text-blue-500">💡</div>
-                    <div className="text-sm text-blue-700">
+                    <div className="text-ocean">💡</div>
+                    <div className="text-sm text-gray-700">
                       <strong>Consejo:</strong> Tu conductor te contactará 30 minutos antes 
                       de la hora de recogida para confirmar la ubicación exacta.
                     </div>
