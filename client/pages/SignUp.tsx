@@ -44,20 +44,7 @@ export default function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const userRoles = [
-    {
-      id: "client",
-      name: "Client",
-      description: "Book transfers and manage your trips",
-      icon: UserIcon,
-    },
-    {
-      id: "business",
-      name: "Business",
-      description: "Corporate account for company transfers",
-      icon: BuildingIcon,
-    },
-  ];
+  // Only client role available
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
