@@ -91,19 +91,11 @@ export default function SignUp() {
         }),
       );
 
-      // Show success message for non-client roles that need approval
-      if (formData.role === "driver" || formData.role === "fleet-manager") {
-        alert(
-          "Registration successful! Your account is pending approval. You'll receive an email once verified.",
-        );
-        navigate("/dashboard");
+      // For all user types, proceed normally
+      if (redirectPath === "book") {
+        navigate("/book");
       } else {
-        // For clients and business accounts, proceed normally
-        if (redirectPath === "book") {
-          navigate("/book");
-        } else {
-          navigate("/dashboard");
-        }
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Registration failed:", error);
