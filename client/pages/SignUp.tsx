@@ -129,51 +129,6 @@ export default function SignUp() {
 
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Account Type Selection */}
-              <div className="space-y-3">
-                <label className="text-sm font-medium text-gray-700">
-                  Account Type
-                </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {userRoles.map((role) => {
-                    const IconComponent = role.icon;
-                    return (
-                      <div
-                        key={role.id}
-                        className={`border-2 rounded-lg p-3 cursor-pointer transition-all hover:border-ocean ${
-                          formData.role === role.id
-                            ? "border-ocean bg-gradient-to-br from-ocean/10 to-coral/10"
-                            : "border-gray-200 hover:bg-gray-50"
-                        }`}
-                        onClick={() =>
-                          setFormData({ ...formData, role: role.id })
-                        }
-                      >
-                        <div className="flex items-start space-x-3">
-                          <div
-                            className={`p-2 rounded-lg ${
-                              formData.role === role.id
-                                ? "bg-gradient-to-br from-ocean to-coral text-white"
-                                : "bg-gray-100 text-gray-600"
-                            }`}
-                          >
-                            <IconComponent className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-sm text-gray-900">
-                              {role.name}
-                            </h3>
-                            <p className="text-xs text-gray-600">
-                              {role.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Personal Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
