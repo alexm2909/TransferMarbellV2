@@ -166,7 +166,7 @@ export default function SignUp() {
                           <div
                             className={`p-2 rounded-lg ${
                               formData.role === role.id
-                                ? "bg-ocean text-white"
+                                ? "bg-gradient-to-br from-ocean to-coral text-white"
                                 : "bg-gray-100 text-gray-600"
                             }`}
                           >
