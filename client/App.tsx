@@ -7,6 +7,7 @@ import BookingForm from "./pages/BookingForm";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import PasswordRecovery from "./pages/PasswordRecovery";
 import DriverRegistration from "./pages/DriverRegistration";
 import Fleet from "./pages/Fleet";
 import Services from "./pages/Services";
