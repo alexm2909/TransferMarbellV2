@@ -781,6 +781,45 @@ export default function AdminPanel() {
                   <Separator className="my-4" />
 
                   <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">Reportes Automáticos</h4>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-green-600"
+                      onClick={() => {
+                        alert("Configurando reporte automático diario de viajes completados al Ministerio de Turismo...");
+                      }}
+                    >
+                      <BuildingIcon className="w-4 h-4 mr-2" />
+                      Reporte Automático Diario
+                      <Badge className="ml-auto bg-green-100 text-green-800">Activo</Badge>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-blue-600"
+                      onClick={() => {
+                        alert("Configurando alertas automáticas para viajes que requieren atención...");
+                      }}
+                    >
+                      <AlertTriangleIcon className="w-4 h-4 mr-2" />
+                      Alertas Automáticas
+                      <Badge className="ml-auto bg-blue-100 text-blue-800">Configurar</Badge>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-purple-600"
+                      onClick={() => {
+                        alert("Configurando sincronización automática con sistemas gubernamentales...");
+                      }}
+                    >
+                      <FileTextIcon className="w-4 h-4 mr-2" />
+                      Sincronización Gubernamental
+                      <Badge className="ml-auto bg-purple-100 text-purple-800">Configurar</Badge>
+                    </Button>
+                  </div>
+
+                  <Separator className="my-4" />
+
+                  <div className="space-y-3">
                     <h4 className="text-sm font-medium text-gray-700">Acciones del Sistema</h4>
                     <Button
                       variant="outline"
