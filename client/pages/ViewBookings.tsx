@@ -144,7 +144,7 @@ export default function ViewBookings() {
         id: "TM001236",
         status: "completed",
         origin: "Puerto Banús",
-        destination: "Estaci��n AVE Málaga",
+        destination: "Estación AVE Málaga",
         date: "2024-12-15",
         time: "11:45",
         passengers: 1,
@@ -193,7 +193,7 @@ export default function ViewBookings() {
     const statusMap = {
       upcoming: {
         label: "Próximo",
-        className: "bg-blue-100 text-blue-700 border-blue-200",
+        className: "bg-ocean-light/20 text-ocean border-ocean/30",
       },
       in_progress: {
         label: "En Curso",
@@ -478,7 +478,7 @@ function BookingCard({ booking, onRepeat, onViewDetails, onRatingSubmit }: Booki
     const statusMap = {
       upcoming: {
         label: "Próximo",
-        className: "bg-blue-100 text-blue-700 border-blue-200",
+        className: "bg-ocean-light/20 text-ocean border-ocean/30",
       },
       in_progress: {
         label: "En Curso",
