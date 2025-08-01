@@ -67,7 +67,7 @@ export default function StatsWidget({
   const colorClasses = getColorClasses(color);
 
   return (
-    <Card className={`hover:shadow-lg transition-all duration-300 border ${colorClasses.accent} hover:scale-105`}>
+    <Card className={`hover:shadow-md transition-shadow duration-200 border ${colorClasses.accent}`}>
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className={`p-3 rounded-lg ${colorClasses.bg}`}>
