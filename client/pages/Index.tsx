@@ -170,29 +170,33 @@ export default function Index() {
                   className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Services
+                  {t("nav.services")}
                 </Link>
                 <Link
                   to="/fleet"
                   className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Fleet
+                  {t("nav.fleet")}
                 </Link>
                 <Link
                   to="/business"
                   className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Business
+                  {t("nav.business")}
                 </Link>
                 <Link
                   to="/support"
                   className="block px-3 py-2 text-gray-700 hover:text-ocean transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Support
+                  {t("nav.support")}
                 </Link>
+
+                <div className="px-3 py-2">
+                  <LanguageSelector variant="select" size="sm" />
+                </div>
 
                 {/* Show different buttons based on authentication status */}
                 {isAuthenticated ? (
@@ -203,7 +207,7 @@ export default function Index() {
                         className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Dashboard
+                        {t("nav.dashboard")}
                       </Button>
                     </Link>
                     <div className="flex justify-center pt-2">
@@ -218,7 +222,7 @@ export default function Index() {
                         className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Sign In
+                        {t("nav.signin")}
                       </Button>
                     </Link>
                     <Link to="/signup" className="w-full">
@@ -226,7 +230,7 @@ export default function Index() {
                         className="w-full bg-ocean text-white hover:bg-ocean/90"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Register
+                        {t("nav.register")}
                       </Button>
                     </Link>
                   </div>
