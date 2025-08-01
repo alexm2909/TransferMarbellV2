@@ -112,7 +112,7 @@ export default function PaymentError() {
                         <div className="text-xs text-gray-600 mb-2">
                           {error.description}
                         </div>
-                        <div className="text-xs text-blue-600">
+                        <div className="text-xs text-ocean">
                           {error.solution}
                         </div>
                       </div>
