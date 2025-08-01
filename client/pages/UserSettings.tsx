@@ -221,8 +221,8 @@ export default function UserSettings() {
                   </Select>
                 </div>
               </div>
-              <div className="p-3 bg-blue-50 rounded-lg border">
-                <p className="text-sm text-blue-800">
+              <div className="p-3 bg-ocean-light/20 rounded-lg border border-ocean/30">
+                <p className="text-sm text-gray-700">
                   <strong>Vista previa:</strong> Los precios se mostrarán como {formatCurrency(45.50)}
                 </p>
               </div>
