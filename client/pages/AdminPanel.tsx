@@ -291,13 +291,13 @@ export default function AdminPanel() {
 
         {/* Main Content */}
         <Tabs defaultValue="trips" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="trips">Viajes</TabsTrigger>
-            <TabsTrigger value="drivers">Conductores</TabsTrigger>
-            <TabsTrigger value="pricing">Precios</TabsTrigger>
-            <TabsTrigger value="disputes">Disputas</TabsTrigger>
-            <TabsTrigger value="ministry">Ministerio</TabsTrigger>
-            <TabsTrigger value="system">Sistema</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-1">
+            <TabsTrigger value="trips" className="text-xs md:text-sm">Viajes</TabsTrigger>
+            <TabsTrigger value="drivers" className="text-xs md:text-sm">Conductores</TabsTrigger>
+            <TabsTrigger value="pricing" className="text-xs md:text-sm">Precios</TabsTrigger>
+            <TabsTrigger value="disputes" className="text-xs md:text-sm">Disputas</TabsTrigger>
+            <TabsTrigger value="ministry" className="text-xs md:text-sm">Ministerio</TabsTrigger>
+            <TabsTrigger value="system" className="text-xs md:text-sm">Sistema</TabsTrigger>
           </TabsList>
 
           {/* Trip Management Tab */}
