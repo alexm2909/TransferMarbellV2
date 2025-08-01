@@ -300,6 +300,11 @@ export default function AdminPanel() {
             <TabsTrigger value="system">Sistema</TabsTrigger>
           </TabsList>
 
+          {/* Trip Management Tab */}
+          <TabsContent value="trips" className="space-y-6">
+            <TripManagement />
+          </TabsContent>
+
           {/* Driver Applications Tab */}
           <TabsContent value="drivers" className="space-y-6">
             <Card>
