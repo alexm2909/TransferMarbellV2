@@ -56,6 +56,7 @@ function App() {
         {/* Authentication */}
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/password-recovery" element={<PasswordRecovery />} />
         <Route path="/driver-registration" element={<DriverRegistration />} />
 
         {/* Chat and Advanced Panels */}
