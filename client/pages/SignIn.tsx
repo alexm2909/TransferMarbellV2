@@ -88,6 +88,8 @@ export default function SignIn() {
         // Redirect based on the redirect parameter or default to dashboard
         if (redirectPath === "book") {
           navigate("/book");
+        } else if (redirectPath === "driver-registration") {
+          navigate("/driver-registration");
         } else {
           navigate("/dashboard");
         }
