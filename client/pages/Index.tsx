@@ -529,32 +529,32 @@ export default function Index() {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">Services</h3>
+              <h3 className="font-semibold mb-4">{t("footer.services")}</h3>
               <ul className="space-y-2 text-gray-300">
-                <li>Airport Transfers</li>
-                <li>City Transfers</li>
-                <li>Business Transport</li>
-                <li>Group Bookings</li>
+                <li>{t("footer.airportTransfers")}</li>
+                <li>{t("footer.cityTransfers")}</li>
+                <li>{t("footer.businessTransport")}</li>
+                <li>{t("footer.groupBookings")}</li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">Support</h3>
+              <h3 className="font-semibold mb-4">{t("footer.support")}</h3>
               <ul className="space-y-2 text-gray-300">
-                <li>Help Center</li>
-                <li>Contact Us</li>
-                <li>Driver Portal</li>
-                <li>Fleet Manager</li>
+                <li>{t("footer.helpCenter")}</li>
+                <li>{t("footer.contactUs")}</li>
+                <li>{t("footer.driverPortal")}</li>
+                <li>{t("footer.fleetManager")}</li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
+              <h3 className="font-semibold mb-4">{t("footer.company")}</h3>
               <ul className="space-y-2 text-gray-300">
-                <li>About Us</li>
-                <li>Careers</li>
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
+                <li>{t("footer.aboutUs")}</li>
+                <li>{t("footer.careers")}</li>
+                <li>{t("footer.privacyPolicy")}</li>
+                <li>{t("footer.termsOfService")}</li>
               </ul>
             </div>
           </div>
