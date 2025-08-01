@@ -291,14 +291,16 @@ export default function AdminPanel() {
 
         {/* Main Content */}
         <Tabs defaultValue="trips" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-1">
-            <TabsTrigger value="trips" className="text-xs md:text-sm">Viajes</TabsTrigger>
-            <TabsTrigger value="drivers" className="text-xs md:text-sm">Conductores</TabsTrigger>
-            <TabsTrigger value="pricing" className="text-xs md:text-sm">Precios</TabsTrigger>
-            <TabsTrigger value="disputes" className="text-xs md:text-sm">Disputas</TabsTrigger>
-            <TabsTrigger value="ministry" className="text-xs md:text-sm">Ministerio</TabsTrigger>
-            <TabsTrigger value="system" className="text-xs md:text-sm">Sistema</TabsTrigger>
-          </TabsList>
+          <div className="overflow-x-auto">
+            <TabsList className="grid w-full grid-cols-6 gap-1 min-w-max md:min-w-0">
+              <TabsTrigger value="trips" className="text-xs md:text-sm px-2 md:px-4">Viajes</TabsTrigger>
+              <TabsTrigger value="drivers" className="text-xs md:text-sm px-2 md:px-4">Conductores</TabsTrigger>
+              <TabsTrigger value="pricing" className="text-xs md:text-sm px-2 md:px-4">Precios</TabsTrigger>
+              <TabsTrigger value="disputes" className="text-xs md:text-sm px-2 md:px-4">Disputas</TabsTrigger>
+              <TabsTrigger value="ministry" className="text-xs md:text-sm px-2 md:px-4">Ministerio</TabsTrigger>
+              <TabsTrigger value="system" className="text-xs md:text-sm px-2 md:px-4">Sistema</TabsTrigger>
+            </TabsList>
+          </div>
 
           {/* Trip Management Tab */}
           <TabsContent value="trips" className="space-y-6">
