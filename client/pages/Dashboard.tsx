@@ -117,14 +117,14 @@ export default function Dashboard() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-ocean-light/20 to-coral-light/20 rounded-lg border border-ocean/30">
                         <div>
-                          <p className="font-medium text-blue-900">
+                          <p className="font-medium text-gray-900">
                             {user.driverStatus === "pending" && "Solicitud Pendiente de Aprobación"}
                             {user.driverStatus === "approved" && "¡Solicitud Aprobada!"}
                             {user.driverStatus === "rejected" && "Solicitud Rechazada"}
                           </p>
-                          <p className="text-sm text-blue-700 mt-1">
+                          <p className="text-sm text-gray-700 mt-1">
                             {user.driverStatus === "pending" && "Tu solicitud está siendo revisada por nuestro equipo."}
                             {user.driverStatus === "approved" && "Ya puedes comenzar a recibir solicitudes de viaje."}
                             {user.driverStatus === "rejected" && "Contacta con soporte para más información."}
