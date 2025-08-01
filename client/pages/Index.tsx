@@ -37,18 +37,18 @@ export default function Index() {
   const features = [
     {
       icon: ShieldCheckIcon,
-      title: "Professional Drivers",
-      desc: "Licensed and verified drivers",
+      title: t("features.professionalDrivers"),
+      desc: t("features.professionalDriversDesc"),
     },
     {
       icon: StarIcon,
-      title: "Top Rated Service",
-      desc: "4.9/5 average rating",
+      title: t("features.topRated"),
+      desc: t("features.topRatedDesc"),
     },
     {
       icon: MessageSquareIcon,
-      title: "Real-time Chat",
-      desc: "Chat with your driver",
+      title: t("features.realTimeChat"),
+      desc: t("features.realTimeChatDesc"),
     },
   ];
 
