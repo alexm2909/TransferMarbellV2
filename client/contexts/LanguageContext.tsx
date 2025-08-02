@@ -195,6 +195,28 @@ export interface Translations {
   "auth.phoneRequired": string;
   "auth.passwordMismatch": string;
   "auth.emailInvalid": string;
+
+  // Missing translations
+  "book_transfer": string;
+  "view_bookings": string;
+  "settings": string;
+  "logout": string;
+  "available_transfers": string;
+  "total_available": string;
+  "accept": string;
+  "reject": string;
+  "credit_card": string;
+  "debit_card": string;
+  "paypal": string;
+  "bank_transfer": string;
+  "payment_methods": string;
+  "add_payment_method": string;
+  "card_number": string;
+  "expiry_date": string;
+  "cvv": string;
+  "cardholder_name": string;
+  "cancel": string;
+  "add": string;
 }
 
 // Spanish translations (default)
