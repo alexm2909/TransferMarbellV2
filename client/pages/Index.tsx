@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
 import UserMenu from "@/components/UserMenu";
-import LanguageSelector from "@/components/LanguageSelector";
+import { FlagOnlyLanguageSelector, FullLanguageSelector } from "@/components/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
