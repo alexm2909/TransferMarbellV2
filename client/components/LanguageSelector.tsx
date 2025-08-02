@@ -168,16 +168,60 @@ export default function LanguageSelector({
   );
 }
 
-// Compact version for mobile/tight spaces
+// Compact version for mobile/tight spaces - only flag
 export function CompactLanguageSelector({ className = "" }: { className?: string }) {
   return (
     <LanguageSelector
       variant="dropdown"
-      size="sm"
+      size="md"
       showFlag={true}
       showText={false}
-      className={className}
+      className={`${className} min-w-0`}
     />
+  );
+}
+
+// Icon-only version with larger flag
+export function FlagOnlyLanguageSelector({ className = "" }: { className?: string }) {
+  const { language, setLanguage, availableLanguages } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const currentLanguage = availableLanguages.find((lang) => lang.code === language);
+
+  const handleLanguageChange = (languageCode: string) => {
+    setLanguage(languageCode);
+    setIsOpen(false);
+  };
+
+  return (
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className={`px-2 py-1 hover:bg-ocean-light/20 transition-colors ${className}`}
+        >
+          <span className="text-xl">{currentLanguage?.flag}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-40">
+        {availableLanguages.map((lang) => (
+          <DropdownMenuItem
+            key={lang.code}
+            onClick={() => handleLanguageChange(lang.code)}
+            className={`flex items-center space-x-3 cursor-pointer ${
+              lang.code === language ? "bg-ocean-light/10 text-ocean font-medium" : ""
+            }`}
+          >
+            <span className="text-lg">{lang.flag}</span>
+            <span className="text-sm">{lang.name}</span>
+            {lang.code === language && (
+              <span className="ml-auto text-ocean text-xs">✓</span>
+            )}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 
