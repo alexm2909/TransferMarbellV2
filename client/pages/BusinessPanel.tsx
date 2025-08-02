@@ -38,8 +38,8 @@ export default function BusinessPanel() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // Redirect if not business
-  if (user?.role !== "business") {
+  // Redirect if not admin
+  if (user?.role !== "admin") {
     navigate("/dashboard");
     return null;
   }
