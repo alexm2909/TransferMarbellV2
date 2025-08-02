@@ -210,6 +210,7 @@ export default function PaymentSummary() {
 
             {/* Desktop and Mobile Navigation */}
             <div className="flex items-center space-x-2">
+              <FlagOnlyLanguageSelector />
               <UserMenu />
             </div>
           </div>
