@@ -1223,17 +1223,31 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
            key;
   };
 
-  // Set language function with persistence
+  // Set language function with enhanced persistence
   const setLanguage = (newLanguage: string) => {
     if (translations[newLanguage]) {
       setLanguageState(newLanguage);
-      localStorage.setItem("transfermarbell_language", newLanguage);
+      // Multiple save attempts for reliability
+      try {
+        localStorage.setItem("transfermarbell_language", newLanguage);
+        // Also set a backup key for extra reliability
+        localStorage.setItem("user_language_preference", newLanguage);
+      } catch (error) {
+        console.warn("Error saving language preference:", error);
+      }
     }
   };
 
-  // Effect to save language preference
+  // Effect to save language preference with additional reliability
   useEffect(() => {
-    localStorage.setItem("transfermarbell_language", language);
+    try {
+      localStorage.setItem("transfermarbell_language", language);
+      localStorage.setItem("user_language_preference", language);
+      // Also store in sessionStorage as fallback
+      sessionStorage.setItem("current_language", language);
+    } catch (error) {
+      console.warn("Error persisting language preference:", error);
+    }
   }, [language]);
 
   // Currency formatting function
