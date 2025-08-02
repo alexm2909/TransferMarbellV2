@@ -315,9 +315,12 @@ export default function TripManagement() {
 
       {/* Filters */}
       <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="relative flex-1 min-w-0">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg">Filtros de Búsqueda</CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <div className="space-y-3">
+            <div className="relative">
               <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <Input
                 placeholder="Buscar viajes..."
@@ -326,31 +329,37 @@ export default function TripManagement() {
                 className="pl-10 w-full"
               />
             </div>
-            <div className="flex gap-2">
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full sm:w-40">
-                  <SelectValue placeholder="Estado" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos</SelectItem>
-                  <SelectItem value="pending">Pendientes</SelectItem>
-                  <SelectItem value="assigned">Asignados</SelectItem>
-                  <SelectItem value="in_progress">En Curso</SelectItem>
-                  <SelectItem value="completed">Completados</SelectItem>
-                  <SelectItem value="cancelled">Cancelados</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={dateFilter} onValueChange={setDateFilter}>
-                <SelectTrigger className="w-full sm:w-40">
-                  <SelectValue placeholder="Fecha" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todas</SelectItem>
-                  <SelectItem value="today">Hoy</SelectItem>
-                  <SelectItem value="yesterday">Ayer</SelectItem>
-                  <SelectItem value="week">Esta Semana</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="text-xs font-medium text-gray-700 mb-1 block">Estado</label>
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Estado" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todos</SelectItem>
+                    <SelectItem value="pending">Pendientes</SelectItem>
+                    <SelectItem value="assigned">Asignados</SelectItem>
+                    <SelectItem value="in_progress">En Curso</SelectItem>
+                    <SelectItem value="completed">Completados</SelectItem>
+                    <SelectItem value="cancelled">Cancelados</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="text-xs font-medium text-gray-700 mb-1 block">Fecha</label>
+                <Select value={dateFilter} onValueChange={setDateFilter}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Fecha" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todas</SelectItem>
+                    <SelectItem value="today">Hoy</SelectItem>
+                    <SelectItem value="yesterday">Ayer</SelectItem>
+                    <SelectItem value="week">Esta Semana</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </CardContent>
