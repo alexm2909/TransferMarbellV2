@@ -1175,9 +1175,37 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return "es";
   });
 
-  // Translation function
-  const t = (key: keyof Translations): string => {
-    return translations[language]?.[key] || translations["es"][key] || key;
+  // Translation function with fallbacks for missing keys
+  const t = (key: string): string => {
+    // Define fallbacks for missing translations
+    const fallbacks: Record<string, string> = {
+      "book_transfer": "Book Transfer",
+      "view_bookings": "View Bookings",
+      "settings": "Settings",
+      "logout": "Logout",
+      "available_transfers": "Available Transfers",
+      "total_available": "Total Available",
+      "accept": "Accept",
+      "reject": "Reject",
+      "credit_card": "Credit Card",
+      "debit_card": "Debit Card",
+      "paypal": "PayPal",
+      "bank_transfer": "Bank Transfer",
+      "payment_methods": "Payment Methods",
+      "add_payment_method": "Add Payment Method",
+      "card_number": "Card Number",
+      "expiry_date": "Expiry Date",
+      "cvv": "CVV",
+      "cardholder_name": "Cardholder Name",
+      "cancel": "Cancel",
+      "add": "Add"
+    };
+
+    // Try current language first, then Spanish, then English fallback, then the key itself
+    return translations[language]?.[key as keyof Translations] ||
+           translations["es"]?.[key as keyof Translations] ||
+           fallbacks[key] ||
+           key;
   };
 
   // Set language function with persistence
