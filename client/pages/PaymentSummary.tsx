@@ -390,8 +390,24 @@ export default function PaymentSummary() {
                   <span className="text-ocean">€{costs.total}</span>
                 </div>
 
-                <div className="text-xs text-gray-500 text-center">
-                  Precios incluyen IVA
+                <div className="space-y-2">
+                  <div className="text-xs text-gray-500 text-center">
+                    Precios incluyen IVA
+                  </div>
+                  {bookingData.selectedPaymentMethod && (
+                    <div className="text-xs text-center p-2 bg-ocean-light/10 rounded border border-ocean/20">
+                      <span className="text-ocean font-medium">
+                        Método: {
+                          bookingData.selectedPaymentMethod === "card" ? "Tarjeta" :
+                          bookingData.selectedPaymentMethod === "apple_pay" ? "Apple Pay" :
+                          bookingData.selectedPaymentMethod === "google_pay" ? "Google Pay" :
+                          bookingData.selectedPaymentMethod === "paypal" ? "PayPal" :
+                          bookingData.selectedPaymentMethod === "bank_transfer" ? "Transferencia" :
+                          "Tarjeta"
+                        }
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <Button
