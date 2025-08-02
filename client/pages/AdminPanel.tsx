@@ -242,7 +242,7 @@ export default function AdminPanel() {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 md:py-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-3 md:py-6">
         {/* Header */}
         <div className="mb-6 md:mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-navy mb-2">
@@ -955,7 +955,7 @@ export default function AdminPanel() {
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
-                      <span className="w-4 h-4 text-gray-500">🎨</span>
+                      <span className="w-4 h-4 text-gray-500">��</span>
                       <span className="text-sm">Color: {selectedDriver.vehicleColor}</span>
                     </div>
                     <div className="flex items-center space-x-2">
