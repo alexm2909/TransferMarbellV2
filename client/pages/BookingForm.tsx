@@ -217,8 +217,8 @@ export default function BookingForm() {
 
     localStorage.setItem("pendingBooking", JSON.stringify(fullBookingData));
 
-    // Redirect to payment summary page
-    navigate("/payment-summary");
+    // Redirect to payment method selection page
+    navigate("/payment-method");
   };
 
   const handleChildSeatsChange = (seats: ChildSeat[]) => {
