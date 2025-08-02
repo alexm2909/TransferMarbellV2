@@ -1159,19 +1159,34 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 // Language provider component
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<string>(() => {
-    // Try to get language from localStorage first
-    const saved = localStorage.getItem("transfermarbell_language");
-    if (saved && translations[saved]) {
-      return saved;
+    // Force retrieval from localStorage on every page load
+    try {
+      const saved = localStorage.getItem("transfermarbell_language");
+      if (saved && translations[saved]) {
+        return saved;
+      }
+    } catch (error) {
+      console.warn("Error reading language from localStorage:", error);
     }
-    
+
     // Try to detect browser language
     const browserLang = navigator.language.split("-")[0];
     if (translations[browserLang]) {
+      // Save detected language
+      try {
+        localStorage.setItem("transfermarbell_language", browserLang);
+      } catch (error) {
+        console.warn("Error saving language to localStorage:", error);
+      }
       return browserLang;
     }
-    
-    // Default to Spanish
+
+    // Default to Spanish and save it
+    try {
+      localStorage.setItem("transfermarbell_language", "es");
+    } catch (error) {
+      console.warn("Error saving default language to localStorage:", error);
+    }
     return "es";
   });
 
