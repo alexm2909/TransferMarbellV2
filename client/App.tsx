@@ -54,6 +54,8 @@ function App() {
         {/* Payment Flow */}
         <Route path="/payment-method" element={<PaymentMethod />} />
         <Route path="/payment-summary" element={<PaymentSummary />} />
+        <Route path="/payment-apple" element={<PaymentApple />} />
+        <Route path="/payment-google" element={<PaymentGoogle />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-error" element={<PaymentError />} />
 
