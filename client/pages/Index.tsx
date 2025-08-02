@@ -195,7 +195,7 @@ export default function Index() {
                 </Link>
 
                 <div className="px-3 py-2">
-                  <LanguageSelector variant="select" size="sm" />
+                  <FullLanguageSelector />
                 </div>
 
                 {/* Show different buttons based on authentication status */}
