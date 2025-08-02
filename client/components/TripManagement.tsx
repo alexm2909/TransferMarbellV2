@@ -263,50 +263,50 @@ export default function TripManagement() {
       </Card>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
         <Card>
-          <CardContent className="p-4">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center space-x-2">
-              <ClockIcon className="w-8 h-8 text-yellow-600" />
+              <ClockIcon className="w-6 h-6 md:w-8 md:h-8 text-yellow-600" />
               <div>
-                <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
-                <div className="text-sm text-gray-600">Pendientes</div>
+                <div className="text-lg md:text-2xl font-bold text-yellow-600">{stats.pending}</div>
+                <div className="text-xs md:text-sm text-gray-600">Pendientes</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="p-4">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center space-x-2">
-              <CarIcon className="w-8 h-8 text-blue-600" />
+              <CarIcon className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
               <div>
-                <div className="text-2xl font-bold text-blue-600">{stats.active}</div>
-                <div className="text-sm text-gray-600">Activos</div>
+                <div className="text-lg md:text-2xl font-bold text-blue-600">{stats.active}</div>
+                <div className="text-xs md:text-sm text-gray-600">Activos</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="p-4">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center space-x-2">
-              <CheckCircleIcon className="w-8 h-8 text-green-600" />
+              <CheckCircleIcon className="w-6 h-6 md:w-8 md:h-8 text-green-600" />
               <div>
-                <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
-                <div className="text-sm text-gray-600">Completados</div>
+                <div className="text-lg md:text-2xl font-bold text-green-600">{stats.completed}</div>
+                <div className="text-xs md:text-sm text-gray-600">Completados</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="p-4">
+          <CardContent className="p-3 md:p-4">
             <div className="flex items-center space-x-2">
-              <EuroIcon className="w-8 h-8 text-ocean" />
+              <EuroIcon className="w-6 h-6 md:w-8 md:h-8 text-ocean" />
               <div>
-                <div className="text-2xl font-bold text-ocean">€{stats.revenue}</div>
-                <div className="text-sm text-gray-600">Ingresos</div>
+                <div className="text-lg md:text-2xl font-bold text-ocean">€{stats.revenue}</div>
+                <div className="text-xs md:text-sm text-gray-600">Ingresos</div>
               </div>
             </div>
           </CardContent>
@@ -559,7 +559,7 @@ export default function TripManagement() {
                         <p className="text-sm">{selectedTrip.date} a las {selectedTrip.time}</p>
                       </div>
                       <div>
-                        <Label className="text-sm font-medium text-gray-700">Distancia y Duraci��n</Label>
+                        <Label className="text-sm font-medium text-gray-700">Distancia y Duración</Label>
                         <p className="text-sm">{selectedTrip.distance}km - {selectedTrip.duration} minutos</p>
                       </div>
                     </div>
