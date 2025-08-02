@@ -290,7 +290,7 @@ export default function AdminPanel() {
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="trips" className="space-y-6">
+        <Tabs defaultValue="trips" className="space-y-4 md:space-y-6">
           <div className="overflow-x-auto">
             <TabsList className="grid w-full grid-cols-6 gap-1 min-w-max md:min-w-0">
               <TabsTrigger value="trips" className="text-xs md:text-sm px-2 md:px-4">Viajes</TabsTrigger>
