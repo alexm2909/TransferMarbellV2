@@ -50,6 +50,7 @@ function App() {
         <Route path="/booking-confirmation" element={<BookingConfirmation />} />
 
         {/* Payment Flow */}
+        <Route path="/payment-method" element={<PaymentMethod />} />
         <Route path="/payment-summary" element={<PaymentSummary />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-error" element={<PaymentError />} />
