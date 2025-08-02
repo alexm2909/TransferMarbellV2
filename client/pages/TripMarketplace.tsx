@@ -83,7 +83,7 @@ export default function TripMarketplace() {
         id: "MT001",
         client: "Roberto López",
         clientPhone: "+34 600 111 222",
-        route: "Aeropuerto de Málaga → Hotel Villa Padierna",
+        route: "Aeropuerto de Málaga ��� Hotel Villa Padierna",
         origin: "Aeropuerto de Málaga (AGP)",
         destination: "Hotel Villa Padierna, Benahavís",
         date: "2024-12-23",
@@ -125,7 +125,7 @@ export default function TripMarketplace() {
         id: "MT003",
         client: "Familie Schmidt",
         clientPhone: "+49 170 123 4567",
-        route: "Puerto Banús ��� Estación María Zambrano",
+        route: "Puerto Banús → Estación María Zambrano",
         origin: "Puerto Banús, Marbella",
         destination: "Estación María Zambrano, Málaga",
         date: "2024-12-24",
@@ -293,7 +293,7 @@ export default function TripMarketplace() {
       setSelectedTrip(null);
 
       // Show success message
-      alert(user.role === "fleet-manager" 
+      alert(user.role === "admin"
         ? `Viaje asignado a tu flota: ${selectedTrip.route}`
         : `Viaje reclamado exitosamente: ${selectedTrip.route}`
       );
