@@ -399,6 +399,28 @@ export const translations: Record<string, Translations> = {
     "auth.phoneRequired": "El teléfono es requerido",
     "auth.passwordMismatch": "Las contraseñas no coinciden",
     "auth.emailInvalid": "Email inválido",
+
+    // Missing translations
+    "book_transfer": "Reservar Traslado",
+    "view_bookings": "Ver Reservas",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión",
+    "available_transfers": "Traslados Disponibles",
+    "total_available": "Total Disponibles",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "credit_card": "Tarjeta de Crédito",
+    "debit_card": "Tarjeta de Débito",
+    "paypal": "PayPal",
+    "bank_transfer": "Transferencia Bancaria",
+    "payment_methods": "Métodos de Pago",
+    "add_payment_method": "Agregar Método de Pago",
+    "card_number": "Número de Tarjeta",
+    "expiry_date": "Fecha de Vencimiento",
+    "cvv": "CVV",
+    "cardholder_name": "Nombre del Titular",
+    "cancel": "Cancelar",
+    "add": "Agregar",
   },
 
   en: {
