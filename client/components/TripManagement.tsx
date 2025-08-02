@@ -239,22 +239,28 @@ export default function TripManagement() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-navy">Gestión de Viajes</h2>
-          <p className="text-gray-600">Supervisa y gestiona todos los viajes en tiempo real</p>
-        </div>
-        <div className="flex space-x-2">
-          <Button onClick={generateTripReport} variant="outline">
-            <DownloadIcon className="w-4 h-4 mr-2" />
-            Generar Reporte
-          </Button>
-          <Button onClick={() => window.location.reload()} variant="outline">
-            <RefreshCwIcon className="w-4 h-4 mr-2" />
-            Actualizar
-          </Button>
-        </div>
-      </div>
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="min-w-0 flex-1">
+              <h2 className="text-xl md:text-2xl font-bold text-navy">Gestión de Viajes</h2>
+              <p className="text-sm md:text-base text-gray-600">Supervisa y gestiona todos los viajes en tiempo real</p>
+            </div>
+            <div className="flex gap-2">
+              <Button onClick={generateTripReport} variant="outline" size="sm" className="flex-1 sm:flex-none">
+                <DownloadIcon className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Generar Reporte</span>
+                <span className="sm:hidden">Reporte</span>
+              </Button>
+              <Button onClick={() => window.location.reload()} variant="outline" size="sm" className="flex-1 sm:flex-none">
+                <RefreshCwIcon className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Actualizar</span>
+                <span className="sm:hidden">Actualizar</span>
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -553,7 +559,7 @@ export default function TripManagement() {
                         <p className="text-sm">{selectedTrip.date} a las {selectedTrip.time}</p>
                       </div>
                       <div>
-                        <Label className="text-sm font-medium text-gray-700">Distancia y Duración</Label>
+                        <Label className="text-sm font-medium text-gray-700">Distancia y Duraci��n</Label>
                         <p className="text-sm">{selectedTrip.distance}km - {selectedTrip.duration} minutos</p>
                       </div>
                     </div>
