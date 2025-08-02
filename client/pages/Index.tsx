@@ -111,7 +111,7 @@ export default function Index() {
                 {t("nav.support")}
               </Link>
 
-              <LanguageSelector variant="dropdown" size="sm" />
+              <FlagOnlyLanguageSelector />
 
               {/* Show different buttons based on authentication status */}
               {isAuthenticated ? (
