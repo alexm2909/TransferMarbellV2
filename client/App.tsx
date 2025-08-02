@@ -21,6 +21,8 @@ import PaymentMethod from "./pages/PaymentMethod";
 import PaymentSummary from "./pages/PaymentSummary";
 import PaymentApple from "./pages/PaymentApple";
 import PaymentGoogle from "./pages/PaymentGoogle";
+import PaymentPaypal from "./pages/PaymentPaypal";
+import PaymentBank from "./pages/PaymentBank";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentError from "./pages/PaymentError";
 import ViewBookings from "./pages/ViewBookings";
