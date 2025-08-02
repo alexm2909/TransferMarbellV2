@@ -19,6 +19,7 @@ import TimeSelector from "@/components/TimeSelector";
 import LuggageSizeSelector from "@/components/LuggageSizeSelector";
 import LuggageCountSelector from "@/components/LuggageCountSelector";
 import UserMenu from "@/components/UserMenu";
+import { FlagOnlyLanguageSelector } from "@/components/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
 import {
   CalendarIcon,
