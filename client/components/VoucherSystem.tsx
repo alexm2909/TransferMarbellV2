@@ -279,7 +279,8 @@ export const useVoucher = () => {
 
   const generateVoucher = (bookingData: any): VoucherData => {
     const voucherId = `TM${Date.now().toString().slice(-6)}`;
-    const qrCode = generateQRCode(voucherId);
+    // Generate a simple QR code placeholder URL
+    const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(voucherId)}`;
     
     return {
       id: voucherId,
