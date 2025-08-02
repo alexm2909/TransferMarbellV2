@@ -221,11 +221,11 @@ export default function PaymentSummary() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <Link
-            to="/book"
+            to="/payment-method"
             className="inline-flex items-center text-ocean hover:text-coral transition-colors mb-4"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
-            Volver al Formulario
+            Cambiar Método de Pago
           </Link>
           <h1 className="text-3xl font-bold text-navy">
             Resumen y Pago
