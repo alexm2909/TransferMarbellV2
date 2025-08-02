@@ -38,6 +38,7 @@ interface BookingData {
   flightNumber: string;
   specialRequests: string;
   paymentPreference: string;
+  selectedPaymentMethod?: string;
   hasReturnTrip: boolean;
   returnDate: string;
   returnTime: string;
