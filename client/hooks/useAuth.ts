@@ -5,6 +5,8 @@ export interface User {
   name: string;
   role: "client" | "driver" | "admin";
   phone?: string;
+  driverStatus?: "pending" | "approved" | "rejected";
+  id?: string;
 }
 
 export function useAuth() {
