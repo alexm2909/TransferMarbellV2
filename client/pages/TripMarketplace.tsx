@@ -125,7 +125,7 @@ export default function TripMarketplace() {
         id: "MT003",
         client: "Familie Schmidt",
         clientPhone: "+49 170 123 4567",
-        route: "Puerto Banús → Estación María Zambrano",
+        route: "Puerto Banús ��� Estación María Zambrano",
         origin: "Puerto Banús, Marbella",
         destination: "Estación María Zambrano, Málaga",
         date: "2024-12-24",
@@ -285,7 +285,7 @@ export default function TripMarketplace() {
       // Update trip status
       setTrips(prev => prev.map(trip => 
         trip.id === selectedTrip.id 
-          ? { ...trip, status: user.role === "fleet-manager" ? "assigned" : "claimed" as const, claimedBy: user.name, assignedBy: user.role === "fleet-manager" ? user.name : undefined }
+          ? { ...trip, status: user.role === "admin" ? "assigned" : "claimed" as const, claimedBy: user.name, assignedBy: user.role === "admin" ? user.name : undefined }
           : trip
       ));
       
