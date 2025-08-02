@@ -1150,6 +1150,7 @@ interface LanguageContextType {
   setLanguage: (language: string) => void;
   t: (key: keyof Translations) => string;
   availableLanguages: Language[];
+  formatCurrency: (amount: number) => string;
 }
 
 // Create context
