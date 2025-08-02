@@ -41,8 +41,8 @@ export default function FleetManagerPanel() {
   const [selectedTrip, setSelectedTrip] = useState<string | null>(null);
   const [showAssignModal, setShowAssignModal] = useState(false);
 
-  // Redirect if not fleet manager
-  if (user?.role !== "fleet-manager") {
+  // Redirect if not admin
+  if (user?.role !== "admin") {
     navigate("/dashboard");
     return null;
   }
