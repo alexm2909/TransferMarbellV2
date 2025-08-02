@@ -1148,7 +1148,7 @@ export const translations: Record<string, Translations> = {
 interface LanguageContextType {
   language: string;
   setLanguage: (language: string) => void;
-  t: (key: keyof Translations) => string;
+  t: (key: string) => string;
   availableLanguages: Language[];
   formatCurrency: (amount: number) => string;
 }
