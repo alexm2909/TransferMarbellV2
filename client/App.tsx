@@ -19,6 +19,8 @@ import DriverPanel from "./pages/DriverPanel";
 import OptimizedDriverPanel from "./pages/OptimizedDriverPanel";
 import PaymentMethod from "./pages/PaymentMethod";
 import PaymentSummary from "./pages/PaymentSummary";
+import PaymentApple from "./pages/PaymentApple";
+import PaymentGoogle from "./pages/PaymentGoogle";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentError from "./pages/PaymentError";
 import ViewBookings from "./pages/ViewBookings";
