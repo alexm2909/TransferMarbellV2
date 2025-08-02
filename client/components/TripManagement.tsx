@@ -136,7 +136,7 @@ export default function TripManagement() {
       driverName: "Ana García",
       driverPhone: "+34 600 111 222",
       origin: "Puerto Banús",
-      destination: "Málaga Airport",
+      destination: "M��laga Airport",
       date: "2024-12-20",
       time: "16:00",
       passengers: 1,
@@ -237,7 +237,7 @@ export default function TripManagement() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* Header */}
       <Card>
         <CardContent className="p-4">
