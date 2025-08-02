@@ -373,60 +373,81 @@ export default function TripManagement() {
             Lista de Viajes ({filteredTrips.length})
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-3 md:p-6">
+          <div className="space-y-3 md:space-y-4">
             {filteredTrips.map((trip) => (
               <Card key={trip.id} className="border border-gray-200">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
-                        <CarIcon className="w-6 h-6 text-ocean" />
+                <CardContent className="p-3 md:p-4">
+                  <div className="space-y-3">
+                    {/* Header with badges */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
+                          <CarIcon className="w-4 h-4 md:w-5 md:h-5 text-ocean" />
+                        </div>
+                        <h4 className="font-semibold text-navy text-sm md:text-base">#{trip.bookingId}</h4>
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <h4 className="font-semibold text-navy">#{trip.bookingId}</h4>
-                          {getStatusBadge(trip.status)}
+                      <div className="flex gap-1">
+                        {getStatusBadge(trip.status)}
+                        <div className="hidden sm:block">
                           {getPriorityBadge(trip.priority)}
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-600">
-                          <div className="space-y-1">
-                            <p className="flex items-center">
-                              <UsersIcon className="w-4 h-4 mr-2" />
-                              {trip.clientName}
-                            </p>
-                            <p className="flex items-center">
-                              <MapPinIcon className="w-4 h-4 mr-2" />
-                              {trip.origin} → {trip.destination}
-                            </p>
-                            <p className="flex items-center">
-                              <CalendarIcon className="w-4 h-4 mr-2" />
-                              {trip.date} a las {trip.time}
-                            </p>
-                          </div>
-                          <div className="space-y-1">
-                            <p className="flex items-center">
-                              <CarIcon className="w-4 h-4 mr-2" />
-                              {trip.vehicle} - {trip.passengers} pax - {trip.luggage} maletas
-                            </p>
-                            <p className="flex items-center">
-                              <EuroIcon className="w-4 h-4 mr-2" />
-                              €{trip.price} - {trip.distance}km - {trip.duration}min
-                            </p>
-                            {trip.driverName && (
-                              <p className="flex items-center">
-                                <CarIcon className="w-4 h-4 mr-2" />
-                                Conductor: {trip.driverName}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                        {trip.notes && (
-                          <div className="mt-2 p-2 bg-gray-50 rounded text-sm text-gray-600">
-                            <strong>Notas:</strong> {trip.notes}
-                          </div>
-                        )}
                       </div>
+                    </div>
+
+                    {/* Trip details in organized sections */}
+                    <div className="space-y-3">
+                      {/* Client and route info */}
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <UsersIcon className="w-4 h-4 mr-2 text-gray-500 flex-shrink-0" />
+                          <span className="font-medium">{trip.clientName}</span>
+                        </div>
+                        <div className="flex items-start text-sm">
+                          <MapPinIcon className="w-4 h-4 mr-2 text-gray-500 flex-shrink-0 mt-0.5" />
+                          <span className="break-words">{trip.origin} → {trip.destination}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <CalendarIcon className="w-4 h-4 mr-2 text-gray-500 flex-shrink-0" />
+                          <span>{trip.date} a las {trip.time}</span>
+                        </div>
+                      </div>
+
+                      {/* Trip details */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm bg-gray-50 p-2 rounded">
+                        <div className="flex items-center">
+                          <CarIcon className="w-4 h-4 mr-2 text-gray-500" />
+                          <span>{trip.vehicle}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <UsersIcon className="w-4 h-4 mr-2 text-gray-500" />
+                          <span>{trip.passengers} pax, {trip.luggage} maletas</span>
+                        </div>
+                        <div className="flex items-center">
+                          <EuroIcon className="w-4 h-4 mr-2 text-gray-500" />
+                          <span className="font-medium">€{trip.price}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <MapPinIcon className="w-4 h-4 mr-2 text-gray-500" />
+                          <span>{trip.distance}km - {trip.duration}min</span>
+                        </div>
+                      </div>
+
+                      {/* Driver info if assigned */}
+                      {trip.driverName && (
+                        <div className="flex items-center text-sm bg-blue-50 p-2 rounded">
+                          <CarIcon className="w-4 h-4 mr-2 text-blue-600" />
+                          <span><strong>Conductor:</strong> {trip.driverName}</span>
+                        </div>
+                      )}
+
+                      {/* Notes */}
+                      {trip.notes && (
+                        <div className="p-2 bg-yellow-50 rounded text-sm">
+                          <strong className="text-yellow-800">Notas:</strong>
+                          <span className="text-yellow-700 ml-1">{trip.notes}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
