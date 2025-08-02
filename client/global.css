@@ -359,6 +359,55 @@
     .grid.grid-cols-2.md\\:grid-cols-4 .text-xs {
       font-size: 0.625rem;
     }
+
+    /* Admin panel mobile optimizations */
+    .admin-panel-mobile {
+      padding: 0.5rem;
+    }
+
+    /* Better button text wrapping on mobile */
+    .mobile-button-text {
+      word-break: keep-all;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Improved mobile card spacing */
+    .mobile-card-compact {
+      padding: 0.75rem;
+    }
+
+    /* Mobile action button improvements */
+    .mobile-action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .mobile-action-grid {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+
+    /* Ensure proper touch targets on mobile */
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Mobile table improvements */
+    .mobile-table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Better mobile form spacing */
+    .mobile-form-spacing > * + * {
+      margin-top: 0.75rem;
+    }
   }
 
   /* Medium screen optimizations */
