@@ -451,7 +451,8 @@ export default function TripManagement() {
                     </div>
                   </div>
 
-                  <div className="flex space-x-2 flex-wrap gap-2">
+                  {/* Action buttons */}
+                  <div className="grid grid-cols-2 sm:flex sm:space-x-2 gap-2 pt-3 border-t">
                     <Button
                       onClick={() => {
                         setSelectedTrip(trip);
@@ -459,17 +460,31 @@ export default function TripManagement() {
                       }}
                       variant="outline"
                       size="sm"
+                      className="w-full sm:w-auto"
                     >
-                      <EyeIcon className="w-4 h-4 mr-2" />
-                      Ver Detalles
+                      <EyeIcon className="w-4 h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Ver Detalles</span>
+                      <span className="sm:hidden">Detalles</span>
                     </Button>
-                    
+
+                    <Button
+                      onClick={() => contactParticipants(trip)}
+                      variant="outline"
+                      size="sm"
+                      className="w-full sm:w-auto"
+                    >
+                      <MessageSquareIcon className="w-4 h-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Contactar</span>
+                      <span className="sm:hidden">Contactar</span>
+                    </Button>
+
                     {trip.status === "pending" && (
                       <Dialog>
                         <DialogTrigger asChild>
-                          <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-                            <CheckCircleIcon className="w-4 h-4 mr-2" />
-                            Asignar Conductor
+                          <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto">
+                            <CheckCircleIcon className="w-4 h-4 sm:mr-2" />
+                            <span className="hidden sm:inline">Asignar Conductor</span>
+                            <span className="sm:hidden">Asignar</span>
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
@@ -498,25 +513,17 @@ export default function TripManagement() {
                       </Dialog>
                     )}
 
-                    <Button
-                      onClick={() => contactParticipants(trip)}
-                      variant="outline"
-                      size="sm"
-                    >
-                      <MessageSquareIcon className="w-4 h-4 mr-2" />
-                      Contactar
-                    </Button>
-
                     {(trip.status === "pending" || trip.status === "assigned") && (
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button
                             variant="outline"
                             size="sm"
-                            className="border-red-500 text-red-600 hover:bg-red-50"
+                            className="border-red-500 text-red-600 hover:bg-red-50 w-full sm:w-auto"
                           >
-                            <XCircleIcon className="w-4 h-4 mr-2" />
-                            Cancelar
+                            <XCircleIcon className="w-4 h-4 sm:mr-2" />
+                            <span className="hidden sm:inline">Cancelar</span>
+                            <span className="sm:hidden">Cancelar</span>
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
