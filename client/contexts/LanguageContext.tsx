@@ -1193,11 +1193,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("transfermarbell_language", language);
   }, [language]);
 
+  // Currency formatting function
+  const formatCurrency = (amount: number): string => {
+    return `€${amount.toFixed(2)}`;
+  };
+
   const value: LanguageContextType = {
     language,
     setLanguage,
     t,
     availableLanguages: LANGUAGES,
+    formatCurrency,
   };
 
   return (
