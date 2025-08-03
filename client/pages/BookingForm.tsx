@@ -757,7 +757,7 @@ export default function BookingForm() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CarIcon className="w-5 h-5 text-ocean" />
-                    Select Vehicle
+                    {t("booking.vehicleSelection")}
                     {parseInt(bookingData.cars) > 1 && (
                       <Badge variant="secondary" className="bg-purple/10 text-purple">
                         {bookingData.cars} coches
