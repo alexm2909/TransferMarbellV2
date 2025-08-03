@@ -1158,57 +1158,22 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 // Language provider component
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<string>("es");
-
-  // Initialize language from localStorage on component mount
-  useEffect(() => {
-    const initializeLanguage = () => {
-      try {
-        const saved = localStorage.getItem("transfermarbell_language");
-        if (saved && translations[saved]) {
-          setLanguageState(saved);
-          return;
-        }
-      } catch (error) {
-        console.warn("Error reading language from localStorage:", error);
+  // Initialize with value from localStorage immediately
+  const [language, setLanguageState] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem("transfermarbell_language");
+      if (saved && translations[saved]) {
+        console.log("Language loaded from localStorage:", saved);
+        return saved;
       }
+    } catch (error) {
+      console.warn("Error reading language from localStorage:", error);
+    }
 
-      // Try to detect browser language
-      const browserLang = navigator.language.split("-")[0];
-      if (translations[browserLang]) {
-        setLanguageState(browserLang);
-        try {
-          localStorage.setItem("transfermarbell_language", browserLang);
-        } catch (error) {
-          console.warn("Error saving language to localStorage:", error);
-        }
-        return;
-      }
-
-      // Default to Spanish and save it
-      setLanguageState("es");
-      try {
-        localStorage.setItem("transfermarbell_language", "es");
-      } catch (error) {
-        console.warn("Error saving default language to localStorage:", error);
-      }
-    };
-
-    initializeLanguage();
-
-    // Listen for language changes in other tabs/windows
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "transfermarbell_language" && e.newValue && translations[e.newValue]) {
-        setLanguageState(e.newValue);
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+    // Default to Spanish
+    console.log("Using default language: es");
+    return "es";
+  });
 
   // Translation function with fallbacks for missing keys
   const t = (key: string): string => {
