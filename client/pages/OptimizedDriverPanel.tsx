@@ -108,6 +108,57 @@ export default function OptimizedDriverPanel() {
     },
   ]);
 
+  const [emergencyTrips, setEmergencyTrips] = useState<EmergencyTrip[]>([
+    {
+      id: "EM001",
+      status: "available",
+      origin: "Hospital Costa del Sol",
+      destination: "Aeropuerto de Málaga (AGP)",
+      date: "2024-03-15",
+      time: "18:00",
+      passengers: 1,
+      children: 0,
+      luggage: 1,
+      price: 75,
+      originalPrice: 50,
+      emergencyBonus: 25,
+      distance: 45,
+      duration: 55,
+      clientName: "Emergency Transfer",
+      clientPhone: "+34 900 123 456",
+      voucherCode: "EM-001234",
+      voucherValidated: false,
+      isEmergency: true,
+      reason: "Conductor anterior no se presentó",
+      createdBy: "Admin - Juan López",
+      urgencyLevel: "high"
+    },
+    {
+      id: "EM002",
+      status: "available",
+      origin: "Puerto Banús",
+      destination: "Estación AVE María Zambrano",
+      date: "2024-03-15",
+      time: "19:30",
+      passengers: 2,
+      children: 0,
+      luggage: 3,
+      price: 65,
+      originalPrice: 40,
+      emergencyBonus: 25,
+      distance: 35,
+      duration: 45,
+      clientName: "Emergency Transfer",
+      clientPhone: "+34 900 987 654",
+      voucherCode: "EM-005678",
+      voucherValidated: false,
+      isEmergency: true,
+      reason: "Cliente perdió el vuelo, necesita traslado urgente",
+      createdBy: "Admin - María Ruiz",
+      urgencyLevel: "critical"
+    }
+  ]);
+
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [showVoucherScanner, setShowVoucherScanner] = useState(false);
   const [voucherInput, setVoucherInput] = useState("");
