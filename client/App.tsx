@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { TripProvider } from "./contexts/TripContext";
