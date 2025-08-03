@@ -320,6 +320,7 @@ Equipo de Transfermarbell
                       value={clientData?.name || ""}
                       placeholder="Nombre del cliente"
                       className="mt-1"
+                      readOnly
                     />
                   </div>
                   <div>
@@ -329,6 +330,7 @@ Equipo de Transfermarbell
                       value={clientData?.email || ""}
                       placeholder="email@ejemplo.com"
                       className="mt-1"
+                      readOnly
                     />
                   </div>
                 </div>
