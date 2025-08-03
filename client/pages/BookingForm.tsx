@@ -397,22 +397,25 @@ export default function BookingForm() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Route Map */}
-              <RouteMap
-                origin={bookingData.origin}
-                destination={bookingData.destination}
-                className="w-full"
-              />
-
-              {/* Journey Details */}
+              {/* Route Details - Reorganized */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPinIcon className="w-5 h-5 text-ocean" />
-                    Journey Details
+                    {t("booking.routeDetails")}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6">
+                  {/* Map first */}
+                  <div className="w-full">
+                    <RouteMap
+                      origin={bookingData.origin}
+                      destination={bookingData.destination}
+                      className="w-full rounded-lg"
+                    />
+                  </div>
+
+                  {/* Origin and Destination in one row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
@@ -450,6 +453,45 @@ export default function BookingForm() {
                         required
                       />
                     </div>
+                  </div>
+
+                  {/* Route Information Cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-ocean-light/10 border border-ocean/20 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPinIcon className="w-5 h-5 text-ocean" />
+                        <span className="text-sm font-medium text-ocean">Distancia</span>
+                      </div>
+                      <p className="text-lg font-bold text-navy">~55 km</p>
+                    </div>
+                    <div className="p-4 bg-coral-light/10 border border-coral/20 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <ClockIcon className="w-5 h-5 text-coral" />
+                        <span className="text-sm font-medium text-coral">Duración</span>
+                      </div>
+                      <p className="text-lg font-bold text-navy">~45 min</p>
+                    </div>
+                    <div className="p-4 bg-green-100 border border-green-200 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <EuroIcon className="w-5 h-5 text-green-600" />
+                        <span className="text-sm font-medium text-green-600">Precio Est.</span>
+                      </div>
+                      <p className="text-lg font-bold text-navy">desde €35</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Journey Details */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <CalendarIcon className="w-5 h-5 text-ocean" />
+                    {t("booking.journeyDetails")}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
                         Date
