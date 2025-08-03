@@ -49,6 +49,15 @@ interface Trip {
   clientPhone: string;
   voucherCode: string;
   voucherValidated: boolean;
+}
+
+interface EmergencyTrip extends Trip {
+  isEmergency: true;
+  originalPrice: number;
+  emergencyBonus: number;
+  reason: string;
+  createdBy: string;
+  urgencyLevel: "medium" | "high" | "critical";
   flightNumber?: string;
   specialRequests?: string;
   vehicleType: string;
