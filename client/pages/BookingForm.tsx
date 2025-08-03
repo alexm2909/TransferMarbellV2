@@ -917,7 +917,7 @@ export default function BookingForm() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
-                        Payment Preference
+                        Preferencia de Pago
                       </label>
                       <Select
                         value={bookingData.paymentPreference}
