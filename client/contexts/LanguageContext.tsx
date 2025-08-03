@@ -1260,15 +1260,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Effect to save language preference with additional reliability
+  // Effect to save language preference
   useEffect(() => {
+    console.log("Language changed in context:", language);
     try {
       localStorage.setItem("transfermarbell_language", language);
-      localStorage.setItem("user_language_preference", language);
-      // Also store in sessionStorage as fallback
-      sessionStorage.setItem("current_language", language);
     } catch (error) {
-      console.warn("Error persisting language preference:", error);
+      console.error("Error persisting language preference:", error);
     }
   }, [language]);
 
