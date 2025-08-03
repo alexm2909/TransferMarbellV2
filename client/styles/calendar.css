@@ -19,15 +19,7 @@ input[type="date"]:focus {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background: linear-gradient(135deg, rgb(23 131 178), rgb(249 115 22));
-  border-radius: 0.25rem;
-  padding: 2px;
   cursor: pointer;
-  color: white;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 0.8;
 }
 
 /* Custom calendar dropdown styles */
