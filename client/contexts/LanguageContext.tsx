@@ -1181,7 +1181,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     try {
       const saved = localStorage.getItem("transfermarbell_language");
       if (saved && translations[saved]) {
-        console.log("Language loaded from localStorage:", saved);
         return saved;
       }
     } catch (error) {
@@ -1189,7 +1188,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Default to Spanish
-    console.log("Using default language: es");
     return "es";
   });
 
