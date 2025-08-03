@@ -494,8 +494,8 @@ export default function BookingForm() {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Date
+                      <label className="text-sm font-medium text-gray-700 text-center block">
+                        Fecha
                       </label>
                       <Input
                         type="date"
@@ -507,13 +507,13 @@ export default function BookingForm() {
                             date: e.target.value,
                           })
                         }
-                        className="border-gray-200 focus:border-ocean focus:ring-ocean"
+                        className="border-gray-200 focus:border-ocean focus:ring-ocean text-center"
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Time
+                      <label className="text-sm font-medium text-gray-700 text-center block">
+                        Hora
                       </label>
                       <TimeSelector
                         value={bookingData.time}
