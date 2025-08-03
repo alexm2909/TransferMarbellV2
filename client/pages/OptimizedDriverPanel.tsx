@@ -446,6 +446,120 @@ export default function OptimizedDriverPanel() {
             </div>
           </TabsContent>
 
+          {/* Emergency Trips */}
+          <TabsContent value="emergency">
+            <div className="grid gap-6">
+              {emergencyTrips.map((trip) => (
+                <Card key={trip.id} className="border-red-200 bg-red-50/50 hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                          <AlertTriangleIcon className="w-6 h-6 text-red-600" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-gray-900">EMERGENCIA</h3>
+                            <Badge className={`${
+                              trip.urgencyLevel === "critical" ? "bg-red-600" :
+                              trip.urgencyLevel === "high" ? "bg-orange-600" :
+                              "bg-yellow-600"
+                            } text-white`}>
+                              {trip.urgencyLevel === "critical" ? "CRÍTICO" :
+                               trip.urgencyLevel === "high" ? "ALTO" : "MEDIO"}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-gray-600">#{trip.id}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-red-600">€{trip.price}</div>
+                        <div className="text-sm text-gray-500 line-through">€{trip.originalPrice}</div>
+                        <div className="text-sm font-medium text-green-600">+€{trip.emergencyBonus} bonus</div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <MapPinIcon className="w-4 h-4 text-green-500" />
+                          <span className="font-medium">Origen:</span>
+                        </div>
+                        <p className="text-gray-700 ml-6">{trip.origin}</p>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <MapPinIcon className="w-4 h-4 text-red-500" />
+                          <span className="font-medium">Destino:</span>
+                        </div>
+                        <p className="text-gray-700 ml-6">{trip.destination}</p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
+                      <div className="flex items-center gap-2">
+                        <CalendarIcon className="w-4 h-4 text-gray-500" />
+                        <span>{trip.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <ClockIcon className="w-4 h-4 text-gray-500" />
+                        <span>{trip.time}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <UsersIcon className="w-4 h-4 text-gray-500" />
+                        <span>{trip.passengers} pax</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <LuggageIcon className="w-4 h-4 text-gray-500" />
+                        <span>{trip.luggage} maletas</span>
+                      </div>
+                    </div>
+
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <AlertTriangleIcon className="w-4 h-4 text-yellow-600" />
+                        <span className="font-medium text-yellow-800">Motivo de emergencia:</span>
+                      </div>
+                      <p className="text-yellow-700 text-sm">{trip.reason}</p>
+                      <p className="text-yellow-600 text-xs mt-1">Creado por: {trip.createdBy}</p>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <Button
+                        onClick={() => acceptTrip(trip.id)}
+                        className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                      >
+                        <CheckIcon className="w-4 h-4 mr-2" />
+                        Aceptar Emergencia
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => setSelectedTrip(trip)}
+                        className="border-red-300 text-red-600 hover:bg-red-50"
+                      >
+                        Ver Detalles
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {emergencyTrips.length === 0 && (
+                <Card className="border-green-200 bg-green-50/50">
+                  <CardContent className="text-center py-12">
+                    <CheckIcon className="w-12 h-12 mx-auto mb-4 text-green-500" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      No hay emergencias activas
+                    </h3>
+                    <p className="text-gray-600">
+                      ¡Excelente! No hay viajes de emergencia en este momento
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </TabsContent>
+
           {/* Active Trips */}
           <TabsContent value="active">
             <div className="grid gap-6">
