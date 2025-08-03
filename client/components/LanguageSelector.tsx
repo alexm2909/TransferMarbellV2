@@ -188,11 +188,7 @@ export function FlagOnlyLanguageSelector({ className = "" }: { className?: strin
 
   const currentLanguage = availableLanguages.find((lang) => lang.code === language);
 
-  console.log("FlagOnlyLanguageSelector - Current language:", language);
-  console.log("FlagOnlyLanguageSelector - Current language object:", currentLanguage);
-
   const handleLanguageChange = (languageCode: string) => {
-    console.log("FlagOnlyLanguageSelector - Changing to:", languageCode);
     setLanguage(languageCode);
     setIsOpen(false);
   };
