@@ -42,22 +42,6 @@ import {
 } from "lucide-react";
 
 function App() {
-  // Ensure language persistence on app initialization
-  useEffect(() => {
-    try {
-      const savedLanguage = localStorage.getItem("transfermarbell_language");
-      if (!savedLanguage) {
-        // Set default language if none exists
-        const browserLang = navigator.language.split('-')[0];
-        const supportedLanguages = ['es', 'en', 'fr', 'de', 'it'];
-        const defaultLang = supportedLanguages.includes(browserLang) ? browserLang : 'es';
-        localStorage.setItem("transfermarbell_language", defaultLang);
-      }
-    } catch (error) {
-      console.warn("Error initializing language:", error);
-    }
-  }, []);
-
   return (
     <LanguageProvider>
       <TripProvider>
