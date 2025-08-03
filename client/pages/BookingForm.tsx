@@ -383,13 +383,13 @@ export default function BookingForm() {
             className="inline-flex items-center text-ocean hover:text-coral transition-colors mb-4"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
-            Back to Home
+            {t("booking.backToHome")}
           </Link>
           <h1 className="text-3xl font-bold text-navy">
-            Complete Your Booking
+            {t("booking.completeBooking")}
           </h1>
           <p className="text-gray-600 mt-2">
-            Fill in the details below to book your private transfer
+            {t("booking.fillDetails")}
           </p>
         </div>
 
