@@ -401,12 +401,12 @@ export default function BookingForm() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Route Details - Reorganized */}
+              {/* Ruta del Viaje */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPinIcon className="w-5 h-5 text-ocean" />
-                    {t("booking.routeDetails")}
+                    Ruta del Viaje
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
