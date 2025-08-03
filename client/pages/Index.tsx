@@ -28,6 +28,9 @@ export default function Index() {
   const { isAuthenticated, user } = useAuth();
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Debugging temporal
+  useLanguageDebug();
   const [preBookingData, setPreBookingData] = useState({
     origin: "",
     destination: "",
