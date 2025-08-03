@@ -9,7 +9,6 @@ import UserMenu from "@/components/UserMenu";
 import { FlagOnlyLanguageSelector, FullLanguageSelector } from "@/components/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useLanguageDebug } from "@/hooks/useLanguageDebug";
 import {
   CalendarIcon,
   ClockIcon,
