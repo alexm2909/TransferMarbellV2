@@ -92,16 +92,7 @@ function App() {
             <Route path="/trip-marketplace" element={<TripMarketplace />} />
 
             {/* User Role Pages */}
-            <Route
-              path="/driver"
-              element={
-                <PlaceholderPage
-                  title="Driver Portal"
-                  description="Manage your vehicles, view available transfers, track earnings, and communicate with passengers. Complete your driver registration to get started."
-                  icon={CarIcon}
-                />
-              }
-            />
+        <Route path="/driver" element={<Navigate to="/driver-panel" replace />} />
 
             <Route
               path="/fleet-manager"
