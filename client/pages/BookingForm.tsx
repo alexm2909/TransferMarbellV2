@@ -25,6 +25,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import {
   CalendarIcon,
   ClockIcon,
+  EuroIcon,
   MapPinIcon,
   UsersIcon,
   LuggageIcon,
