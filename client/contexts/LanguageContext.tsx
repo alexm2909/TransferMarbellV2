@@ -1226,9 +1226,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Set language function
   const setLanguage = (newLanguage: string) => {
-    console.log("setLanguage called with:", newLanguage);
     if (translations[newLanguage] && newLanguage !== language) {
-      console.log("Setting language to:", newLanguage);
       setLanguageState(newLanguage);
       localStorage.setItem("transfermarbell_language", newLanguage);
     }
