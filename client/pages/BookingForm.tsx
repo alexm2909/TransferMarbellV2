@@ -901,10 +901,10 @@ export default function BookingForm() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
-                        Flight Number (Optional)
+                        {t("booking.flightNumber")} (Opcional)
                       </label>
                       <Input
-                        placeholder="e.g., IB1234"
+                        placeholder="ej. IB1234"
                         value={bookingData.flightNumber}
                         onChange={(e) =>
                           setBookingData({
