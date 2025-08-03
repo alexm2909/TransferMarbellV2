@@ -154,7 +154,7 @@ export default function OptimizedDriverPanel() {
       voucherValidated: false,
       isEmergency: true,
       reason: "Cliente perdió el vuelo, necesita traslado urgente",
-      createdBy: "Admin - María Ruiz",
+      createdBy: "Admin - Mar��a Ruiz",
       urgencyLevel: "critical"
     }
   ]);
@@ -338,9 +338,12 @@ export default function OptimizedDriverPanel() {
         </div>
 
         <Tabs defaultValue="available" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="available">
               Disponibles ({availableTrips.length})
+            </TabsTrigger>
+            <TabsTrigger value="emergency" className="text-red-600 font-semibold">
+              🚨 Emergencias ({emergencyTrips.length})
             </TabsTrigger>
             <TabsTrigger value="active">
               Activos ({activeTrips.length})
