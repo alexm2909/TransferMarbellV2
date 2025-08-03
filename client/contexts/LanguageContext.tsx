@@ -134,6 +134,9 @@ export interface Translations {
 
   // Booking
   "booking.title": string;
+  "booking.backToHome": string;
+  "booking.completeBooking": string;
+  "booking.fillDetails": string;
   "booking.selectVehicle": string;
   "booking.passengers": string;
   "booking.luggage": string;
@@ -141,6 +144,12 @@ export interface Translations {
   "booking.confirm": string;
   "booking.payment": string;
   "booking.summary": string;
+  "booking.routeDetails": string;
+  "booking.journeyDetails": string;
+  "booking.vehicleSelection": string;
+  "booking.additionalDetails": string;
+  "booking.flightNumber": string;
+  "booking.specialRequests": string;
 
   // Common
   "common.loading": string;
