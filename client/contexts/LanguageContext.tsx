@@ -347,6 +347,9 @@ export const translations: Record<string, Translations> = {
 
     // Booking
     "booking.title": "Reservar Traslado",
+    "booking.backToHome": "Volver al Inicio",
+    "booking.completeBooking": "Completa tu Reserva",
+    "booking.fillDetails": "Rellena los detalles a continuación para reservar tu traslado privado",
     "booking.selectVehicle": "Seleccionar Vehículo",
     "booking.passengers": "Pasajeros",
     "booking.luggage": "Equipaje",
@@ -354,6 +357,12 @@ export const translations: Record<string, Translations> = {
     "booking.confirm": "Confirmar",
     "booking.payment": "Pago",
     "booking.summary": "Resumen",
+    "booking.routeDetails": "Detalles de la Ruta",
+    "booking.journeyDetails": "Detalles del Viaje",
+    "booking.vehicleSelection": "Selección de Vehículo",
+    "booking.additionalDetails": "Detalles Adicionales",
+    "booking.flightNumber": "Número de Vuelo",
+    "booking.specialRequests": "Solicitudes Especiales",
 
     // Common
     "common.loading": "Cargando...",
