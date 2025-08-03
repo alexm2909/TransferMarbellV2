@@ -1195,6 +1195,19 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     };
 
     initializeLanguage();
+
+    // Listen for language changes in other tabs/windows
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "transfermarbell_language" && e.newValue && translations[e.newValue]) {
+        setLanguageState(e.newValue);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   // Translation function with fallbacks for missing keys
