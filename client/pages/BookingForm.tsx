@@ -894,7 +894,7 @@ export default function BookingForm() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <PlaneIcon className="w-5 h-5 text-ocean" />
-                    Additional Details
+                    {t("booking.additionalDetails")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
