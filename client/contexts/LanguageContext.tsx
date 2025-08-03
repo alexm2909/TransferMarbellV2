@@ -1218,14 +1218,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Effect to save language preference
+  // Save to localStorage when language changes
   useEffect(() => {
-    console.log("Language changed in context:", language);
-    try {
-      localStorage.setItem("transfermarbell_language", language);
-    } catch (error) {
-      console.error("Error persisting language preference:", error);
-    }
+    console.log("Language state changed to:", language);
+    localStorage.setItem("transfermarbell_language", language);
   }, [language]);
 
   // Currency formatting function
