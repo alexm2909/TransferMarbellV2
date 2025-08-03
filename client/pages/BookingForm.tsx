@@ -945,12 +945,12 @@ export default function BookingForm() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">
-                      Special Requests (Optional)
+                      {t("booking.specialRequests")} (Opcional)
                     </label>
                     <textarea
                       className="w-full p-3 border border-gray-200 rounded-md focus:border-ocean focus:ring-ocean resize-none"
                       rows={3}
-                      placeholder="Any special requirements or requests..."
+                      placeholder="Cualquier requisito o solicitud especial..."
                       value={bookingData.specialRequests}
                       onChange={(e) =>
                         setBookingData({
