@@ -46,109 +46,115 @@ function App() {
     <LanguageProvider>
       <TripProvider>
         <BrowserRouter>
-            <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-        {/* Booking Flow */}
-        <Route path="/book" element={<BookingForm />} />
-        <Route path="/booking-confirmation" element={<BookingConfirmation />} />
-
-        {/* Payment Flow */}
-        <Route path="/payment-method" element={<PaymentMethod />} />
-        <Route path="/payment-summary" element={<PaymentSummary />} />
-        <Route path="/payment-apple" element={<PaymentApple />} />
-        <Route path="/payment-google" element={<PaymentGoogle />} />
-        <Route path="/payment-paypal" element={<PaymentPaypal />} />
-        <Route path="/payment-bank" element={<PaymentBank />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/payment-error" element={<PaymentError />} />
-
-        {/* Authentication */}
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/password-recovery" element={<PasswordRecovery />} />
-        <Route path="/driver-registration" element={<DriverRegistration />} />
-
-        {/* Chat and Advanced Panels */}
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/driver-panel" element={<OptimizedDriverPanel />} />
-        <Route path="/admin-panel" element={<AdminPanel />} />
-        <Route path="/fleet-panel" element={<FleetManagerPanel />} />
-        <Route path="/business-panel" element={<BusinessPanel />} />
-
-        {/* Client Features */}
-        <Route path="/my-bookings" element={<ViewBookings />} />
-        <Route path="/refer-friends" element={<ReferFriends />} />
-        <Route path="/settings" element={<UserSettings />} />
-
-        {/* Driver/Fleet Manager Features */}
-        <Route path="/trip-marketplace" element={<TripMarketplace />} />
-
-        {/* User Role Pages */}
-        <Route
-          path="/driver"
-          element={
-            <PlaceholderPage
-              title="Driver Portal"
-              description="Manage your vehicles, view available transfers, track earnings, and communicate with passengers. Complete your driver registration to get started."
-              icon={CarIcon}
+            {/* Booking Flow */}
+            <Route path="/book" element={<BookingForm />} />
+            <Route
+              path="/booking-confirmation"
+              element={<BookingConfirmation />}
             />
-          }
-        />
 
-        <Route
-          path="/fleet-manager"
-          element={
-            <PlaceholderPage
-              title="Fleet Manager Dashboard"
-              description="Manage your fleet of drivers and vehicles. Assign transfers, monitor performance, and oversee operations across your fleet."
-              icon={UsersIcon}
+            {/* Payment Flow */}
+            <Route path="/payment-method" element={<PaymentMethod />} />
+            <Route path="/payment-summary" element={<PaymentSummary />} />
+            <Route path="/payment-apple" element={<PaymentApple />} />
+            <Route path="/payment-google" element={<PaymentGoogle />} />
+            <Route path="/payment-paypal" element={<PaymentPaypal />} />
+            <Route path="/payment-bank" element={<PaymentBank />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-error" element={<PaymentError />} />
+
+            {/* Authentication */}
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/password-recovery" element={<PasswordRecovery />} />
+            <Route
+              path="/driver-registration"
+              element={<DriverRegistration />}
             />
-          }
-        />
 
-        <Route
-          path="/admin"
-          element={
-            <PlaceholderPage
-              title="Admin Control Panel"
-              description="Manage all platform operations including user verification, pricing approvals, dispute resolution, and system configuration."
-              icon={ShieldIcon}
+            {/* Chat and Advanced Panels */}
+            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/driver-panel" element={<OptimizedDriverPanel />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
+            <Route path="/fleet-panel" element={<FleetManagerPanel />} />
+            <Route path="/business-panel" element={<BusinessPanel />} />
+
+            {/* Client Features */}
+            <Route path="/my-bookings" element={<ViewBookings />} />
+            <Route path="/refer-friends" element={<ReferFriends />} />
+            <Route path="/settings" element={<UserSettings />} />
+
+            {/* Driver/Fleet Manager Features */}
+            <Route path="/trip-marketplace" element={<TripMarketplace />} />
+
+            {/* User Role Pages */}
+            <Route
+              path="/driver"
+              element={
+                <PlaceholderPage
+                  title="Driver Portal"
+                  description="Manage your vehicles, view available transfers, track earnings, and communicate with passengers. Complete your driver registration to get started."
+                  icon={CarIcon}
+                />
+              }
             />
-          }
-        />
 
-        {/* Service Pages */}
-        <Route
-          path="/business"
-          element={
-            <PlaceholderPage
-              title="Business Solutions"
-              description="Corporate transfer solutions for businesses. Manage group bookings, generate reports, and streamline your company's transportation needs."
-              icon={BuildingIcon}
+            <Route
+              path="/fleet-manager"
+              element={
+                <PlaceholderPage
+                  title="Fleet Manager Dashboard"
+                  description="Manage your fleet of drivers and vehicles. Assign transfers, monitor performance, and oversee operations across your fleet."
+                  icon={UsersIcon}
+                />
+              }
             />
-          }
-        />
 
-        <Route path="/fleet" element={<Fleet />} />
-
-        <Route path="/services" element={<Services />} />
-
-        <Route
-          path="/support"
-          element={
-            <PlaceholderPage
-              title="Support Center"
-              description="Get help with bookings, payments, account issues, or general questions. Our support team is here to assist you 24/7."
-              icon={HelpCircleIcon}
+            <Route
+              path="/admin"
+              element={
+                <PlaceholderPage
+                  title="Admin Control Panel"
+                  description="Manage all platform operations including user verification, pricing approvals, dispute resolution, and system configuration."
+                  icon={ShieldIcon}
+                />
+              }
             />
-          }
-        />
 
-                {/* Catch-all route for 404 */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+            {/* Service Pages */}
+            <Route
+              path="/business"
+              element={
+                <PlaceholderPage
+                  title="Business Solutions"
+                  description="Corporate transfer solutions for businesses. Manage group bookings, generate reports, and streamline your company's transportation needs."
+                  icon={BuildingIcon}
+                />
+              }
+            />
+
+            <Route path="/fleet" element={<Fleet />} />
+
+            <Route path="/services" element={<Services />} />
+
+            <Route
+              path="/support"
+              element={
+                <PlaceholderPage
+                  title="Support Center"
+                  description="Get help with bookings, payments, account issues, or general questions. Our support team is here to assist you 24/7."
+                  icon={HelpCircleIcon}
+                />
+              }
+            />
+
+            {/* Catch-all route for 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
       </TripProvider>
     </LanguageProvider>

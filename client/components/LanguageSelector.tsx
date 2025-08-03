@@ -34,7 +34,9 @@ export default function LanguageSelector({
   const { language, setLanguage, availableLanguages } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLanguage = availableLanguages.find((lang) => lang.code === language);
+  const currentLanguage = availableLanguages.find(
+    (lang) => lang.code === language,
+  );
 
   const handleLanguageChange = (languageCode: string) => {
     setLanguage(languageCode);
@@ -61,9 +63,13 @@ export default function LanguageSelector({
         <SelectTrigger className={`${sizeClasses[size]} ${className}`}>
           <SelectValue>
             <div className="flex items-center space-x-2">
-              {showFlag && <span className="text-lg">{currentLanguage?.flag}</span>}
+              {showFlag && (
+                <span className="text-lg">{currentLanguage?.flag}</span>
+              )}
               {showText && <span>{currentLanguage?.name}</span>}
-              {!showText && !showFlag && <GlobeIcon className={iconSizeClasses[size]} />}
+              {!showText && !showFlag && (
+                <GlobeIcon className={iconSizeClasses[size]} />
+              )}
             </div>
           </SelectValue>
         </SelectTrigger>
@@ -90,10 +96,16 @@ export default function LanguageSelector({
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="flex items-center space-x-1">
-            {showFlag && <span className="text-lg">{currentLanguage?.flag}</span>}
+            {showFlag && (
+              <span className="text-lg">{currentLanguage?.flag}</span>
+            )}
             {showText && <span>{currentLanguage?.name}</span>}
-            {!showText && !showFlag && <GlobeIcon className={iconSizeClasses[size]} />}
-            <ChevronDownIcon className={`${iconSizeClasses[size]} transition-transform ${isOpen ? "rotate-180" : ""}`} />
+            {!showText && !showFlag && (
+              <GlobeIcon className={iconSizeClasses[size]} />
+            )}
+            <ChevronDownIcon
+              className={`${iconSizeClasses[size]} transition-transform ${isOpen ? "rotate-180" : ""}`}
+            />
           </div>
         </Button>
 
@@ -104,7 +116,7 @@ export default function LanguageSelector({
               className="fixed inset-0 z-10 bg-transparent"
               onClick={() => setIsOpen(false)}
             />
-            
+
             {/* Dropdown */}
             <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20">
               <div className="py-1">
@@ -113,7 +125,9 @@ export default function LanguageSelector({
                     key={lang.code}
                     onClick={() => handleLanguageChange(lang.code)}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-ocean-light/20 transition-colors flex items-center space-x-3 ${
-                      lang.code === language ? "bg-ocean-light/10 text-ocean font-medium" : "text-gray-700"
+                      lang.code === language
+                        ? "bg-ocean-light/10 text-ocean font-medium"
+                        : "text-gray-700"
                     }`}
                   >
                     <span className="text-lg">{lang.flag}</span>
@@ -140,10 +154,18 @@ export default function LanguageSelector({
           className={`${sizeClasses[size]} hover:bg-ocean-light/20 hover:text-ocean transition-colors ${className}`}
         >
           <div className="flex items-center space-x-1">
-            {showFlag && <span className="text-lg">{currentLanguage?.flag}</span>}
-            {showText && <span className="hidden sm:inline">{currentLanguage?.name}</span>}
-            {!showText && !showFlag && <GlobeIcon className={iconSizeClasses[size]} />}
-            <ChevronDownIcon className={`${iconSizeClasses[size]} transition-transform ${isOpen ? "rotate-180" : ""}`} />
+            {showFlag && (
+              <span className="text-lg">{currentLanguage?.flag}</span>
+            )}
+            {showText && (
+              <span className="hidden sm:inline">{currentLanguage?.name}</span>
+            )}
+            {!showText && !showFlag && (
+              <GlobeIcon className={iconSizeClasses[size]} />
+            )}
+            <ChevronDownIcon
+              className={`${iconSizeClasses[size]} transition-transform ${isOpen ? "rotate-180" : ""}`}
+            />
           </div>
         </Button>
       </DropdownMenuTrigger>
@@ -153,7 +175,9 @@ export default function LanguageSelector({
             key={lang.code}
             onClick={() => handleLanguageChange(lang.code)}
             className={`flex items-center space-x-3 cursor-pointer ${
-              lang.code === language ? "bg-ocean-light/10 text-ocean font-medium" : ""
+              lang.code === language
+                ? "bg-ocean-light/10 text-ocean font-medium"
+                : ""
             }`}
           >
             <span className="text-lg">{lang.flag}</span>
@@ -169,7 +193,11 @@ export default function LanguageSelector({
 }
 
 // Compact version for mobile/tight spaces - only flag
-export function CompactLanguageSelector({ className = "" }: { className?: string }) {
+export function CompactLanguageSelector({
+  className = "",
+}: {
+  className?: string;
+}) {
   return (
     <LanguageSelector
       variant="dropdown"
@@ -182,11 +210,17 @@ export function CompactLanguageSelector({ className = "" }: { className?: string
 }
 
 // Icon-only version with larger flag
-export function FlagOnlyLanguageSelector({ className = "" }: { className?: string }) {
+export function FlagOnlyLanguageSelector({
+  className = "",
+}: {
+  className?: string;
+}) {
   const { language, setLanguage, availableLanguages } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLanguage = availableLanguages.find((lang) => lang.code === language);
+  const currentLanguage = availableLanguages.find(
+    (lang) => lang.code === language,
+  );
 
   const handleLanguageChange = (languageCode: string) => {
     setLanguage(languageCode);
@@ -210,7 +244,9 @@ export function FlagOnlyLanguageSelector({ className = "" }: { className?: strin
             key={lang.code}
             onClick={() => handleLanguageChange(lang.code)}
             className={`flex items-center space-x-3 cursor-pointer ${
-              lang.code === language ? "bg-ocean-light/10 text-ocean font-medium" : ""
+              lang.code === language
+                ? "bg-ocean-light/10 text-ocean font-medium"
+                : ""
             }`}
           >
             <span className="text-lg">{lang.flag}</span>
@@ -226,7 +262,11 @@ export function FlagOnlyLanguageSelector({ className = "" }: { className?: strin
 }
 
 // Full version with text
-export function FullLanguageSelector({ className = "" }: { className?: string }) {
+export function FullLanguageSelector({
+  className = "",
+}: {
+  className?: string;
+}) {
   return (
     <LanguageSelector
       variant="dropdown"

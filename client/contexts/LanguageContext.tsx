@@ -206,26 +206,26 @@ export interface Translations {
   "auth.emailInvalid": string;
 
   // Missing translations
-  "book_transfer": string;
-  "view_bookings": string;
-  "settings": string;
-  "logout": string;
-  "available_transfers": string;
-  "total_available": string;
-  "accept": string;
-  "reject": string;
-  "credit_card": string;
-  "debit_card": string;
-  "paypal": string;
-  "bank_transfer": string;
-  "payment_methods": string;
-  "add_payment_method": string;
-  "card_number": string;
-  "expiry_date": string;
-  "cvv": string;
-  "cardholder_name": string;
-  "cancel": string;
-  "add": string;
+  book_transfer: string;
+  view_bookings: string;
+  settings: string;
+  logout: string;
+  available_transfers: string;
+  total_available: string;
+  accept: string;
+  reject: string;
+  credit_card: string;
+  debit_card: string;
+  paypal: string;
+  bank_transfer: string;
+  payment_methods: string;
+  add_payment_method: string;
+  card_number: string;
+  expiry_date: string;
+  cvv: string;
+  cardholder_name: string;
+  cancel: string;
+  add: string;
 }
 
 // Spanish translations (default)
@@ -243,21 +243,27 @@ export const translations: Record<string, Translations> = {
     // Homepage
     "home.title": "Traslados Privados Premium",
     "home.subtitle": "Hechos Simples",
-    "home.description": "Reserva traslados profesionales al aeropuerto, viajes urbanos y transporte privado por la Costa del Sol. Confiable, cómodo y siempre puntual.",
+    "home.description":
+      "Reserva traslados profesionales al aeropuerto, viajes urbanos y transporte privado por la Costa del Sol. Confiable, cómodo y siempre puntual.",
     "home.bookingTitle": "Reserva tu Traslado",
-    "home.bookingDescription": "Introduce los detalles de tu viaje para comenzar",
+    "home.bookingDescription":
+      "Introduce los detalles de tu viaje para comenzar",
     "home.from": "Desde",
     "home.to": "Hasta",
     "home.date": "Fecha",
     "home.time": "Hora",
     "home.continue": "Continuar Reserva",
-    "home.nextStep": "Siguiente: Selecciona tipo de vehículo, pasajeros y completa tu reserva",
+    "home.nextStep":
+      "Siguiente: Selecciona tipo de vehículo, pasajeros y completa tu reserva",
     "home.whyChoose": "¿Por qué elegir Transfermarbell?",
-    "home.whyChooseDesc": "Experimenta la diferencia con nuestro servicio premium de traslados privados",
+    "home.whyChooseDesc":
+      "Experimenta la diferencia con nuestro servicio premium de traslados privados",
     "home.becomeDriver": "Conviértete en Conductor",
-    "home.becomeDriverDesc": "Únete a nuestra red de conductores profesionales y empieza a ganar dinero con tu vehículo. Horario flexible, tarifas competitivas y soporte cuando lo necesites.",
+    "home.becomeDriverDesc":
+      "Únete a nuestra red de conductores profesionales y empieza a ganar dinero con tu vehículo. Horario flexible, tarifas competitivas y soporte cuando lo necesites.",
     "home.readyToBook": "¿Listo para Reservar tu Traslado?",
-    "home.readyToBookDesc": "Únete a miles de clientes satisfechos que confían en Transfermarbell para sus necesidades de transporte privado por la Costa del Sol.",
+    "home.readyToBookDesc":
+      "Únete a miles de clientes satisfechos que confían en Transfermarbell para sus necesidades de transporte privado por la Costa del Sol.",
     "home.bookNow": "Reservar Ahora",
     "home.viewFleet": "Ver Nuestra Flota",
 
@@ -271,7 +277,8 @@ export const translations: Record<string, Translations> = {
 
     // Driver section
     "driver.title": "Conviértete en Conductor",
-    "driver.description": "Únete a nuestra red de conductores profesionales y empieza a ganar dinero con tu vehículo. Horario flexible, tarifas competitivas y soporte cuando lo necesites.",
+    "driver.description":
+      "Únete a nuestra red de conductores profesionales y empieza a ganar dinero con tu vehículo. Horario flexible, tarifas competitivas y soporte cuando lo necesites.",
     "driver.earnUpTo": "Gana hasta €2,000+ por mes",
     "driver.flexibleHours": "Horarios flexibles",
     "driver.insuranceSupport": "Seguro y soporte incluidos",
@@ -297,7 +304,8 @@ export const translations: Record<string, Translations> = {
     "footer.careers": "Carreras",
     "footer.privacyPolicy": "Política de Privacidad",
     "footer.termsOfService": "Términos de Servicio",
-    "footer.copyright": "© 2024 Transfermarbell. Todos los derechos reservados.",
+    "footer.copyright":
+      "© 2024 Transfermarbell. Todos los derechos reservados.",
 
     // Dashboard
     "dashboard.welcome": "Bienvenido",
@@ -309,11 +317,13 @@ export const translations: Record<string, Translations> = {
     "dashboard.applicationPending": "Solicitud Pendiente de Aprobación",
     "dashboard.applicationApproved": "¡Solicitud Aprobada!",
     "dashboard.applicationRejected": "Solicitud Rechazada",
-    "dashboard.pendingApproval": "Tu solicitud está siendo revisada por nuestro equipo.",
+    "dashboard.pendingApproval":
+      "Tu solicitud está siendo revisada por nuestro equipo.",
     "dashboard.approved": "Ya puedes comenzar a recibir solicitudes de viaje.",
     "dashboard.contactSupport": "Contacta con soporte para más información.",
     "dashboard.becomeDriver": "¿Quieres ser conductor?",
-    "dashboard.becomeDriverDesc": "Únete a nuestro equipo de conductores profesionales y empieza a ganar dinero con tu vehículo.",
+    "dashboard.becomeDriverDesc":
+      "Únete a nuestro equipo de conductores profesionales y empieza a ganar dinero con tu vehículo.",
     "dashboard.apply": "Aplicar",
     "dashboard.myBookings": "Mis Reservas",
     "dashboard.confirmed": "Confirmado",
@@ -323,7 +333,8 @@ export const translations: Record<string, Translations> = {
 
     // Admin Panel
     "admin.title": "Panel de Administración",
-    "admin.description": "Gestiona usuarios, aprobaciones y configura el sistema",
+    "admin.description":
+      "Gestiona usuarios, aprobaciones y configura el sistema",
     "admin.totalUsers": "Usuarios Totales",
     "admin.pendingRequests": "Solicitudes Pendientes",
     "admin.activeDisputes": "Disputas Activas",
@@ -349,7 +360,8 @@ export const translations: Record<string, Translations> = {
     "booking.title": "Reservar Traslado",
     "booking.backToHome": "Volver al Inicio",
     "booking.completeBooking": "Completa tu Reserva",
-    "booking.fillDetails": "Rellena los detalles a continuación para reservar tu traslado privado",
+    "booking.fillDetails":
+      "Rellena los detalles a continuación para reservar tu traslado privado",
     "booking.selectVehicle": "Seleccionar Vehículo",
     "booking.passengers": "Pasajeros",
     "booking.luggage": "Equipaje",
@@ -419,26 +431,26 @@ export const translations: Record<string, Translations> = {
     "auth.emailInvalid": "Email inválido",
 
     // Missing translations
-    "book_transfer": "Reservar Traslado",
-    "view_bookings": "Ver Reservas",
-    "settings": "Configuración",
-    "logout": "Cerrar Sesión",
-    "available_transfers": "Traslados Disponibles",
-    "total_available": "Total Disponibles",
-    "accept": "Aceptar",
-    "reject": "Rechazar",
-    "credit_card": "Tarjeta de Crédito",
-    "debit_card": "Tarjeta de Débito",
-    "paypal": "PayPal",
-    "bank_transfer": "Transferencia Bancaria",
-    "payment_methods": "Métodos de Pago",
-    "add_payment_method": "Agregar Método de Pago",
-    "card_number": "Número de Tarjeta",
-    "expiry_date": "Fecha de Vencimiento",
-    "cvv": "CVV",
-    "cardholder_name": "Nombre del Titular",
-    "cancel": "Cancelar",
-    "add": "Agregar",
+    book_transfer: "Reservar Traslado",
+    view_bookings: "Ver Reservas",
+    settings: "Configuración",
+    logout: "Cerrar Sesión",
+    available_transfers: "Traslados Disponibles",
+    total_available: "Total Disponibles",
+    accept: "Aceptar",
+    reject: "Rechazar",
+    credit_card: "Tarjeta de Crédito",
+    debit_card: "Tarjeta de Débito",
+    paypal: "PayPal",
+    bank_transfer: "Transferencia Bancaria",
+    payment_methods: "Métodos de Pago",
+    add_payment_method: "Agregar Método de Pago",
+    card_number: "Número de Tarjeta",
+    expiry_date: "Fecha de Vencimiento",
+    cvv: "CVV",
+    cardholder_name: "Nombre del Titular",
+    cancel: "Cancelar",
+    add: "Agregar",
   },
 
   en: {
@@ -454,7 +466,8 @@ export const translations: Record<string, Translations> = {
     // Homepage
     "home.title": "Premium Private Transfers",
     "home.subtitle": "Made Simple",
-    "home.description": "Book professional airport transfers, city rides, and private transportation across Costa del Sol. Reliable, comfortable, and always on time.",
+    "home.description":
+      "Book professional airport transfers, city rides, and private transportation across Costa del Sol. Reliable, comfortable, and always on time.",
     "home.bookingTitle": "Book Your Transfer",
     "home.bookingDescription": "Enter your journey details to get started",
     "home.from": "From",
@@ -462,13 +475,17 @@ export const translations: Record<string, Translations> = {
     "home.date": "Date",
     "home.time": "Time",
     "home.continue": "Continue Booking",
-    "home.nextStep": "Next: Select vehicle type, passengers, and complete your booking",
+    "home.nextStep":
+      "Next: Select vehicle type, passengers, and complete your booking",
     "home.whyChoose": "Why Choose Transfermarbell?",
-    "home.whyChooseDesc": "Experience the difference with our premium private transfer service",
+    "home.whyChooseDesc":
+      "Experience the difference with our premium private transfer service",
     "home.becomeDriver": "Become a Driver",
-    "home.becomeDriverDesc": "Join our network of professional drivers and start earning money with your vehicle. Flexible schedule, competitive rates, and support when you need it.",
+    "home.becomeDriverDesc":
+      "Join our network of professional drivers and start earning money with your vehicle. Flexible schedule, competitive rates, and support when you need it.",
     "home.readyToBook": "Ready to Book Your Transfer?",
-    "home.readyToBookDesc": "Join thousands of satisfied customers who trust Transfermarbell for their private transportation needs across Costa del Sol.",
+    "home.readyToBookDesc":
+      "Join thousands of satisfied customers who trust Transfermarbell for their private transportation needs across Costa del Sol.",
     "home.bookNow": "Book Now",
     "home.viewFleet": "View Our Fleet",
 
@@ -482,7 +499,8 @@ export const translations: Record<string, Translations> = {
 
     // Driver section
     "driver.title": "Become a Driver",
-    "driver.description": "Join our network of professional drivers and start earning money with your vehicle. Flexible schedule, competitive rates, and support when you need it.",
+    "driver.description":
+      "Join our network of professional drivers and start earning money with your vehicle. Flexible schedule, competitive rates, and support when you need it.",
     "driver.earnUpTo": "Earn up to €2,000+ per month",
     "driver.flexibleHours": "Flexible working hours",
     "driver.insuranceSupport": "Insurance and support included",
@@ -520,11 +538,13 @@ export const translations: Record<string, Translations> = {
     "dashboard.applicationPending": "Application Pending Approval",
     "dashboard.applicationApproved": "Application Approved!",
     "dashboard.applicationRejected": "Application Rejected",
-    "dashboard.pendingApproval": "Your application is being reviewed by our team.",
+    "dashboard.pendingApproval":
+      "Your application is being reviewed by our team.",
     "dashboard.approved": "You can now start receiving trip requests.",
     "dashboard.contactSupport": "Contact support for more information.",
     "dashboard.becomeDriver": "Want to become a driver?",
-    "dashboard.becomeDriverDesc": "Join our team of professional drivers and start earning money with your vehicle.",
+    "dashboard.becomeDriverDesc":
+      "Join our team of professional drivers and start earning money with your vehicle.",
     "dashboard.apply": "Apply",
     "dashboard.myBookings": "My Bookings",
     "dashboard.confirmed": "Confirmed",
@@ -634,21 +654,27 @@ export const translations: Record<string, Translations> = {
     // Homepage
     "home.title": "Transferts Privés Premium",
     "home.subtitle": "Rendus Simples",
-    "home.description": "Réservez des transferts professionnels d'aéroport, des trajets urbains et du transport privé sur la Costa del Sol. Fiable, confortable et toujours à l'heure.",
+    "home.description":
+      "Réservez des transferts professionnels d'aéroport, des trajets urbains et du transport privé sur la Costa del Sol. Fiable, confortable et toujours à l'heure.",
     "home.bookingTitle": "Réservez Votre Transfert",
-    "home.bookingDescription": "Entrez les détails de votre voyage pour commencer",
+    "home.bookingDescription":
+      "Entrez les détails de votre voyage pour commencer",
     "home.from": "De",
     "home.to": "À",
     "home.date": "Date",
     "home.time": "Heure",
     "home.continue": "Continuer la Réservation",
-    "home.nextStep": "Suivant: Sélectionnez le type de véhicule, les passagers et complétez votre réservation",
+    "home.nextStep":
+      "Suivant: Sélectionnez le type de véhicule, les passagers et complétez votre réservation",
     "home.whyChoose": "Pourquoi Choisir Transfermarbell?",
-    "home.whyChooseDesc": "Découvrez la différence avec notre service premium de transferts privés",
+    "home.whyChooseDesc":
+      "Découvrez la différence avec notre service premium de transferts privés",
     "home.becomeDriver": "Devenir Chauffeur",
-    "home.becomeDriverDesc": "Rejoignez notre réseau de chauffeurs professionnels et commencez à gagner de l'argent avec votre véhicule. Horaires flexibles, tarifs compétitifs et support quand vous en avez besoin.",
+    "home.becomeDriverDesc":
+      "Rejoignez notre réseau de chauffeurs professionnels et commencez à gagner de l'argent avec votre véhicule. Horaires flexibles, tarifs compétitifs et support quand vous en avez besoin.",
     "home.readyToBook": "Prêt à Réserver Votre Transfert?",
-    "home.readyToBookDesc": "Rejoignez des milliers de clients satisfaits qui font confiance à Transfermarbell pour leurs besoins de transport privé sur la Costa del Sol.",
+    "home.readyToBookDesc":
+      "Rejoignez des milliers de clients satisfaits qui font confiance à Transfermarbell pour leurs besoins de transport privé sur la Costa del Sol.",
     "home.bookNow": "Réserver Maintenant",
     "home.viewFleet": "Voir Notre Flotte",
 
@@ -662,13 +688,15 @@ export const translations: Record<string, Translations> = {
 
     // Driver section
     "driver.title": "Devenir Chauffeur",
-    "driver.description": "Rejoignez notre réseau de chauffeurs professionnels et commencez à gagner de l'argent avec votre véhicule. Horaires flexibles, tarifs compétitifs et support quand vous en avez besoin.",
+    "driver.description":
+      "Rejoignez notre réseau de chauffeurs professionnels et commencez à gagner de l'argent avec votre véhicule. Horaires flexibles, tarifs compétitifs et support quand vous en avez besoin.",
     "driver.earnUpTo": "Gagnez jusqu'à 2 000 €+ par mois",
     "driver.flexibleHours": "Horaires flexibles",
     "driver.insuranceSupport": "Assurance et support inclus",
     "driver.noUpfrontCosts": "Pas de coûts initiaux",
     "driver.applyToDrive": "Postuler pour Conduire",
-    "driver.needAccount": "Vous avez besoin d'un compte pour postuler comme chauffeur",
+    "driver.needAccount":
+      "Vous avez besoin d'un compte pour postuler comme chauffeur",
     "driver.signUp": "S'inscrire",
     "driver.signIn": "Se Connecter",
 
@@ -700,11 +728,15 @@ export const translations: Record<string, Translations> = {
     "dashboard.applicationPending": "Candidature en Attente d'Approbation",
     "dashboard.applicationApproved": "Candidature Approuvée!",
     "dashboard.applicationRejected": "Candidature Rejetée",
-    "dashboard.pendingApproval": "Votre candidature est en cours d'examen par notre équipe.",
-    "dashboard.approved": "Vous pouvez maintenant commencer à recevoir des demandes de voyage.",
-    "dashboard.contactSupport": "Contactez le support pour plus d'informations.",
+    "dashboard.pendingApproval":
+      "Votre candidature est en cours d'examen par notre équipe.",
+    "dashboard.approved":
+      "Vous pouvez maintenant commencer à recevoir des demandes de voyage.",
+    "dashboard.contactSupport":
+      "Contactez le support pour plus d'informations.",
     "dashboard.becomeDriver": "Voulez-vous devenir chauffeur?",
-    "dashboard.becomeDriverDesc": "Rejoignez notre équipe de chauffeurs professionnels et commencez à gagner de l'argent avec votre véhicule.",
+    "dashboard.becomeDriverDesc":
+      "Rejoignez notre équipe de chauffeurs professionnels et commencez à gagner de l'argent avec votre véhicule.",
     "dashboard.apply": "Postuler",
     "dashboard.myBookings": "Mes Réservations",
     "dashboard.confirmed": "Confirmé",
@@ -714,7 +746,8 @@ export const translations: Record<string, Translations> = {
 
     // Admin Panel
     "admin.title": "Panneau d'Administration",
-    "admin.description": "Gérez les utilisateurs, les approbations et configurez le système",
+    "admin.description":
+      "Gérez les utilisateurs, les approbations et configurez le système",
     "admin.totalUsers": "Total Utilisateurs",
     "admin.pendingRequests": "Demandes en Attente",
     "admin.activeDisputes": "Disputes Actives",
@@ -792,7 +825,8 @@ export const translations: Record<string, Translations> = {
     "auth.termsAndConditions": "Conditions Générales",
     "auth.privacyPolicy": "Politique de Confidentialité",
     "auth.invalidCredentials": "Identifiants invalides",
-    "auth.passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+    "auth.passwordTooShort":
+      "Le mot de passe doit contenir au moins 6 caractères",
     "auth.emailRequired": "L'email est requis",
     "auth.passwordRequired": "Le mot de passe est requis",
     "auth.nameRequired": "Le nom est requis",
@@ -814,21 +848,27 @@ export const translations: Record<string, Translations> = {
     // Homepage
     "home.title": "Premium Private Transfers",
     "home.subtitle": "Einfach Gemacht",
-    "home.description": "Buchen Sie professionelle Flughafentransfers, Stadtfahrten und privaten Transport an der Costa del Sol. Zuverlässig, komfortabel und immer pünktlich.",
+    "home.description":
+      "Buchen Sie professionelle Flughafentransfers, Stadtfahrten und privaten Transport an der Costa del Sol. Zuverlässig, komfortabel und immer pünktlich.",
     "home.bookingTitle": "Buchen Sie Ihren Transfer",
-    "home.bookingDescription": "Geben Sie Ihre Reisedetails ein, um zu beginnen",
+    "home.bookingDescription":
+      "Geben Sie Ihre Reisedetails ein, um zu beginnen",
     "home.from": "Von",
     "home.to": "Nach",
     "home.date": "Datum",
     "home.time": "Zeit",
     "home.continue": "Buchung Fortsetzen",
-    "home.nextStep": "Weiter: Fahrzeugtyp, Passagiere auswählen und Buchung abschließen",
+    "home.nextStep":
+      "Weiter: Fahrzeugtyp, Passagiere auswählen und Buchung abschließen",
     "home.whyChoose": "Warum Transfermarbell Wählen?",
-    "home.whyChooseDesc": "Erleben Sie den Unterschied mit unserem Premium-Service für private Transfers",
+    "home.whyChooseDesc":
+      "Erleben Sie den Unterschied mit unserem Premium-Service für private Transfers",
     "home.becomeDriver": "Fahrer Werden",
-    "home.becomeDriverDesc": "Treten Sie unserem Netzwerk professioneller Fahrer bei und verdienen Sie Geld mit Ihrem Fahrzeug. Flexible Arbeitszeiten, wettbewerbsfähige Preise und Support, wenn Sie ihn brauchen.",
+    "home.becomeDriverDesc":
+      "Treten Sie unserem Netzwerk professioneller Fahrer bei und verdienen Sie Geld mit Ihrem Fahrzeug. Flexible Arbeitszeiten, wettbewerbsfähige Preise und Support, wenn Sie ihn brauchen.",
     "home.readyToBook": "Bereit, Ihren Transfer zu Buchen?",
-    "home.readyToBookDesc": "Schließen Sie sich Tausenden zufriedener Kunden an, die Transfermarbell für ihre privaten Transportbedürfnisse an der Costa del Sol vertrauen.",
+    "home.readyToBookDesc":
+      "Schließen Sie sich Tausenden zufriedener Kunden an, die Transfermarbell für ihre privaten Transportbedürfnisse an der Costa del Sol vertrauen.",
     "home.bookNow": "Jetzt Buchen",
     "home.viewFleet": "Unsere Flotte Ansehen",
 
@@ -842,13 +882,15 @@ export const translations: Record<string, Translations> = {
 
     // Driver section
     "driver.title": "Fahrer Werden",
-    "driver.description": "Treten Sie unserem Netzwerk professioneller Fahrer bei und verdienen Sie Geld mit Ihrem Fahrzeug. Flexible Arbeitszeiten, wettbewerbsfähige Preise und Support, wenn Sie ihn brauchen.",
+    "driver.description":
+      "Treten Sie unserem Netzwerk professioneller Fahrer bei und verdienen Sie Geld mit Ihrem Fahrzeug. Flexible Arbeitszeiten, wettbewerbsfähige Preise und Support, wenn Sie ihn brauchen.",
     "driver.earnUpTo": "Verdienen Sie bis zu 2.000 €+ pro Monat",
     "driver.flexibleHours": "Flexible Arbeitszeiten",
     "driver.insuranceSupport": "Versicherung und Support inbegriffen",
     "driver.noUpfrontCosts": "Keine Vorabkosten",
     "driver.applyToDrive": "Als Fahrer Bewerben",
-    "driver.needAccount": "Sie benötigen ein Konto, um sich als Fahrer zu bewerben",
+    "driver.needAccount":
+      "Sie benötigen ein Konto, um sich als Fahrer zu bewerben",
     "driver.signUp": "Registrieren",
     "driver.signIn": "Anmelden",
 
@@ -880,11 +922,14 @@ export const translations: Record<string, Translations> = {
     "dashboard.applicationPending": "Bewerbung Wartet auf Genehmigung",
     "dashboard.applicationApproved": "Bewerbung Genehmigt!",
     "dashboard.applicationRejected": "Bewerbung Abgelehnt",
-    "dashboard.pendingApproval": "Ihre Bewerbung wird von unserem Team überprüft.",
+    "dashboard.pendingApproval":
+      "Ihre Bewerbung wird von unserem Team überprüft.",
     "dashboard.approved": "Sie können jetzt Reiseanfragen erhalten.",
-    "dashboard.contactSupport": "Kontaktieren Sie den Support für weitere Informationen.",
+    "dashboard.contactSupport":
+      "Kontaktieren Sie den Support für weitere Informationen.",
     "dashboard.becomeDriver": "Möchten Sie Fahrer werden?",
-    "dashboard.becomeDriverDesc": "Treten Sie unserem Team professioneller Fahrer bei und verdienen Sie Geld mit Ihrem Fahrzeug.",
+    "dashboard.becomeDriverDesc":
+      "Treten Sie unserem Team professioneller Fahrer bei und verdienen Sie Geld mit Ihrem Fahrzeug.",
     "dashboard.apply": "Bewerben",
     "dashboard.myBookings": "Meine Buchungen",
     "dashboard.confirmed": "Bestätigt",
@@ -894,7 +939,8 @@ export const translations: Record<string, Translations> = {
 
     // Admin Panel
     "admin.title": "Verwaltungspanel",
-    "admin.description": "Benutzer verwalten, Genehmigungen und System konfigurieren",
+    "admin.description":
+      "Benutzer verwalten, Genehmigungen und System konfigurieren",
     "admin.totalUsers": "Gesamtbenutzer",
     "admin.pendingRequests": "Ausstehende Anfragen",
     "admin.activeDisputes": "Aktive Streitigkeiten",
@@ -994,21 +1040,27 @@ export const translations: Record<string, Translations> = {
     // Homepage
     "home.title": "Trasferimenti Privati Premium",
     "home.subtitle": "Resi Semplici",
-    "home.description": "Prenota trasferimenti aeroportuali professionali, corse urbane e trasporti privati sulla Costa del Sol. Affidabile, confortevole e sempre puntuale.",
+    "home.description":
+      "Prenota trasferimenti aeroportuali professionali, corse urbane e trasporti privati sulla Costa del Sol. Affidabile, confortevole e sempre puntuale.",
     "home.bookingTitle": "Prenota il Tuo Trasferimento",
-    "home.bookingDescription": "Inserisci i dettagli del tuo viaggio per iniziare",
+    "home.bookingDescription":
+      "Inserisci i dettagli del tuo viaggio per iniziare",
     "home.from": "Da",
     "home.to": "A",
     "home.date": "Data",
     "home.time": "Ora",
     "home.continue": "Continua Prenotazione",
-    "home.nextStep": "Prossimo: Seleziona tipo di veicolo, passeggeri e completa la prenotazione",
+    "home.nextStep":
+      "Prossimo: Seleziona tipo di veicolo, passeggeri e completa la prenotazione",
     "home.whyChoose": "Perché Scegliere Transfermarbell?",
-    "home.whyChooseDesc": "Scopri la differenza con il nostro servizio premium di trasferimenti privati",
+    "home.whyChooseDesc":
+      "Scopri la differenza con il nostro servizio premium di trasferimenti privati",
     "home.becomeDriver": "Diventa Autista",
-    "home.becomeDriverDesc": "Unisciti alla nostra rete di autisti professionali e inizia a guadagnare con il tuo veicolo. Orari flessibili, tariffe competitive e supporto quando ne hai bisogno.",
+    "home.becomeDriverDesc":
+      "Unisciti alla nostra rete di autisti professionali e inizia a guadagnare con il tuo veicolo. Orari flessibili, tariffe competitive e supporto quando ne hai bisogno.",
     "home.readyToBook": "Pronto a Prenotare il Tuo Trasferimento?",
-    "home.readyToBookDesc": "Unisciti a migliaia di clienti soddisfatti che si affidano a Transfermarbell per le loro esigenze di trasporto privato sulla Costa del Sol.",
+    "home.readyToBookDesc":
+      "Unisciti a migliaia di clienti soddisfatti che si affidano a Transfermarbell per le loro esigenze di trasporto privato sulla Costa del Sol.",
     "home.bookNow": "Prenota Ora",
     "home.viewFleet": "Vedi la Nostra Flotta",
 
@@ -1022,13 +1074,15 @@ export const translations: Record<string, Translations> = {
 
     // Driver section
     "driver.title": "Diventa Autista",
-    "driver.description": "Unisciti alla nostra rete di autisti professionali e inizia a guadagnare con il tuo veicolo. Orari flessibili, tariffe competitive e supporto quando ne hai bisogno.",
+    "driver.description":
+      "Unisciti alla nostra rete di autisti professionali e inizia a guadagnare con il tuo veicolo. Orari flessibili, tariffe competitive e supporto quando ne hai bisogno.",
     "driver.earnUpTo": "Guadagna fino a €2.000+ al mese",
     "driver.flexibleHours": "Orari flessibili",
     "driver.insuranceSupport": "Assicurazione e supporto inclusi",
     "driver.noUpfrontCosts": "Nessun costo iniziale",
     "driver.applyToDrive": "Candidati per Guidare",
-    "driver.needAccount": "Hai bisogno di un account per candidarti come autista",
+    "driver.needAccount":
+      "Hai bisogno di un account per candidarti come autista",
     "driver.signUp": "Registrati",
     "driver.signIn": "Accedi",
 
@@ -1060,11 +1114,14 @@ export const translations: Record<string, Translations> = {
     "dashboard.applicationPending": "Candidatura in Attesa di Approvazione",
     "dashboard.applicationApproved": "Candidatura Approvata!",
     "dashboard.applicationRejected": "Candidatura Respinta",
-    "dashboard.pendingApproval": "La tua candidatura è in fase di revisione dal nostro team.",
+    "dashboard.pendingApproval":
+      "La tua candidatura è in fase di revisione dal nostro team.",
     "dashboard.approved": "Ora puoi iniziare a ricevere richieste di viaggio.",
-    "dashboard.contactSupport": "Contatta il supporto per maggiori informazioni.",
+    "dashboard.contactSupport":
+      "Contatta il supporto per maggiori informazioni.",
     "dashboard.becomeDriver": "Vuoi diventare autista?",
-    "dashboard.becomeDriverDesc": "Unisciti al nostro team di autisti professionali e inizia a guadagnare con il tuo veicolo.",
+    "dashboard.becomeDriverDesc":
+      "Unisciti al nostro team di autisti professionali e inizia a guadagnare con il tuo veicolo.",
     "dashboard.apply": "Candidati",
     "dashboard.myBookings": "Le Mie Prenotazioni",
     "dashboard.confirmed": "Confermato",
@@ -1159,7 +1216,7 @@ export const translations: Record<string, Translations> = {
     "auth.phoneRequired": "Il telefono è richiesto",
     "auth.passwordMismatch": "Le password non corrispondono",
     "auth.emailInvalid": "Email non valida",
-  }
+  },
 };
 
 // Language context type
@@ -1172,7 +1229,9 @@ interface LanguageContextType {
 }
 
 // Create context
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined,
+);
 
 // Language provider component
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
@@ -1195,33 +1254,35 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const t = (key: string): string => {
     // Define fallbacks for missing translations
     const fallbacks: Record<string, string> = {
-      "book_transfer": "Book Transfer",
-      "view_bookings": "View Bookings",
-      "settings": "Settings",
-      "logout": "Logout",
-      "available_transfers": "Available Transfers",
-      "total_available": "Total Available",
-      "accept": "Accept",
-      "reject": "Reject",
-      "credit_card": "Credit Card",
-      "debit_card": "Debit Card",
-      "paypal": "PayPal",
-      "bank_transfer": "Bank Transfer",
-      "payment_methods": "Payment Methods",
-      "add_payment_method": "Add Payment Method",
-      "card_number": "Card Number",
-      "expiry_date": "Expiry Date",
-      "cvv": "CVV",
-      "cardholder_name": "Cardholder Name",
-      "cancel": "Cancel",
-      "add": "Add"
+      book_transfer: "Book Transfer",
+      view_bookings: "View Bookings",
+      settings: "Settings",
+      logout: "Logout",
+      available_transfers: "Available Transfers",
+      total_available: "Total Available",
+      accept: "Accept",
+      reject: "Reject",
+      credit_card: "Credit Card",
+      debit_card: "Debit Card",
+      paypal: "PayPal",
+      bank_transfer: "Bank Transfer",
+      payment_methods: "Payment Methods",
+      add_payment_method: "Add Payment Method",
+      card_number: "Card Number",
+      expiry_date: "Expiry Date",
+      cvv: "CVV",
+      cardholder_name: "Cardholder Name",
+      cancel: "Cancel",
+      add: "Add",
     };
 
     // Try current language first, then Spanish, then English fallback, then the key itself
-    return translations[language]?.[key as keyof Translations] ||
-           translations["es"]?.[key as keyof Translations] ||
-           fallbacks[key] ||
-           key;
+    return (
+      translations[language]?.[key as keyof Translations] ||
+      translations["es"]?.[key as keyof Translations] ||
+      fallbacks[key] ||
+      key
+    );
   };
 
   // Set language function

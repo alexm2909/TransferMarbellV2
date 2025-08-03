@@ -1,4 +1,4 @@
-@import './styles/calendar.css';
+@import "./styles/calendar.css";
 
 @tailwind base;
 @tailwind components;
@@ -51,16 +51,16 @@
     --sidebar-ring: 194 100% 28%;
 
     /* Transfermarbell brand colors - Original Gradients */
-    --ocean: 194 100% 28%;     /* Teal Ocean */
+    --ocean: 194 100% 28%; /* Teal Ocean */
     --ocean-light: 190 100% 85%;
-    --coral: 15 89% 58%;       /* Warm Coral */
+    --coral: 15 89% 58%; /* Warm Coral */
     --coral-light: 15 100% 90%;
-    --navy: 240 100% 20%;      /* Deep Navy */
-    --sky: 195 100% 75%;       /* Light Sky */
-    --success: 120 100% 40%;   /* Green */
-    --warning: 45 100% 50%;    /* Yellow */
-    --purple: 270 75% 60%;     /* Purple */
-    --pink: 330 100% 60%;      /* Pink */
+    --navy: 240 100% 20%; /* Deep Navy */
+    --sky: 195 100% 75%; /* Light Sky */
+    --success: 120 100% 40%; /* Green */
+    --warning: 45 100% 50%; /* Yellow */
+    --purple: 270 75% 60%; /* Purple */
+    --pink: 330 100% 60%; /* Pink */
   }
 
   .dark {
@@ -101,16 +101,16 @@
     --sidebar-ring: 194 100% 38%;
 
     /* Transfermarbell brand colors - dark mode */
-    --ocean: 210 100% 55%;     /* Brighter Blue for dark mode */
+    --ocean: 210 100% 55%; /* Brighter Blue for dark mode */
     --ocean-light: 210 100% 25%;
-    --coral: 15 100% 65%;      /* Brighter Orange for dark mode */
+    --coral: 15 100% 65%; /* Brighter Orange for dark mode */
     --coral-light: 15 100% 25%;
     --navy: 210 40% 98%;
-    --sky: 195 100% 25%;       /* Darker but vivid blue */
-    --success: 120 100% 45%;   /* Brighter Green */
-    --warning: 45 100% 55%;    /* Brighter Yellow */
-    --purple: 270 100% 65%;    /* Bright Purple for dark mode */
-    --pink: 330 100% 65%;      /* Bright Pink for dark mode */
+    --sky: 195 100% 25%; /* Darker but vivid blue */
+    --success: 120 100% 45%; /* Brighter Green */
+    --warning: 45 100% 55%; /* Brighter Yellow */
+    --purple: 270 100% 65%; /* Bright Purple for dark mode */
+    --pink: 330 100% 65%; /* Bright Pink for dark mode */
   }
 }
 
@@ -124,7 +124,8 @@
   }
 
   /* Mobile optimization - prevent horizontal scroll */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
@@ -176,19 +177,30 @@
   }
 
   /* Ensure containers don't overflow */
-  .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl {
+  .container,
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl,
+  .max-w-3xl,
+  .max-w-2xl,
+  .max-w-xl {
     max-width: 100%;
     overflow-x: hidden;
   }
 
   /* Smooth card transitions without scaling */
-  .card, [class*="Card"] {
+  .card,
+  [class*="Card"] {
     transition: box-shadow 0.2s ease-in-out;
     transform: none !important;
   }
 
-  .card:hover, [class*="Card"]:hover {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  .card:hover,
+  [class*="Card"]:hover {
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
     transform: none !important;
   }
 
@@ -206,13 +218,21 @@
   /* Enhanced mobile optimizations */
   @media (max-width: 768px) {
     /* Prevent button overflow in cards */
-    .space-x-3 > *, .space-x-4 > *, .flex.space-x-3 > *, .flex.space-x-4 > * {
+    .space-x-3 > *,
+    .space-x-4 > *,
+    .flex.space-x-3 > *,
+    .flex.space-x-4 > * {
       flex-shrink: 1;
       min-width: 0;
     }
 
     /* Ensure text doesn't overflow */
-    .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+    .text-xl,
+    .text-2xl,
+    .text-3xl,
+    .text-4xl,
+    .text-5xl,
+    .text-6xl {
       word-break: break-word;
       overflow-wrap: break-word;
       line-height: 1.2;
@@ -447,11 +467,12 @@
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
@@ -462,13 +483,16 @@
   }
 
   /* Enhanced form input styles */
-  input:focus, textarea:focus, select:focus {
+  input:focus,
+  textarea:focus,
+  select:focus {
     outline: none;
     box-shadow: 0 0 0 2px hsl(var(--ring));
   }
 
   /* Smooth transitions for interactive elements */
-  button, .cursor-pointer {
+  button,
+  .cursor-pointer {
     transition: all 0.2s ease-in-out;
   }
 
@@ -479,9 +503,16 @@
   }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
   }
 
   .border-green-500 {
@@ -490,7 +521,9 @@
 
   /* Enhanced accessibility */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -499,7 +532,8 @@
 
   /* High contrast mode support */
   @media (prefers-contrast: high) {
-    .bg-gradient-to-r, .bg-gradient-to-br {
+    .bg-gradient-to-r,
+    .bg-gradient-to-br {
       background: hsl(var(--ocean)) !important;
     }
 

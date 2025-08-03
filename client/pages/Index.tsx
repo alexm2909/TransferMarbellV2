@@ -6,7 +6,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
 import UserMenu from "@/components/UserMenu";
-import { FlagOnlyLanguageSelector, FullLanguageSelector } from "@/components/LanguageSelector";
+import {
+  FlagOnlyLanguageSelector,
+  FullLanguageSelector,
+} from "@/components/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -247,9 +250,7 @@ export default function Index() {
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold text-navy mb-6">
               {t("home.title")}
-              <span className="block text-ocean">
-                {t("home.subtitle")}
-              </span>
+              <span className="block text-ocean">{t("home.subtitle")}</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t("home.description")}
@@ -263,9 +264,7 @@ export default function Index() {
                 <h2 className="text-2xl font-bold text-navy mb-2">
                   {t("home.bookingTitle")}
                 </h2>
-                <p className="text-gray-600">
-                  {t("home.bookingDescription")}
-                </p>
+                <p className="text-gray-600">{t("home.bookingDescription")}</p>
               </div>
 
               <form onSubmit={handlePreBookingSubmit}>
@@ -359,9 +358,7 @@ export default function Index() {
               </form>
 
               <div className="mt-4 text-center">
-                <p className="text-sm text-gray-500">
-                  {t("home.nextStep")}
-                </p>
+                <p className="text-sm text-gray-500">{t("home.nextStep")}</p>
               </div>
             </CardContent>
           </Card>

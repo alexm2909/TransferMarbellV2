@@ -7,8 +7,14 @@ export function useLanguageDebug() {
   useEffect(() => {
     console.log("=== LANGUAGE DEBUG ===");
     console.log("Current language:", language);
-    console.log("localStorage value:", localStorage.getItem("transfermarbell_language"));
-    console.log("sessionStorage value:", sessionStorage.getItem("current_language"));
+    console.log(
+      "localStorage value:",
+      localStorage.getItem("transfermarbell_language"),
+    );
+    console.log(
+      "sessionStorage value:",
+      sessionStorage.getItem("current_language"),
+    );
     console.log("All localStorage keys:", Object.keys(localStorage));
     console.log("===================");
   }, [language]);

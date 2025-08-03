@@ -80,8 +80,6 @@ interface LuggageCount {
   xlarge: number;
 }
 
-
-
 export default function BookingForm() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isLoading, logout } = useAuth();
@@ -176,19 +174,21 @@ export default function BookingForm() {
     },
   ];
 
-  const isVehicleCompatible = (vehicle: typeof vehicleTypes[0]) => {
+  const isVehicleCompatible = (vehicle: (typeof vehicleTypes)[0]) => {
     const carsCount = parseInt(bookingData.cars) || 1;
-    const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
+    const totalPassengers =
+      parseInt(bookingData.passengers) + parseInt(bookingData.children);
     const totalLuggage = parseInt(bookingData.luggage);
 
     // With multiple cars, multiply the vehicle capacity
     const totalVehicleCapacity = vehicle.maxPassengers * carsCount;
     const totalLuggageCapacity = vehicle.maxLuggage * carsCount;
 
-    return totalPassengers <= totalVehicleCapacity && totalLuggage <= totalLuggageCapacity;
+    return (
+      totalPassengers <= totalVehicleCapacity &&
+      totalLuggage <= totalLuggageCapacity
+    );
   };
-
-
 
   useEffect(() => {
     // Load pre-booking data from localStorage
@@ -227,9 +227,9 @@ export default function BookingForm() {
 
   const handleChildSeatsChange = (seats: ChildSeat[]) => {
     setChildSeats(seats);
-    setBookingData(prev => ({
+    setBookingData((prev) => ({
       ...prev,
-      childSeats: seats.length.toString()
+      childSeats: seats.length.toString(),
     }));
   };
 
@@ -242,9 +242,14 @@ export default function BookingForm() {
   };
 
   const calculateEstimatedPrice = () => {
-    const basePrice = vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price || "€25";
-    const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ''));
-    const childSeatsPrice = childSeats.reduce((total, seat) => total + seat.price, 0);
+    const basePrice =
+      vehicleTypes.find((v) => v.id === bookingData.vehicleType)?.price ||
+      "€25";
+    const basePriceNum = parseInt(basePrice.replace(/[^\d]/g, ""));
+    const childSeatsPrice = childSeats.reduce(
+      (total, seat) => total + seat.price,
+      0,
+    );
     // Las maletas ya no tienen coste extra, solo sirven para indicar el tipo de vehículo necesario
 
     // Añadir precio del viaje de vuelta si está seleccionado
@@ -389,9 +394,7 @@ export default function BookingForm() {
           <h1 className="text-3xl font-bold text-navy">
             {t("booking.completeBooking")}
           </h1>
-          <p className="text-gray-600 mt-2">
-            {t("booking.fillDetails")}
-          </p>
+          <p className="text-gray-600 mt-2">{t("booking.fillDetails")}</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -461,21 +464,27 @@ export default function BookingForm() {
                     <div className="p-4 bg-ocean-light/10 border border-ocean/20 rounded-lg">
                       <div className="flex items-center gap-2 mb-2">
                         <MapPinIcon className="w-5 h-5 text-ocean" />
-                        <span className="text-sm font-medium text-ocean">Distancia</span>
+                        <span className="text-sm font-medium text-ocean">
+                          Distancia
+                        </span>
                       </div>
                       <p className="text-lg font-bold text-navy">~55 km</p>
                     </div>
                     <div className="p-4 bg-coral-light/10 border border-coral/20 rounded-lg">
                       <div className="flex items-center gap-2 mb-2">
                         <ClockIcon className="w-5 h-5 text-coral" />
-                        <span className="text-sm font-medium text-coral">Duración</span>
+                        <span className="text-sm font-medium text-coral">
+                          Duración
+                        </span>
                       </div>
                       <p className="text-lg font-bold text-navy">~45 min</p>
                     </div>
                     <div className="p-4 bg-green-100 border border-green-200 rounded-lg">
                       <div className="flex items-center gap-2 mb-2">
                         <EuroIcon className="w-5 h-5 text-green-600" />
-                        <span className="text-sm font-medium text-green-600">Precio Est.</span>
+                        <span className="text-sm font-medium text-green-600">
+                          Precio Est.
+                        </span>
                       </div>
                       <p className="text-lg font-bold text-navy">desde €35</p>
                     </div>
@@ -563,7 +572,10 @@ export default function BookingForm() {
                           <Input
                             type="date"
                             value={bookingData.returnDate}
-                            min={bookingData.date || new Date().toISOString().split("T")[0]}
+                            min={
+                              bookingData.date ||
+                              new Date().toISOString().split("T")[0]
+                            }
                             onChange={(e) =>
                               setBookingData({
                                 ...bookingData,
@@ -620,16 +632,21 @@ export default function BookingForm() {
                         <Select
                           value={bookingData.passengers}
                           onValueChange={(value) =>
-                            setBookingData({ ...bookingData, passengers: value })
+                            setBookingData({
+                              ...bookingData,
+                              passengers: value,
+                            })
                           }
                         >
                           <SelectTrigger className="w-full min-w-[100px]">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20].map((num) => (
+                            {[
+                              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20,
+                            ].map((num) => (
                               <SelectItem key={num} value={num.toString()}>
-                                {num} {num === 1 ? 'adulto' : 'adultos'}
+                                {num} {num === 1 ? "adulto" : "adultos"}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -657,7 +674,7 @@ export default function BookingForm() {
                           <SelectContent>
                             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                               <SelectItem key={num} value={num.toString()}>
-                                {num} {num === 1 ? 'niño' : 'niños'}
+                                {num} {num === 1 ? "niño" : "niños"}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -683,11 +700,13 @@ export default function BookingForm() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20].map((num) => (
-                              <SelectItem key={num} value={num.toString()}>
-                                {num} {num === 1 ? 'maleta' : 'maletas'}
-                              </SelectItem>
-                            ))}
+                            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20].map(
+                              (num) => (
+                                <SelectItem key={num} value={num.toString()}>
+                                  {num} {num === 1 ? "maleta" : "maletas"}
+                                </SelectItem>
+                              ),
+                            )}
                           </SelectContent>
                         </Select>
                       </div>
@@ -713,7 +732,7 @@ export default function BookingForm() {
                           <SelectContent>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                               <SelectItem key={num} value={num.toString()}>
-                                {num} {num === 1 ? 'coche' : 'coches'}
+                                {num} {num === 1 ? "coche" : "coches"}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -723,7 +742,8 @@ export default function BookingForm() {
                   </div>
 
                   {/* Segunda fila: Configuración detallada */}
-                  {(parseInt(bookingData.children) > 0 || parseInt(bookingData.luggage) > 0) && (
+                  {(parseInt(bookingData.children) > 0 ||
+                    parseInt(bookingData.luggage) > 0) && (
                     <div className="mt-6 space-y-6">
                       {/* Selector de edad de niños */}
                       {parseInt(bookingData.children) > 0 && (
@@ -734,8 +754,8 @@ export default function BookingForm() {
                       )}
 
                       {/* Selector de maletas - modo simple o por cantidades */}
-                      {parseInt(bookingData.luggage) > 0 && (
-                        parseInt(bookingData.luggage) <= 3 ? (
+                      {parseInt(bookingData.luggage) > 0 &&
+                        (parseInt(bookingData.luggage) <= 3 ? (
                           <LuggageSizeSelector
                             numberOfLuggage={parseInt(bookingData.luggage)}
                             onLuggageChange={handleLuggageChange}
@@ -745,8 +765,7 @@ export default function BookingForm() {
                             totalLuggage={parseInt(bookingData.luggage)}
                             onLuggageCountChange={handleLuggageCountChange}
                           />
-                        )
-                      )}
+                        ))}
                     </div>
                   )}
                 </CardContent>
@@ -759,14 +778,18 @@ export default function BookingForm() {
                     <CarIcon className="w-5 h-5 text-ocean" />
                     {t("booking.vehicleSelection")}
                     {parseInt(bookingData.cars) > 1 && (
-                      <Badge variant="secondary" className="bg-purple/10 text-purple">
+                      <Badge
+                        variant="secondary"
+                        className="bg-purple/10 text-purple"
+                      >
                         {bookingData.cars} coches
                       </Badge>
                     )}
                   </CardTitle>
                   {parseInt(bookingData.cars) > 1 && (
                     <p className="text-sm text-gray-600 mt-2">
-                      Capacidad total con {bookingData.cars} vehículos del tipo seleccionado
+                      Capacidad total con {bookingData.cars} vehículos del tipo
+                      seleccionado
                     </p>
                   )}
                 </CardHeader>
@@ -774,7 +797,9 @@ export default function BookingForm() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {vehicleTypes.map((vehicle) => {
                       const isCompatible = isVehicleCompatible(vehicle);
-                      const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
+                      const totalPassengers =
+                        parseInt(bookingData.passengers) +
+                        parseInt(bookingData.children);
                       const totalLuggage = parseInt(bookingData.luggage);
                       const carsCount = parseInt(bookingData.cars) || 1;
 
@@ -787,8 +812,8 @@ export default function BookingForm() {
                             !isCompatible
                               ? "border-red-200 bg-red-50/50 cursor-not-allowed opacity-60"
                               : isSelected
-                              ? "border-ocean bg-ocean/10 cursor-pointer"
-                              : "border-gray-200 cursor-pointer hover:border-ocean"
+                                ? "border-ocean bg-ocean/10 cursor-pointer"
+                                : "border-gray-200 cursor-pointer hover:border-ocean"
                           }`}
                           onClick={() => {
                             if (isCompatible) {
@@ -808,9 +833,13 @@ export default function BookingForm() {
 
                           <div className="flex items-start justify-between mb-3">
                             <div>
-                              <h3 className={`font-semibold ${
-                                isCompatible ? "text-gray-900" : "text-gray-500"
-                              }`}>
+                              <h3
+                                className={`font-semibold ${
+                                  isCompatible
+                                    ? "text-gray-900"
+                                    : "text-gray-500"
+                                }`}
+                              >
                                 {vehicle.name}
                               </h3>
                               <p className="text-sm text-gray-500">
@@ -819,25 +848,35 @@ export default function BookingForm() {
                               <div className="text-xs text-gray-500 mt-1">
                                 {carsCount > 1 ? (
                                   <span>
-                                    Capacidad total ({carsCount} coches): {vehicle.maxPassengers * carsCount} pasajeros, {vehicle.maxLuggage * carsCount} maletas
+                                    Capacidad total ({carsCount} coches):{" "}
+                                    {vehicle.maxPassengers * carsCount}{" "}
+                                    pasajeros, {vehicle.maxLuggage * carsCount}{" "}
+                                    maletas
                                   </span>
                                 ) : (
                                   <span>
-                                    Max: {vehicle.maxPassengers} pasajeros, {vehicle.maxLuggage} maletas
+                                    Max: {vehicle.maxPassengers} pasajeros,{" "}
+                                    {vehicle.maxLuggage} maletas
                                   </span>
                                 )}
                               </div>
                             </div>
-                            <div className={`px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm ${
-                              isCompatible
-                                ? "bg-gradient-to-r from-ocean to-coral text-white"
-                                : "bg-gray-100 text-gray-500"
-                            }`}>
+                            <div
+                              className={`px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm ${
+                                isCompatible
+                                  ? "bg-gradient-to-r from-ocean to-coral text-white"
+                                  : "bg-gray-100 text-gray-500"
+                              }`}
+                            >
                               {carsCount > 1 ? (
                                 <div className="text-center">
-                                  <div className="text-xs opacity-90">desde</div>
+                                  <div className="text-xs opacity-90">
+                                    desde
+                                  </div>
                                   <div>{vehicle.price}</div>
-                                  <div className="text-xs opacity-90">× {carsCount}</div>
+                                  <div className="text-xs opacity-90">
+                                    × {carsCount}
+                                  </div>
                                 </div>
                               ) : (
                                 vehicle.price
@@ -845,21 +884,33 @@ export default function BookingForm() {
                             </div>
                           </div>
 
-                          <p className={`text-sm mb-3 ${
-                            isCompatible ? "text-gray-600" : "text-gray-500"
-                          }`}>
+                          <p
+                            className={`text-sm mb-3 ${
+                              isCompatible ? "text-gray-600" : "text-gray-500"
+                            }`}
+                          >
                             {vehicle.description}
                           </p>
 
                           {/* Mostrar problemas de compatibilidad */}
                           {!isCompatible && (
                             <div className="mb-3 p-2 bg-red-100 border border-red-200 rounded text-xs text-red-700">
-                              <div className="font-medium mb-1">Requisitos no cumplidos:</div>
-                              {totalPassengers > (vehicle.maxPassengers * carsCount) && (
-                                <div>• Demasiados pasajeros ({totalPassengers} &gt; {vehicle.maxPassengers * carsCount})</div>
+                              <div className="font-medium mb-1">
+                                Requisitos no cumplidos:
+                              </div>
+                              {totalPassengers >
+                                vehicle.maxPassengers * carsCount && (
+                                <div>
+                                  • Demasiados pasajeros ({totalPassengers} &gt;{" "}
+                                  {vehicle.maxPassengers * carsCount})
+                                </div>
                               )}
-                              {totalLuggage > (vehicle.maxLuggage * carsCount) && (
-                                <div>• Demasiadas maletas ({totalLuggage} &gt; {vehicle.maxLuggage * carsCount})</div>
+                              {totalLuggage >
+                                vehicle.maxLuggage * carsCount && (
+                                <div>
+                                  • Demasiadas maletas ({totalLuggage} &gt;{" "}
+                                  {vehicle.maxLuggage * carsCount})
+                                </div>
                               )}
                               <div className="mt-1 text-purple-600 font-medium">
                                 💡 Selecciona más coches en el selector numérico
@@ -872,12 +923,16 @@ export default function BookingForm() {
                               <div
                                 key={index}
                                 className={`flex items-center text-xs ${
-                                  isCompatible ? "text-gray-500" : "text-gray-400"
+                                  isCompatible
+                                    ? "text-gray-500"
+                                    : "text-gray-400"
                                 }`}
                               >
-                                <div className={`w-1 h-1 rounded-full mr-2 ${
-                                  isCompatible ? "bg-ocean" : "bg-gray-400"
-                                }`}></div>
+                                <div
+                                  className={`w-1 h-1 rounded-full mr-2 ${
+                                    isCompatible ? "bg-ocean" : "bg-gray-400"
+                                  }`}
+                                ></div>
                                 {feature}
                               </div>
                             ))}
@@ -1019,8 +1074,13 @@ export default function BookingForm() {
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Vehicle</span>
                         <span className="font-medium">
-                          {vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name}
-                          {parseInt(bookingData.cars) > 1 && ` (${bookingData.cars} coches)`}
+                          {
+                            vehicleTypes.find(
+                              (v) => v.id === bookingData.vehicleType,
+                            )?.name
+                          }
+                          {parseInt(bookingData.cars) > 1 &&
+                            ` (${bookingData.cars} coches)`}
                         </span>
                       </div>
                     )}
