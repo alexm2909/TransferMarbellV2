@@ -1234,7 +1234,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Save to localStorage when language changes
   useEffect(() => {
-    console.log("Language state changed to:", language);
     localStorage.setItem("transfermarbell_language", language);
   }, [language]);
 
