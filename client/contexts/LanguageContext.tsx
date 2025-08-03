@@ -1158,37 +1158,44 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 // Language provider component
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<string>(() => {
-    // Force retrieval from localStorage on every page load
-    try {
-      const saved = localStorage.getItem("transfermarbell_language");
-      if (saved && translations[saved]) {
-        return saved;
-      }
-    } catch (error) {
-      console.warn("Error reading language from localStorage:", error);
-    }
+  const [language, setLanguageState] = useState<string>("es");
 
-    // Try to detect browser language
-    const browserLang = navigator.language.split("-")[0];
-    if (translations[browserLang]) {
-      // Save detected language
+  // Initialize language from localStorage on component mount
+  useEffect(() => {
+    const initializeLanguage = () => {
       try {
-        localStorage.setItem("transfermarbell_language", browserLang);
+        const saved = localStorage.getItem("transfermarbell_language");
+        if (saved && translations[saved]) {
+          setLanguageState(saved);
+          return;
+        }
       } catch (error) {
-        console.warn("Error saving language to localStorage:", error);
+        console.warn("Error reading language from localStorage:", error);
       }
-      return browserLang;
-    }
 
-    // Default to Spanish and save it
-    try {
-      localStorage.setItem("transfermarbell_language", "es");
-    } catch (error) {
-      console.warn("Error saving default language to localStorage:", error);
-    }
-    return "es";
-  });
+      // Try to detect browser language
+      const browserLang = navigator.language.split("-")[0];
+      if (translations[browserLang]) {
+        setLanguageState(browserLang);
+        try {
+          localStorage.setItem("transfermarbell_language", browserLang);
+        } catch (error) {
+          console.warn("Error saving language to localStorage:", error);
+        }
+        return;
+      }
+
+      // Default to Spanish and save it
+      setLanguageState("es");
+      try {
+        localStorage.setItem("transfermarbell_language", "es");
+      } catch (error) {
+        console.warn("Error saving default language to localStorage:", error);
+      }
+    };
+
+    initializeLanguage();
+  }, []);
 
   // Translation function with fallbacks for missing keys
   const t = (key: string): string => {
