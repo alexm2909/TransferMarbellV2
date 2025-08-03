@@ -1208,20 +1208,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
            key;
   };
 
-  // Set language function with enhanced persistence
+  // Set language function
   const setLanguage = (newLanguage: string) => {
-    console.log("Changing language from", language, "to", newLanguage);
-    if (translations[newLanguage]) {
+    console.log("setLanguage called with:", newLanguage);
+    if (translations[newLanguage] && newLanguage !== language) {
+      console.log("Setting language to:", newLanguage);
       setLanguageState(newLanguage);
-      // Save to localStorage immediately
-      try {
-        localStorage.setItem("transfermarbell_language", newLanguage);
-        console.log("Language saved to localStorage:", newLanguage);
-      } catch (error) {
-        console.error("Error saving language preference:", error);
-      }
-    } else {
-      console.warn("Language not supported:", newLanguage);
+      localStorage.setItem("transfermarbell_language", newLanguage);
     }
   };
 
