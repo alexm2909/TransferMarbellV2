@@ -60,3 +60,37 @@ input[type="date"]::-webkit-datetime-edit-year-field:focus {
 .dark input[type="date"]::-webkit-datetime-edit-year-field {
   color: #f9fafb;
 }
+
+/* Calendar dropdown styles */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+/* Webkit calendar panel styles */
+input[type="date"]::-webkit-calendar-picker-indicator:focus {
+  background: linear-gradient(135deg, rgb(23 131 178), rgb(249 115 22));
+  border-radius: 0.25rem;
+  color: white;
+}
+
+/* Calendar popup styles */
+::-webkit-calendar-picker-indicator {
+  filter: none;
+}
+
+/* Custom calendar popup appearance */
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type="date"]:focus::-webkit-calendar-picker-indicator {
+  background: linear-gradient(135deg, rgb(23 131 178), rgb(249 115 22));
+  border-radius: 0.25rem;
+  padding: 2px;
+}
+
+/* Style the calendar dropdown when opened */
+input[type="date"]:hover::-webkit-calendar-picker-indicator {
+  background: linear-gradient(135deg, rgba(23, 131, 178, 0.8), rgba(249, 115, 22, 0.8));
+  border-radius: 0.25rem;
+}
