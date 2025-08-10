@@ -26,8 +26,14 @@ export default function Dashboard() {
   const { isAuthenticated, user, logout, isLoading } = useAuth();
 
   // Redirect to signin if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate("/signin");
+    }
+  }, [isLoading, isAuthenticated, navigate]);
+
+  // Early return for unauthenticated users
   if (!isLoading && !isAuthenticated) {
-    navigate("/signin");
     return null;
   }
 
