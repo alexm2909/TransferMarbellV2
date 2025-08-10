@@ -126,9 +126,9 @@ export default function Chat({
   return (
     <Card className="h-full max-h-[600px] flex flex-col">
       <CardHeader className="pb-3 border-b">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center space-x-3 min-w-0 flex-1">
+            <div className="w-10 h-10 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center flex-shrink-0">
               <span className="text-sm font-bold text-ocean">
                 {user?.role === "driver" ?
                   getOtherParticipantName().split(' ').map(n => n[0]).join('') :
@@ -136,18 +136,19 @@ export default function Chat({
                 }
               </span>
             </div>
-            <div>
-              <CardTitle className="text-lg">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg truncate">
                 {user?.role === "driver" ? getOtherParticipantName() : (getOtherParticipantName() || driverName)}
               </CardTitle>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 flex-wrap">
                 <Badge
                   variant="outline"
                   className={`text-xs ${isActive ? 'border-green-500 text-green-600 bg-green-50' : 'border-gray-300'}`}
                 >
                   {isActive ? '🟢 En línea' : '⚫ Desconectado'}
                 </Badge>
-                <span className="text-xs text-gray-500">Viaje #{tripId}</span>
+                <span className="text-xs text-gray-500 hidden sm:inline">Viaje #{tripId}</span>
+                <span className="text-xs text-gray-500 sm:hidden">#{tripId}</span>
                 {getUnreadCount() > 0 && (
                   <Badge className="bg-red-500 text-white text-xs">
                     {getUnreadCount()}
@@ -156,17 +157,17 @@ export default function Chat({
               </div>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm">
-              <PhoneIcon className="w-4 h-4 mr-1" />
-              Llamar
+          <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+            <Button variant="outline" size="sm" className="h-8 px-2 sm:px-3">
+              <PhoneIcon className="w-4 h-4 sm:mr-1" />
+              <span className="hidden sm:inline">Llamar</span>
             </Button>
-            <Button variant="outline" size="sm" onClick={handleShareLocation}>
-              <NavigationIcon className="w-4 h-4 mr-1" />
-              Ubicación
+            <Button variant="outline" size="sm" className="h-8 px-2 sm:px-3" onClick={handleShareLocation}>
+              <NavigationIcon className="w-4 h-4 sm:mr-1" />
+              <span className="hidden sm:inline">Ubicación</span>
             </Button>
             {onClose && (
-              <Button variant="ghost" size="sm" onClick={onClose}>
+              <Button variant="ghost" size="sm" className="h-8 px-2" onClick={onClose}>
                 <XIcon className="w-4 h-4" />
               </Button>
             )}
