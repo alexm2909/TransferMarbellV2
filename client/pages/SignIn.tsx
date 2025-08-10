@@ -119,7 +119,8 @@ export default function SignIn() {
         } else if (redirectPath === "driver-registration") {
           navigate("/driver-registration");
         } else {
-          navigate("/dashboard");
+          // Default client users go to booking form page
+          navigate("/");
         }
       } else {
         throw new Error("Invalid credentials");
