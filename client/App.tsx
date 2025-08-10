@@ -48,25 +48,73 @@ function App() {
       <TripProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/dashboard" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
 
-            {/* Booking Flow */}
-            <Route path="/book" element={<BookingForm />} />
+            {/* Booking Flow - Client Only */}
+            <Route path="/book" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <BookingForm />
+              </ProtectedRoute>
+            } />
             <Route
               path="/booking-confirmation"
-              element={<BookingConfirmation />}
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <BookingConfirmation />
+                </ProtectedRoute>
+              }
             />
 
-            {/* Payment Flow */}
-            <Route path="/payment-method" element={<PaymentMethod />} />
-            <Route path="/payment-summary" element={<PaymentSummary />} />
-            <Route path="/payment-apple" element={<PaymentApple />} />
-            <Route path="/payment-google" element={<PaymentGoogle />} />
-            <Route path="/payment-paypal" element={<PaymentPaypal />} />
-            <Route path="/payment-bank" element={<PaymentBank />} />
-            <Route path="/payment-success" element={<PaymentSuccess />} />
-            <Route path="/payment-error" element={<PaymentError />} />
+            {/* Payment Flow - Client Only */}
+            <Route path="/payment-method" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentMethod />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-summary" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentSummary />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-apple" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentApple />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-google" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentGoogle />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-paypal" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentPaypal />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-bank" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentBank />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-success" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentSuccess />
+              </ProtectedRoute>
+            } />
+            <Route path="/payment-error" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <PaymentError />
+              </ProtectedRoute>
+            } />
 
             {/* Authentication */}
             <Route path="/signin" element={<SignIn />} />
