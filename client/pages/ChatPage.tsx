@@ -13,21 +13,38 @@ export default function ChatPage() {
       {/* Navigation */}
       <nav className="bg-white border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center space-x-2">
+          <div className="flex justify-between items-center h-16 gap-4">
+            <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
               <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center">
                 <CarIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent hidden sm:block">
                 Transfermarbell
               </span>
+              <span className="text-lg font-bold bg-gradient-to-r from-ocean to-coral bg-clip-text text-transparent sm:hidden">
+                TM
+              </span>
             </Link>
-            <Link to="/dashboard">
-              <Button variant="outline">
-                <ArrowLeftIcon className="w-4 h-4 mr-2" />
-                Volver al Dashboard
-              </Button>
-            </Link>
+
+            <div className="flex items-center space-x-2 flex-shrink-0">
+              {user?.role === "driver" ? (
+                <Link to="/driver-panel">
+                  <Button variant="outline" size="sm" className="h-9 px-3">
+                    <ArrowLeftIcon className="w-4 h-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Volver al Panel</span>
+                    <span className="sm:hidden">Panel</span>
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <Button variant="outline" size="sm" className="h-9 px-3">
+                    <ArrowLeftIcon className="w-4 h-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Volver al Inicio</span>
+                    <span className="sm:hidden">Inicio</span>
+                  </Button>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </nav>
