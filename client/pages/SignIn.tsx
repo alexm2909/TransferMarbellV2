@@ -85,13 +85,21 @@ export default function SignIn() {
           }),
         );
 
-        // Redirect based on the redirect parameter or default to dashboard
+        // Redirect based on role and redirect parameter
         if (redirectPath === "book") {
           navigate("/book");
         } else if (redirectPath === "driver-registration") {
           navigate("/driver-registration");
         } else {
-          navigate("/dashboard");
+          // Redirect based on user role
+          if (testUser.role === "driver") {
+            navigate("/driver-panel");
+          } else if (testUser.role === "admin") {
+            navigate("/admin-panel");
+          } else {
+            // Client users go to booking form page by default
+            navigate("/");
+          }
         }
       } else if (formData.email && formData.password) {
         // Default user for any other email/password combination
