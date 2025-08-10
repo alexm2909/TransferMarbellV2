@@ -13,7 +13,7 @@ export function ProtectedRoute({
   children,
   allowedRoles = ["client", "driver", "admin"],
   requireAuth = false,
-  redirectTo
+  redirectTo,
 }: ProtectedRouteProps) {
   const { isAuthenticated, user, isLoading } = useAuth();
   const location = useLocation();
@@ -37,12 +37,12 @@ export function ProtectedRoute({
     if (user.role === "driver") {
       return <Navigate to="/driver-panel" replace />;
     }
-    
+
     // For other unauthorized roles, redirect to appropriate default page
     if (redirectTo) {
       return <Navigate to={redirectTo} replace />;
     }
-    
+
     // Default redirects based on role
     switch (user.role) {
       case "client":

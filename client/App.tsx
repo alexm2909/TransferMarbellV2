@@ -48,23 +48,32 @@ function App() {
       <TripProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <Index />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <Index />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Booking Flow - Client Only */}
-            <Route path="/book" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <BookingForm />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/book"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <BookingForm />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/booking-confirmation"
               element={
@@ -75,46 +84,70 @@ function App() {
             />
 
             {/* Payment Flow - Client Only */}
-            <Route path="/payment-method" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentMethod />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-summary" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentSummary />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-apple" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentApple />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-google" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentGoogle />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-paypal" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentPaypal />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-bank" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentBank />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-success" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentSuccess />
-              </ProtectedRoute>
-            } />
-            <Route path="/payment-error" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <PaymentError />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/payment-method"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentMethod />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-summary"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentSummary />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-apple"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentApple />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-google"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentGoogle />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-paypal"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentPaypal />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-bank"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentBank />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-success"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentSuccess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment-error"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <PaymentError />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Authentication */}
             <Route path="/signin" element={<SignIn />} />
@@ -126,64 +159,94 @@ function App() {
             />
 
             {/* Chat - Both Drivers and Clients */}
-            <Route path="/chat" element={
-              <ProtectedRoute allowedRoles={["client", "driver", "admin"]}>
-                <ChatPage />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/chat"
+              element={
+                <ProtectedRoute allowedRoles={["client", "driver", "admin"]}>
+                  <ChatPage />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Driver Panel - Driver Only */}
-            <Route path="/driver-panel" element={
-              <ProtectedRoute allowedRoles={["driver", "admin"]}>
-                <OptimizedDriverPanel />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/driver-panel"
+              element={
+                <ProtectedRoute allowedRoles={["driver", "admin"]}>
+                  <OptimizedDriverPanel />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Admin Panel - Admin Only */}
-            <Route path="/admin-panel" element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <AdminPanel />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/admin-panel"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <AdminPanel />
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/fleet-panel" element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <FleetManagerPanel />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/fleet-panel"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <FleetManagerPanel />
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/business-panel" element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <BusinessPanel />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/business-panel"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <BusinessPanel />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Client Features - Client Only */}
-            <Route path="/my-bookings" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <ViewBookings />
-              </ProtectedRoute>
-            } />
-            <Route path="/refer-friends" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <ReferFriends />
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute allowedRoles={["client", "driver", "admin"]}>
-                <UserSettings />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/my-bookings"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ViewBookings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/refer-friends"
+              element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ReferFriends />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute allowedRoles={["client", "driver", "admin"]}>
+                  <UserSettings />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Driver/Fleet Manager Features */}
-            <Route path="/trip-marketplace" element={
-              <ProtectedRoute allowedRoles={["driver", "admin"]}>
-                <TripMarketplace />
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/trip-marketplace"
+              element={
+                <ProtectedRoute allowedRoles={["driver", "admin"]}>
+                  <TripMarketplace />
+                </ProtectedRoute>
+              }
+            />
 
             {/* User Role Pages */}
-        <Route path="/driver" element={<Navigate to="/driver-panel" replace />} />
+            <Route
+              path="/driver"
+              element={<Navigate to="/driver-panel" replace />}
+            />
 
             <Route
               path="/fleet-manager"

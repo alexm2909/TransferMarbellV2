@@ -7,7 +7,7 @@ import { ArrowLeftIcon, CarIcon } from "lucide-react";
 export default function ChatPage() {
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
-  const tripId = searchParams.get('transfer') || 'TM123456';
+  const tripId = searchParams.get("transfer") || "TM123456";
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
@@ -52,13 +52,14 @@ export default function ChatPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-navy mb-2">
-            {user?.role === "driver" ? "Chat con el Cliente" : "Chat con tu Conductor"}
+            {user?.role === "driver"
+              ? "Chat con el Cliente"
+              : "Chat con tu Conductor"}
           </h1>
           <p className="text-gray-600">
             {user?.role === "driver"
               ? "Mantente en contacto con tu cliente durante el viaje"
-              : "Mantente en contacto con tu conductor en tiempo real"
-            }
+              : "Mantente en contacto con tu conductor en tiempo real"}
           </p>
         </div>
 

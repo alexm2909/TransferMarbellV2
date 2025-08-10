@@ -76,7 +76,8 @@ export default function Chat({
       "Marbella Centro",
     ];
 
-    const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+    const randomLocation =
+      locations[Math.floor(Math.random() * locations.length)];
     shareLocation(randomLocation);
   };
 
@@ -88,9 +89,9 @@ export default function Chat({
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('es-ES', {
-      hour: '2-digit',
-      minute: '2-digit',
+    return date.toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -104,24 +105,27 @@ export default function Chat({
     } else if (date.toDateString() === yesterday.toDateString()) {
       return "Ayer";
     } else {
-      return date.toLocaleDateString('es-ES', {
-        day: 'numeric',
-        month: 'short',
+      return date.toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "short",
       });
     }
   };
 
-  const quickMessages = user?.role === "driver" ? [
-    "Ya estoy llegando",
-    "Estoy en el lugar de recogida",
-    "Hay algo de tráfico, 5 min de retraso",
-    "¿Cuántas maletas llevas?",
-  ] : [
-    "¿Ya estás en camino?",
-    "¿Cuánto tiempo falta?",
-    "Estoy listo para salir",
-    "Gracias por el excelente servicio",
-  ];
+  const quickMessages =
+    user?.role === "driver"
+      ? [
+          "Ya estoy llegando",
+          "Estoy en el lugar de recogida",
+          "Hay algo de tráfico, 5 min de retraso",
+          "¿Cuántas maletas llevas?",
+        ]
+      : [
+          "¿Ya estás en camino?",
+          "¿Cuánto tiempo falta?",
+          "Estoy listo para salir",
+          "Gracias por el excelente servicio",
+        ];
 
   return (
     <Card className="h-full max-h-[600px] flex flex-col">
@@ -130,25 +134,36 @@ export default function Chat({
           <div className="flex items-center space-x-3 min-w-0 flex-1">
             <div className="w-10 h-10 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center flex-shrink-0">
               <span className="text-sm font-bold text-ocean">
-                {user?.role === "driver" ?
-                  getOtherParticipantName().split(' ').map(n => n[0]).join('') :
-                  (getOtherParticipantName() || "CR").split(' ').map(n => n[0]).join('')
-                }
+                {user?.role === "driver"
+                  ? getOtherParticipantName()
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                  : (getOtherParticipantName() || "CR")
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
               </span>
             </div>
             <div className="min-w-0 flex-1">
               <CardTitle className="text-lg truncate">
-                {user?.role === "driver" ? getOtherParticipantName() : (getOtherParticipantName() || driverName)}
+                {user?.role === "driver"
+                  ? getOtherParticipantName()
+                  : getOtherParticipantName() || driverName}
               </CardTitle>
               <div className="flex items-center space-x-2 flex-wrap">
                 <Badge
                   variant="outline"
-                  className={`text-xs ${isActive ? 'border-green-500 text-green-600 bg-green-50' : 'border-gray-300'}`}
+                  className={`text-xs ${isActive ? "border-green-500 text-green-600 bg-green-50" : "border-gray-300"}`}
                 >
-                  {isActive ? '🟢 En línea' : '⚫ Desconectado'}
+                  {isActive ? "🟢 En línea" : "⚫ Desconectado"}
                 </Badge>
-                <span className="text-xs text-gray-500 hidden sm:inline">Viaje #{tripId}</span>
-                <span className="text-xs text-gray-500 sm:hidden">#{tripId}</span>
+                <span className="text-xs text-gray-500 hidden sm:inline">
+                  Viaje #{tripId}
+                </span>
+                <span className="text-xs text-gray-500 sm:hidden">
+                  #{tripId}
+                </span>
                 {getUnreadCount() > 0 && (
                   <Badge className="bg-red-500 text-white text-xs">
                     {getUnreadCount()}
@@ -162,12 +177,22 @@ export default function Chat({
               <PhoneIcon className="w-4 h-4 sm:mr-1" />
               <span className="hidden sm:inline">Llamar</span>
             </Button>
-            <Button variant="outline" size="sm" className="h-8 px-2 sm:px-3" onClick={handleShareLocation}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 px-2 sm:px-3"
+              onClick={handleShareLocation}
+            >
               <NavigationIcon className="w-4 h-4 sm:mr-1" />
               <span className="hidden sm:inline">Ubicación</span>
             </Button>
             {onClose && (
-              <Button variant="ghost" size="sm" className="h-8 px-2" onClick={onClose}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2"
+                onClick={onClose}
+              >
                 <XIcon className="w-4 h-4" />
               </Button>
             )}
@@ -179,8 +204,10 @@ export default function Chat({
         {/* Messages Area */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map((message, index) => {
-            const showDate = index === 0 || 
-              formatDate(message.timestamp) !== formatDate(messages[index - 1].timestamp);
+            const showDate =
+              index === 0 ||
+              formatDate(message.timestamp) !==
+                formatDate(messages[index - 1].timestamp);
 
             return (
               <div key={message.id}>
@@ -191,25 +218,33 @@ export default function Chat({
                     </span>
                   </div>
                 )}
-                
-                <div className={`flex ${
-                  message.senderRole === user?.role ? 'justify-end' : 'justify-start'
-                }`}>
-                  <div className={`max-w-[80%] ${
-                    message.type === 'system' ? 'mx-auto' : ''
-                  }`}>
-                    {message.type === 'system' ? (
+
+                <div
+                  className={`flex ${
+                    message.senderRole === user?.role
+                      ? "justify-end"
+                      : "justify-start"
+                  }`}
+                >
+                  <div
+                    className={`max-w-[80%] ${
+                      message.type === "system" ? "mx-auto" : ""
+                    }`}
+                  >
+                    {message.type === "system" ? (
                       <div className="text-center text-xs text-gray-500 bg-gray-100 px-3 py-2 rounded-full">
                         {message.content}
                       </div>
                     ) : (
-                      <div className={`rounded-lg px-4 py-2 ${
-                        message.senderRole === user?.role
-                          ? 'bg-ocean text-white ml-auto'
-                          : 'bg-gray-100 text-gray-900'
-                      }`}>
+                      <div
+                        className={`rounded-lg px-4 py-2 ${
+                          message.senderRole === user?.role
+                            ? "bg-ocean text-white ml-auto"
+                            : "bg-gray-100 text-gray-900"
+                        }`}
+                      >
                         <div className="text-sm">
-                          {message.type === 'location' ? (
+                          {message.type === "location" ? (
                             <div className="flex items-center space-x-2">
                               <MapPinIcon className="w-4 h-4" />
                               <span>{message.content}</span>
@@ -218,9 +253,13 @@ export default function Chat({
                             message.content
                           )}
                         </div>
-                        <div className={`flex items-center justify-between mt-1 ${
-                          message.senderRole === user?.role ? 'text-ocean-light' : 'text-gray-500'
-                        }`}>
+                        <div
+                          className={`flex items-center justify-between mt-1 ${
+                            message.senderRole === user?.role
+                              ? "text-ocean-light"
+                              : "text-gray-500"
+                          }`}
+                        >
                           <span className="text-xs">
                             {formatTime(message.timestamp)}
                           </span>
@@ -248,10 +287,18 @@ export default function Chat({
                 <div className="flex items-center space-x-1">
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.1s" }}
+                    ></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.2s" }}
+                    ></div>
                   </div>
-                  <span className="text-xs text-gray-500 ml-2">escribiendo...</span>
+                  <span className="text-xs text-gray-500 ml-2">
+                    escribiendo...
+                  </span>
                 </div>
               </div>
             </div>
