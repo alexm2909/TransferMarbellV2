@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { TripProvider } from "./contexts/TripContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import BookingForm from "./pages/BookingForm";
