@@ -125,20 +125,62 @@ function App() {
               element={<DriverRegistration />}
             />
 
-            {/* Chat and Advanced Panels */}
-            <Route path="/chat" element={<ChatPage />} />
-            <Route path="/driver-panel" element={<OptimizedDriverPanel />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
-            <Route path="/fleet-panel" element={<FleetManagerPanel />} />
-            <Route path="/business-panel" element={<BusinessPanel />} />
+            {/* Chat - Both Drivers and Clients */}
+            <Route path="/chat" element={
+              <ProtectedRoute allowedRoles={["client", "driver", "admin"]}>
+                <ChatPage />
+              </ProtectedRoute>
+            } />
 
-            {/* Client Features */}
-            <Route path="/my-bookings" element={<ViewBookings />} />
-            <Route path="/refer-friends" element={<ReferFriends />} />
-            <Route path="/settings" element={<UserSettings />} />
+            {/* Driver Panel - Driver Only */}
+            <Route path="/driver-panel" element={
+              <ProtectedRoute allowedRoles={["driver", "admin"]}>
+                <OptimizedDriverPanel />
+              </ProtectedRoute>
+            } />
+
+            {/* Admin Panel - Admin Only */}
+            <Route path="/admin-panel" element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminPanel />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/fleet-panel" element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <FleetManagerPanel />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/business-panel" element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <BusinessPanel />
+              </ProtectedRoute>
+            } />
+
+            {/* Client Features - Client Only */}
+            <Route path="/my-bookings" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ViewBookings />
+              </ProtectedRoute>
+            } />
+            <Route path="/refer-friends" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ReferFriends />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute allowedRoles={["client", "driver", "admin"]}>
+                <UserSettings />
+              </ProtectedRoute>
+            } />
 
             {/* Driver/Fleet Manager Features */}
-            <Route path="/trip-marketplace" element={<TripMarketplace />} />
+            <Route path="/trip-marketplace" element={
+              <ProtectedRoute allowedRoles={["driver", "admin"]}>
+                <TripMarketplace />
+              </ProtectedRoute>
+            } />
 
             {/* User Role Pages */}
         <Route path="/driver" element={<Navigate to="/driver-panel" replace />} />
