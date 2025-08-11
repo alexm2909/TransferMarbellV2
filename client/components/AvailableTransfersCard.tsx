@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useTrips } from "@/contexts/TripContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useAvailableBookings, useEmergencyBookings } from "@/hooks/useDatabase";
 import {
   MapPinIcon,
   CalendarIcon,
