@@ -60,6 +60,7 @@ export default function PaymentSuccess() {
   const { generateVoucher, addVoucher } = useVoucher();
   const [generatedVoucher, setGeneratedVoucher] = useState<any>(null);
   const bookingId = searchParams.get("id");
+  const { updateBooking } = useBookings();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
