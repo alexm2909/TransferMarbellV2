@@ -16,6 +16,7 @@ import Fleet from "./pages/Fleet";
 import Services from "./pages/Services";
 import ChatPage from "./pages/ChatPage";
 import AdminPanel from "./pages/AdminPanel";
+import EnhancedAdminPanel from "./pages/EnhancedAdminPanel";
 import FleetManagerPanel from "./pages/FleetManagerPanel";
 import BusinessPanel from "./pages/BusinessPanel";
 import DriverPanel from "./pages/DriverPanel";
