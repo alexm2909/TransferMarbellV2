@@ -489,7 +489,7 @@ export default function DriverRegistration() {
 
                 <Button
                   type="submit"
-                  disabled={isLoading || !allRequiredUploaded || !formData.agreeToDriverTerms}
+                  disabled={isLoading || !allRequiredUploaded || !formData.agreeToDriverTerms || !vehicleDataComplete}
                   className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-3 h-12"
                 >
                   {isLoading ? "Enviando Solicitud..." : "Enviar Solicitud para ser Conductor"}
