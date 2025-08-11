@@ -208,17 +208,69 @@ export default function BookingForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !user) {
       // Redirect to login page
       localStorage.setItem("bookingData", JSON.stringify(bookingData));
       navigate("/signin?redirect=book");
       return;
     }
 
+    // Calculate pricing
+    const selectedVehicle = vehicleTypes.find((v) => v.id === bookingData.vehicleType);
+    const basePrice = selectedVehicle ? parseInt(selectedVehicle.price.replace(/[^\d]/g, "")) : 25;
+    const childSeatsPrice = childSeats.reduce((total, seat) => total + seat.price, 0);
+    const totalPrice = basePrice + childSeatsPrice;
+
+    // Create booking in database
+    const newBooking = createBooking({
+      clientId: user.id,
+      status: "pending",
+      tripDetails: {
+        origin: {
+          address: bookingData.origin
+        },
+        destination: {
+          address: bookingData.destination
+        },
+        date: bookingData.date,
+        time: bookingData.time,
+        passengers: parseInt(bookingData.passengers),
+        luggage: {
+          small: luggageCount.small,
+          medium: luggageCount.medium,
+          large: luggageCount.large
+        },
+        children: bookingData.children ? {
+          count: parseInt(bookingData.children),
+          ages: childSeats.map(seat => seat.age)
+        } : undefined,
+        specialRequests: bookingData.specialRequests
+      },
+      vehicleType: selectedVehicle?.name || bookingData.vehicleType,
+      pricing: {
+        basePrice,
+        extras: childSeats.map(seat => ({
+          name: seat.description,
+          price: seat.price
+        })),
+        totalPrice,
+        currency: "EUR"
+      },
+      payment: {
+        status: "pending"
+      },
+      clientData: {
+        name: user.name,
+        email: user.email,
+        phone: user.phone || ""
+      }
+    });
+
     // Save booking data to localStorage for the payment process
     const fullBookingData = {
       ...bookingData,
       childSeats: childSeats,
+      bookingId: newBooking.id,
       timestamp: new Date().toISOString(),
     };
 
