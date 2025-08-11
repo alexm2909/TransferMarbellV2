@@ -22,6 +22,8 @@ import UserMenu from "@/components/UserMenu";
 import { FlagOnlyLanguageSelector } from "@/components/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useBookings } from "@/hooks/useDatabase";
+import { database } from "@/services/database";
 import {
   CalendarIcon,
   ClockIcon,
