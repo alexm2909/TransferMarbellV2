@@ -189,27 +189,53 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      <div className="border rounded-lg p-4 bg-ocean-light/10">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <h3 className="font-semibold">
-                              Málaga Airport → Hotel Majestic
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                              Mañana, 14:30
-                            </p>
+                      {bookings && bookings.length > 0 ? (
+                        bookings.slice(0, 3).map((booking) => (
+                          <div key={booking.id} className="border rounded-lg p-4 bg-ocean-light/10">
+                            <div className="flex justify-between items-start mb-2">
+                              <div>
+                                <h3 className="font-semibold">
+                                  {booking.tripDetails.origin.address} → {booking.tripDetails.destination.address}
+                                </h3>
+                                <p className="text-sm text-gray-600">
+                                  {new Date(booking.tripDetails.date).toLocaleDateString('es-ES')} - {booking.tripDetails.time}
+                                </p>
+                              </div>
+                              <Badge className={
+                                booking.status === 'completed' ? 'bg-green-500 text-white' :
+                                booking.status === 'confirmed' || booking.status === 'assigned' ? 'bg-blue-500 text-white' :
+                                booking.status === 'in_progress' ? 'bg-yellow-500 text-white' :
+                                'bg-gray-500 text-white'
+                              }>
+                                {booking.status === 'pending' ? 'Pendiente' :
+                                 booking.status === 'assigned' ? 'Asignado' :
+                                 booking.status === 'confirmed' ? 'Confirmado' :
+                                 booking.status === 'in_progress' ? 'En Curso' :
+                                 booking.status === 'completed' ? 'Completado' :
+                                 booking.status === 'cancelled' ? 'Cancelado' : booking.status}
+                              </Badge>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-500">
+                                {booking.tripDetails.passengers} pasajero{booking.tripDetails.passengers > 1 ? 's' : ''}, {booking.tripDetails.luggage.small + booking.tripDetails.luggage.medium + booking.tripDetails.luggage.large} maleta{(booking.tripDetails.luggage.small + booking.tripDetails.luggage.medium + booking.tripDetails.luggage.large) > 1 ? 's' : ''}
+                              </span>
+                              <span className="font-bold text-ocean">€{booking.pricing.totalPrice}</span>
+                            </div>
+                            {booking.isEmergency && (
+                              <div className="mt-2">
+                                <Badge className="bg-red-100 text-red-700 text-xs">
+                                  🚨 Emergencia (+€{booking.emergencyDetails?.emergencyBonus})
+                                </Badge>
+                              </div>
+                            )}
                           </div>
-                          <Badge className="bg-success text-white">
-                            Confirmado
-                          </Badge>
+                        ))
+                      ) : (
+                        <div className="text-center py-8 text-gray-500">
+                          <CalendarIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                          <p className="text-sm">No tienes reservas aún</p>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-500">
-                            2 pasajeros, 1 maleta
-                          </span>
-                          <span className="font-bold text-ocean">€35</span>
-                        </div>
-                      </div>
+                      )}
                       <div className="text-center py-6">
                         <Link to="/book">
                           <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
