@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import UserMenu from "@/components/UserMenu";
 import EmailBilling from "@/components/EmailBilling";
+import { useAvailableBookings, useEmergencyBookings, useBookings } from "@/hooks/useDatabase";
 import {
   CarIcon,
   MapPinIcon,
