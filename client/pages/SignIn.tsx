@@ -67,29 +67,13 @@ export default function SignIn() {
     setIsLoading(true);
 
     try {
-      // Mock authentication - replace with real authentication
+      // Mock authentication delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Check if it's a test credential
-      const testUser =
-        testCredentials[
-          formData.email.toLowerCase() as keyof typeof testCredentials
-        ];
+      // Use the new database authentication
+      const result = authLogin(formData.email, formData.password);
 
-      if (testUser && formData.password === testUser.password) {
-        // Set authentication status with test user data
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("userRole", testUser.role);
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            email: formData.email,
-            name: testUser.name,
-            role: testUser.role,
-            phone: testUser.phone,
-          }),
-        );
-
+      if (result.success && result.user) {
         // Redirect based on role and redirect parameter
         if (redirectPath === "book") {
           navigate("/book");
@@ -97,42 +81,21 @@ export default function SignIn() {
           navigate("/driver-registration");
         } else {
           // Redirect based on user role
-          if (testUser.role === "driver") {
+          if (result.user.role === "driver") {
             navigate("/driver-panel");
-          } else if (testUser.role === "admin") {
+          } else if (result.user.role === "admin") {
             navigate("/admin-panel");
           } else {
             // Client users go to booking form page by default
             navigate("/");
           }
         }
-      } else if (formData.email && formData.password) {
-        // Default user for any other email/password combination
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("userRole", "client");
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            email: formData.email,
-            name: "Usuario Demo",
-            role: "client",
-          }),
-        );
-
-        if (redirectPath === "book") {
-          navigate("/book");
-        } else if (redirectPath === "driver-registration") {
-          navigate("/driver-registration");
-        } else {
-          // Default client users go to booking form page
-          navigate("/");
-        }
       } else {
-        throw new Error("Invalid credentials");
+        throw new Error(result.error || "Invalid credentials");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please check your credentials and try again.");
+      alert(error instanceof Error ? error.message : "Login failed. Please check your credentials and try again.");
     } finally {
       setIsLoading(false);
     }
