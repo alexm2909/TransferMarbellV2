@@ -103,13 +103,18 @@ export default function Dashboard() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
+        <div className="mb-6">
           <h1 className="text-3xl font-bold text-navy">
             Bienvenido, {user?.name?.split(" ")[0] || "User"}!
           </h1>
           <p className="text-gray-600 mt-2">
             Panel de control para {getRoleBadge(user?.role || "")}
           </p>
+        </div>
+
+        {/* Database Status */}
+        <div className="mb-8">
+          <DatabaseStatus />
         </div>
 
         {/* Content Area */}
