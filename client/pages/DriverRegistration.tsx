@@ -173,8 +173,14 @@ export default function DriverRegistration() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validate vehicle data
+    if (!vehicleData.make || !vehicleData.model || !vehicleData.year || !vehicleData.type || !vehicleData.plate || !vehicleData.color) {
+      alert("Por favor, completa toda la información del vehículo");
+      return;
+    }
+
     if (!formData.agreeToDriverTerms) {
-      alert("Please agree to the driver terms and conditions");
+      alert("Por favor, acepta los términos y condiciones para conductores");
       return;
     }
 
@@ -182,7 +188,7 @@ export default function DriverRegistration() {
     const uploadedDocs = requiredDocs.filter(doc => doc.uploaded);
 
     if (uploadedDocs.length < requiredDocs.length) {
-      alert("Please upload all required documents");
+      alert("Por favor, sube todos los documentos requeridos");
       return;
     }
 
@@ -198,19 +204,20 @@ export default function DriverRegistration() {
         ...currentUser,
         driverStatus: "pending",
         driverApplication: {
-          ...formData,
+          vehicle: vehicleData,
+          financial: {
+            bankAccount: formData.bankAccount,
+            taxId: formData.taxId,
+          },
           documents: documents.filter(doc => doc.uploaded),
           submittedAt: new Date().toISOString(),
         },
       };
-      
+
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      alert(
-        "¡Solicitud enviada con éxito! Tu solicitud para ser conductor está pendiente de aprobación por un administrador. Recibirás un email cuando sea revisada."
-      );
-      
-      navigate("/dashboard");
+      // Redirect to pending approval page instead of showing alert
+      navigate("/driver-registration-pending");
     } catch (error) {
       console.error("Driver registration failed:", error);
       alert("Error al enviar la solicitud. Por favor, inténtalo de nuevo.");
