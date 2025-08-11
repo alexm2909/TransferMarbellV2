@@ -308,97 +308,15 @@ export default function DriverRegistration() {
                 <CarIcon className="w-5 h-5 text-ocean" />
                 Información del Vehículo
               </CardTitle>
+              <p className="text-sm text-gray-600 mt-2">
+                Selecciona tu vehículo de nuestra base de datos actualizada o usa la detección automática por matrícula.
+              </p>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Tipo de Vehículo
-                  </label>
-                  <Input
-                    placeholder="ej. Sedan, SUV, Van"
-                    value={formData.vehicleType}
-                    onChange={(e) =>
-                      setFormData({ ...formData, vehicleType: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Marca
-                  </label>
-                  <Input
-                    placeholder="ej. Mercedes, BMW, Audi"
-                    value={formData.vehicleMake}
-                    onChange={(e) =>
-                      setFormData({ ...formData, vehicleMake: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Modelo
-                  </label>
-                  <Input
-                    placeholder="ej. Clase E, Serie 5"
-                    value={formData.vehicleModel}
-                    onChange={(e) =>
-                      setFormData({ ...formData, vehicleModel: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Año
-                  </label>
-                  <Input
-                    type="number"
-                    placeholder="ej. 2020"
-                    min="2010"
-                    max={new Date().getFullYear()}
-                    value={formData.vehicleYear}
-                    onChange={(e) =>
-                      setFormData({ ...formData, vehicleYear: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Matrícula
-                  </label>
-                  <Input
-                    placeholder="ej. 1234 ABC"
-                    value={formData.vehiclePlate}
-                    onChange={(e) =>
-                      setFormData({ ...formData, vehiclePlate: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Color
-                  </label>
-                  <Input
-                    placeholder="ej. Negro, Blanco, Plata"
-                    value={formData.vehicleColor}
-                    onChange={(e) =>
-                      setFormData({ ...formData, vehicleColor: e.target.value })
-                    }
-                    className="border-gray-200 focus:border-ocean focus:ring-ocean"
-                    required
-                  />
-                </div>
-              </div>
+            <CardContent>
+              <VehicleSelector
+                value={vehicleData}
+                onChange={setVehicleData}
+              />
             </CardContent>
           </Card>
 
