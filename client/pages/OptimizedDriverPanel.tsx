@@ -67,6 +67,9 @@ interface EmergencyTrip extends Trip {
 export default function OptimizedDriverPanel() {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
+  const { availableBookings } = useAvailableBookings();
+  const { emergencyBookings } = useEmergencyBookings();
+  const { bookings: driverBookings } = useBookings(user?.id);
   const [trips, setTrips] = useState<Trip[]>([
     {
       id: "1",
