@@ -158,6 +158,10 @@ function App() {
               path="/driver-registration"
               element={<DriverRegistration />}
             />
+            <Route
+              path="/driver-registration-pending"
+              element={<DriverRegistrationPending />}
+            />
 
             {/* Chat - Both Drivers and Clients */}
             <Route
