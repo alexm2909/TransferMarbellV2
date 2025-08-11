@@ -33,13 +33,16 @@ export default function DriverRegistration() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [vehicleData, setVehicleData] = useState<VehicleData>({
+    make: "",
+    model: "",
+    year: "",
+    type: "",
+    plate: "",
+    color: "",
+  });
+
   const [formData, setFormData] = useState({
-    vehicleType: "",
-    vehicleMake: "",
-    vehicleModel: "",
-    vehicleYear: "",
-    vehiclePlate: "",
-    vehicleColor: "",
     bankAccount: "",
     taxId: "",
     agreeToDriverTerms: false,
