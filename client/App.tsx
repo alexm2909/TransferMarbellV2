@@ -11,6 +11,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import DriverRegistration from "./pages/DriverRegistration";
+import DriverRegistrationPending from "./pages/DriverRegistrationPending";
 import Fleet from "./pages/Fleet";
 import Services from "./pages/Services";
 import ChatPage from "./pages/ChatPage";
