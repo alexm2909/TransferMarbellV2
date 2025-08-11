@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
 import UserMenu from "@/components/UserMenu";
 import VoucherSystem, { useVoucher } from "@/components/VoucherSystem";
+import { useBookings } from "@/hooks/useDatabase";
+import { database } from "@/services/database";
 import {
   CarIcon,
   CheckCircleIcon,
