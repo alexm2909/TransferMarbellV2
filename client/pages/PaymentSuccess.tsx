@@ -84,6 +84,20 @@ export default function PaymentSuccess() {
       if (parsed.bookingId === bookingId) {
         setBooking(parsed);
 
+        // Update booking status in database to completed
+        updateBooking(bookingId, {
+          status: "completed",
+          payment: {
+            status: "completed",
+            transactionId: `TXN_${Date.now()}`,
+            paidAt: new Date().toISOString()
+          },
+          timeline: {
+            createdAt: parsed.timestamp || new Date().toISOString(),
+            completedAt: new Date().toISOString()
+          }
+        });
+
         // Generate voucher for the booking
         const voucher = generateVoucher({
           date: parsed.date,
