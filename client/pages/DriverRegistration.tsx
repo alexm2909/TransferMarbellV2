@@ -230,6 +230,9 @@ export default function DriverRegistration() {
     .filter(doc => doc.required)
     .every(doc => doc.uploaded);
 
+  const vehicleDataComplete = vehicleData.make && vehicleData.model && vehicleData.year &&
+    vehicleData.type && vehicleData.plate && vehicleData.color;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-ocean-light via-sky to-coral-light">
       {/* Navigation */}
