@@ -19,13 +19,14 @@ import {
 } from "lucide-react";
 
 export default function AvailableTransfersCard() {
-  const { getRecentAvailableTrips, getTotalAvailableCount, acceptTrip, rejectTrip } = useTrips();
   const { t, formatCurrency } = useLanguage();
   const { user } = useAuth();
   const [processingTrips, setProcessingTrips] = useState<string[]>([]);
-  
-  const recentTrips = getRecentAvailableTrips(3);
-  const totalCount = getTotalAvailableCount();
+  const { availableBookings } = useAvailableBookings();
+  const { emergencyBookings } = useEmergencyBookings();
+
+  const recentTrips = availableBookings.slice(0, 3);
+  const totalCount = availableBookings.length;
 
   const handleAcceptTrip = async (tripId: string) => {
     if (!user) return;
