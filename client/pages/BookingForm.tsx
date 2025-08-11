@@ -86,6 +86,7 @@ export default function BookingForm() {
   const navigate = useNavigate();
   const { isAuthenticated, user, isLoading, logout } = useAuth();
   const { t } = useLanguage();
+  const { createBooking } = useBookings();
   const [childSeats, setChildSeats] = useState<ChildSeat[]>([]);
   const [luggageItems, setLuggageItems] = useState<LuggageItem[]>([]);
 
