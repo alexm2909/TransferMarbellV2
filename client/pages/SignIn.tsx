@@ -18,6 +18,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectPath = searchParams.get("redirect");
+  const { login: authLogin } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
