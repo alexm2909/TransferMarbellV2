@@ -28,25 +28,26 @@ export default function AvailableTransfersCard() {
   const recentTrips = availableBookings.slice(0, 3);
   const totalCount = availableBookings.length;
 
-  const handleAcceptTrip = async (tripId: string) => {
+  const handleAcceptTrip = async (bookingId: string) => {
     if (!user) return;
-    
-    setProcessingTrips(prev => [...prev, tripId]);
-    
+
+    setProcessingTrips(prev => [...prev, bookingId]);
+
     // Simulate API call delay
     setTimeout(() => {
-      acceptTrip(tripId, user.id || 'driver-1', user.name || 'Conductor');
-      setProcessingTrips(prev => prev.filter(id => id !== tripId));
+      // This would call the database to assign the booking
+      // For now we'll just simulate the processing
+      setProcessingTrips(prev => prev.filter(id => id !== bookingId));
     }, 1000);
   };
 
-  const handleRejectTrip = async (tripId: string) => {
-    setProcessingTrips(prev => [...prev, tripId]);
-    
+  const handleRejectTrip = async (bookingId: string) => {
+    setProcessingTrips(prev => [...prev, bookingId]);
+
     // Simulate API call delay
     setTimeout(() => {
-      rejectTrip(tripId);
-      setProcessingTrips(prev => prev.filter(id => id !== tripId));
+      // This could mark the booking as rejected by this driver
+      setProcessingTrips(prev => prev.filter(id => id !== bookingId));
     }, 500);
   };
 
