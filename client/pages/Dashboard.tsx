@@ -25,6 +25,9 @@ import {
 export default function Dashboard() {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout, isLoading } = useAuth();
+  const { bookings } = useBookings(user?.id);
+  const { notifications, unreadCount } = useNotifications(user?.id || '');
+  const { stats } = useSystemStats();
 
   // Redirect to signin if not authenticated
   useEffect(() => {
