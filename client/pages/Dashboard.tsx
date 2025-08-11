@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import NotificationCenter from "@/components/NotificationCenter";
 import UserMenu from "@/components/UserMenu";
 import AvailableTransfersCard from "@/components/AvailableTransfersCard";
+import DatabaseStatus from "@/components/DatabaseStatus";
 import { useBookings, useNotifications, useSystemStats } from "@/hooks/useDatabase";
 import {
   CarIcon,
