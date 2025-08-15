@@ -489,6 +489,14 @@ Web: www.transfermarbell.com
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button
+                  onClick={handleShowVoucher}
+                  className="w-full bg-gradient-to-r from-purple to-ocean hover:from-purple/90 hover:to-ocean/90 text-white justify-start"
+                  disabled={!generatedVoucher}
+                >
+                  <TicketIcon className="w-4 h-4 mr-2" />
+                  Ver Voucher Completo
+                </Button>
+                <Button
                   onClick={handleDownloadReceipt}
                   variant="outline"
                   className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
