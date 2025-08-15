@@ -121,7 +121,13 @@ export default function PaymentSuccess() {
       console.error("Error parsing booking data:", error);
       navigate("/");
     }
-  }, [isAuthenticated, isLoading, navigate, bookingId]);
+  }, [isAuthenticated, isLoading, navigate, bookingId, updateBooking]);
+
+  const handleShowVoucher = useCallback(() => {
+    if (generatedVoucher) {
+      setShowVoucher(true);
+    }
+  }, [generatedVoucher]);
 
   const getVehicleDetails = (type: string) => {
     const vehicles = {
