@@ -139,22 +139,16 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     const directionsServiceInstance = new window.google.maps.DirectionsService();
     const directionsRendererInstance = new window.google.maps.DirectionsRenderer({
       suppressMarkers: false,
+      draggable: false,
       polylineOptions: {
-        strokeColor: "#006d77", // Ocean color - same as markers
-        strokeWeight: 4,
-        strokeOpacity: 1,
+        strokeColor: "#006d77", // Ocean color for route line
+        strokeWeight: 6,
+        strokeOpacity: 0.8,
         zIndex: 1000,
       },
       markerOptions: {
-        icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 8,
-          fillColor: "#006d77", // Ocean color - reverted
-          fillOpacity: 1,
-          strokeColor: "#ffffff",
-          strokeWeight: 2,
-          zIndex: 200,
-        },
+        // Custom markers for origin and destination
+        optimized: false,
       },
     });
 
