@@ -486,34 +486,36 @@ export default function OptimizedDriverPanel() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
                       <div className="flex items-center gap-2">
                         <CalendarIcon className="w-4 h-4 text-gray-500" />
-                        <span>{trip.date}</span>
+                        <span>{booking.tripDetails.date}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <ClockIcon className="w-4 h-4 text-gray-500" />
-                        <span>{trip.time}</span>
+                        <span>{booking.tripDetails.time}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <UsersIcon className="w-4 h-4 text-gray-500" />
-                        <span>{trip.passengers} pax</span>
+                        <span>{booking.tripDetails.passengers} pax</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <LuggageIcon className="w-4 h-4 text-gray-500" />
-                        <span>{trip.luggage} maletas</span>
+                        <span>{(booking.tripDetails.luggage.small || 0) + (booking.tripDetails.luggage.medium || 0) + (booking.tripDetails.luggage.large || 0)} maletas</span>
                       </div>
                     </div>
 
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <AlertTriangleIcon className="w-4 h-4 text-yellow-600" />
-                        <span className="font-medium text-yellow-800">Motivo de emergencia:</span>
+                    {booking.emergencyDetails && (
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <AlertTriangleIcon className="w-4 h-4 text-yellow-600" />
+                          <span className="font-medium text-yellow-800">Motivo de emergencia:</span>
+                        </div>
+                        <p className="text-yellow-700 text-sm">{booking.emergencyDetails.reason}</p>
+                        <p className="text-yellow-600 text-xs mt-1">Creado por: {booking.emergencyDetails.createdBy}</p>
                       </div>
-                      <p className="text-yellow-700 text-sm">{trip.reason}</p>
-                      <p className="text-yellow-600 text-xs mt-1">Creado por: {trip.createdBy}</p>
-                    </div>
+                    )}
 
                     <div className="flex gap-3">
                       <Button
-                        onClick={() => acceptTrip(trip.id)}
+                        onClick={() => acceptTrip(booking.id)}
                         className="flex-1 bg-red-600 hover:bg-red-700 text-white"
                       >
                         <CheckIcon className="w-4 h-4 mr-2" />
@@ -521,7 +523,7 @@ export default function OptimizedDriverPanel() {
                       </Button>
                       <Button
                         variant="outline"
-                        onClick={() => setSelectedTrip(trip)}
+                        onClick={() => setSelectedTrip(booking)}
                         className="border-red-300 text-red-600 hover:bg-red-50"
                       >
                         Ver Detalles
