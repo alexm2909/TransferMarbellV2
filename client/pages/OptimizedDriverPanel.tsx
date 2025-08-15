@@ -69,7 +69,7 @@ export default function OptimizedDriverPanel() {
   const { isAuthenticated, user, logout } = useAuth();
   const { availableBookings } = useAvailableBookings();
   const { emergencyBookings } = useEmergencyBookings();
-  const { bookings: driverBookings } = useBookings(user?.id);
+  const { bookings: driverBookings, assignToDriver, updateBooking } = useBookings(user?.id);
   const [trips, setTrips] = useState<Trip[]>([
     {
       id: "1",
