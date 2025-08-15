@@ -554,15 +554,15 @@ export default function OptimizedDriverPanel() {
           {/* Active Trips */}
           <TabsContent value="active">
             <div className="grid gap-6">
-              {activeTrips.map((trip) => (
-                <Card key={trip.id} className="border-l-4 border-l-blue-500">
+              {activeTrips.map((booking) => (
+                <Card key={booking.id} className="border-l-4 border-l-blue-500">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-lg">{trip.clientName}</h3>
-                          {getStatusBadge(trip.status)}
-                          {trip.voucherValidated ? (
+                          <h3 className="font-semibold text-lg">{booking.clientData?.name || 'Cliente'}</h3>
+                          {getStatusBadge(booking.status)}
+                          {booking.status === "confirmed" ? (
                             <Badge className="bg-green-100 text-green-800">
                               <TicketIcon className="w-3 h-3 mr-1" />
                               Voucher OK
