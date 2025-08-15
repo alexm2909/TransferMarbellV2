@@ -210,12 +210,14 @@ export default function OptimizedDriverPanel() {
     }
   };
 
-  const getStatusBadge = (status: Trip['status']) => {
+  const getStatusBadge = (status: string) => {
     switch (status) {
-      case "available":
-        return <Badge className="bg-green-100 text-green-800">Disponible</Badge>;
-      case "accepted":
-        return <Badge className="bg-blue-100 text-blue-800">Aceptado</Badge>;
+      case "pending":
+        return <Badge className="bg-gray-100 text-gray-800">Pendiente</Badge>;
+      case "assigned":
+        return <Badge className="bg-blue-100 text-blue-800">Asignado</Badge>;
+      case "confirmed":
+        return <Badge className="bg-green-100 text-green-800">Confirmado</Badge>;
       case "in_progress":
         return <Badge className="bg-yellow-100 text-yellow-800">En Curso</Badge>;
       case "completed":
@@ -236,7 +238,7 @@ export default function OptimizedDriverPanel() {
     booking.status === "completed"
   );
 
-  const todayEarnings = completedTrips.reduce((sum, trip) => sum + trip.price, 0);
+  const todayEarnings = completedTrips.reduce((sum, booking) => sum + booking.pricing.totalPrice, 0);
   const todayTrips = completedTrips.length;
 
   return (
