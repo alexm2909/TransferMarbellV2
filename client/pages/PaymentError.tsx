@@ -208,22 +208,28 @@ export default function PaymentError() {
 
             {/* Help & Support */}
             <Card className="shadow-lg border-0 bg-white/95 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>¿Necesitas Ayuda?</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">¿Necesitas Ayuda?</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="text-sm text-gray-600 mb-4">
-                  Si continúas teniendo problemas, nuestro equipo de soporte está aquí para ayudarte.
+              <CardContent className="space-y-3 pt-2">
+                <div className="text-sm text-gray-600 leading-relaxed">
+                  Si continúas teniendo problemas, nuestro equipo está aquí para ayudarte.
                 </div>
-                
-                <Button variant="outline" className="w-full justify-start">
-                  <PhoneIcon className="w-4 h-4 mr-2" />
-                  Llamar: +34 952 123 456
+
+                <Button variant="outline" className="w-full justify-start h-auto py-3 px-3">
+                  <PhoneIcon className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <div className="text-left overflow-hidden">
+                    <div className="text-sm font-medium">Llamar</div>
+                    <div className="text-xs text-gray-600 truncate">+34 952 123 456</div>
+                  </div>
                 </Button>
-                
-                <Button variant="outline" className="w-full justify-start">
-                  <MailIcon className="w-4 h-4 mr-2" />
-                  Email: soporte@transfermarbell.com
+
+                <Button variant="outline" className="w-full justify-start h-auto py-3 px-3">
+                  <MailIcon className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <div className="text-left overflow-hidden">
+                    <div className="text-sm font-medium">Email</div>
+                    <div className="text-xs text-gray-600 truncate">soporte@transfermarbell.com</div>
+                  </div>
                 </Button>
               </CardContent>
             </Card>
