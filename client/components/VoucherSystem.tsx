@@ -223,16 +223,16 @@ Presenta este voucher al conductor para ser recogido.
   if (showModal) {
     return (
       <Dialog open={showModal} onOpenChange={onClose}>
-        <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+        <DialogContent className="max-w-lg overflow-hidden">
+          <DialogHeader className="pb-2">
+            <DialogTitle className="flex items-center gap-2 text-lg">
               <TicketIcon className="w-5 h-5 text-ocean" />
               Tu Voucher de Transferencia
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-4 overflow-hidden">
-            <div className="max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+          <div className="space-y-3 overflow-hidden">
+            <div className="overflow-hidden">
               <VoucherContent />
             </div>
 
