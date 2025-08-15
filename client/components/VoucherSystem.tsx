@@ -232,7 +232,7 @@ Presenta este voucher al conductor para ser recogido.
           </DialogHeader>
 
           <div className="space-y-4 overflow-hidden">
-            <div className="max-h-[60vh] overflow-y-auto pr-2">
+            <div className="max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               <VoucherContent />
             </div>
 
