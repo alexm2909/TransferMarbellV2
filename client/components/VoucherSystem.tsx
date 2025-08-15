@@ -237,7 +237,7 @@ Presenta este voucher al conductor para ser recogido.
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-2 justify-center print:hidden border-t pt-4">
+            <div className="flex gap-2 justify-center print:hidden border-t pt-2">
               <Button
                 onClick={handleDownload}
                 disabled={isDownloading}
