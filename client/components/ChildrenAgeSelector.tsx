@@ -135,7 +135,7 @@ export default function ChildrenAgeSelector({
       <div className="space-y-2">
         {Array.from({ length: numberOfChildren }, (_, index) => (
           <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border">
-            <div className="w-6 h-6 bg-ocean rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+            <div className="w-6 h-6 bg-ocean rounded-md flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
               {index + 1}
             </div>
 
