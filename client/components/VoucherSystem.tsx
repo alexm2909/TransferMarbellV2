@@ -172,8 +172,8 @@ Presenta este voucher al conductor para ser recogido.
 
       {/* Driver Info */}
       {voucher.driverName && (
-        <div className="bg-gray-50 p-3 rounded-lg mb-4">
-          <h4 className="font-medium text-gray-900 mb-2">Conductor Asignado</h4>
+        <div className="bg-gray-50 p-2 rounded-lg mb-3">
+          <h4 className="font-medium text-gray-900 mb-1 text-sm">Conductor Asignado</h4>
           <div className="text-sm space-y-1">
             <div>{voucher.driverName}</div>
             {voucher.driverPhone && (
@@ -188,16 +188,16 @@ Presenta este voucher al conductor para ser recogido.
 
       {/* Special Requests */}
       {voucher.specialRequests && (
-        <div className="bg-yellow-50 p-3 rounded-lg mb-4">
-          <h4 className="font-medium text-gray-900 mb-1">Solicitudes Especiales</h4>
+        <div className="bg-yellow-50 p-2 rounded-lg mb-3">
+          <h4 className="font-medium text-gray-900 mb-1 text-sm">Solicitudes Especiales</h4>
           <p className="text-sm text-gray-700">{voucher.specialRequests}</p>
         </div>
       )}
 
       {/* QR Code */}
-      <div className="text-center mb-4">
-        <div className="w-24 h-24 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-2">
-          <QrCodeIcon className="w-16 h-16 text-gray-400" />
+      <div className="text-center mb-3">
+        <div className="w-20 h-20 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-2">
+          <QrCodeIcon className="w-14 h-14 text-gray-400" />
         </div>
         <p className="text-xs text-gray-500">
           Presenta este código al conductor
@@ -205,13 +205,13 @@ Presenta este voucher al conductor para ser recogido.
       </div>
 
       {/* Price */}
-      <div className="text-center border-t pt-4">
-        <div className="text-2xl font-bold text-ocean">{voucher.price}</div>
+      <div className="text-center border-t pt-3">
+        <div className="text-xl font-bold text-ocean">{voucher.price}</div>
         <p className="text-sm text-gray-600">Precio Total</p>
       </div>
 
       {/* Footer */}
-      <div className="text-center mt-4 pt-4 border-t">
+      <div className="text-center mt-3 pt-3 border-t">
         <p className="text-xs text-gray-500">
           Voucher obligatorio para el servicio<br />
           Conserva este comprobante hasta completar el viaje
