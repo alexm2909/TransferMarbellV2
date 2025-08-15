@@ -432,8 +432,8 @@ export default function OptimizedDriverPanel() {
           {/* Emergency Trips */}
           <TabsContent value="emergency">
             <div className="grid gap-6">
-              {emergencyTrips.map((trip) => (
-                <Card key={trip.id} className="border-red-200 bg-red-50/50 hover:shadow-lg transition-shadow">
+              {emergencyBookings.map((booking) => (
+                <Card key={booking.id} className="border-red-200 bg-red-50/50 hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -444,21 +444,25 @@ export default function OptimizedDriverPanel() {
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="font-semibold text-gray-900">EMERGENCIA</h3>
                             <Badge className={`${
-                              trip.urgencyLevel === "critical" ? "bg-red-600" :
-                              trip.urgencyLevel === "high" ? "bg-orange-600" :
+                              booking.emergencyDetails?.urgencyLevel === "critical" ? "bg-red-600" :
+                              booking.emergencyDetails?.urgencyLevel === "high" ? "bg-orange-600" :
                               "bg-yellow-600"
                             } text-white`}>
-                              {trip.urgencyLevel === "critical" ? "CRÍTICO" :
-                               trip.urgencyLevel === "high" ? "ALTO" : "MEDIO"}
+                              {booking.emergencyDetails?.urgencyLevel === "critical" ? "CRÍTICO" :
+                               booking.emergencyDetails?.urgencyLevel === "high" ? "ALTO" : "MEDIO"}
                             </Badge>
                           </div>
-                          <p className="text-sm text-gray-600">#{trip.id}</p>
+                          <p className="text-sm text-gray-600">#{booking.id}</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-red-600">€{trip.price}</div>
-                        <div className="text-sm text-gray-500 line-through">€{trip.originalPrice}</div>
-                        <div className="text-sm font-medium text-green-600">+€{trip.emergencyBonus} bonus</div>
+                        <div className="text-2xl font-bold text-red-600">€{booking.pricing.totalPrice}</div>
+                        {booking.emergencyDetails && (
+                          <>
+                            <div className="text-sm text-gray-500 line-through">€{booking.emergencyDetails.originalPrice}</div>
+                            <div className="text-sm font-medium text-green-600">+€{booking.emergencyDetails.emergencyBonus} bonus</div>
+                          </>
+                        )}
                       </div>
                     </div>
 
@@ -468,14 +472,14 @@ export default function OptimizedDriverPanel() {
                           <MapPinIcon className="w-4 h-4 text-green-500" />
                           <span className="font-medium">Origen:</span>
                         </div>
-                        <p className="text-gray-700 ml-6">{trip.origin}</p>
+                        <p className="text-gray-700 ml-6">{booking.tripDetails.origin.address}</p>
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-2">
                           <MapPinIcon className="w-4 h-4 text-red-500" />
                           <span className="font-medium">Destino:</span>
                         </div>
-                        <p className="text-gray-700 ml-6">{trip.destination}</p>
+                        <p className="text-gray-700 ml-6">{booking.tripDetails.destination.address}</p>
                       </div>
                     </div>
 
