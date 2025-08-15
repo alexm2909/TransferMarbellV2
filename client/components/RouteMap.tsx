@@ -138,17 +138,13 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
 
     const directionsServiceInstance = new window.google.maps.DirectionsService();
     const directionsRendererInstance = new window.google.maps.DirectionsRenderer({
-      suppressMarkers: false,
+      suppressMarkers: true, // We'll use custom markers instead
       draggable: false,
       polylineOptions: {
         strokeColor: "#006d77", // Ocean color for route line
         strokeWeight: 6,
         strokeOpacity: 0.8,
-        zIndex: 1000,
-      },
-      markerOptions: {
-        // Custom markers for origin and destination
-        optimized: false,
+        zIndex: 500,
       },
     });
 
