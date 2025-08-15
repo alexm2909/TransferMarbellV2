@@ -214,11 +214,12 @@ export default function BookingForm() {
       return;
     }
 
-    // Calculate pricing
+    // Calculate pricing and required cars
     const selectedVehicle = vehicleTypes.find((v) => v.id === bookingData.vehicleType);
     const basePrice = selectedVehicle ? parseInt(selectedVehicle.price.replace(/[^\d]/g, "")) : 25;
+    const requiredCars = selectedVehicle ? calculateRequiredCars(selectedVehicle) : 1;
     const childSeatsPrice = childSeats.reduce((total, seat) => total + seat.price, 0);
-    const totalPrice = basePrice + childSeatsPrice;
+    const totalPrice = (basePrice * requiredCars) + childSeatsPrice;
 
     // Create booking in database
     const newBooking = createBooking({
