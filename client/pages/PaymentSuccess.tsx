@@ -512,6 +512,12 @@ Web: www.transfermarbell.com
                   <ShareIcon className="w-4 h-4 mr-2" />
                   Compartir Reserva
                 </Button>
+                <Link to="/my-bookings" className="block">
+                  <Button variant="outline" className="w-full justify-start">
+                    <CalendarIcon className="w-4 h-4 mr-2" />
+                    Ver Mis Reservas
+                  </Button>
+                </Link>
                 <Link to="/chat" className="block">
                   <Button variant="outline" className="w-full justify-start">
                     <MessageSquareIcon className="w-4 h-4 mr-2" />
