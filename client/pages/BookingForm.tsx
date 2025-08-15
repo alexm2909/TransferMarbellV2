@@ -177,20 +177,21 @@ export default function BookingForm() {
     },
   ];
 
-  const isVehicleCompatible = (vehicle: (typeof vehicleTypes)[0]) => {
-    const carsCount = parseInt(bookingData.cars) || 1;
-    const totalPassengers =
-      parseInt(bookingData.passengers) + parseInt(bookingData.children);
+  // Calculate the minimum number of cars needed for a vehicle type
+  const calculateRequiredCars = (vehicle: (typeof vehicleTypes)[0]) => {
+    const totalPassengers = parseInt(bookingData.passengers) + parseInt(bookingData.children);
     const totalLuggage = parseInt(bookingData.luggage);
 
-    // With multiple cars, multiply the vehicle capacity
-    const totalVehicleCapacity = vehicle.maxPassengers * carsCount;
-    const totalLuggageCapacity = vehicle.maxLuggage * carsCount;
+    const passengerCars = Math.ceil(totalPassengers / vehicle.maxPassengers);
+    const luggageCars = Math.ceil(totalLuggage / vehicle.maxLuggage);
 
-    return (
-      totalPassengers <= totalVehicleCapacity &&
-      totalLuggage <= totalLuggageCapacity
-    );
+    return Math.max(passengerCars, luggageCars, 1);
+  };
+
+  const isVehicleCompatible = (vehicle: (typeof vehicleTypes)[0]) => {
+    const requiredCars = calculateRequiredCars(vehicle);
+    // A vehicle is compatible if we can determine how many cars are needed
+    return requiredCars <= 10; // Set a reasonable maximum
   };
 
   useEffect(() => {
