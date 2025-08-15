@@ -179,11 +179,12 @@ export default function OptimizedDriverPanel() {
   };
 
   const completeTrip = (tripId: string) => {
-    setTrips(prev =>
-      prev.map(trip =>
-        trip.id === tripId ? { ...trip, status: "completed" } : trip
-      )
-    );
+    updateBooking(tripId, {
+      status: "completed",
+      timeline: {
+        completedAt: new Date().toISOString()
+      }
+    });
   };
 
   const validateVoucher = (tripId: string, voucherCode: string) => {
@@ -358,7 +359,7 @@ export default function OptimizedDriverPanel() {
                       </div>
                       <div className="text-right">
                         <div className="text-2xl font-bold text-green-600">€{trip.price}</div>
-                        <div className="text-sm text-gray-500">{trip.distance}km • {trip.duration}min</div>
+                        <div className="text-sm text-gray-500">{trip.distance}km ��� {trip.duration}min</div>
                       </div>
                     </div>
 
