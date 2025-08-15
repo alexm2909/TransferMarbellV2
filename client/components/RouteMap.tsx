@@ -197,6 +197,41 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
             const route = response.routes[0];
             const leg = route.legs[0];
 
+            // Add custom markers for better visibility
+            const originMarker = new window.google.maps.Marker({
+              position: leg.start_location,
+              map: map,
+              title: "Origen",
+              icon: {
+                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
+                    <path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8z" fill="#10B981"/>
+                    <circle cx="12" cy="8" r="3" fill="white"/>
+                  </svg>
+                `),
+                scaledSize: new window.google.maps.Size(24, 32),
+                anchor: new window.google.maps.Point(12, 32),
+              },
+              zIndex: 1000,
+            });
+
+            const destinationMarker = new window.google.maps.Marker({
+              position: leg.end_location,
+              map: map,
+              title: "Destino",
+              icon: {
+                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
+                    <path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8z" fill="#EF4444"/>
+                    <circle cx="12" cy="8" r="3" fill="white"/>
+                  </svg>
+                `),
+                scaledSize: new window.google.maps.Size(24, 32),
+                anchor: new window.google.maps.Point(12, 32),
+              },
+              zIndex: 1000,
+            });
+
             // Calculate estimated cost based on distance (€1.5 per km + base €15)
             const distanceKm = parseFloat(leg.distance.text.replace(/[^\d.]/g, ''));
             const estimatedCost = Math.round(15 + (distanceKm * 1.5));
