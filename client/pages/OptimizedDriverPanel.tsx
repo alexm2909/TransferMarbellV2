@@ -70,47 +70,6 @@ export default function OptimizedDriverPanel() {
   const { availableBookings } = useAvailableBookings();
   const { emergencyBookings } = useEmergencyBookings();
   const { bookings: driverBookings, assignToDriver, updateBooking } = useBookings(user?.id);
-  const [trips, setTrips] = useState<Trip[]>([
-    {
-      id: "1",
-      status: "available",
-      origin: "Aeropuerto de Málaga (AGP)",
-      destination: "Hotel Majestic, Marbella",
-      date: "2024-03-15",
-      time: "14:30",
-      passengers: 2,
-      children: 0,
-      luggage: 2,
-      price: 45,
-      distance: 58,
-      duration: 65,
-      clientName: "María González",
-      clientPhone: "+34 666 123 456",
-      voucherCode: "TM-123456",
-      voucherValidated: false,
-      vehicleType: "Comfort",
-    },
-    {
-      id: "2",
-      status: "accepted",
-      origin: "Hotel Melia Don Pepe",
-      destination: "Aeropuerto de Málaga (AGP)",
-      date: "2024-03-15",
-      time: "16:45",
-      passengers: 3,
-      children: 1,
-      luggage: 4,
-      price: 55,
-      distance: 62,
-      duration: 70,
-      clientName: "John Smith",
-      clientPhone: "+44 7700 900 123",
-      voucherCode: "TM-789012",
-      voucherValidated: true,
-      flightNumber: "BA456",
-      vehicleType: "Premium",
-    },
-  ]);
 
   const [emergencyTrips, setEmergencyTrips] = useState<EmergencyTrip[]>([
     {
