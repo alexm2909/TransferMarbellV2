@@ -577,31 +577,31 @@ export default function OptimizedDriverPanel() {
                         <div className="space-y-2 text-sm">
                           <div className="flex items-center">
                             <MapPinIcon className="w-4 h-4 text-green-500 mr-2" />
-                            <span>{trip.origin}</span>
+                            <span>{booking.tripDetails.origin.address}</span>
                           </div>
                           <div className="flex items-center">
                             <MapPinIcon className="w-4 h-4 text-red-500 mr-2" />
-                            <span>{trip.destination}</span>
+                            <span>{booking.tripDetails.destination.address}</span>
                           </div>
                           <div className="flex items-center">
                             <PhoneIcon className="w-4 h-4 text-blue-500 mr-2" />
-                            <a href={`tel:${trip.clientPhone}`} className="text-blue-600 hover:underline">
-                              {trip.clientPhone}
+                            <a href={`tel:${booking.clientData?.phone}`} className="text-blue-600 hover:underline">
+                              {booking.clientData?.phone || 'Teléfono no disponible'}
                             </a>
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-green-600">€{trip.price}</div>
-                        <div className="text-sm text-gray-500">{trip.date} • {trip.time}</div>
+                        <div className="text-2xl font-bold text-green-600">€{booking.pricing.totalPrice}</div>
+                        <div className="text-sm text-gray-500">{booking.tripDetails.date} • {booking.tripDetails.time}</div>
                       </div>
                     </div>
 
                     <div className="flex gap-3">
-                      {!trip.voucherValidated && (
+                      {booking.status === "assigned" && (
                         <Button
                           onClick={() => {
-                            setSelectedTrip(trip);
+                            setSelectedTrip(booking);
                             setShowVoucherScanner(true);
                           }}
                           className="bg-yellow-600 hover:bg-yellow-700 text-white"
@@ -610,10 +610,10 @@ export default function OptimizedDriverPanel() {
                           Validar Voucher
                         </Button>
                       )}
-                      
-                      {trip.status === "accepted" && trip.voucherValidated && (
+
+                      {booking.status === "confirmed" && (
                         <Button
-                          onClick={() => startTrip(trip.id)}
+                          onClick={() => startTrip(booking.id)}
                           className="bg-blue-600 hover:bg-blue-700 text-white"
                         >
                           <NavigationIcon className="w-4 h-4 mr-2" />
