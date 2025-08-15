@@ -110,11 +110,11 @@ Presenta este voucher al conductor para ser recogido.
       </div>
 
       {/* Booking Reference */}
-      <div className="text-center mb-4">
-        <div className="text-2xl font-bold text-gray-900 mb-1">
+      <div className="text-center mb-3">
+        <div className="text-xl font-bold text-gray-900 mb-1">
           {voucher.bookingRef}
         </div>
-        <Badge 
+        <Badge
           className={
             voucher.status === "confirmed" ? "bg-green-100 text-green-800" :
             voucher.status === "pending" ? "bg-yellow-100 text-yellow-800" :
@@ -127,7 +127,7 @@ Presenta este voucher al conductor para ser recogido.
       </div>
 
       {/* Trip Details */}
-      <div className="space-y-3 mb-6">
+      <div className="space-y-2 mb-4">
         <div className="flex items-center">
           <ClockIcon className="w-4 h-4 text-ocean mr-3 flex-shrink-0" />
           <div>
