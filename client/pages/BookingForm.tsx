@@ -1081,96 +1081,104 @@ export default function BookingForm() {
 
             {/* Booking Summary */}
             <div className="lg:col-span-1">
-              <Card className="sticky top-24">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CreditCardIcon className="w-5 h-5 text-ocean" />
-                    Booking Summary
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-3">
-                    <div className="space-y-2">
-                      <span className="text-sm text-gray-600">Route</span>
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <div className="flex items-start space-x-2">
-                          <div className="flex flex-col items-center mt-1">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <div className="w-0.5 h-6 bg-gray-300"></div>
-                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          </div>
-                          <div className="flex-1 min-w-0 space-y-2">
-                            <div className="text-sm font-medium text-gray-900 break-words">
-                              {bookingData.origin || "Origen"}
+              <div className="sticky top-24">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <CreditCardIcon className="w-5 h-5 text-ocean" />
+                      Booking Summary
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-3">
+                      <div className="space-y-2">
+                        <span className="text-sm text-gray-600">Route</span>
+                        <div className="bg-gray-50 p-3 rounded-lg">
+                          <div className="flex items-start space-x-2">
+                            <div className="flex flex-col items-center mt-1">
+                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                              <div className="w-0.5 h-6 bg-gray-300"></div>
+                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                             </div>
-                            <div className="text-sm font-medium text-gray-900 break-words">
-                              {bookingData.destination || "Destino"}
+                            <div className="flex-1 min-w-0 space-y-2">
+                              <div className="text-sm font-medium text-gray-900 break-words">
+                                {bookingData.origin || "Origen"}
+                              </div>
+                              <div className="text-sm font-medium text-gray-900 break-words">
+                                {bookingData.destination || "Destino"}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Date & Time</span>
-                      <span className="font-medium">
-                        {bookingData.date} {bookingData.time}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Passengers</span>
-                      <span className="font-medium">
-                        {bookingData.passengers} adults
-                        {bookingData.children !== "0" &&
-                          `, ${bookingData.children} children`}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Luggage</span>
-                      <span className="font-medium">
-                        {bookingData.luggage} pieces
-                      </span>
-                    </div>
-                    {bookingData.vehicleType && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Vehicle</span>
+                        <span className="text-gray-600">Date & Time</span>
                         <span className="font-medium">
-                          {
-                            vehicleTypes.find(
-                              (v) => v.id === bookingData.vehicleType,
-                            )?.name
-                          }
-                          {parseInt(bookingData.cars) > 1 &&
-                            ` (${bookingData.cars} coches)`}
+                          {bookingData.date} {bookingData.time}
                         </span>
                       </div>
-                    )}
-                  </div>
-
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between text-lg font-semibold">
-                      <span>Estimated Price</span>
-                      <span className="text-ocean">
-                        {calculateEstimatedPrice()}
-                      </span>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Passengers</span>
+                        <span className="font-medium">
+                          {bookingData.passengers} adults
+                          {bookingData.children !== "0" &&
+                            `, ${bookingData.children} children`}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Luggage</span>
+                        <span className="font-medium">
+                          {bookingData.luggage} pieces
+                        </span>
+                      </div>
+                      {bookingData.vehicleType && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-600">Vehicle</span>
+                          <span className="font-medium">
+                            {
+                              vehicleTypes.find(
+                                (v) => v.id === bookingData.vehicleType,
+                              )?.name
+                            }
+                            {(() => {
+                              const selectedVehicle = vehicleTypes.find(v => v.id === bookingData.vehicleType);
+                              if (selectedVehicle) {
+                                const requiredCars = calculateRequiredCars(selectedVehicle);
+                                return requiredCars > 1 ? ` (${requiredCars} coches)` : '';
+                              }
+                              return '';
+                            })()}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Final price will be confirmed after booking
-                    </p>
-                  </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-3"
-                    disabled={!bookingData.vehicleType}
-                  >
-                    Complete Booking
-                  </Button>
+                    <div className="border-t pt-4">
+                      <div className="flex justify-between text-lg font-semibold">
+                        <span>Estimated Price</span>
+                        <span className="text-ocean">
+                          {calculateEstimatedPrice()}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Final price will be confirmed after booking
+                      </p>
+                    </div>
 
-                  <div className="text-xs text-gray-500 text-center">
-                    By booking, you agree to our terms and conditions
-                  </div>
-                </CardContent>
-              </Card>
+                    <Button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90 text-white font-semibold py-3"
+                      disabled={!bookingData.vehicleType}
+                    >
+                      Complete Booking
+                    </Button>
+
+                    <div className="text-xs text-gray-500 text-center">
+                      By booking, you agree to our terms and conditions
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </form>
