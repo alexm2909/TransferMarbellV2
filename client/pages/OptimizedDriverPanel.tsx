@@ -150,11 +150,16 @@ export default function OptimizedDriverPanel() {
   }
 
   const acceptTrip = (tripId: string) => {
-    setTrips(prev =>
-      prev.map(trip =>
-        trip.id === tripId ? { ...trip, status: "accepted" } : trip
-      )
-    );
+    if (user?.id) {
+      assignToDriver(tripId, user.id);
+      updateBooking(tripId, {
+        status: "assigned",
+        driverId: user.id,
+        timeline: {
+          assignedAt: new Date().toISOString()
+        }
+      });
+    }
   };
 
   const startTrip = (tripId: string) => {
