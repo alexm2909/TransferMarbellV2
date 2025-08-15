@@ -389,16 +389,16 @@ export default function OptimizedDriverPanel() {
                       </div>
                     </div>
 
-                    {trip.specialRequests && (
+                    {booking.tripDetails.specialRequests && (
                       <div className="mb-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
                         <h4 className="font-medium text-yellow-800 mb-1">Solicitudes Especiales:</h4>
-                        <p className="text-sm text-yellow-700">{trip.specialRequests}</p>
+                        <p className="text-sm text-yellow-700">{booking.tripDetails.specialRequests}</p>
                       </div>
                     )}
 
                     <div className="flex gap-3">
                       <Button
-                        onClick={() => acceptTrip(trip.id)}
+                        onClick={() => acceptTrip(booking.id)}
                         className="bg-green-600 hover:bg-green-700 text-white flex-1"
                       >
                         <CheckIcon className="w-4 h-4 mr-2" />
