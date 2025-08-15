@@ -342,50 +342,50 @@ export default function OptimizedDriverPanel() {
           {/* Available Trips */}
           <TabsContent value="available">
             <div className="grid gap-6">
-              {availableTrips.map((trip) => (
-                <Card key={trip.id} className="hover:shadow-lg transition-shadow">
+              {availableTrips.map((booking) => (
+                <Card key={booking.id} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-lg">{trip.clientName}</h3>
-                          {getStatusBadge(trip.status)}
+                          <h3 className="font-semibold text-lg">{booking.clientData?.name || 'Cliente'}</h3>
+                          <Badge className="bg-blue-100 text-blue-700">Disponible</Badge>
                         </div>
                         <div className="space-y-2 text-sm">
                           <div className="flex items-center">
                             <MapPinIcon className="w-4 h-4 text-green-500 mr-2" />
                             <span className="font-medium">Origen:</span>
-                            <span className="ml-2">{trip.origin}</span>
+                            <span className="ml-2">{booking.tripDetails.origin.address}</span>
                           </div>
                           <div className="flex items-center">
                             <MapPinIcon className="w-4 h-4 text-red-500 mr-2" />
                             <span className="font-medium">Destino:</span>
-                            <span className="ml-2">{trip.destination}</span>
+                            <span className="ml-2">{booking.tripDetails.destination.address}</span>
                           </div>
                           <div className="flex items-center">
                             <ClockIcon className="w-4 h-4 text-blue-500 mr-2" />
-                            <span className="font-medium">{trip.date} a las {trip.time}</span>
+                            <span className="font-medium">{booking.tripDetails.date} a las {booking.tripDetails.time}</span>
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-green-600">€{trip.price}</div>
-                        <div className="text-sm text-gray-500">{trip.distance}km • {trip.duration}min</div>
+                        <div className="text-2xl font-bold text-green-600">€{booking.pricing.totalPrice}</div>
+                        <div className="text-sm text-gray-500">Precio estimado</div>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
                       <div className="flex items-center">
                         <UsersIcon className="w-4 h-4 text-blue-500 mr-2" />
-                        <span>{trip.passengers + trip.children} pasajeros</span>
+                        <span>{booking.tripDetails.passengers + (booking.tripDetails.children?.count || 0)} pasajeros</span>
                       </div>
                       <div className="flex items-center">
                         <LuggageIcon className="w-4 h-4 text-purple-500 mr-2" />
-                        <span>{trip.luggage} maletas</span>
+                        <span>{(booking.tripDetails.luggage.small || 0) + (booking.tripDetails.luggage.medium || 0) + (booking.tripDetails.luggage.large || 0)} maletas</span>
                       </div>
                       <div className="flex items-center">
                         <CarIcon className="w-4 h-4 text-orange-500 mr-2" />
-                        <span>{trip.vehicleType}</span>
+                        <span>{booking.vehicleType}</span>
                       </div>
                     </div>
 
