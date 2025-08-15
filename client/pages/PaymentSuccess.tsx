@@ -483,7 +483,7 @@ Web: www.transfermarbell.com
 
                 <div className="space-y-3">
                   <Button
-                    onClick={() => setShowVoucher(true)}
+                    onClick={handleShowVoucher}
                     className="w-full bg-gradient-to-r from-purple to-ocean hover:from-purple/90 hover:to-ocean/90 text-white"
                     disabled={!generatedVoucher}
                   >
