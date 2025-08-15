@@ -223,19 +223,21 @@ Presenta este voucher al conductor para ser recogido.
   if (showModal) {
     return (
       <Dialog open={showModal} onOpenChange={onClose}>
-        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-hidden">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <TicketIcon className="w-5 h-5 text-ocean" />
               Tu Voucher de Transferencia
             </DialogTitle>
           </DialogHeader>
-          
-          <div className="space-y-4">
-            <VoucherContent />
-            
+
+          <div className="space-y-4 overflow-hidden">
+            <div className="max-h-[60vh] overflow-y-auto pr-2">
+              <VoucherContent />
+            </div>
+
             {/* Action Buttons */}
-            <div className="flex gap-2 justify-center print:hidden">
+            <div className="flex gap-2 justify-center print:hidden border-t pt-4">
               <Button
                 onClick={handleDownload}
                 disabled={isDownloading}
@@ -245,7 +247,7 @@ Presenta este voucher al conductor para ser recogido.
                 <DownloadIcon className="w-4 h-4 mr-2" />
                 {isDownloading ? "Descargando..." : "Descargar"}
               </Button>
-              
+
               <Button
                 onClick={handlePrint}
                 variant="outline"
@@ -254,7 +256,7 @@ Presenta este voucher al conductor para ser recogido.
                 <PrinterIcon className="w-4 h-4 mr-2" />
                 Imprimir
               </Button>
-              
+
               <Button
                 onClick={handleEmailSend}
                 variant="outline"
