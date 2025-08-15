@@ -767,31 +767,37 @@ export default function BookingForm() {
                       </div>
                     </div>
 
-                    <div className="flex flex-row sm:flex-col items-center sm:items-center p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-ocean/40 transition-colors">
+                    <div className="flex flex-row sm:flex-col items-center sm:items-center p-3 sm:p-4 border border-gray-200 rounded-lg bg-blue-50 border-blue-200">
                       <div className="flex items-center space-x-3 sm:space-x-0 sm:flex-col flex-1">
-                        <CarIcon className="w-5 h-5 sm:w-6 sm:h-6 text-purple sm:mb-2 flex-shrink-0" />
-                        <label className="text-sm font-medium text-gray-700 sm:mb-2 flex-1 sm:flex-none sm:text-center">
-                          Coches
+                        <CarIcon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 sm:mb-2 flex-shrink-0" />
+                        <label className="text-sm font-medium text-blue-700 sm:mb-2 flex-1 sm:flex-none sm:text-center">
+                          Coches Requeridos
                         </label>
                       </div>
                       <div className="w-28 sm:w-full">
-                        <Select
-                          value={bookingData.cars}
-                          onValueChange={(value) =>
-                            setBookingData({ ...bookingData, cars: value })
+                        {(() => {
+                          const selectedVehicle = vehicleTypes.find(v => v.id === bookingData.vehicleType);
+                          if (selectedVehicle) {
+                            const requiredCars = calculateRequiredCars(selectedVehicle);
+                            return (
+                              <div className="text-center p-2 bg-blue-100 rounded-lg">
+                                <div className="text-lg font-bold text-blue-800">
+                                  {requiredCars}
+                                </div>
+                                <div className="text-xs text-blue-600">
+                                  {requiredCars === 1 ? "coche" : "coches"}
+                                </div>
+                              </div>
+                            );
                           }
-                        >
-                          <SelectTrigger className="w-full min-w-[100px]">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                              <SelectItem key={num} value={num.toString()}>
-                                {num} {num === 1 ? "coche" : "coches"}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                          return (
+                            <div className="text-center p-2 bg-gray-100 rounded-lg">
+                              <div className="text-sm text-gray-500">
+                                Selecciona vehículo
+                              </div>
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>
