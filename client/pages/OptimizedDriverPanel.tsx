@@ -227,9 +227,14 @@ export default function OptimizedDriverPanel() {
     }
   };
 
-  const availableTrips = trips.filter(t => t.status === "available");
-  const activeTrips = trips.filter(t => ["accepted", "in_progress"].includes(t.status));
-  const completedTrips = trips.filter(t => t.status === "completed");
+  // Use database data instead of mock data
+  const availableTrips = availableBookings;
+  const activeTrips = driverBookings.filter(booking =>
+    ["assigned", "confirmed", "in_progress"].includes(booking.status)
+  );
+  const completedTrips = driverBookings.filter(booking =>
+    booking.status === "completed"
+  );
 
   const todayEarnings = completedTrips.reduce((sum, trip) => sum + trip.price, 0);
   const todayTrips = completedTrips.length;
