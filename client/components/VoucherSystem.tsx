@@ -94,10 +94,10 @@ Presenta este voucher al conductor para ser recogido.
   const VoucherContent = () => (
     <div
       ref={voucherRef}
-      className="bg-white p-6 rounded-lg border shadow-lg max-w-md mx-auto print:shadow-none print:border-0"
+      className="bg-white p-4 rounded-lg border shadow-lg max-w-md mx-auto print:shadow-none print:border-0"
     >
       {/* Header */}
-      <div className="text-center mb-6 border-b pb-4">
+      <div className="text-center mb-4 border-b pb-3">
         <div className="flex items-center justify-center mb-2">
           <div className="w-8 h-8 bg-gradient-to-br from-ocean to-coral rounded-lg flex items-center justify-center mr-2">
             <CarIcon className="w-5 h-5 text-white" />
