@@ -244,7 +244,8 @@ export default function BookingForm() {
           count: parseInt(bookingData.children),
           ages: childSeats.map(seat => seat.age)
         } : undefined,
-        specialRequests: bookingData.specialRequests
+        specialRequests: bookingData.specialRequests,
+        carsRequired: requiredCars
       },
       vehicleType: selectedVehicle?.name || bookingData.vehicleType,
       pricing: {
