@@ -862,7 +862,7 @@ export default function BookingForm() {
                         parseInt(bookingData.passengers) +
                         parseInt(bookingData.children);
                       const totalLuggage = parseInt(bookingData.luggage);
-                      const carsCount = parseInt(bookingData.cars) || 1;
+                      const carsCount = calculateRequiredCars(vehicle);
 
                       const isSelected = bookingData.vehicleType === vehicle.id;
 
