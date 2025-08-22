@@ -715,20 +715,20 @@ export default function OptimizedDriverPanel() {
           {/* Completed Trips */}
           <TabsContent value="completed">
             <div className="grid gap-4">
-              {completedTrips.map((trip) => (
-                <Card key={trip.id} className="border-l-4 border-l-green-500">
+              {completedTrips.map((booking) => (
+                <Card key={booking.id} className="border-l-4 border-l-green-500">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold">{trip.clientName}</h3>
+                        <h3 className="font-semibold">{booking.clientData?.name || 'Cliente'}</h3>
                         <p className="text-sm text-gray-600">
-                          {trip.origin} → {trip.destination}
+                          {booking.tripDetails.origin.address} → {booking.tripDetails.destination.address}
                         </p>
-                        <p className="text-xs text-gray-500">{trip.date} • {trip.time}</p>
+                        <p className="text-xs text-gray-500">{booking.tripDetails.date} • {booking.tripDetails.time}</p>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-green-600">€{trip.price}</div>
-                        {getStatusBadge(trip.status)}
+                        <div className="font-bold text-green-600">€{booking.pricing.totalPrice}</div>
+                        {getStatusBadge(booking.status)}
                       </div>
                     </div>
                   </CardContent>
