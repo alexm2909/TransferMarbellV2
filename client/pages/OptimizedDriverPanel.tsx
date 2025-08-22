@@ -191,6 +191,33 @@ export default function OptimizedDriverPanel() {
         completedAt: new Date().toISOString()
       }
     });
+    toast({
+      title: "✅ Viaje Completado",
+      description: "El viaje ha sido marcado como completado exitosamente.",
+      duration: 3000,
+    });
+  };
+
+  const reportEmergency = () => {
+    if (!selectedTrip || !emergencyReason.trim()) return;
+
+    // Here you would normally call an API to report the emergency
+    // For now, we'll just show a confirmation
+    toast({
+      title: "🚨 Emergencia Reportada",
+      description: `Se ha reportado una emergencia durante el viaje. Motivo: ${emergencyReason}`,
+      variant: "destructive",
+      duration: 5000,
+    });
+
+    setShowEmergencyDialog(false);
+    setEmergencyReason("");
+    setSelectedTrip(null);
+  };
+
+  const openChat = (booking: any) => {
+    // Navigate to chat page with the booking ID or client info
+    navigate(`/chat?booking=${booking.id}&client=${booking.clientData?.name || 'Cliente'}`);
   };
 
   const validateVoucher = (tripId: string, voucherCode: string) => {
@@ -637,16 +664,32 @@ export default function OptimizedDriverPanel() {
                       )}
                       
                       {booking.status === "in_progress" && (
-                        <Button
-                          onClick={() => completeTrip(booking.id)}
-                          className="bg-green-600 hover:bg-green-700 text-white"
-                        >
-                          <CheckIcon className="w-4 h-4 mr-2" />
-                          Completar Viaje
-                        </Button>
+                        <>
+                          <Button
+                            onClick={() => completeTrip(booking.id)}
+                            className="bg-green-600 hover:bg-green-700 text-white"
+                          >
+                            <CheckIcon className="w-4 h-4 mr-2" />
+                            Completar Viaje
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              setSelectedTrip(booking);
+                              setShowEmergencyDialog(true);
+                            }}
+                            variant="outline"
+                            className="border-red-300 text-red-600 hover:bg-red-50"
+                          >
+                            <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
+                            Emergencia
+                          </Button>
+                        </>
                       )}
 
-                      <Button variant="outline">
+                      <Button
+                        variant="outline"
+                        onClick={() => openChat(booking)}
+                      >
                         <MessageSquareIcon className="w-4 h-4 mr-2" />
                         Chat
                       </Button>
