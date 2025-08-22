@@ -32,6 +32,7 @@ import {
   CameraIcon,
   MessageSquareIcon,
   ExclamationTriangleIcon,
+  ExclamationTriangleIcon,
   SettingsIcon,
 } from "lucide-react";
 
@@ -127,6 +128,8 @@ export default function OptimizedDriverPanel() {
 
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [showVoucherScanner, setShowVoucherScanner] = useState(false);
+  const [showEmergencyDialog, setShowEmergencyDialog] = useState(false);
+  const [emergencyReason, setEmergencyReason] = useState("");
   const [voucherInput, setVoucherInput] = useState("");
   const [showBilling, setShowBilling] = useState(false);
 
