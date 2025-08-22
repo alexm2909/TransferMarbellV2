@@ -283,7 +283,17 @@ Equipo de Transfermarbell
                     {isSending ? "Enviando..." : "Enviar por Email"}
                   </Button>
                 )}
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    toast({
+                      title: "📄 Detalles de Factura",
+                      description: `Factura ${invoice.invoiceNumber} - Total: €${invoice.total.toFixed(2)} - Estado: ${invoice.status}`,
+                      duration: 4000,
+                    });
+                  }}
+                >
                   <FileTextIcon className="w-4 h-4 mr-2" />
                   Ver Detalles
                 </Button>
