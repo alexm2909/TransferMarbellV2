@@ -120,12 +120,21 @@ export default function EmailBilling({ bookings = [], clientData, onInvoiceGener
       const existingInvoices = JSON.parse(stored);
       localStorage.setItem("invoices", JSON.stringify([...existingInvoices, invoice]));
 
-      alert('Factura generada exitosamente');
+      toast({
+        title: "✅ Factura Generada",
+        description: "La factura ha sido generada exitosamente.",
+        duration: 3000,
+      });
       setShowCreateInvoice(false);
       setSelectedBookings([]);
     } catch (error) {
       console.error('Error generating invoice:', error);
-      alert('Error al generar la factura');
+      toast({
+        title: "❌ Error",
+        description: "Error al generar la factura. Por favor inténtalo de nuevo.",
+        variant: "destructive",
+        duration: 4000,
+      });
     } finally {
       setIsGenerating(false);
     }
@@ -148,10 +157,19 @@ export default function EmailBilling({ bookings = [], clientData, onInvoiceGener
       );
       setInvoices(updatedInvoices);
       
-      alert('Factura enviada por email');
+      toast({
+        title: "📧 Email Enviado",
+        description: "La factura ha sido enviada por email exitosamente.",
+        duration: 3000,
+      });
     } catch (error) {
       console.error('Error sending invoice:', error);
-      alert('Error al enviar la factura');
+      toast({
+        title: "❌ Error de Envío",
+        description: "Error al enviar la factura por email. Por favor inténtalo de nuevo.",
+        variant: "destructive",
+        duration: 4000,
+      });
     } finally {
       setIsSending(false);
     }
