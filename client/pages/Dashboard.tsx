@@ -1,5 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -675,7 +675,7 @@ export default function Dashboard() {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Ahorrado</span>
-                        <span className="font-medium text-success">€45</span>
+                        <span className="font-medium text-success">���45</span>
                       </div>
                     </>
                   )}
