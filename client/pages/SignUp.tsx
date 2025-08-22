@@ -50,12 +50,22 @@ export default function SignUp() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      toast({
+        title: "❌ Error de Contraseña",
+        description: "Las contraseñas no coinciden. Por favor verifica e inténtalo de nuevo.",
+        variant: "destructive",
+        duration: 3000,
+      });
       return;
     }
 
     if (!formData.agreeToTerms) {
-      alert("Please agree to the terms and conditions");
+      toast({
+        title: "⚠️ Términos y Condiciones",
+        description: "Debes aceptar los términos y condiciones para continuar.",
+        variant: "destructive",
+        duration: 3000,
+      });
       return;
     }
 
@@ -88,7 +98,12 @@ export default function SignUp() {
       }
     } catch (error) {
       console.error("Registration failed:", error);
-      alert("Registration failed. Please try again.");
+      toast({
+        title: "❌ Error de Registro",
+        description: "Error al crear la cuenta. Por favor inténtalo de nuevo.",
+        variant: "destructive",
+        duration: 4000,
+      });
     } finally {
       setIsLoading(false);
     }

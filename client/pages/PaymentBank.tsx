@@ -16,12 +16,20 @@ export default function PaymentBank() {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    alert("Copiado al portapapeles");
+    toast({
+      title: "📋 Copiado",
+      description: "Información copiada al portapapeles.",
+      duration: 2000,
+    });
   };
 
   const handleBankTransferComplete = () => {
     // In a real implementation, this would be pending until transfer is confirmed
-    alert("Instrucciones de transferencia proporcionadas. Una vez realizada la transferencia, tu reserva será confirmada.");
+    toast({
+      title: "✅ Instrucciones Enviadas",
+      description: "Instrucciones de transferencia proporcionadas. Una vez realizada la transferencia, tu reserva será confirmada.",
+      duration: 5000,
+    });
     navigate("/payment-success?type=bank");
   };
 
