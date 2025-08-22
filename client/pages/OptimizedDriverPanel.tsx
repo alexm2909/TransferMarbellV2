@@ -368,7 +368,7 @@ export default function OptimizedDriverPanel() {
               Disponibles ({availableTrips.length})
             </TabsTrigger>
             <TabsTrigger value="emergency" className="text-red-600 font-semibold">
-              🚨 Emergencias ({emergencyBookings.length})
+              🚨 Emergencias ({emergencyTrips.length})
             </TabsTrigger>
             <TabsTrigger value="active">
               Activos ({activeTrips.length})
@@ -575,7 +575,7 @@ export default function OptimizedDriverPanel() {
                 </Card>
               ))}
 
-              {emergencyBookings.length === 0 && (
+              {emergencyTrips.length === 0 && (
                 <Card className="border-green-200 bg-green-50/50">
                   <CardContent className="text-center py-12">
                     <CheckIcon className="w-12 h-12 mx-auto mb-4 text-green-500" />
@@ -715,20 +715,20 @@ export default function OptimizedDriverPanel() {
           {/* Completed Trips */}
           <TabsContent value="completed">
             <div className="grid gap-4">
-              {completedTrips.map((booking) => (
-                <Card key={booking.id} className="border-l-4 border-l-green-500">
+              {completedTrips.map((trip) => (
+                <Card key={trip.id} className="border-l-4 border-l-green-500">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold">{booking.clientData?.name || 'Cliente'}</h3>
+                        <h3 className="font-semibold">{trip.clientName}</h3>
                         <p className="text-sm text-gray-600">
-                          {booking.tripDetails.origin.address} → {booking.tripDetails.destination.address}
+                          {trip.origin} → {trip.destination}
                         </p>
-                        <p className="text-xs text-gray-500">{booking.tripDetails.date} • {booking.tripDetails.time}</p>
+                        <p className="text-xs text-gray-500">{trip.date} • {trip.time}</p>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-green-600">€{booking.pricing.totalPrice}</div>
-                        {getStatusBadge(booking.status)}
+                        <div className="font-bold text-green-600">€{trip.price}</div>
+                        {getStatusBadge(trip.status)}
                       </div>
                     </div>
                   </CardContent>
