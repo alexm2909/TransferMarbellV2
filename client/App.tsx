@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { Toaster } from "@/components/ui/toaster";
 import { TripProvider } from "./contexts/TripContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Index from "./pages/Index";
@@ -21,6 +22,7 @@ import FleetManagerPanel from "./pages/FleetManagerPanel";
 import BusinessPanel from "./pages/BusinessPanel";
 import DriverPanel from "./pages/DriverPanel";
 import OptimizedDriverPanel from "./pages/OptimizedDriverPanel";
+import DriverEarnings from "./pages/DriverEarnings";
 import PaymentMethod from "./pages/PaymentMethod";
 import PaymentSummary from "./pages/PaymentSummary";
 import PaymentApple from "./pages/PaymentApple";
@@ -180,6 +182,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={["driver", "admin"]}>
                   <OptimizedDriverPanel />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/driver-earnings"
+              element={
+                <ProtectedRoute allowedRoles={["driver"]}>
+                  <DriverEarnings />
                 </ProtectedRoute>
               }
             />
