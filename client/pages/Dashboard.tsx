@@ -154,7 +154,7 @@ export default function Dashboard() {
       driver: "🚗",
       admin: "⚙️",
     };
-    return iconMap[role as keyof typeof iconMap] || "���";
+    return iconMap[role as keyof typeof iconMap] || "👤";
   };
 
   return (
@@ -373,183 +373,337 @@ export default function Dashboard() {
             {/* ADMIN DASHBOARD */}
             {user?.role === "admin" && (
               <>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <SettingsIcon className="w-5 h-5 text-ocean" />
-                      Resumen del Sistema
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                      <div className="text-center p-3 bg-ocean-light/20 rounded-lg">
-                        <div className="text-xl font-bold text-ocean">156</div>
-                        <div className="text-xs text-gray-600">
-                          Usuarios Total
-                        </div>
-                      </div>
-                      <div className="text-center p-3 bg-coral-light/20 rounded-lg">
-                        <div className="text-xl font-bold text-coral">24</div>
-                        <div className="text-xs text-gray-600">
-                          Conductores Activos
-                        </div>
-                      </div>
-                      <div className="text-center p-3 bg-success/20 rounded-lg">
-                        <div className="text-xl font-bold text-success">89</div>
-                        <div className="text-xs text-gray-600">
-                          Reservas Hoy
-                        </div>
-                      </div>
-                      <div className="text-center p-3 bg-warning/20 rounded-lg">
-                        <div className="text-xl font-bold text-warning">3</div>
-                        <div className="text-xs text-gray-600">Pendientes</div>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 border rounded-lg bg-yellow-50">
+                {/* Stats Overview */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  <Card>
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
                         <div>
-                          <span className="font-medium">
-                            Solicitud Conductor
-                          </span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Miguel Torres
-                          </span>
+                          <p className="text-sm font-medium text-gray-600">Total Usuarios</p>
+                          <p className="text-2xl font-bold text-gray-900">{stats?.totalUsers || 0}</p>
                         </div>
-                        <Button size="sm" variant="outline">
-                          Revisar
-                        </Button>
+                        <UsersIcon className="w-8 h-8 text-ocean" />
                       </div>
-                      <div className="flex justify-between items-center p-3 border rounded-lg bg-yellow-50">
-                        <div>
-                          <span className="font-medium">Subida de Precio</span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            +€5 Ruta Aeropuerto
-                          </span>
-                        </div>
-                        <Button size="sm" variant="outline">
-                          Revisar
-                        </Button>
-                      </div>
-                      <div className="flex justify-between items-center p-3 border rounded-lg bg-red-50">
-                        <div>
-                          <span className="font-medium">Disputa de Pago</span>
-                          <span className="text-sm text-gray-500 ml-2">
-                            Reserva #TM001234
-                          </span>
-                        </div>
-                        <Button size="sm" variant="outline">
-                          Resolver
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
 
-                {/* Driver Approval Section */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <CarIcon className="w-5 h-5 text-purple" />
-                      Solicitudes de Conductor Pendientes
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {/* Mock driver applications - replace with real data */}
-                      {(() => {
-                        const applications = [
-                          {
-                            id: "1",
-                            name: "Miguel Torres",
-                            email: "miguel@example.com",
-                            vehicle: "Mercedes Clase E 2020",
-                            submittedAt: "Hace 2 días",
-                            documents: ["VTC", "Seguro", "Permiso", "ITV", "Antecedentes"]
-                          },
-                          {
-                            id: "2",
-                            name: "Ana García",
-                            email: "ana@example.com",
-                            vehicle: "BMW Serie 5 2019",
-                            submittedAt: "Hace 1 día",
-                            documents: ["VTC", "Seguro", "Permiso", "ITV"]
-                          }
-                        ];
+                  <Card>
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-600">Conductores</p>
+                          <p className="text-2xl font-bold text-gray-900">{stats?.totalDrivers || 0}</p>
+                        </div>
+                        <CarIcon className="w-8 h-8 text-coral" />
+                      </div>
+                    </CardContent>
+                  </Card>
 
-                        return applications.length > 0 ? (
-                          applications.map((application) => (
-                            <div key={application.id} className="border rounded-lg p-4 bg-purple/5">
+                  <Card>
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-600">Reservas Totales</p>
+                          <p className="text-2xl font-bold text-gray-900">{stats?.totalBookings || 0}</p>
+                        </div>
+                        <TrendingUpIcon className="w-8 h-8 text-green-500" />
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-600">Solicitudes Pendientes</p>
+                          <p className="text-2xl font-bold text-gray-900">{stats?.pendingApplications || 0}</p>
+                        </div>
+                        <ClockIcon className="w-8 h-8 text-amber-500" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Admin Tabs */}
+                <Tabs defaultValue="applications" className="space-y-6">
+                  <TabsList className="grid w-full grid-cols-4">
+                    <TabsTrigger value="applications">Solicitudes Conductor</TabsTrigger>
+                    <TabsTrigger value="bookings">Reservas</TabsTrigger>
+                    <TabsTrigger value="users">Usuarios</TabsTrigger>
+                    <TabsTrigger value="emergencies">Emergencias</TabsTrigger>
+                  </TabsList>
+
+                  {/* Driver Applications */}
+                  <TabsContent value="applications">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Solicitudes de Conductor Pendientes</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {applications.length > 0 ? (
+                            applications.map((application) => (
+                              <div key={application.id} className="border rounded-lg p-4 bg-white">
+                                <div className="flex justify-between items-start mb-3">
+                                  <div>
+                                    <h4 className="font-semibold text-gray-900">
+                                      Usuario ID: {application.userId}
+                                    </h4>
+                                    <p className="text-sm text-gray-600">
+                                      Vehículo: {application.vehicle.make} {application.vehicle.model} ({application.vehicle.year})
+                                    </p>
+                                    <p className="text-sm text-gray-600">
+                                      Enviado: {new Date(application.submittedAt).toLocaleDateString('es-ES')}
+                                    </p>
+                                  </div>
+                                  <Badge variant="secondary">
+                                    {application.status === 'pending' ? 'Pendiente' : application.status}
+                                  </Badge>
+                                </div>
+
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                  <Badge variant="outline">
+                                    Matrícula: {application.vehicle.plate}
+                                  </Badge>
+                                  <Badge variant="outline">
+                                    Color: {application.vehicle.color}
+                                  </Badge>
+                                  <Badge variant="outline">
+                                    {application.documents.length} documentos
+                                  </Badge>
+                                </div>
+
+                                <div className="flex gap-2">
+                                  <Button
+                                    size="sm"
+                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                    onClick={() => handleApproveApplication(application.id)}
+                                  >
+                                    <CheckCircleIcon className="w-4 h-4 mr-2" />
+                                    Aprobar
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="border-red-300 text-red-600 hover:bg-red-50"
+                                    onClick={() => handleRejectApplication(application.id)}
+                                  >
+                                    <XCircleIcon className="w-4 h-4 mr-2" />
+                                    Rechazar
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => setSelectedApplication(application)}
+                                  >
+                                    <EyeIcon className="w-4 h-4 mr-2" />
+                                    Ver Detalles
+                                  </Button>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="text-center py-8 text-gray-500">
+                              <FileTextIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                              <p className="text-sm">No hay solicitudes pendientes</p>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  {/* Bookings */}
+                  <TabsContent value="bookings">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Todas las Reservas</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {bookings.slice(0, 10).map((booking) => (
+                            <div key={booking.id} className="border rounded-lg p-4 bg-white">
                               <div className="flex justify-between items-start mb-3">
                                 <div>
-                                  <h4 className="font-semibold text-gray-900">{application.name}</h4>
-                                  <p className="text-sm text-gray-600">{application.email}</p>
-                                  <p className="text-sm text-gray-600">{application.vehicle}</p>
+                                  <h4 className="font-semibold">
+                                    {booking.tripDetails.origin.address} → {booking.tripDetails.destination.address}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">
+                                    {new Date(booking.tripDetails.date).toLocaleDateString('es-ES')} - {booking.tripDetails.time}
+                                  </p>
+                                  <p className="text-sm text-gray-600">
+                                    Cliente: {booking.clientData?.name || 'N/A'}
+                                  </p>
                                 </div>
                                 <div className="text-right">
-                                  <Badge variant="secondary" className="mb-2">
-                                    {application.submittedAt}
+                                  <Badge className={getStatusBadge(booking.status)}>
+                                    {booking.status}
                                   </Badge>
-                                  <div className="text-xs text-gray-500">
-                                    {application.documents.length} documentos
+                                  <p className="text-lg font-bold text-gray-900 mt-1">
+                                    €{booking.pricing.totalPrice}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="flex justify-between items-center">
+                                <div className="flex gap-4 text-sm text-gray-600">
+                                  <span>{booking.tripDetails.passengers} pasajeros</span>
+                                  <span>{booking.tripDetails.luggage.small + booking.tripDetails.luggage.medium + booking.tripDetails.luggage.large} maletas</span>
+                                </div>
+                                <div className="flex gap-2">
+                                  {!booking.isEmergency && booking.status === 'pending' && (
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      className="border-red-300 text-red-600"
+                                      onClick={() => setEmergencyDialog({ open: true, booking })}
+                                    >
+                                      <AlertTriangleIcon className="w-4 h-4 mr-2" />
+                                      Convertir a Emergencia
+                                    </Button>
+                                  )}
+                                  {booking.isEmergency && (
+                                    <Badge className="bg-red-100 text-red-700">
+                                      🚨 Emergencia (+€{booking.emergencyDetails?.emergencyBonus})
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  {/* Users */}
+                  <TabsContent value="users">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Gestión de Usuarios</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {users.map((user) => (
+                            <div key={user.id} className="border rounded-lg p-4 bg-white">
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <h4 className="font-semibold">{user.name}</h4>
+                                  <p className="text-sm text-gray-600">{user.email}</p>
+                                  <p className="text-sm text-gray-600">Teléfono: {user.phone || 'N/A'}</p>
+                                </div>
+                                <div className="text-right">
+                                  <Badge className={
+                                    user.role === 'admin' ? 'bg-purple-100 text-purple-800' :
+                                    user.role === 'driver' ? 'bg-blue-100 text-blue-800' :
+                                    'bg-green-100 text-green-800'
+                                  }>
+                                    {user.role === 'admin' ? 'Administrador' :
+                                     user.role === 'driver' ? 'Conductor' :
+                                     'Cliente'}
+                                  </Badge>
+                                  {user.driverStatus && (
+                                    <Badge className="mt-1 block" variant="outline">
+                                      {user.driverStatus === 'pending' ? 'Pendiente' :
+                                       user.driverStatus === 'approved' ? 'Aprobado' :
+                                       'Rechazado'}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  {/* Emergency Bookings */}
+                  <TabsContent value="emergencies">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Reservas de Emergencia</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {emergencyBookings.length > 0 ? (
+                            emergencyBookings.map((booking) => (
+                              <div key={booking.id} className="border-2 border-red-200 rounded-lg p-4 bg-red-50">
+                                <div className="flex justify-between items-start mb-3">
+                                  <div>
+                                    <h4 className="font-semibold text-red-900">
+                                      🚨 {booking.tripDetails.origin.address} → {booking.tripDetails.destination.address}
+                                    </h4>
+                                    <p className="text-sm text-red-700">
+                                      {new Date(booking.tripDetails.date).toLocaleDateString('es-ES')} - {booking.tripDetails.time}
+                                    </p>
+                                    <p className="text-sm text-red-700">
+                                      Motivo: {booking.emergencyDetails?.reason}
+                                    </p>
+                                  </div>
+                                  <div className="text-right">
+                                    <p className="text-lg font-bold text-red-900">
+                                      €{booking.pricing.totalPrice}
+                                      <span className="text-sm font-normal">
+                                        (+€{booking.emergencyDetails?.emergencyBonus} bonus)
+                                      </span>
+                                    </p>
                                   </div>
                                 </div>
                               </div>
-
-                              <div className="flex flex-wrap gap-2 mb-4">
-                                {application.documents.map((doc) => (
-                                  <Badge key={doc} variant="outline" className="text-xs">
-                                    {doc}
-                                  </Badge>
-                                ))}
-                              </div>
-
-                              <div className="flex gap-2">
-                                <Button
-                                  size="sm"
-                                  className="bg-green-600 hover:bg-green-700 text-white flex-1"
-                                  onClick={() => {
-                                    // Mock approval
-                                    alert(`Conductor ${application.name} aprobado exitosamente`);
-                                  }}
-                                >
-                                  Aprobar
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  className="border-red-300 text-red-600 hover:bg-red-50 flex-1"
-                                  onClick={() => {
-                                    // Mock rejection
-                                    const reason = prompt("Razón del rechazo:");
-                                    if (reason) {
-                                      alert(`Conductor ${application.name} rechazado: ${reason}`);
-                                    }
-                                  }}
-                                >
-                                  Rechazar
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  onClick={() => {
-                                    alert(`Ver detalles completos de ${application.name}`);
-                                  }}
-                                >
-                                  Ver Detalles
-                                </Button>
-                              </div>
+                            ))
+                          ) : (
+                            <div className="text-center py-8 text-gray-500">
+                              <AlertTriangleIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                              <p className="text-sm">No hay reservas de emergencia</p>
                             </div>
-                          ))
-                        ) : (
-                          <div className="text-center py-6 text-gray-500">
-                            <CarIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
-                            <p className="text-sm">No hay solicitudes pendientes</p>
-                          </div>
-                        );
-                      })()}
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+
+                {/* Emergency Creation Dialog */}
+                <Dialog open={emergencyDialog.open} onOpenChange={(open) => setEmergencyDialog({ open })}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Convertir a Reserva de Emergencia</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium">Motivo de la emergencia</label>
+                        <Input
+                          value={emergencyReason}
+                          onChange={(e) => setEmergencyReason(e.target.value)}
+                          placeholder="Ej: Conductor no disponible, cancelación de último momento..."
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium">Bonus adicional (€)</label>
+                        <Input
+                          type="number"
+                          value={emergencyBonus}
+                          onChange={(e) => setEmergencyBonus(Number(e.target.value))}
+                          min="5"
+                          max="100"
+                        />
+                      </div>
+                      <div className="flex gap-2 justify-end">
+                        <Button variant="outline" onClick={() => setEmergencyDialog({ open: false })}>
+                          Cancelar
+                        </Button>
+                        <Button
+                          className="bg-red-600 hover:bg-red-700"
+                          onClick={handleCreateEmergency}
+                          disabled={!emergencyReason}
+                        >
+                          Crear Emergencia
+                        </Button>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </DialogContent>
+                </Dialog>
               </>
             )}
 
