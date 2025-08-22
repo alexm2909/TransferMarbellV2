@@ -15,6 +15,7 @@ import {
   BuildingIcon,
   UserIcon,
 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface InvoiceData {
   id: string;
@@ -49,6 +50,7 @@ interface EmailBillingProps {
 }
 
 export default function EmailBilling({ bookings = [], clientData, onInvoiceGenerated }: EmailBillingProps) {
+  const { toast } = useToast();
   const [invoices, setInvoices] = useState<InvoiceData[]>([]);
   const [showCreateInvoice, setShowCreateInvoice] = useState(false);
   const [selectedBookings, setSelectedBookings] = useState<string[]>([]);
