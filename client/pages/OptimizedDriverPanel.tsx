@@ -823,6 +823,63 @@ export default function OptimizedDriverPanel() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Emergency Report Dialog */}
+      <Dialog open={showEmergencyDialog} onOpenChange={setShowEmergencyDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <ExclamationTriangleIcon className="w-5 h-5 text-red-600" />
+              Reportar Emergencia Durante Viaje
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-800">
+                <span className="font-medium">⚠️ Importante:</span> Utiliza esta función solo en caso de emergencias reales durante el viaje (accidente, problema médico, etc.)
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">
+                Describe la emergencia *
+              </label>
+              <textarea
+                value={emergencyReason}
+                onChange={(e) => setEmergencyReason(e.target.value)}
+                placeholder="Describe brevemente la situación de emergencia..."
+                className="w-full p-3 border border-gray-200 rounded-lg resize-none h-24 focus:border-red-400 focus:ring-red-400"
+                maxLength={200}
+              />
+              <p className="text-xs text-gray-500">
+                {emergencyReason.length}/200 caracteres
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                onClick={() => {
+                  setShowEmergencyDialog(false);
+                  setEmergencyReason("");
+                }}
+                variant="outline"
+                className="flex-1"
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={reportEmergency}
+                disabled={!emergencyReason.trim()}
+                className="bg-red-600 hover:bg-red-700 text-white flex-1"
+              >
+                <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
+                Reportar Emergencia
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
