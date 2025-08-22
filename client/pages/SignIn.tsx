@@ -95,7 +95,12 @@ export default function SignIn() {
       }
     } catch (error) {
       console.error("Login failed:", error);
-      alert(error instanceof Error ? error.message : "Login failed. Please check your credentials and try again.");
+      toast({
+        title: "❌ Error de Acceso",
+        description: error instanceof Error ? error.message : "Error de acceso. Por favor verifica tus credenciales e inténtalo de nuevo.",
+        variant: "destructive",
+        duration: 4000,
+      });
     } finally {
       setIsLoading(false);
     }
