@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,6 +20,7 @@ export default function SignIn() {
   const [searchParams] = useSearchParams();
   const redirectPath = searchParams.get("redirect");
   const { login: authLogin } = useAuth();
+  const { toast } = useToast();
 
   const [formData, setFormData] = useState({
     email: "",
