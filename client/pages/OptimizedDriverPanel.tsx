@@ -32,7 +32,6 @@ import {
   CameraIcon,
   MessageSquareIcon,
   ExclamationTriangleIcon,
-  ExclamationTriangleIcon,
   SettingsIcon,
 } from "lucide-react";
 
