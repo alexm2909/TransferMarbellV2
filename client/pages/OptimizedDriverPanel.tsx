@@ -368,7 +368,7 @@ export default function OptimizedDriverPanel() {
               Disponibles ({availableTrips.length})
             </TabsTrigger>
             <TabsTrigger value="emergency" className="text-red-600 font-semibold">
-              🚨 Emergencias ({emergencyTrips.length})
+              🚨 Emergencias ({emergencyBookings.length})
             </TabsTrigger>
             <TabsTrigger value="active">
               Activos ({activeTrips.length})
@@ -575,7 +575,7 @@ export default function OptimizedDriverPanel() {
                 </Card>
               ))}
 
-              {emergencyTrips.length === 0 && (
+              {emergencyBookings.length === 0 && (
                 <Card className="border-green-200 bg-green-50/50">
                   <CardContent className="text-center py-12">
                     <CheckIcon className="w-12 h-12 mx-auto mb-4 text-green-500" />
