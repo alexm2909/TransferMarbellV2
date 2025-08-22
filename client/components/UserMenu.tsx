@@ -56,7 +56,7 @@ export default function UserMenu({ className }: UserMenuProps) {
     const iconMap = {
       client: "👤",
       driver: "🚗",
-      admin: "⚙️",
+      admin: "��️",
     };
     return iconMap[role as keyof typeof iconMap] || "👤";
   };
@@ -119,17 +119,11 @@ export default function UserMenu({ className }: UserMenuProps) {
                   Panel de Conductor
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <MapPinIcon className="w-4 h-4 mr-2" />
-                Ver Mapa
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <ClockIcon className="w-4 h-4 mr-2" />
-                Horarios
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
-                <EuroIcon className="w-4 h-4 mr-2" />
-                Ganancias
+              <DropdownMenuItem asChild>
+                <Link to="/driver-earnings" className="cursor-pointer">
+                  <EuroIcon className="w-4 h-4 mr-2" />
+                  Ganancias
+                </Link>
               </DropdownMenuItem>
             </>
           )}
