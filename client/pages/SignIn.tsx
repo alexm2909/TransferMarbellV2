@@ -234,7 +234,11 @@ export default function SignIn() {
                 <Button
                   variant="outline"
                   className="h-12 border-gray-200 hover:border-ocean"
-                  onClick={() => alert("Google Sign-In coming soon!")}
+                  onClick={() => toast({
+                    title: "🚧 Próximamente",
+                    description: "Google Sign-In estará disponible próximamente.",
+                    duration: 3000,
+                  })}
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
@@ -258,7 +262,11 @@ export default function SignIn() {
                 <Button
                   variant="outline"
                   className="h-12 border-gray-200 hover:border-ocean"
-                  onClick={() => alert("Facebook Sign-In coming soon!")}
+                  onClick={() => toast({
+                    title: "🚧 Próximamente",
+                    description: "Facebook Sign-In estará disponible próximamente.",
+                    duration: 3000,
+                  })}
                 >
                   <svg
                     className="w-5 h-5"
@@ -271,7 +279,11 @@ export default function SignIn() {
                 <Button
                   variant="outline"
                   className="h-12 border-gray-200 hover:border-ocean"
-                  onClick={() => alert("Apple Sign-In coming soon!")}
+                  onClick={() => toast({
+                    title: "🚧 Próximamente",
+                    description: "Apple Sign-In estará disponible próximamente.",
+                    duration: 3000,
+                  })}
                 >
                   <svg
                     className="w-5 h-5"
