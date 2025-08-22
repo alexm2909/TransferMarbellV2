@@ -837,22 +837,21 @@ export default function Dashboard() {
                 )}
                 {user?.role === "admin" && (
                   <>
-                    <Link to="/admin-panel">
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
-                      >
-                        <SettingsIcon className="w-4 h-4 mr-2" />
-                        Panel Admin
-                      </Button>
-                    </Link>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start border-ocean text-ocean hover:bg-ocean hover:text-white"
+                      onClick={exportData}
+                    >
+                      <DownloadIcon className="w-4 h-4 mr-2" />
+                      Exportar Datos
+                    </Button>
                     <Button variant="outline" className="w-full justify-start">
                       <UsersIcon className="w-4 h-4 mr-2" />
-                      Usuarios
+                      Gestionar Usuarios
                     </Button>
                     <Button variant="outline" className="w-full justify-start">
                       <TrendingUpIcon className="w-4 h-4 mr-2" />
-                      Reportes
+                      Ver Estadísticas
                     </Button>
                   </>
                 )}
