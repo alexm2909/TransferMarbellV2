@@ -71,7 +71,7 @@ function App() {
             <Route
               path="/book"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <BookingForm />
                 </ProtectedRoute>
               }
@@ -79,7 +79,7 @@ function App() {
             <Route
               path="/booking-confirmation"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <BookingConfirmation />
                 </ProtectedRoute>
               }
@@ -89,7 +89,7 @@ function App() {
             <Route
               path="/payment-method"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentMethod />
                 </ProtectedRoute>
               }
