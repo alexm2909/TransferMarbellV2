@@ -97,7 +97,7 @@ function App() {
             <Route
               path="/payment-summary"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentSummary />
                 </ProtectedRoute>
               }
@@ -105,7 +105,7 @@ function App() {
             <Route
               path="/payment-apple"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentApple />
                 </ProtectedRoute>
               }
@@ -113,7 +113,7 @@ function App() {
             <Route
               path="/payment-google"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentGoogle />
                 </ProtectedRoute>
               }
@@ -121,7 +121,7 @@ function App() {
             <Route
               path="/payment-paypal"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentPaypal />
                 </ProtectedRoute>
               }
@@ -129,7 +129,7 @@ function App() {
             <Route
               path="/payment-bank"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentBank />
                 </ProtectedRoute>
               }
@@ -137,7 +137,7 @@ function App() {
             <Route
               path="/payment-success"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentSuccess />
                 </ProtectedRoute>
               }
@@ -145,7 +145,7 @@ function App() {
             <Route
               path="/payment-error"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <PaymentError />
                 </ProtectedRoute>
               }
