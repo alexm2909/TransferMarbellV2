@@ -8,7 +8,15 @@ import NotificationCenter from "@/components/NotificationCenter";
 import UserMenu from "@/components/UserMenu";
 import AvailableTransfersCard from "@/components/AvailableTransfersCard";
 import DatabaseStatus from "@/components/DatabaseStatus";
-import { useBookings, useNotifications, useSystemStats } from "@/hooks/useDatabase";
+import {
+  useBookings,
+  useNotifications,
+  useSystemStats,
+  useUsers,
+  useDriverApplications,
+  useEmergencyBookings,
+  useDatabaseExport
+} from "@/hooks/useDatabase";
 import {
   CarIcon,
   UsersIcon,
@@ -21,6 +29,14 @@ import {
   MapPinIcon,
   EuroIcon,
   BuildingIcon,
+  AlertTriangleIcon,
+  FileTextIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+  EyeIcon,
+  DownloadIcon,
+  RefreshCwIcon,
+  ShieldIcon,
 } from "lucide-react";
 
 export default function Dashboard() {
