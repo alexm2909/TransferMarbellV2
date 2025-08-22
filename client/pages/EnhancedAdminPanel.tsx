@@ -93,7 +93,6 @@ export default function EnhancedAdminPanel() {
     );
     
     if (success) {
-      alert("Reserva convertida a emergencia exitosamente");
       setEmergencyDialog({ open: false });
       setEmergencyReason("");
       setEmergencyBonus(10);
