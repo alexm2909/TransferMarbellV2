@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import NotificationCenter from "@/components/NotificationCenter";
 import UserMenu from "@/components/UserMenu";
@@ -45,6 +48,18 @@ export default function Dashboard() {
   const { bookings } = useBookings(user?.id);
   const { notifications, unreadCount } = useNotifications(user?.id || '');
   const { stats } = useSystemStats();
+
+  // Admin-specific hooks
+  const { users } = useUsers();
+  const { applications, approveApplication, rejectApplication } = useDriverApplications();
+  const { emergencyBookings, createEmergencyBooking } = useEmergencyBookings();
+  const { exportData, clearData } = useDatabaseExport();
+
+  // Admin-specific state
+  const [selectedApplication, setSelectedApplication] = useState<any>(null);
+  const [emergencyDialog, setEmergencyDialog] = useState<{ open: boolean; booking?: any }>({ open: false });
+  const [emergencyBonus, setEmergencyBonus] = useState(10);
+  const [emergencyReason, setEmergencyReason] = useState("");
 
   // Redirect to signin if not authenticated
   useEffect(() => {
