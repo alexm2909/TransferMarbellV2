@@ -184,14 +184,10 @@ function App() {
               }
             />
 
-            {/* Admin Panel - Admin Only */}
+            {/* Admin Panel - Redirect to Dashboard */}
             <Route
               path="/admin-panel"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <EnhancedAdminPanel />
-                </ProtectedRoute>
-              }
+              element={<Navigate to="/dashboard" replace />}
             />
 
             <Route
@@ -216,7 +212,7 @@ function App() {
             <Route
               path="/my-bookings"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <ViewBookings />
                 </ProtectedRoute>
               }
@@ -224,7 +220,7 @@ function App() {
             <Route
               path="/refer-friends"
               element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ProtectedRoute allowedRoles={["client"]}>
                   <ReferFriends />
                 </ProtectedRoute>
               }
