@@ -68,7 +68,7 @@ export default function EnhancedAdminPanel() {
   const handleApproveApplication = async (applicationId: string) => {
     const success = approveApplication(applicationId, user.id, "Solicitud aprobada por administrador");
     if (success) {
-      alert("Solicitud aprobada exitosamente");
+      // Success handled through UI update
     }
   };
 
@@ -77,7 +77,7 @@ export default function EnhancedAdminPanel() {
     if (reason) {
       const success = rejectApplication(applicationId, user.id, reason);
       if (success) {
-        alert("Solicitud rechazada");
+        // Success handled through UI update
       }
     }
   };
