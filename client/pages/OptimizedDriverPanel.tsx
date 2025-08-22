@@ -203,12 +203,21 @@ export default function OptimizedDriverPanel() {
           confirmedAt: new Date().toISOString()
         }
       });
-      alert("Voucher validado correctamente");
+      toast({
+        title: "✅ Voucher Validado",
+        description: "El voucher ha sido validado correctamente. Ahora puedes iniciar el viaje.",
+        duration: 3000,
+      });
       setShowVoucherScanner(false);
       setVoucherInput("");
       setSelectedTrip(null);
     } else {
-      alert("Código de voucher incorrecto");
+      toast({
+        title: "❌ Código Incorrecto",
+        description: "El código del voucher no coincide. Por favor verifica e inténtalo de nuevo.",
+        variant: "destructive",
+        duration: 3000,
+      });
     }
   };
 
