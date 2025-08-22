@@ -40,7 +40,10 @@ export default function UserMenu({ className }: UserMenuProps) {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    // Force navigation to home page after logout
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 100);
   };
 
   const getRoleBadge = (role: string) => {
@@ -56,7 +59,7 @@ export default function UserMenu({ className }: UserMenuProps) {
     const iconMap = {
       client: "👤",
       driver: "🚗",
-      admin: "��️",
+      admin: "⚙️",
     };
     return iconMap[role as keyof typeof iconMap] || "👤";
   };
