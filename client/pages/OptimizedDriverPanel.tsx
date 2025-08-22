@@ -31,7 +31,6 @@ import {
   FileTextIcon,
   CameraIcon,
   MessageSquareIcon,
-  ExclamationTriangleIcon,
   SettingsIcon,
 } from "lucide-react";
 
@@ -679,7 +678,7 @@ export default function OptimizedDriverPanel() {
                             variant="outline"
                             className="border-red-300 text-red-600 hover:bg-red-50"
                           >
-                            <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
+                            <AlertTriangleIcon className="w-4 h-4 mr-2" />
                             Emergencia
                           </Button>
                         </>
@@ -828,7 +827,7 @@ export default function OptimizedDriverPanel() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <ExclamationTriangleIcon className="w-5 h-5 text-red-600" />
+              <AlertTriangleIcon className="w-5 h-5 text-red-600" />
               Reportar Emergencia Durante Viaje
             </DialogTitle>
           </DialogHeader>
@@ -872,7 +871,7 @@ export default function OptimizedDriverPanel() {
                 disabled={!emergencyReason.trim()}
                 className="bg-red-600 hover:bg-red-700 text-white flex-1"
               >
-                <ExclamationTriangleIcon className="w-4 h-4 mr-2" />
+                <AlertTriangleIcon className="w-4 h-4 mr-2" />
                 Reportar Emergencia
               </Button>
             </div>
