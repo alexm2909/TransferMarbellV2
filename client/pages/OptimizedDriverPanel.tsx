@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 import UserMenu from "@/components/UserMenu";
 import EmailBilling from "@/components/EmailBilling";
 import { useAvailableBookings, useEmergencyBookings, useBookings } from "@/hooks/useDatabase";
@@ -30,6 +31,7 @@ import {
   FileTextIcon,
   CameraIcon,
   MessageSquareIcon,
+  ExclamationTriangleIcon,
   SettingsIcon,
 } from "lucide-react";
 
