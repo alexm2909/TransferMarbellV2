@@ -61,6 +61,54 @@ export default function Dashboard() {
   const [emergencyBonus, setEmergencyBonus] = useState(10);
   const [emergencyReason, setEmergencyReason] = useState("");
 
+  // Admin functions
+  const handleApproveApplication = (applicationId: string) => {
+    const success = approveApplication(applicationId, user.id);
+    if (success) {
+      // Success handled through UI update
+    }
+  };
+
+  const handleRejectApplication = (applicationId: string) => {
+    const reason = prompt("Motivo del rechazo:");
+    if (reason) {
+      const success = rejectApplication(applicationId, user.id, reason);
+      if (success) {
+        // Success handled through UI update
+      }
+    }
+  };
+
+  const handleCreateEmergency = async () => {
+    if (!emergencyDialog.booking || !emergencyReason) return;
+
+    const success = createEmergencyBooking(
+      emergencyDialog.booking.id,
+      emergencyReason,
+      emergencyBonus,
+      user.id
+    );
+
+    if (success) {
+      setEmergencyDialog({ open: false });
+      setEmergencyReason("");
+      setEmergencyBonus(10);
+    }
+  };
+
+  const getStatusBadge = (status: string) => {
+    const styles = {
+      pending: "bg-yellow-100 text-yellow-800",
+      assigned: "bg-blue-100 text-blue-800",
+      confirmed: "bg-green-100 text-green-800",
+      in_progress: "bg-purple-100 text-purple-800",
+      completed: "bg-green-100 text-green-800",
+      cancelled: "bg-red-100 text-red-800"
+    };
+
+    return styles[status as keyof typeof styles] || "bg-gray-100 text-gray-800";
+  };
+
   // Redirect to signin if not authenticated
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -106,7 +154,7 @@ export default function Dashboard() {
       driver: "🚗",
       admin: "⚙️",
     };
-    return iconMap[role as keyof typeof iconMap] || "👤";
+    return iconMap[role as keyof typeof iconMap] || "���";
   };
 
   return (
@@ -675,7 +723,7 @@ export default function Dashboard() {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Ahorrado</span>
-                        <span className="font-medium text-success">���45</span>
+                        <span className="font-medium text-success">€45</span>
                       </div>
                     </>
                   )}
