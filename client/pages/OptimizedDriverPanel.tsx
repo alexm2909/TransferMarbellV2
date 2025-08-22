@@ -621,9 +621,9 @@ export default function OptimizedDriverPanel() {
                         </Button>
                       )}
                       
-                      {trip.status === "in_progress" && (
+                      {booking.status === "in_progress" && (
                         <Button
-                          onClick={() => completeTrip(trip.id)}
+                          onClick={() => completeTrip(booking.id)}
                           className="bg-green-600 hover:bg-green-700 text-white"
                         >
                           <CheckIcon className="w-4 h-4 mr-2" />
