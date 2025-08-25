@@ -5,7 +5,7 @@ declare global {
   }
 }
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ";
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ";
 
 interface GoogleMapsLoaderOptions {
   libraries?: string[];
