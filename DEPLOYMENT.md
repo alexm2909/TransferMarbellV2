@@ -5,6 +5,7 @@
 La aplicación está completamente preparada para el despliegue en Vercel con las siguientes configuraciones:
 
 ### ⚠️ **IMPORTANTE - Problema de Deploy Solucionado**
+
 - ✅ Movido `vite` y herramientas de build a `dependencies` (no `devDependencies`)
 - ✅ Vercel ahora puede encontrar e instalar `vite` correctamente
 - ✅ Error "vite: command not found" resuelto
@@ -127,9 +128,11 @@ La aplicación estará disponible en http://localhost:3000
 ## Troubleshooting
 
 ### Error: "vite: command not found"
+
 ✅ **Solucionado**: Las herramientas de build (`vite`, `typescript`, etc.) ahora están en `dependencies` en lugar de `devDependencies`, por lo que Vercel las instalará correctamente.
 
 ### Si el build falla
+
 1. Verificar que las variables de entorno estén configuradas
 2. Revisar los logs de Vercel para errores específicos
 3. Asegurar que la Google Maps API key tenga los dominios correctos
