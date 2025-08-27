@@ -35,22 +35,43 @@ La aplicación está completamente preparada para el despliegue en Vercel con la
 
 ## Pasos para Desplegar
 
-### 1. Conectar Repositorio a Vercel
+### 1. Desvincular del repositorio anterior
+
+```bash
+git remote remove origin
+```
+
+### 2. Crear nuevo repositorio en GitHub
+
+1. Crea un nuevo repositorio en GitHub
+2. Conecta el proyecto:
+
+```bash
+git remote add origin https://github.com/TU_USUARIO/TU_NUEVO_REPO.git
+git push -u origin main
+```
+
+### 3. ⚠️ **CONFIGURAR GOOGLE MAPS API - REQUERIDO**
+
+**La aplicación no funcionará sin esto:**
+
+1. **Crear API Key**: Ve a [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+2. **Habilitar APIs**: Maps JavaScript API, Places API, Geocoding API, Directions API
+3. **Configurar restricciones**: Añade tus dominios (localhost + Vercel domain)
+4. **Ver guía completa**: `GOOGLE_MAPS_SETUP.md`
+
+### 4. Conectar Repositorio a Vercel
 
 1. Ve a [vercel.com](https://vercel.com)
 2. Conecta tu repositorio de GitHub
 3. Selecciona este proyecto
 
-### 2. Configurar Variables de Entorno
-
-En Vercel, configura estas variables de entorno:
+### 5. Configurar Variables de Entorno en Vercel
 
 ```bash
-VITE_GOOGLE_MAPS_API_KEY=tu_clave_de_google_maps
+VITE_GOOGLE_MAPS_API_KEY=tu_clave_de_google_maps_aqui
 NODE_ENV=production
 ```
-
-**Importante**: Asegúrate de que tu clave de Google Maps tenga configurados los dominios permitidos en Google Cloud Console.
 
 ### 3. Configuración Automática
 
@@ -130,6 +151,23 @@ La aplicación estará disponible en http://localhost:3000
 ### Error: "vite: command not found"
 
 ✅ **Solucionado**: Las herramientas de build (`vite`, `typescript`, etc.) ahora están en `dependencies` en lugar de `devDependencies`, por lo que Vercel las instalará correctamente.
+
+### Error: "This page can't load Google Maps correctly"
+
+❌ **Problema común**: Google Maps API no configurada correctamente
+
+**Solución:**
+
+1. Verificar que `VITE_GOOGLE_MAPS_API_KEY` esté configurada
+2. Verificar que las APIs estén habilitadas en Google Cloud
+3. Verificar restricciones de dominio en la API key
+4. Ver guía completa en `GOOGLE_MAPS_SETUP.md`
+
+### Error: "RefererNotAllowedMapError"
+
+❌ **Problema**: El dominio no está autorizado
+
+**Solución:** Añadir el dominio de Vercel a las restricciones de la API key
 
 ### Si el build falla
 
