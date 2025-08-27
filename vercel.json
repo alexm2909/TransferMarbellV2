@@ -1,5 +1,23 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/spa",
+  "framework": "vite",
+  "functions": {
+    "netlify/functions/api.ts": {
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/netlify/functions/api.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
