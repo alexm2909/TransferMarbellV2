@@ -1,8 +1,8 @@
 {
-<<<<<<< HEAD
   "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
   "framework": "vite",
+  "installCommand": "npm install",
   "functions": {
     "netlify/functions/api.ts": {
       "maxDuration": 10
@@ -21,20 +21,4 @@
   "env": {
     "NODE_ENV": "production"
   }
-=======
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/server/node-build.mjs",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/server/node-build.mjs"
-    }
-  ]
->>>>>>> refs/remotes/origin/main
 }
-
