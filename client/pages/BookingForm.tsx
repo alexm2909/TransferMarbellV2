@@ -459,8 +459,6 @@ export default function BookingForm() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <MapPinIcon className="w-5 h-5 text-ocean" />
-                    Ruta del Viaje
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
