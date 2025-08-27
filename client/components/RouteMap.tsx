@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPinIcon, ClockIcon, RouteIcon, NavigationIcon } from "lucide-react";
-import { loadGoogleMaps, isGoogleMapsLoaded } from "@/lib/googleMapsLoader";
+import { loadGoogleMaps, isGoogleMapsLoaded, getGoogleMapsError, hasGoogleMapsError } from "@/lib/googleMapsLoader";
 
 interface RouteMapProps {
   origin: string;
@@ -25,6 +25,12 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
 
   // Load Google Maps script
   useEffect(() => {
+    if (hasGoogleMapsError()) {
+      setError(getGoogleMapsError() || 'Error with Google Maps configuration');
+      setIsLoading(false);
+      return;
+    }
+
     if (isGoogleMapsLoaded()) {
       initializeMap();
       return;
@@ -36,7 +42,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       })
       .catch((error) => {
         console.error('Failed to load Google Maps:', error);
-        setError('Failed to load map');
+        setError(error.message || 'Failed to load map');
         setIsLoading(false);
       });
   }, []);

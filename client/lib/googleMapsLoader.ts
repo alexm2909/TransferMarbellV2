@@ -5,7 +5,8 @@ declare global {
   }
 }
 
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ";
+// Use environment variable or empty string to force user to set their own key
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 interface GoogleMapsLoaderOptions {
   libraries?: string[];
@@ -17,6 +18,8 @@ class GoogleMapsLoader {
   private isLoading = false;
   private loadPromise: Promise<void> | null = null;
   private callbacks: (() => void)[] = [];
+  private hasError = false;
+  private errorMessage = '';
 
   private constructor() {}
 
@@ -28,9 +31,23 @@ class GoogleMapsLoader {
   }
 
   async load(options: GoogleMapsLoaderOptions = {}): Promise<void> {
+    // Check if API key is available
+    if (!GOOGLE_MAPS_API_KEY) {
+      const error = new Error('Google Maps API key not configured. Please set VITE_GOOGLE_MAPS_API_KEY environment variable.');
+      console.error(error.message);
+      this.hasError = true;
+      this.errorMessage = error.message;
+      throw error;
+    }
+
     // If already loaded, resolve immediately
     if (this.isLoaded && window.google) {
       return Promise.resolve();
+    }
+
+    // If has error, throw the error
+    if (this.hasError) {
+      throw new Error(this.errorMessage);
     }
 
     // If currently loading, return the existing promise
@@ -62,7 +79,12 @@ class GoogleMapsLoader {
             this.isLoading = false;
             resolve();
           });
-          existingScript.addEventListener('error', reject);
+          existingScript.addEventListener('error', (error) => {
+            this.isLoading = false;
+            this.hasError = true;
+            this.errorMessage = 'Failed to load Google Maps API - Check API key and domain restrictions';
+            reject(new Error(this.errorMessage));
+          });
         }
         return;
       }
@@ -83,9 +105,12 @@ class GoogleMapsLoader {
         resolve();
       };
 
-      script.onerror = () => {
+      script.onerror = (error) => {
         this.isLoading = false;
-        reject(new Error('Failed to load Google Maps API'));
+        this.hasError = true;
+        this.errorMessage = 'Failed to load Google Maps API - Check API key and domain restrictions';
+        console.error('Google Maps loading error:', error);
+        reject(new Error(this.errorMessage));
       };
 
       document.head.appendChild(script);
@@ -108,6 +133,14 @@ class GoogleMapsLoader {
   isGoogleMapsLoaded(): boolean {
     return this.isLoaded && !!window.google;
   }
+
+  getError(): string | null {
+    return this.hasError ? this.errorMessage : null;
+  }
+
+  hasLoadingError(): boolean {
+    return this.hasError;
+  }
 }
 
 export const googleMapsLoader = GoogleMapsLoader.getInstance();
@@ -120,4 +153,14 @@ export const loadGoogleMaps = (libraries: string[] = []): Promise<void> => {
 // Helper function to check if Google Maps is loaded
 export const isGoogleMapsLoaded = (): boolean => {
   return googleMapsLoader.isGoogleMapsLoaded();
+};
+
+// Helper function to get loading error
+export const getGoogleMapsError = (): string | null => {
+  return googleMapsLoader.getError();
+};
+
+// Helper function to check if there's a loading error
+export const hasGoogleMapsError = (): boolean => {
+  return googleMapsLoader.hasLoadingError();
 };
