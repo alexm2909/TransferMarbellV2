@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Test</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Google Maps API Test</h1>
+        <div id="status" class="status">Cargando...</div>
+        <div id="map"></div>
+        <div id="key-info">
+            <h3>API Key Information:</h3>
+            <p>Key: AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ</p>
+            <p>Current domain: <span id="current-domain"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-domain').textContent = window.location.hostname;
+        
+        function initMap() {
+            const statusDiv = document.getElementById('status');
+            
+            try {
+                // Test if Google Maps loaded
+                if (typeof google === 'undefined') {
+                    throw new Error('Google Maps no se cargó correctamente');
+                }
+                
+                // Create map
+                const map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: { lat: 36.7213, lng: -4.4214 } // Málaga
+                });
+                
+                // Add marker
+                const marker = new google.maps.Marker({
+                    position: { lat: 36.7213, lng: -4.4214 },
+                    map: map,
+                    title: 'Málaga, España'
+                });
+                
+                statusDiv.className = 'status success';
+                statusDiv.textContent = '✅ Google Maps funciona correctamente!';
+                
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ Error: ' + error.message;
+                console.error('Google Maps error:', error);
+            }
+        }
+        
+        function handleError() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = 'status error';
+            statusDiv.textContent = '❌ Error cargando Google Maps API. Verifica la key y los dominios permitidos.';
+        }
+        
+        // Handle script loading errors
+        window.addEventListener('error', function(e) {
+            if (e.target.src && e.target.src.includes('maps.googleapis.com')) {
+                handleError();
+            }
+        });
+    </script>
+    
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdejLAhodEvEQoLM8bDGpElU6xKFk12SQ&libraries=places,geometry&callback=initMap">
+    </script>
+</body>
+</html>
