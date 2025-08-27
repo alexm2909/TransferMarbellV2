@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { MapPinIcon, SearchIcon, LoaderIcon } from "lucide-react";
-import { loadGoogleMaps, isGoogleMapsLoaded } from "@/lib/googleMapsLoader";
+import { loadGoogleMaps, isGoogleMapsLoaded, hasGoogleMapsError, getGoogleMapsError } from "@/lib/googleMapsLoader";
 
 interface AddressAutocompleteProps {
   placeholder: string;
@@ -27,6 +27,11 @@ export default function AddressAutocomplete({
 
   // Load Google Maps script and initialize services
   useEffect(() => {
+    if (hasGoogleMapsError()) {
+      console.error('Google Maps configuration error:', getGoogleMapsError());
+      return;
+    }
+
     if (isGoogleMapsLoaded()) {
       initializeServices();
       return;
