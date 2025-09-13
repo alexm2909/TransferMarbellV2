@@ -267,31 +267,31 @@ export default function DriverPanel() {
             value="3"
             subtitle="Traslados"
             icon={CarIcon}
-            trend={12}
-            colorScheme="ocean"
+            change={{ value: '12%', type: 'increase', period: '24h' }}
+            color="ocean"
           />
           <StatsWidget
             title="Ganancias"
             value="€165"
             subtitle="Hoy"
             icon={EuroIcon}
-            trend={8}
-            colorScheme="coral"
+            change={{ value: '8%', type: 'increase', period: '24h' }}
+            color="coral"
           />
           <StatsWidget
             title="Rating"
             value="4.9"
             subtitle="Promedio"
             icon={StarIcon}
-            trend={2}
-            colorScheme="success"
+            change={{ value: '2%', type: 'increase', period: '24h' }}
+            color="success"
           />
           <StatsWidget
             title="Disponibles"
             value={availableTransfers.length.toString()}
             subtitle="Traslados"
             icon={NavigationIcon}
-            colorScheme="navy"
+            color="ocean"
           />
         </div>
 
