@@ -640,6 +640,10 @@ class DatabaseService {
   // STATISTICS
   // ========================================================================
 
+  public getAllBookings(): Booking[] {
+    return this.getData<Booking>('bookings');
+  }
+
   public getSystemStats(): SystemStats {
     const users = this.getData<DatabaseUser>('users');
     const bookings = this.getData<Booking>('bookings');
