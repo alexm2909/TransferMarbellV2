@@ -101,36 +101,51 @@ export default function AvailableTransfersCard() {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        {recentTrips.map((trip) => {
-          const isProcessing = processingTrips.includes(trip.id);
-          
+        {recentTrips.map((booking) => {
+          const isProcessing = processingTrips.includes(booking.id);
+
+          // Normalize booking fields from Booking model
+          const clientName = booking.clientData?.name || 'Cliente';
+          const clientPhone = booking.clientData?.phone || '';
+          const estimatedPrice = booking.pricing?.totalPrice ?? 0;
+          const distance = booking.tripDetails?.origin?.address && booking.tripDetails?.destination?.address ? null : null; // distance not stored explicitly
+          const duration = null;
+          const origin = booking.tripDetails?.origin?.address || booking.clientData?.address || 'Origen';
+          const destination = booking.tripDetails?.destination?.address || 'Destino';
+          const date = booking.tripDetails?.date || booking.timeline?.createdAt?.split('T')[0] || '';
+          const time = booking.tripDetails?.time || '';
+          const passengers = booking.tripDetails?.passengers ?? 1;
+          const children = booking.tripDetails?.children?.count ?? 0;
+          const vehicleType = booking.vehicleType || 'economy';
+          const specialRequests = booking.tripDetails?.specialRequests || booking.tripDetails?.specialRequests || '';
+
           return (
             <div
-              key={trip.id}
+              key={booking.id}
               className="border rounded-lg p-4 bg-gradient-to-r from-ocean-light/10 to-coral-light/10 dark:from-ocean-light/5 dark:to-coral-light/5 hover:shadow-md transition-shadow"
             >
               {/* Header with client info and price */}
               <div className="flex justify-between items-start mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-ocean to-coral rounded-full flex items-center justify-center text-white font-bold">
-                    {trip.clientName.charAt(0)}
+                    {clientName.charAt(0)}
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                      {trip.clientName}
+                      {clientName}
                     </h3>
                     <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
                       <PhoneIcon className="w-3 h-3" />
-                      <span>{trip.clientPhone}</span>
+                      <span>{clientPhone}</span>
                     </div>
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-success">
-                    {formatCurrency(trip.estimatedPrice)}
+                    {formatCurrency(estimatedPrice)}
                   </div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {trip.distance && `${trip.distance} • ${trip.duration}`}
+                    {distance && `${distance} • ${duration}`}
                   </div>
                 </div>
               </div>
@@ -141,7 +156,7 @@ export default function AvailableTransfersCard() {
                   <div className="w-3 h-3 bg-green-500 rounded-full mt-1 flex-shrink-0"></div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      {trip.origin}
+                      {origin}
                     </p>
                   </div>
                 </div>
@@ -149,7 +164,7 @@ export default function AvailableTransfersCard() {
                   <div className="w-3 h-3 bg-red-500 rounded-full mt-1 flex-shrink-0"></div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      {trip.destination}
+                      {destination}
                     </p>
                   </div>
                 </div>
@@ -159,33 +174,33 @@ export default function AvailableTransfersCard() {
               <div className="grid grid-cols-2 gap-4 text-xs text-gray-600 dark:text-gray-400 mb-4">
                 <div className="flex items-center space-x-1">
                   <CalendarIcon className="w-3 h-3" />
-                  <span>{trip.date}</span>
+                  <span>{date}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <ClockIcon className="w-3 h-3" />
-                  <span>{trip.time}</span>
+                  <span>{time}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <UsersIcon className="w-3 h-3" />
-                  <span>{trip.passengers} {trip.children > 0 && `+${trip.children} niños`}</span>
+                  <span>{passengers} {children > 0 && `+${children} niños`}</span>
                 </div>
                 <div className="flex items-center space-x-1">
-                  <span>{getVehicleIcon(trip.vehicleType)}</span>
-                  <span className="capitalize">{trip.vehicleType}</span>
+                  <span>{getVehicleIcon(vehicleType)}</span>
+                  <span className="capitalize">{vehicleType}</span>
                 </div>
               </div>
 
               {/* Special requests */}
-              {trip.specialRequests && (
+              {specialRequests && (
                 <div className="mb-3 p-2 bg-blue-50 dark:bg-blue-900/20 rounded text-xs text-blue-700 dark:text-blue-300">
-                  <strong>Requisitos especiales:</strong> {trip.specialRequests}
+                  <strong>Requisitos especiales:</strong> {specialRequests}
                 </div>
               )}
 
               {/* Action buttons */}
               <div className="flex space-x-2">
                 <Button
-                  onClick={() => handleAcceptTrip(trip.id)}
+                  onClick={() => handleAcceptTrip(booking.id)}
                   disabled={isProcessing}
                   className="flex-1 bg-success hover:bg-success/90 text-white"
                   size="sm"
@@ -200,7 +215,7 @@ export default function AvailableTransfersCard() {
                   )}
                 </Button>
                 <Button
-                  onClick={() => handleRejectTrip(trip.id)}
+                  onClick={() => handleRejectTrip(booking.id)}
                   disabled={isProcessing}
                   variant="outline"
                   className="flex-1 border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20"
