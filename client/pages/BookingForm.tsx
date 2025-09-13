@@ -835,21 +835,25 @@ export default function BookingForm() {
                   <CardTitle className="flex items-center gap-2">
                     <CarIcon className="w-5 h-5 text-ocean" />
                     {t("booking.vehicleSelection")}
-                    {parseInt(bookingData.cars) > 1 && (
-                      <Badge
-                        variant="secondary"
-                        className="bg-purple/10 text-purple"
-                      >
-                        {bookingData.cars} coches
-                      </Badge>
-                    )}
+                    {(() => {
+                      const selectedVehicle = vehicleTypes.find(v => v.id === bookingData.vehicleType);
+                      const carsCount = selectedVehicle ? calculateRequiredCars(selectedVehicle) : 1;
+                      return carsCount > 1 ? (
+                        <Badge variant="secondary" className="bg-purple/10 text-purple">
+                          {carsCount} coches
+                        </Badge>
+                      ) : null;
+                    })()}
                   </CardTitle>
-                  {parseInt(bookingData.cars) > 1 && (
-                    <p className="text-sm text-gray-600 mt-2">
-                      Capacidad total con {bookingData.cars} vehículos del tipo
-                      seleccionado
-                    </p>
-                  )}
+                  {(() => {
+                    const selectedVehicle = vehicleTypes.find(v => v.id === bookingData.vehicleType);
+                    const carsCount = selectedVehicle ? calculateRequiredCars(selectedVehicle) : 1;
+                    return carsCount > 1 ? (
+                      <p className="text-sm text-gray-600 mt-2">
+                        Capacidad total con {carsCount} vehículos del tipo seleccionado
+                      </p>
+                    ) : null;
+                  })()}
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
