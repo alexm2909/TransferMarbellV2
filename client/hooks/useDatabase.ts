@@ -89,7 +89,7 @@ export function useBookings(userId?: string) {
     if (userId) {
       setBookings(database.getBookingsByUserId(userId));
     } else {
-      setBookings(database.getData('bookings'));
+      setBookings(database.getAllBookings());
     }
     setLoading(false);
   }, [userId]);
