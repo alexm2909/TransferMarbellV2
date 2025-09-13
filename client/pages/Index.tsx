@@ -107,12 +107,12 @@ export default function Index() {
               >
                 {t("nav.business")}
               </Link>
-              <Link
-                to="/support"
+              <a
+                href="https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/support"
                 className="text-gray-700 hover:text-ocean transition-colors"
               >
                 {t("nav.support")}
-              </Link>
+              </a>
 
               <FlagOnlyLanguageSelector />
 
