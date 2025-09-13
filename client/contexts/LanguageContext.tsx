@@ -229,7 +229,7 @@ export interface Translations {
 }
 
 // Spanish translations (default)
-export const translations: Record<string, Translations> = {
+export const translations: Record<string, any> = {
   es: {
     // Navigation
     "nav.services": "Servicios",
