@@ -110,7 +110,7 @@ export default function AvailableTransfersCard() {
           const estimatedPrice = booking.pricing?.totalPrice ?? 0;
           const distance = booking.tripDetails?.origin?.address && booking.tripDetails?.destination?.address ? null : null; // distance not stored explicitly
           const duration = null;
-          const origin = booking.tripDetails?.origin?.address || booking.clientData?.address || 'Origen';
+          const origin = booking.tripDetails?.origin?.address || 'Origen';
           const destination = booking.tripDetails?.destination?.address || 'Destino';
           const date = booking.tripDetails?.date || booking.timeline?.createdAt?.split('T')[0] || '';
           const time = booking.tripDetails?.time || '';
