@@ -59,7 +59,9 @@ export default function PaymentError() {
               </span>
             </Link>
             <div className="flex items-center space-x-2">
-              <UserMenu />
+              <Link to="/mi-reserva">
+                <Button variant="outline">Mi reserva</Button>
+              </Link>
             </div>
           </div>
         </div>
