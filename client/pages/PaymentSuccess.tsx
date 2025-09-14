@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import VoucherSystem, { useVoucher } from "@/components/VoucherSystem";
-import VoucherSystem, { useVoucher } from "@/components/VoucherSystem";
 import { useBookings } from "@/hooks/useDatabase";
 import { database } from "@/services/database";
 import {
