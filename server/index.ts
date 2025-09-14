@@ -16,6 +16,11 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+  // Send confirmation email (used after booking creation)
+  app.post("/api/send-confirmation", async (req, res) => {
+    const { handleSendConfirmation } = await import("./routes/sendConfirmation");
+    return handleSendConfirmation(req, res);
+  });
 
   return app;
 }
