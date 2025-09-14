@@ -33,7 +33,10 @@ export default function ReservationLookup() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
       <div className="max-w-md w-full bg-white border rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Consultar mi reserva</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-bold">Consultar mi reserva</h2>
+          <Link to="/" className="text-ocean hover:underline">Volver al inicio</Link>
+        </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Etiqueta de reserva</label>
