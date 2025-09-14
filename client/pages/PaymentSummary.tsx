@@ -51,7 +51,6 @@ interface BookingData {
 
 export default function PaymentSummary() {
   const navigate = useNavigate();
-  const { isAuthenticated, user, isLoading } = useAuth();
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
