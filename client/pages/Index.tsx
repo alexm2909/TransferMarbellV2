@@ -380,42 +380,17 @@ export default function Index() {
                     <span>{t("driver.noUpfrontCosts")}</span>
                   </li>
                 </ul>
-                {isAuthenticated ? (
-                  <Link to="/driver-registration">
-                    <Button
-                      size="lg"
-                      className="bg-white text-ocean hover:bg-gray-100 font-semibold px-8"
-                    >
-                      {t("driver.applyToDrive")}
-                      <ArrowRightIcon className="w-5 h-5 ml-2" />
-                    </Button>
-                  </Link>
-                ) : (
-                  <div className="space-y-4">
-                    <p className="text-white/80 text-sm">
-                      {t("driver.needAccount")}
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link to="/signup">
-                        <Button
-                          size="lg"
-                          className="bg-white text-ocean hover:bg-gray-100 font-semibold px-6"
-                        >
-                          {t("driver.signUp")}
-                        </Button>
-                      </Link>
-                      <Link to="/signin">
-                        <Button
-                          variant="outline"
-                          size="lg"
-                          className="border-white text-white hover:bg-white hover:text-ocean font-semibold px-6"
-                        >
-                          {t("driver.signIn")}
-                        </Button>
-                      </Link>
-                    </div>
+                <div className="space-y-4">
+                  <p className="text-white/80 text-sm">{t("home.readyToBookDesc")}</p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link to="/book">
+                      <Button size="lg" className="bg-white text-ocean hover:bg-gray-100 font-semibold px-6">Reservar Ahora</Button>
+                    </Link>
+                    <Link to="/mi-reserva">
+                      <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-ocean font-semibold px-6">Mi reserva</Button>
+                    </Link>
                   </div>
-                )}
+                </div>
               </div>
               <div className="text-center lg:text-right">
                 <div className="w-64 h-64 mx-auto lg:mx-0 bg-white/10 rounded-full flex items-center justify-center">
