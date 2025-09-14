@@ -98,7 +98,7 @@ export default function Services() {
       description: "Descubre la Costa del Sol con nuestros tours personalizados",
       icon: MapPinIcon,
       features: [
-        "Guías locales expertos",
+        "Gu��as locales expertos",
         "Rutas personalizables",
         "Grupos pequeños y privados",
         "Paradas flexibles",
@@ -162,18 +162,11 @@ export default function Services() {
               </span>
             </Link>
             <div className="flex items-center space-x-4">
-              <Link to="/signin">
-                <Button
-                  variant="outline"
-                  className="border-ocean text-ocean hover:bg-ocean hover:text-white"
-                >
-                  Iniciar Sesión
-                </Button>
+              <Link to="/mi-reserva">
+                <Button variant="outline" className="border-ocean text-ocean">Mi reserva</Button>
               </Link>
-              <Link to="/signup">
-                <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                  Registrarse
-                </Button>
+              <Link to="/book">
+                <Button className="bg-gradient-to-r from-ocean to-coral">Reservar</Button>
               </Link>
             </div>
           </div>
@@ -349,7 +342,7 @@ export default function Services() {
                   </div>
                   <h3 className="font-semibold text-navy mb-2">Disfruta</h3>
                   <p className="text-sm text-gray-700">
-                    Relájate y disfruta tu viaje premium
+                    Rel��jate y disfruta tu viaje premium
                   </p>
                 </div>
               </div>
