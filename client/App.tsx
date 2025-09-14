@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import BookingForm from "./pages/BookingForm";
 import BookingConfirmation from "./pages/BookingConfirmation";
+import ReservationLookup from "./pages/ReservationLookup";
+import ReservationDetails from "./pages/ReservationDetails";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import PasswordRecovery from "./pages/PasswordRecovery";
