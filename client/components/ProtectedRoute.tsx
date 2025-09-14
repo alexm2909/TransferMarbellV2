@@ -28,7 +28,7 @@ export function ProtectedRoute({
 
   // If authentication is required and user is not authenticated
   if (requireAuth && !isAuthenticated) {
-    return <Navigate to="/signin" state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   // If user is authenticated but doesn't have the required role
