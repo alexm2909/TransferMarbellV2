@@ -61,11 +61,6 @@ export default function PaymentSuccess() {
   const { updateBooking } = useBookings();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      navigate("/signin");
-      return;
-    }
-
     if (!bookingId) {
       navigate("/");
       return;
@@ -119,7 +114,7 @@ export default function PaymentSuccess() {
       console.error("Error parsing booking data:", error);
       navigate("/");
     }
-  }, [isAuthenticated, isLoading, navigate, bookingId, updateBooking]);
+  }, [bookingId, navigate, generateVoucher, addVoucher, updateBooking]);
 
   const handleShowVoucher = useCallback(() => {
     if (generatedVoucher) {
@@ -148,8 +143,8 @@ TRANSFERMARBELL - RECIBO DE RESERVA
 
 Número de Reserva: ${booking.bookingId}
 Fecha de Emisión: ${new Date().toLocaleDateString('es-ES')}
-Cliente: ${user?.name || 'Cliente'}
-Email: ${user?.email || ''}
+Cliente: Cliente
+  Email:
 
 DETALLES DEL VIAJE
 ------------------
