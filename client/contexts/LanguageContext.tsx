@@ -64,9 +64,6 @@ export interface Translations {
   "driver.insuranceSupport": string;
   "driver.noUpfrontCosts": string;
   "driver.applyToDrive": string;
-  "driver.needAccount": string;
-  "driver.signUp": string;
-  "driver.signIn": string;
 
   // Footer
   "footer.services": string;
@@ -85,52 +82,6 @@ export interface Translations {
   "footer.privacyPolicy": string;
   "footer.termsOfService": string;
   "footer.copyright": string;
-
-  // Dashboard
-  "dashboard.welcome": string;
-  "dashboard.controlPanel": string;
-  "dashboard.client": string;
-  "dashboard.driver": string;
-  "dashboard.admin": string;
-  "dashboard.driverApplication": string;
-  "dashboard.applicationPending": string;
-  "dashboard.applicationApproved": string;
-  "dashboard.applicationRejected": string;
-  "dashboard.pendingApproval": string;
-  "dashboard.approved": string;
-  "dashboard.contactSupport": string;
-  "dashboard.becomeDriver": string;
-  "dashboard.becomeDriverDesc": string;
-  "dashboard.apply": string;
-  "dashboard.myBookings": string;
-  "dashboard.confirmed": string;
-  "dashboard.passengers": string;
-  "dashboard.luggage": string;
-  "dashboard.newBooking": string;
-
-  // Admin Panel
-  "admin.title": string;
-  "admin.description": string;
-  "admin.totalUsers": string;
-  "admin.pendingRequests": string;
-  "admin.activeDisputes": string;
-  "admin.totalRevenue": string;
-  "admin.trips": string;
-  "admin.drivers": string;
-  "admin.pricing": string;
-  "admin.disputes": string;
-  "admin.ministry": string;
-  "admin.system": string;
-  "admin.driverApplications": string;
-  "admin.search": string;
-  "admin.all": string;
-  "admin.pending": string;
-  "admin.approved": string;
-  "admin.rejected": string;
-  "admin.viewDetails": string;
-  "admin.viewDocuments": string;
-  "admin.approve": string;
-  "admin.reject": string;
 
   // Booking
   "booking.title": string;
@@ -175,35 +126,6 @@ export interface Translations {
   "common.status": string;
   "common.actions": string;
 
-  // Auth
-  "auth.signIn": string;
-  "auth.signUp": string;
-  "auth.email": string;
-  "auth.password": string;
-  "auth.confirmPassword": string;
-  "auth.forgotPassword": string;
-  "auth.resetPassword": string;
-  "auth.sendResetLink": string;
-  "auth.backToSignIn": string;
-  "auth.noAccount": string;
-  "auth.haveAccount": string;
-  "auth.createAccount": string;
-  "auth.signInAccount": string;
-  "auth.enterEmail": string;
-  "auth.enterPassword": string;
-  "auth.fullName": string;
-  "auth.phoneNumber": string;
-  "auth.agreeTerms": string;
-  "auth.termsAndConditions": string;
-  "auth.privacyPolicy": string;
-  "auth.invalidCredentials": string;
-  "auth.passwordTooShort": string;
-  "auth.emailRequired": string;
-  "auth.passwordRequired": string;
-  "auth.nameRequired": string;
-  "auth.phoneRequired": string;
-  "auth.passwordMismatch": string;
-  "auth.emailInvalid": string;
 
   // Missing translations
   book_transfer: string;
@@ -236,8 +158,6 @@ export const translations: Record<string, any> = {
     "nav.fleet": "Flota",
     "nav.business": "Empresas",
     "nav.support": "Soporte",
-    "nav.signin": "Iniciar Sesión",
-    "nav.register": "Registrarse",
     "nav.dashboard": "Panel",
 
     // Homepage
@@ -285,8 +205,6 @@ export const translations: Record<string, any> = {
     "driver.noUpfrontCosts": "Sin costos iniciales",
     "driver.applyToDrive": "Aplicar para Conducir",
     "driver.needAccount": "Necesitas una cuenta para aplicar como conductor",
-    "driver.signUp": "Registrarse",
-    "driver.signIn": "Iniciar Sesión",
 
     // Footer
     "footer.services": "Servicios",
@@ -306,55 +224,6 @@ export const translations: Record<string, any> = {
     "footer.termsOfService": "Términos de Servicio",
     "footer.copyright":
       "© 2024 Transfermarbell. Todos los derechos reservados.",
-
-    // Dashboard
-    "dashboard.welcome": "Bienvenido",
-    "dashboard.controlPanel": "Panel de control para",
-    "dashboard.client": "Cliente",
-    "dashboard.driver": "Conductor",
-    "dashboard.admin": "Administrador",
-    "dashboard.driverApplication": "Estado de Solicitud de Conductor",
-    "dashboard.applicationPending": "Solicitud Pendiente de Aprobación",
-    "dashboard.applicationApproved": "¡Solicitud Aprobada!",
-    "dashboard.applicationRejected": "Solicitud Rechazada",
-    "dashboard.pendingApproval":
-      "Tu solicitud está siendo revisada por nuestro equipo.",
-    "dashboard.approved": "Ya puedes comenzar a recibir solicitudes de viaje.",
-    "dashboard.contactSupport": "Contacta con soporte para más información.",
-    "dashboard.becomeDriver": "¿Quieres ser conductor?",
-    "dashboard.becomeDriverDesc":
-      "Únete a nuestro equipo de conductores profesionales y empieza a ganar dinero con tu vehículo.",
-    "dashboard.apply": "Aplicar",
-    "dashboard.myBookings": "Mis Reservas",
-    "dashboard.confirmed": "Confirmado",
-    "dashboard.passengers": "pasajeros",
-    "dashboard.luggage": "maleta",
-    "dashboard.newBooking": "Nueva Reserva",
-
-    // Admin Panel
-    "admin.title": "Panel de Administración",
-    "admin.description":
-      "Gestiona usuarios, aprobaciones y configura el sistema",
-    "admin.totalUsers": "Usuarios Totales",
-    "admin.pendingRequests": "Solicitudes Pendientes",
-    "admin.activeDisputes": "Disputas Activas",
-    "admin.totalRevenue": "Ingresos Totales",
-    "admin.trips": "Viajes",
-    "admin.drivers": "Conductores",
-    "admin.pricing": "Precios",
-    "admin.disputes": "Disputas",
-    "admin.ministry": "Ministerio",
-    "admin.system": "Sistema",
-    "admin.driverApplications": "Solicitudes de Conductores",
-    "admin.search": "Buscar conductor...",
-    "admin.all": "Todos",
-    "admin.pending": "Pendientes",
-    "admin.approved": "Aprobados",
-    "admin.rejected": "Rechazados",
-    "admin.viewDetails": "Ver Detalles",
-    "admin.viewDocuments": "Ver Documentos",
-    "admin.approve": "Aprobar",
-    "admin.reject": "Rechazar",
 
     // Booking
     "booking.title": "Reservar Traslado",
@@ -400,35 +269,6 @@ export const translations: Record<string, any> = {
     "common.status": "Estado",
     "common.actions": "Acciones",
 
-    // Auth
-    "auth.signIn": "Iniciar Sesión",
-    "auth.signUp": "Registrarse",
-    "auth.email": "Email",
-    "auth.password": "Contraseña",
-    "auth.confirmPassword": "Confirmar Contraseña",
-    "auth.forgotPassword": "¿Olvidaste tu contraseña?",
-    "auth.resetPassword": "Restablecer Contraseña",
-    "auth.sendResetLink": "Enviar Enlace de Restablecimiento",
-    "auth.backToSignIn": "Volver a Iniciar Sesión",
-    "auth.noAccount": "¿No tienes una cuenta?",
-    "auth.haveAccount": "¿Ya tienes una cuenta?",
-    "auth.createAccount": "Crear cuenta",
-    "auth.signInAccount": "Iniciar sesión",
-    "auth.enterEmail": "Introduce tu email",
-    "auth.enterPassword": "Introduce tu contraseña",
-    "auth.fullName": "Nombre completo",
-    "auth.phoneNumber": "Número de teléfono",
-    "auth.agreeTerms": "Acepto los",
-    "auth.termsAndConditions": "Términos y Condiciones",
-    "auth.privacyPolicy": "Política de Privacidad",
-    "auth.invalidCredentials": "Credenciales inválidas",
-    "auth.passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
-    "auth.emailRequired": "El email es requerido",
-    "auth.passwordRequired": "La contraseña es requerida",
-    "auth.nameRequired": "El nombre es requerido",
-    "auth.phoneRequired": "El teléfono es requerido",
-    "auth.passwordMismatch": "Las contraseñas no coinciden",
-    "auth.emailInvalid": "Email inválido",
 
     // Missing translations
     book_transfer: "Reservar Traslado",
@@ -683,7 +523,7 @@ export const translations: Record<string, any> = {
     "features.professionalDriversDesc": "Chauffeurs licenciés et vérifiés",
     "features.topRated": "Service Très Bien Noté",
     "features.topRatedDesc": "Note moyenne de 4.9/5",
-    "features.realTimeChat": "Chat en Temps Réel",
+    "features.realTimeChat": "Chat en Temps R��el",
     "features.realTimeChatDesc": "Chattez avec votre chauffeur",
 
     // Driver section
