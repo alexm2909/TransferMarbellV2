@@ -81,6 +81,7 @@ export interface DriverProfile {
 export interface Booking {
   id: string;
   clientId: string;
+  reservationTag?: string;
   driverId?: string;
   status: "pending" | "assigned" | "confirmed" | "in_progress" | "completed" | "cancelled";
   tripDetails: {
