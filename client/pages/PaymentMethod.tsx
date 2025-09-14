@@ -88,7 +88,6 @@ const paymentMethods = [
 
 export default function PaymentMethod() {
   const navigate = useNavigate();
-  const { isAuthenticated, user, isLoading } = useAuth();
   const { t } = useLanguage();
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [selectedMethod, setSelectedMethod] = useState<string>("card");
