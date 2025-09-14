@@ -46,7 +46,6 @@ interface BookingDetails {
 export default function BookingConfirmation() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { isAuthenticated, user } = useAuth();
   const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -326,7 +325,7 @@ export default function BookingConfirmation() {
                       {bookingDetails.childSeats.map((seat, index) => (
                         <div key={index} className="flex justify-between items-center text-sm">
                           <span className="text-gray-600">{seat.type}</span>
-                          <span className="font-medium">+€{seat.price}</span>
+                          <span className="font-medium">+���{seat.price}</span>
                         </div>
                       ))}
                     </div>
