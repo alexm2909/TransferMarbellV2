@@ -299,7 +299,9 @@ Web: www.transfermarbell.com
               </span>
             </Link>
             <div className="flex items-center space-x-2">
-              <UserMenu />
+              <Link to="/mi-reserva">
+                <Button variant="outline">Mi reserva</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -433,7 +435,7 @@ Web: www.transfermarbell.com
                       {booking.childSeats.map((seat, index) => (
                         <div key={index} className="text-sm flex justify-between">
                           <span>{seat.description}</span>
-                          <span className="font-medium">������{seat.price}</span>
+                          <span className="font-medium">�����{seat.price}</span>
                         </div>
                       ))}
                     </div>
