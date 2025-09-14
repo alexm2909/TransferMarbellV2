@@ -52,7 +52,6 @@ interface CompletedBooking {
 export default function PaymentSuccess() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { isAuthenticated, user, isLoading } = useAuth();
   const [booking, setBooking] = useState<CompletedBooking | null>(null);
   const [showVoucher, setShowVoucher] = useState(false);
   const { generateVoucher, addVoucher } = useVoucher();
