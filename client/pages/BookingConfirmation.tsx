@@ -164,8 +164,8 @@ export default function BookingConfirmation() {
             <p className="text-gray-600 mb-6">
               No pudimos encontrar los detalles de tu reserva.
             </p>
-            <Link to="/dashboard">
-              <Button>Ir al Dashboard</Button>
+            <Link to="/">
+              <Button>Ir al Inicio</Button>
             </Link>
           </CardContent>
         </Card>
@@ -325,7 +325,7 @@ export default function BookingConfirmation() {
                       {bookingDetails.childSeats.map((seat, index) => (
                         <div key={index} className="flex justify-between items-center text-sm">
                           <span className="text-gray-600">{seat.type}</span>
-                          <span className="font-medium">+���{seat.price}</span>
+                          <span className="font-medium">+€{seat.price}</span>
                         </div>
                       ))}
                     </div>
