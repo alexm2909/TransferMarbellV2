@@ -211,8 +211,12 @@ export default function PaymentSummary() {
 
             {/* Desktop and Mobile Navigation */}
             <div className="flex items-center space-x-2">
-              <FlagOnlyLanguageSelector />
-              <UserMenu />
+              <Link to="/mi-reserva">
+                <Button variant="outline">Mi reserva</Button>
+              </Link>
+              <Link to="/book">
+                <Button className="bg-ocean text-white">Reservar</Button>
+              </Link>
             </div>
           </div>
         </div>
