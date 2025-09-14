@@ -10,127 +10,44 @@ export interface User {
   id?: string;
 }
 
+// Simplified auth shim: the app no longer requires users to sign in.
+// Returns a default 'guest' client user so pages that expect a user remain functional.
 export function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState<DatabaseUser | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Check authentication status on mount
-    const authStatus = localStorage.getItem("isAuthenticated");
-    const userEmail = localStorage.getItem("userEmail");
-
-    if (authStatus === "true" && userEmail) {
-      // Get user from database
-      const dbUser = database.getUserByEmail(userEmail);
-      if (dbUser) {
-        setIsAuthenticated(true);
-        setUser(dbUser);
-        // Update last login
-        database.updateUser(dbUser.id, {
-          lastLogin: new Date().toISOString()
-        });
-      } else {
-        // User not found in database, logout
-        logout();
-      }
+    // Ensure there is a guest user in the in-memory/local DB and expose it to the app
+    const guestEmail = "guest@transfermarbell.local";
+    let guest = database.getUserByEmail(guestEmail);
+    if (!guest) {
+      guest = database.createUser({
+        email: guestEmail,
+        name: "Cliente Invitado",
+        role: "client",
+        phone: "",
+      });
     }
-
+    setUser(guest);
+    setIsAuthenticated(true);
     setIsLoading(false);
   }, []);
 
-  const login = (email: string, password: string): { success: boolean; user?: DatabaseUser; error?: string } => {
-    // Test credentials for different user roles
-    const testCredentials: { [key: string]: { password: string; role: string; name: string; phone?: string } } = {
-      "cliente@test.com": {
-        password: "123456",
-        role: "client",
-        name: "Ana García",
-        phone: "+34 600 123 456"
-      },
-      "conductor@test.com": {
-        password: "123456",
-        role: "driver",
-        name: "Carlos Rodríguez",
-        phone: "+34 600 654 321"
-      },
-      "admin@test.com": {
-        password: "123456",
-        role: "admin",
-        name: "José Martínez",
-        phone: "+34 600 345 678"
-      }
-    };
-
-    // Check if user exists in database
-    let dbUser = database.getUserByEmail(email);
-
-    // If user doesn't exist and it's a test credential, create them
-    if (!dbUser && testCredentials[email.toLowerCase()]) {
-      const testUser = testCredentials[email.toLowerCase()];
-      if (testUser.password === password) {
-        dbUser = database.createUser({
-          email,
-          name: testUser.name,
-          role: testUser.role as "client" | "driver" | "admin",
-          phone: testUser.phone,
-          driverStatus: testUser.role === "driver" ? "approved" : undefined
-        });
-      }
-    }
-
-    // Verify credentials
-    if (dbUser && (testCredentials[email.toLowerCase()]?.password === password || password === "123456")) {
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("userEmail", email);
-
-      // Update last login
-      database.updateUser(dbUser.id, {
-        lastLogin: new Date().toISOString()
-      });
-
-      setIsAuthenticated(true);
-      setUser(dbUser);
-
-      return { success: true, user: dbUser };
-    }
-
-    return { success: false, error: "Credenciales inválidas" };
-  };
-
-  const register = (userData: Omit<DatabaseUser, 'id' | 'createdAt'>): { success: boolean; user?: DatabaseUser; error?: string } => {
-    // Check if user already exists
-    const existingUser = database.getUserByEmail(userData.email);
-    if (existingUser) {
-      return { success: false, error: "El usuario ya existe" };
-    }
-
-    // Create new user
-    const newUser = database.createUser(userData);
-
-    localStorage.setItem("isAuthenticated", "true");
-    localStorage.setItem("userEmail", userData.email);
-
-    setIsAuthenticated(true);
-    setUser(newUser);
-
-    return { success: true, user: newUser };
-  };
-
+  const login = async () => ({ success: false, error: "Autenticación deshabilitada" });
+  const register = async () => ({ success: false, error: "Registro deshabilitado" });
   const logout = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("userEmail");
-    setIsAuthenticated(false);
-    setUser(null);
+    // no-op: keep the guest session
+    setIsAuthenticated(true);
   };
 
   const updateUserProfile = (updates: Partial<DatabaseUser>) => {
-    if (user) {
+    if (user && user.id) {
       const success = database.updateUser(user.id, updates);
       if (success) {
-        const updatedUser = database.getUserById(user.id);
-        if (updatedUser) {
-          setUser(updatedUser);
+        const updated = database.getUserById(user.id);
+        if (updated) {
+          setUser(updated);
         }
       }
       return success;
