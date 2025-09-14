@@ -5,12 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
-import UserMenu from "@/components/UserMenu";
-import {
-  FlagOnlyLanguageSelector,
-  FullLanguageSelector,
-} from "@/components/LanguageSelector";
-import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   CalendarIcon,
@@ -114,38 +108,15 @@ export default function Index() {
                 {t("nav.support")}
               </a>
 
-              <FlagOnlyLanguageSelector />
-
-              {/* Show different buttons based on authentication status */}
-              {isAuthenticated ? (
-                <div className="flex items-center space-x-4">
-                  <Link to="/dashboard">
-                    <Button
-                      variant="outline"
-                      className="border-ocean text-ocean hover:bg-ocean hover:text-white"
-                    >
-                      {t("nav.dashboard")}
-                    </Button>
-                  </Link>
-                  <UserMenu />
-                </div>
-              ) : (
-                <>
-                  <Link to="/signin">
-                    <Button
-                      variant="outline"
-                      className="border-ocean text-ocean hover:bg-ocean hover:text-white"
-                    >
-                      {t("nav.signin")}
-                    </Button>
-                  </Link>
-                  <Link to="/signup">
-                    <Button className="bg-ocean text-white hover:bg-ocean/90">
-                      {t("nav.register")}
-                    </Button>
-                  </Link>
-                </>
-              )}
+              {/* Quick actions: view my reservation or book now */}
+              <div className="flex items-center space-x-4">
+                <Link to="/mi-reserva">
+                  <Button variant="outline" className="border-ocean text-ocean">Mi reserva</Button>
+                </Link>
+                <Link to="/book">
+                  <Button className="bg-ocean text-white">Reservar Ahora</Button>
+                </Link>
+              </div>
             </div>
 
             {/* Mobile menu button */}
@@ -197,47 +168,28 @@ export default function Index() {
                   {t("nav.support")}
                 </Link>
 
+                {/* Mobile quick actions */}
                 <div className="px-3 py-2">
-                  <FullLanguageSelector />
-                </div>
-
-                {/* Show different buttons based on authentication status */}
-                {isAuthenticated ? (
                   <div className="flex flex-col gap-3 px-3 pt-2">
-                    <Link to="/dashboard" className="w-full">
+                    <Link to="/mi-reserva" className="w-full">
                       <Button
                         variant="outline"
                         className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        {t("nav.dashboard")}
+                        Mi reserva
                       </Button>
                     </Link>
-                    <div className="flex justify-center pt-2">
-                      <UserMenu />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-3 px-3 pt-2">
-                    <Link to="/signin" className="w-full">
-                      <Button
-                        variant="outline"
-                        className="w-full border-ocean text-ocean hover:bg-ocean hover:text-white"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {t("nav.signin")}
-                      </Button>
-                    </Link>
-                    <Link to="/signup" className="w-full">
+                    <Link to="/book" className="w-full">
                       <Button
                         className="w-full bg-ocean text-white hover:bg-ocean/90"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        {t("nav.register")}
+                        Reservar Ahora
                       </Button>
                     </Link>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           )}
