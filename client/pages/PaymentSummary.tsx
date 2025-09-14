@@ -55,11 +55,6 @@ export default function PaymentSummary() {
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      navigate("/signin");
-      return;
-    }
-
     const pendingBooking = localStorage.getItem("pendingBooking");
     if (!pendingBooking) {
       navigate("/book");
@@ -73,7 +68,7 @@ export default function PaymentSummary() {
       console.error("Error parsing booking data:", error);
       navigate("/book");
     }
-  }, [isAuthenticated, isLoading, navigate]);
+  }, [navigate]);
 
   const getVehicleDetails = (type: string) => {
     const vehicles = {
