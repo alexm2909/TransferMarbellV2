@@ -3,8 +3,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/hooks/useAuth";
-import UserMenu from "@/components/UserMenu";
+import VoucherSystem, { useVoucher } from "@/components/VoucherSystem";
 import VoucherSystem, { useVoucher } from "@/components/VoucherSystem";
 import { useBookings } from "@/hooks/useDatabase";
 import { database } from "@/services/database";
@@ -434,7 +433,7 @@ Web: www.transfermarbell.com
                       {booking.childSeats.map((seat, index) => (
                         <div key={index} className="text-sm flex justify-between">
                           <span>{seat.description}</span>
-                          <span className="font-medium">�����{seat.price}</span>
+                          <span className="font-medium">������{seat.price}</span>
                         </div>
                       ))}
                     </div>
