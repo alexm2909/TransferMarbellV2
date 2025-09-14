@@ -153,18 +153,11 @@ function App() {
               }
             />
 
-            {/* Authentication */}
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/password-recovery" element={<PasswordRecovery />} />
-            <Route
-              path="/driver-registration"
-              element={<DriverRegistration />}
-            />
-            <Route
-              path="/driver-registration-pending"
-              element={<DriverRegistrationPending />}
-            />
+            {/* Public reservation lookup (no login required) */}
+            <Route path="/mi-reserva" element={<ReservationLookup />} />
+            <Route path="/mi-reserva/:id" element={<ReservationDetails />} />
+
+            {/* Authentication routes removed - authentication is disabled */}
 
             {/* Chat - Both Drivers and Clients */}
             <Route
