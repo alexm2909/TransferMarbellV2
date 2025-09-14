@@ -19,17 +19,17 @@ export default function NotFound() {
               </span>
             </Link>
             <div className="flex items-center space-x-4">
-              <Link to="/signin">
+              <Link to="/mi-reserva">
                 <Button
                   variant="outline"
                   className="border-ocean text-ocean hover:bg-ocean hover:text-white"
                 >
-                  Sign In
+                  Mi reserva
                 </Button>
               </Link>
-              <Link to="/">
+              <Link to="/book">
                 <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                  Book Now
+                  Reservar Ahora
                 </Button>
               </Link>
             </div>
