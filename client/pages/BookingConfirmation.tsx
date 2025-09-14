@@ -52,17 +52,76 @@ export default function BookingConfirmation() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/signin");
-      return;
+    // Try to load pending booking from localStorage first
+    const pending = localStorage.getItem('pendingBooking');
+    if (pending) {
+      try {
+        const parsed = JSON.parse(pending);
+        const bookingId = parsed.id;
+        const booking = (window as any).database?.getBookingById ? (window as any).database.getBookingById(bookingId) : null;
+        // If app's database service is available import it
+        // Fallback: try to import database module
+        if (!booking) {
+          // try dynamic import
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const db = require('@/services/database');
+            const b = db.database.getBookingById(bookingId);
+            if (b) {
+              setBookingDetails({
+                bookingId: b.id,
+                origin: b.tripDetails.origin.address,
+                destination: b.tripDetails.destination.address,
+                date: b.tripDetails.date,
+                time: b.tripDetails.time,
+                passengers: b.tripDetails.passengers,
+                children: b.tripDetails.children?.count || 0,
+                luggage: (b.tripDetails.luggage?.large || 0),
+                vehicleType: b.vehicleType || '',
+                flightNumber: b.tripDetails.flightNumber || '',
+                totalPrice: b.pricing.totalPrice || 0,
+                driverName: (b.driverId && (db.database.getUserById(b.driverId)?.name)) || 'Sin asignar',
+                driverPhone: (b.driverId && db.database.getUserById(b.driverId)?.phone) || '',
+                vehiclePlate: '',
+                childSeats: [],
+              });
+              setIsLoading(false);
+              return;
+            }
+          } catch (err) {
+            // ignore
+          }
+        } else {
+          setBookingDetails({
+            bookingId: booking.id,
+            origin: booking.tripDetails.origin.address,
+            destination: booking.tripDetails.destination.address,
+            date: booking.tripDetails.date,
+            time: booking.tripDetails.time,
+            passengers: booking.tripDetails.passengers,
+            children: booking.tripDetails.children?.count || 0,
+            luggage: (booking.tripDetails.luggage?.large || 0),
+            vehicleType: booking.vehicleType || '',
+            flightNumber: booking.tripDetails.flightNumber || '',
+            totalPrice: booking.pricing.totalPrice || 0,
+            driverName: 'Sin asignar',
+            driverPhone: '',
+            vehiclePlate: '',
+            childSeats: [],
+          });
+          setIsLoading(false);
+          return;
+        }
+      } catch (err) {
+        // fallback to simulated data below
+      }
     }
 
-    // Simulate loading booking details
-    const bookingId = searchParams.get("id") || "TM" + Date.now().toString().slice(-6);
-    
+    // If no pending booking available, show simulated booking
+    const bookingIdSim = searchParams.get("id") || ("TM" + Date.now().toString().slice(-6));
     setTimeout(() => {
       setBookingDetails({
-        bookingId,
+        bookingId: bookingIdSim,
         origin: "Málaga Airport (AGP)",
         destination: "Hotel Majestic - Paseo de Sancha, Málaga",
         date: "2024-12-28",
@@ -81,8 +140,8 @@ export default function BookingConfirmation() {
         ]
       });
       setIsLoading(false);
-    }, 1500);
-  }, [isAuthenticated, navigate, searchParams]);
+    }, 500);
+  }, [navigate, searchParams]);
 
   if (isLoading) {
     return (
