@@ -53,7 +53,7 @@ export default function Fleet() {
       price: "€50",
       rating: 4.9,
       features: ["Wi-Fi", "Aire Acondicionado", "Asientos de Cuero", "Cargador USB", "Agua Gratis"],
-      description: "Elegante sedán premium con máximo confort y tecnología avanzada.",
+      description: "Elegante sedán premium con máximo confort y tecnolog��a avanzada.",
       available: true,
     },
     {
@@ -177,18 +177,11 @@ export default function Fleet() {
               </span>
             </Link>
             <div className="flex items-center space-x-4">
-              <Link to="/signin">
-                <Button
-                  variant="outline"
-                  className="border-ocean text-ocean hover:bg-ocean hover:text-white"
-                >
-                  Iniciar Sesión
-                </Button>
+              <Link to="/mi-reserva">
+                <Button variant="outline" className="border-ocean text-ocean">Mi reserva</Button>
               </Link>
-              <Link to="/signup">
-                <Button className="bg-gradient-to-r from-ocean to-coral hover:from-ocean/90 hover:to-coral/90">
-                  Registrarse
-                </Button>
+              <Link to="/book">
+                <Button className="bg-gradient-to-r from-ocean to-coral">Reservar</Button>
               </Link>
             </div>
           </div>
