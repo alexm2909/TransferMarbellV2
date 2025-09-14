@@ -212,9 +212,11 @@ export default function BookingConfirmation() {
                 Transfermarbell
               </span>
             </Link>
-            <Link to="/dashboard">
-              <Button variant="outline">Mi Dashboard</Button>
-            </Link>
+            <div className="flex items-center space-x-2">
+              <Link to="/mi-reserva">
+                <Button variant="outline">Mi reserva</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
