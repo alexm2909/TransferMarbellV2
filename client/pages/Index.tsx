@@ -386,6 +386,8 @@ export default function Index() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
       {/* Additional Info Section */}
       <div className="bg-white py-16">
