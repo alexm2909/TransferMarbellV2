@@ -73,6 +73,8 @@ export default function BookingForm() {
         date,
         time,
         passengers: parseInt(passengers),
+        children: childrenCount,
+        childSeats: childSeats,
         luggage: { small: 0, medium: 0, large: parseInt(luggage) },
       },
       vehicleType,
