@@ -32,6 +32,8 @@ export default function BookingForm() {
   const [luggage, setLuggage] = useState("1");
   const [vehicleType, setVehicleType] = useState("");
   const [email, setEmail] = useState("");
+  const [childrenCount, setChildrenCount] = useState(0);
+  const [childSeats, setChildSeats] = useState<any[]>([]);
 
   useEffect(() => {
     const pre = localStorage.getItem("preBookingData");
