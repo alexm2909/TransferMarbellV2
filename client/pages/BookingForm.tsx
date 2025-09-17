@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
+import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
+import RouteMap from "@/components/RouteMap";
 import { CreditCardIcon, ArrowLeftIcon, CarIcon } from "lucide-react";
 import { database } from "@/services/database";
 import { useBookings } from "@/hooks/useDatabase";
