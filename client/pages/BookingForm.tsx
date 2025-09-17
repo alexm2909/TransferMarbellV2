@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,13 +7,14 @@ import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
 import RouteMap from "@/components/RouteMap";
-import { CreditCardIcon, ArrowLeftIcon, CarIcon } from "lucide-react";
-import { database } from "@/services/database";
+import { ArrowLeftIcon } from "lucide-react";
 import { useBookings } from "@/hooks/useDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 function generateReservationTag() {
-  const letters = Array.from({ length: 3 }).map(() => String.fromCharCode(65 + Math.floor(Math.random() * 26))).join("");
+  const letters = Array.from({ length: 3 })
+    .map(() => String.fromCharCode(65 + Math.floor(Math.random() * 26)))
+    .join("");
   const numbers = Math.floor(1000 + Math.random() * 9000).toString();
   return `TRMB_${letters}${numbers}`;
 }
@@ -48,8 +48,11 @@ export default function BookingForm() {
         setLuggage(p.luggage || "1");
         setVehicleType(p.vehicleType || "");
         setEmail(p.clientEmail || "");
+        setChildrenCount(p.children || 0);
         localStorage.removeItem("preBookingData");
-      } catch {}
+      } catch (e) {
+        // ignore
+      }
     }
   }, []);
 
@@ -72,10 +75,10 @@ export default function BookingForm() {
         destination: { address: destination },
         date,
         time,
-        passengers: parseInt(passengers),
+        passengers: parseInt(passengers, 10),
         children: childrenCount,
         childSeats: childSeats,
-        luggage: { small: 0, medium: 0, large: parseInt(luggage) },
+        luggage: { small: 0, medium: 0, large: parseInt(luggage, 10) },
       },
       vehicleType,
       pricing: { basePrice: 0, extras: [], totalPrice: 0, currency: "EUR" },
@@ -110,7 +113,7 @@ export default function BookingForm() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-3xl mx-auto p-6">
         <div className="mb-4">
-          <Link to="/" className="inline-flex items-center text-ocean hover:text-coral"> 
+          <Link to="/" className="inline-flex items-center text-ocean hover:text-coral">
             <ArrowLeftIcon className="w-4 h-4 mr-2" /> Volver
           </Link>
           <h1 className="text-2xl font-bold mt-4">Reservar Traslado</h1>
@@ -142,25 +145,41 @@ export default function BookingForm() {
             <div>
               <label className="block text-sm font-medium text-gray-700">Pasajeros</label>
               <Select value={passengers} onValueChange={(v) => setPassengers(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
-                  {[1,2,3,4,5,6].map(n => <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <SelectItem key={n} value={String(n)}>
+                      {n}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700">Maletas</label>
               <Select value={luggage} onValueChange={(v) => setLuggage(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
-                  {[0,1,2,3,4,5].map(n => <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}
+                  {[0, 1, 2, 3, 4, 5].map((n) => (
+                    <SelectItem key={n} value={String(n)}>
+                      {n}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700">Vehículo</label>
               <Select value={vehicleType} onValueChange={(v) => setVehicleType(v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="economy">Economy</SelectItem>
                   <SelectItem value="comfort">Comfort</SelectItem>
@@ -171,16 +190,44 @@ export default function BookingForm() {
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Correo electrónico</label>
-            <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required />
+          <div className="grid grid-cols-2 gap-4 items-end">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Niños</label>
+              <Select value={String(childrenCount)} onValueChange={(v) => setChildrenCount(parseInt(v, 10))}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {[0, 1, 2, 3, 4].map((n) => (
+                    <SelectItem key={n} value={String(n)}>
+                      {n}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Correo electrónico</label>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required />
+            </div>
           </div>
+
+          {childrenCount > 0 && (
+            <div>
+              <ChildrenAgeSelector numberOfChildren={childrenCount} onChildSeatsChange={(seats) => setChildSeats(seats)} />
+            </div>
+          )}
 
           <div className="flex justify-end">
             <Button type="submit" className="bg-gradient-to-r from-ocean to-coral text-white">Completar Reserva</Button>
           </div>
         </form>
 
+        {/* Map preview below the form */}
+        <div className="mt-6">
+          <RouteMap origin={origin} destination={destination} />
+        </div>
       </div>
     </div>
   );
