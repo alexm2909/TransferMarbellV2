@@ -138,6 +138,74 @@ export default function LuggageSizeSelector({
     );
   }
 
+  // Compact mode when more than 2 luggage
+  if (numberOfLuggage > 2) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+            <LuggageIcon className="w-4 h-4 text-ocean" />
+            Tamaño de Maletas
+          </h4>
+          <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+            Sin coste extra
+          </Badge>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="p-3 bg-gray-50 rounded-lg border flex flex-col items-center">
+            <div className="text-xs text-gray-600">Pequeñas</div>
+            <div className="mt-2 flex items-center gap-2">
+              <button type="button" onClick={() => { setSmallCount(Math.max(0, smallCount - 1)); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Minus className="w-4 h-4" /></button>
+              <div className="text-sm font-medium">{smallCount}</div>
+              <button type="button" onClick={() => { setSmallCount(smallCount + 1); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Plus className="w-4 h-4" /></button>
+            </div>
+          </div>
+
+          <div className="p-3 bg-gray-50 rounded-lg border flex flex-col items-center">
+            <div className="text-xs text-gray-600">Medianas</div>
+            <div className="mt-2 flex items-center gap-2">
+              <button type="button" onClick={() => { setMediumCount(Math.max(0, mediumCount - 1)); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Minus className="w-4 h-4" /></button>
+              <div className="text-sm font-medium">{mediumCount}</div>
+              <button type="button" onClick={() => { setMediumCount(mediumCount + 1); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Plus className="w-4 h-4" /></button>
+            </div>
+          </div>
+
+          <div className="p-3 bg-gray-50 rounded-lg border flex flex-col items-center">
+            <div className="text-xs text-gray-600">Grandes</div>
+            <div className="mt-2 flex items-center gap-2">
+              <button type="button" onClick={() => { setLargeCount(Math.max(0, largeCount - 1)); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Minus className="w-4 h-4" /></button>
+              <div className="text-sm font-medium">{largeCount}</div>
+              <button type="button" onClick={() => { setLargeCount(largeCount + 1); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Plus className="w-4 h-4" /></button>
+            </div>
+          </div>
+
+          <div className="p-3 bg-gray-50 rounded-lg border flex flex-col items-center">
+            <div className="text-xs text-gray-600">Extra Grande</div>
+            <div className="mt-2 flex items-center gap-2">
+              <button type="button" onClick={() => { setXlargeCount(Math.max(0, xlargeCount - 1)); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Minus className="w-4 h-4" /></button>
+              <div className="text-sm font-medium">{xlargeCount}</div>
+              <button type="button" onClick={() => { setXlargeCount(xlargeCount + 1); setTimeout(rebuildLuggageFromCounts, 0); }} className="p-1 rounded-md bg-white border"><Plus className="w-4 h-4" /></button>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-xs text-gray-500 bg-blue-50 p-3 rounded-lg">
+          <div className="font-medium text-blue-800 mb-1">Información sobre tamaños:</div>
+          <ul className="space-y-1">
+            <li>• <strong>Pequeña:</strong> Equipaje de mano (≤ 55cm)</li>
+            <li>• <strong>Mediana:</strong> Maleta estándar (≤ 70cm)</li>
+            <li>• <strong>Grande:</strong> Maleta grande (≤ 80cm)</li>
+            <li>• <strong>Extra Grande:</strong> Maleta muy grande (&gt; 80cm)</li>
+          </ul>
+          <p className="mt-2 text-blue-700 font-medium">
+            Esta información nos ayuda a seleccionar el vehículo más adecuado para tu equipaje.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -154,7 +222,7 @@ export default function LuggageSizeSelector({
         {luggage.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border"
+            className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg border"
           >
             <div className="flex items-center gap-2 min-w-0 flex-1">
               <span className="text-lg">
@@ -177,7 +245,7 @@ export default function LuggageSizeSelector({
                   handleSizeChange(index, size)
                 }
               >
-                <SelectTrigger className="w-36">
+                <SelectTrigger className="w-32 h-9">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
