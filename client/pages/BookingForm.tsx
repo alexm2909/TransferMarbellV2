@@ -383,11 +383,20 @@ export default function BookingForm() {
                     </div>
                     <div>
                       <Label>Pago</Label>
-                      <RadioGroup defaultValue={paymentOption} onValueChange={(v) => setPaymentOption(v)} className="flex gap-3">
-                        <RadioGroupItem value="full" id="pay-full" />
-                        <label htmlFor="pay-full" className="text-sm">Pago completo</label>
-                        <RadioGroupItem value="deposit" id="pay-deposit" />
-                        <label htmlFor="pay-deposit" className="text-sm">Reservar 20% (depósito)</label>
+                      <RadioGroup value={paymentOption} onValueChange={(v) => setPaymentOption(v)} className="grid grid-cols-1 gap-2">
+                        <div className="grid grid-cols-2 gap-2">
+                          <label className={`p-3 rounded-lg border ${paymentOption === 'full' ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} cursor-pointer`}>
+                            <RadioGroupItem value="full" id="pay-full" />
+                            <div className="font-medium">Pago completo</div>
+                            <div className="text-xs text-gray-500">Paga ahora el total</div>
+                          </label>
+
+                          <label className={`p-3 rounded-lg border ${paymentOption === 'deposit' ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} cursor-pointer`}>
+                            <RadioGroupItem value="deposit" id="pay-deposit" />
+                            <div className="font-medium">Reservar 20% (depósito)</div>
+                            <div className="text-xs text-gray-500">Paga solo el 20% ahora</div>
+                          </label>
+                        </div>
                       </RadioGroup>
                     </div>
                   </div>
@@ -396,12 +405,12 @@ export default function BookingForm() {
                     <Label>Solicitudes especiales</Label>
                     <Textarea value={specialRequests} onChange={(e) => setSpecialRequests(e.target.value)} placeholder="Indica si necesitas silla de ruedas, asistencia, etc." />
                   </div>
+
+                  <div className="mt-4">
+                    <Button type="submit" className="w-full bg-gradient-to-r from-ocean to-coral text-white">Completar Reserva</Button>
+                  </div>
                 </CardContent>
               </Card>
-
-              <div className="flex justify-end">
-                <Button type="submit" className="bg-gradient-to-r from-ocean to-coral text-white">Completar Reserva</Button>
-              </div>
             </form>
           </div>
 
