@@ -8,7 +8,7 @@ import TimeSelector from "@/components/TimeSelector";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
 import RouteMap from "@/components/RouteMap";
 import LuggageSizeSelector from "@/components/LuggageSizeSelector";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, Users, Baby, Suitcase, Calendar, Clock, Car, Truck, Star, Airplane, CreditCard, MessageCircle } from "lucide-react";
 import { useBookings } from "@/hooks/useDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
