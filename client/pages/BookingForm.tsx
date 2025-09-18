@@ -163,7 +163,7 @@ export default function BookingForm() {
               {/* Origin / Destination (kept simple) */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Origen y Destino</CardTitle>
+                  <CardTitle className="flex items-center gap-2"><MapPinIcon className="w-5 h-5 text-ocean" /> Origen y Destino</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
