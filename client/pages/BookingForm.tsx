@@ -48,6 +48,23 @@ export default function BookingForm() {
   const [paymentOption, setPaymentOption] = useState("full");
   const [specialRequests, setSpecialRequests] = useState("");
 
+  // Vehicle definitions with numeric capacities
+  const vehicleOptions = [
+    { key: 'economy', name: 'Economy', desc: 'Sedan cómodo, 4 pasajeros', seatsCapacity: 4, luggageCapacity: 2, bullets: ['Air conditioning','Professional driver','Free Wi-Fi'], price: '€25' },
+    { key: 'comfort', name: 'Comfort', desc: 'Premium comfort with extra space', seatsCapacity: 4, luggageCapacity: 3, bullets: ['Leather seats','Extra legroom','Phone charger','Water bottles'], price: '€35' },
+    { key: 'premium', name: 'Premium', desc: 'Luxury vehicles for special occasions', seatsCapacity: 4, luggageCapacity: 3, bullets: ['Luxury sedan','Premium amenities','Concierge service'], price: '€50' },
+    { key: 'van', name: 'Van', desc: 'Spacious van for groups and families', seatsCapacity: 8, luggageCapacity: 8, bullets: ['Large trunk space','Group seating','Extra luggage capacity'], price: '€65' },
+    { key: 'luxury', name: 'Luxury', desc: 'Ultimate luxury experience', seatsCapacity: 4, luggageCapacity: 2, bullets: ['Premium luxury car','VIP treatment','Red carpet service'], price: '€80' },
+  ];
+
+  const largestSeats = Math.max(...vehicleOptions.map(v => v.seatsCapacity));
+  const largestLuggage = Math.max(...vehicleOptions.map(v => v.luggageCapacity));
+
+  const totalPeople = parseInt(passengers || '0', 10) + childrenCount;
+  const totalLuggageCount = luggageDetails && luggageDetails.length > 0 ? luggageDetails.length : (parseInt(luggage || '0', 10) || 0);
+
+  const requiredCars = Math.max(1, Math.ceil(totalPeople / largestSeats), Math.ceil(totalLuggageCount / largestLuggage));
+
   useEffect(() => {
     const pre = localStorage.getItem("preBookingData");
     if (pre) {
