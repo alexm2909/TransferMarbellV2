@@ -36,6 +36,7 @@ export default function BookingForm() {
   const [returnTrip, setReturnTrip] = useState(false);
   const [returnDate, setReturnDate] = useState("");
   const [returnTime, setReturnTime] = useState("");
+  const [dateError, setDateError] = useState<string | null>(null);
   const [passengers, setPassengers] = useState("1");
   const [luggage, setLuggage] = useState("1");
   const [vehicleType, setVehicleType] = useState("");
