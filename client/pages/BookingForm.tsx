@@ -77,6 +77,14 @@ export default function BookingForm() {
       return;
     }
 
+    if (returnTrip && returnDate) {
+      if (returnDate < date) {
+        setDateError('La fecha de regreso no puede ser anterior a la fecha de ida');
+        alert('La fecha de regreso no puede ser anterior a la fecha de ida');
+        return;
+      }
+    }
+
     const reservationTag = generateReservationTag();
 
     // Build luggage counts from luggageDetails if present
