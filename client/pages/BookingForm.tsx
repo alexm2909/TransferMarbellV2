@@ -7,6 +7,7 @@ import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
 import RouteMap from "@/components/RouteMap";
+import LuggageSizeSelector from "@/components/LuggageSizeSelector";
 import { ArrowLeftIcon } from "lucide-react";
 import { useBookings } from "@/hooks/useDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
