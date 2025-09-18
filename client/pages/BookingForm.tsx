@@ -11,6 +11,10 @@ import LuggageSizeSelector from "@/components/LuggageSizeSelector";
 import { ArrowLeftIcon } from "lucide-react";
 import { useBookings } from "@/hooks/useDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 function generateReservationTag() {
   const letters = Array.from({ length: 3 })
