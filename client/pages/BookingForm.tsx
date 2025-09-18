@@ -146,141 +146,223 @@ export default function BookingForm() {
               <h1 className="text-2xl font-bold mt-4">Reservar Traslado</h1>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded shadow">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Origen</label>
-                <AddressAutocomplete value={origin} onChange={setOrigin} placeholder="Aeropuerto, hotel, dirección..." />
-              </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Origin / Destination (kept simple) */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Origen y Destino</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <Label>Origen</Label>
+                      <AddressAutocomplete value={origin} onChange={setOrigin} placeholder="Aeropuerto, hotel, dirección..." />
+                    </div>
+                    <div>
+                      <Label>Destino</Label>
+                      <AddressAutocomplete value={destination} onChange={setDestination} placeholder="Aeropuerto, hotel, dirección..." />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Destino</label>
-                <AddressAutocomplete value={destination} onChange={setDestination} placeholder="Aeropuerto, hotel, dirección..." />
-              </div>
+              {/* Trip details card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Detalles del viaje</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Fecha</Label>
+                      <Input className="h-12" type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+                    </div>
+                    <div>
+                      <Label>Hora</Label>
+                      <TimeSelector value={time} onChange={setTime} />
+                    </div>
+                  </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Fecha</label>
-                  <Input className="h-12" type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Hora</label>
-                  <TimeSelector value={time} onChange={setTime} />
-                </div>
-              </div>
+                  <div className="mt-4 border-t pt-4">
+                    <label className="inline-flex items-center gap-2">
+                      <input type="checkbox" checked={returnTrip} onChange={(e) => setReturnTrip(e.target.checked)} className="rounded border-input text-ocean focus:ring-0" />
+                      <span className="text-sm">Ida y vuelta</span>
+                    </label>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Pasajeros</label>
-                  <Select value={passengers} onValueChange={(v) => setPassengers(v)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {[1, 2, 3, 4, 5, 6].map((n) => (
-                        <SelectItem key={n} value={String(n)}>
-                          {n}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Maletas</label>
-                  <Select value={luggage} onValueChange={(v) => setLuggage(v)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {[0, 1, 2, 3, 4, 5].map((n) => (
-                        <SelectItem key={n} value={String(n)}>
-                          {n}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Vehicle selection moved below as selectable cards */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Vehículo</label>
-                  <div className="text-xs text-gray-500 mt-1">Selecciona un tipo abajo</div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 items-end">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Niños</label>
-                  <Select value={String(childrenCount)} onValueChange={(v) => setChildrenCount(parseInt(v, 10))}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {[0, 1, 2, 3, 4].map((n) => (
-                        <SelectItem key={n} value={String(n)}>
-                          {n}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Correo electrónico</label>
-                  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required />
-                </div>
-              </div>
-
-              {childrenCount > 0 && (
-                <div>
-                  <ChildrenAgeSelector numberOfChildren={childrenCount} onChildSeatsChange={(seats) => setChildSeats(seats)} />
-                </div>
-              )}
-
-              {/* Luggage size selector appears when luggage > 0 */}
-              {parseInt(luggage || "0", 10) > 0 && (
-                <div>
-                  <LuggageSizeSelector numberOfLuggage={parseInt(luggage || "0", 10)} onLuggageChange={(items) => setLuggageDetails(items)} />
-                </div>
-              )}
-
-              {/* Vehicle cards */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3">Elige tipo de vehículo</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    { key: 'economy', name: 'Economy', desc: 'Sedan cómodo, 4 pasajeros', seats: 4, luggage: 2, price: '€25' },
-                    { key: 'comfort', name: 'Comfort', desc: 'Sedan premium, 4 pasajeros', seats: 4, luggage: 3, price: '€35' },
-                    { key: 'van', name: 'Van', desc: 'Furgoneta, 6 pasajeros', seats: 6, luggage: 6, price: '€45' },
-                    { key: 'luxury', name: 'Luxury', desc: 'Limusina / Executive', seats: 4, luggage: 3, price: '€70' },
-                  ].map((opt) => (
-                    <div
-                      key={opt.key}
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => setVehicleType(opt.key)}
-                      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setVehicleType(opt.key)}
-                      className={`p-4 rounded-lg cursor-pointer border ${vehicleType === opt.key ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} transition-colors`}
-                    >
-                      <div className="flex items-center justify-between">
+                    {returnTrip && (
+                      <div className="mt-3 grid grid-cols-2 gap-4">
                         <div>
-                          <div className="font-semibold text-gray-900">{opt.name}</div>
-                          <div className="text-xs text-gray-600">{opt.desc}</div>
+                          <Label>Fecha de regreso</Label>
+                          <Input className="h-12" type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
                         </div>
-                        <div className="text-right">
-                          <div className="text-sm font-bold text-gray-900">{opt.price}</div>
-                          <div className="text-xs text-gray-500">Desde</div>
+                        <div>
+                          <Label>Hora de regreso</Label>
+                          <TimeSelector value={returnTime} onChange={setReturnTime} />
                         </div>
                       </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
 
-                      <div className="mt-3 flex items-center gap-3 text-xs text-gray-600">
-                        <div>🪑 {opt.seats} plazas</div>
-                        <div>🧳 {opt.luggage} maletas</div>
+              {/* Passengers & Luggage */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Passengers & Luggage</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-4 gap-4 mb-4">
+                    <div className="p-4 rounded-lg border border-gray-200 text-center">
+                      <div className="text-sm text-gray-500">Adultos</div>
+                      <div className="mt-2">
+                        <Select value={passengers} onValueChange={(v) => setPassengers(v)}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[1, 2, 3, 4, 5, 6].map((n) => (
+                              <SelectItem key={n} value={String(n)}>
+                                {n} adulto
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+
+                    <div className="p-4 rounded-lg border border-gray-200 text-center">
+                      <div className="text-sm text-gray-500">Niños</div>
+                      <div className="mt-2">
+                        <Select value={String(childrenCount)} onValueChange={(v) => setChildrenCount(parseInt(v, 10))}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[0, 1, 2, 3, 4].map((n) => (
+                              <SelectItem key={n} value={String(n)}>
+                                {n} niñ{n === 1 ? 'o' : 'os'}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-lg border border-gray-200 text-center">
+                      <div className="text-sm text-gray-500">Maletas</div>
+                      <div className="mt-2">
+                        <Select value={luggage} onValueChange={(v) => setLuggage(v)}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[0, 1, 2, 3, 4, 5].map((n) => (
+                              <SelectItem key={n} value={String(n)}>
+                                {n} maleta{n === 1 ? '' : 's'}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-lg border border-gray-200 text-center bg-gray-50">
+                      <div className="text-sm text-gray-500">Coches Requeridos</div>
+                      <div className="mt-2 text-2xl font-bold">{Math.max(1, Math.ceil(parseInt(passengers || '1', 10) / 4))}</div>
+                      <div className="text-xs text-gray-500">coches</div>
+                    </div>
+                  </div>
+
+                  {childrenCount > 0 && (
+                    <div className="mb-4">
+                      <ChildrenAgeSelector numberOfChildren={childrenCount} onChildSeatsChange={(seats) => setChildSeats(seats)} />
+                    </div>
+                  )}
+
+                  {parseInt(luggage || "0", 10) > 0 && (
+                    <div className="mb-3">
+                      <LuggageSizeSelector numberOfLuggage={parseInt(luggage || "0", 10)} onLuggageChange={(items) => setLuggageDetails(items)} />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Vehicle selection card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Selección de Vehículo</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                      { key: 'economy', name: 'Economy', desc: 'Sedan cómodo, 4 pasajeros', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 2 maletas', bullets: ['Air conditioning','Professional driver','Free Wi-Fi'], price: '€25' },
+                      { key: 'comfort', name: 'Comfort', desc: 'Premium comfort with extra space', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 3 maletas', bullets: ['Leather seats','Extra legroom','Phone charger','Water bottles'], price: '€35' },
+                      { key: 'premium', name: 'Premium', desc: 'Luxury vehicles for special occasions', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 3 maletas', bullets: ['Luxury sedan','Premium amenities','Concierge service'], price: '€50' },
+                      { key: 'van', name: 'Van', desc: 'Spacious van for groups and families', seats: '4-8 passengers', luggage: 'Max: 8 pasajeros, 8 maletas', bullets: ['Large trunk space','Group seating','Extra luggage capacity'], price: '€65' },
+                      { key: 'luxury', name: 'Luxury', desc: 'Ultimate luxury experience', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 2 maletas', bullets: ['Premium luxury car','VIP treatment','Red carpet service'], price: '€80' },
+                    ].map((opt) => (
+                      <div
+                        key={opt.key}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => setVehicleType(opt.key)}
+                        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setVehicleType(opt.key)}
+                        className={`p-4 rounded-lg cursor-pointer border ${vehicleType === opt.key ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} transition-colors`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <div className="font-semibold text-gray-900">{opt.name}</div>
+                            <div className="text-xs text-gray-600">{opt.desc}</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-sm font-bold text-gray-900">{opt.price}</div>
+                            <div className="text-xs text-gray-500">From</div>
+                          </div>
+                        </div>
+
+                        <div className="mt-3 text-xs text-gray-600">
+                          <div className="mb-2">{opt.seats}</div>
+                          <div className="mb-2">{opt.luggage}</div>
+                          <ul className="list-disc ml-5 space-y-1">
+                            {opt.bullets.map((b) => (
+                              <li key={b}>{b}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Additional details card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Detalles adicionales</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Número de vuelo (opcional)</Label>
+                      <Input value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} placeholder="Ej: VY1234" />
+                    </div>
+                    <div>
+                      <Label>Pago</Label>
+                      <RadioGroup defaultValue={paymentOption} onValueChange={(v) => setPaymentOption(v)} className="flex gap-3">
+                        <RadioGroupItem value="full" id="pay-full" />
+                        <label htmlFor="pay-full" className="text-sm">Pago completo</label>
+                        <RadioGroupItem value="deposit" id="pay-deposit" />
+                        <label htmlFor="pay-deposit" className="text-sm">Reservar 20% (depósito)</label>
+                      </RadioGroup>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <Label>Solicitudes especiales</Label>
+                    <Textarea value={specialRequests} onChange={(e) => setSpecialRequests(e.target.value)} placeholder="Indica si necesitas silla de ruedas, asistencia, etc." />
+                  </div>
+                </CardContent>
+              </Card>
 
               <div className="flex justify-end">
                 <Button type="submit" className="bg-gradient-to-r from-ocean to-coral text-white">Completar Reserva</Button>
