@@ -362,7 +362,7 @@ export default function BookingForm() {
               {/* Additional details card */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Detalles adicionales</CardTitle>
+                  <CardTitle className="flex items-center gap-2"><Star className="w-5 h-5 text-ocean" /> Detalles adicionales</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
