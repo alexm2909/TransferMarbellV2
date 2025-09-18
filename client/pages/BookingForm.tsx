@@ -356,8 +356,8 @@ export default function BookingForm() {
                         </div>
 
                         <div className="mt-3 text-xs text-gray-600">
-                          <div className="mb-2">{opt.seats}</div>
-                          <div className="mb-2">{opt.luggage}</div>
+                          <div className="mb-2">Capacidad: {opt.seatsCapacity} pax</div>
+                          <div className="mb-2">Maletas: {opt.luggageCapacity}</div>
                           <ul className="list-disc ml-5 space-y-1">
                             {opt.bullets.map((b) => (
                               <li key={b}>{b}</li>
