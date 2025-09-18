@@ -68,6 +68,18 @@ export default function BookingForm() {
 
     const reservationTag = generateReservationTag();
 
+    // Build luggage counts from luggageDetails if present
+    const luggageCounts = { small: 0, medium: 0, large: 0, xlarge: 0 };
+    if (luggageDetails && luggageDetails.length > 0) {
+      luggageDetails.forEach((it: any) => {
+        const size = it.size || 'medium';
+        luggageCounts[size] = (luggageCounts[size] || 0) + 1;
+      });
+    } else {
+      // fallback: put all in large as previous behavior
+      luggageCounts.large = parseInt(luggage, 10) || 0;
+    }
+
     const newBooking = createBooking({
       clientId: email,
       reservationTag,
@@ -80,7 +92,7 @@ export default function BookingForm() {
         passengers: parseInt(passengers, 10),
         children: childrenCount,
         childSeats: childSeats,
-        luggage: { small: 0, medium: 0, large: parseInt(luggage, 10) },
+        luggage: luggageCounts,
       },
       vehicleType,
       pricing: { basePrice: 0, extras: [], totalPrice: 0, currency: "EUR" },
