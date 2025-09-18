@@ -182,7 +182,7 @@ export default function BookingForm() {
               {/* Trip details card */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Detalles del viaje</CardTitle>
+                  <CardTitle className="flex items-center gap-2"><Calendar className="w-5 h-5 text-ocean" /> Detalles del viaje</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
