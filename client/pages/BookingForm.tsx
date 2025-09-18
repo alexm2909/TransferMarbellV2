@@ -308,7 +308,7 @@ export default function BookingForm() {
               {/* Vehicle selection card */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Selección de Vehículo</CardTitle>
+                  <CardTitle className="flex items-center gap-2"><Car className="w-5 h-5 text-ocean" /> Selección de Vehículo</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
