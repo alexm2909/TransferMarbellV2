@@ -265,7 +265,7 @@ export default function BookingForm() {
                     </div>
 
                     <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
-                      <div className="p-2 bg-coral-50 rounded-full inline-flex"><Suitcase className="w-5 h-5 text-coral" /></div>
+                      <div className="p-2 bg-coral-50 rounded-full inline-flex"><LuggageIcon className="w-5 h-5 text-coral" /></div>
                       <div className="text-sm text-gray-500">Maletas</div>
                       <div className="w-full mt-2">
                         <Select value={luggage} onValueChange={(v) => setLuggage(v)}>
