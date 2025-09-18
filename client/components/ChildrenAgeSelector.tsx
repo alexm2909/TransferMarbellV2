@@ -123,43 +123,34 @@ export default function ChildrenAgeSelector({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-3">
+    <div className="space-y-3 text-sm">
+      <div className="flex items-center gap-2 mb-2">
         <BabyIcon className="w-4 h-4 text-ocean" />
-        <span className="text-sm font-medium text-gray-700">
-          Edades de los niños (para sillas infantiles)
-        </span>
+        <span className="font-medium text-gray-700">Edades de los niños</span>
       </div>
 
-      {/* Layout vertical compacto */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         {Array.from({ length: numberOfChildren }, (_, index) => (
-          <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border">
+          <div key={index} className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg border">
             <div className="w-6 h-6 bg-ocean rounded-md flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
               {index + 1}
             </div>
 
             <div className="flex-1">
-              <span className="text-sm font-medium text-gray-700">
-                Niño {index + 1}
-              </span>
+              <span className="text-sm font-medium text-gray-700">Niño {index + 1}</span>
             </div>
 
             <Select
               value={childrenAges[index]?.toString() || ""}
               onValueChange={(value) => handleAgeChange(index, value)}
             >
-              <SelectTrigger className="w-32 h-9 border-gray-200 focus:border-ocean">
+              <SelectTrigger className="w-28 h-9">
                 <SelectValue placeholder="Edad" />
               </SelectTrigger>
               <SelectContent>
                 {Array.from({ length: 16 }, (_, i) => (
                   <SelectItem key={i} value={i.toString()}>
-                    {i === 0
-                      ? "Bebé (0-11m)"
-                      : i === 1
-                      ? "1 año"
-                      : `${i} años`}
+                    {i === 0 ? "Bebé (0-11m)" : i === 1 ? "1 año" : `${i} años`}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -168,15 +159,12 @@ export default function ChildrenAgeSelector({
         ))}
       </div>
 
-      {/* Resumen compacto de sillas requeridas */}
       {childrenAges.some((age) => age !== null) && (
-        <div className="mt-4">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+        <div className="mt-2">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs">
             <div className="flex items-center gap-2 mb-2">
               <ShieldIcon className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-blue-800">
-                Sillas infantiles incluidas
-              </span>
+              <span className="font-medium text-blue-800">Sillas infantiles incluidas</span>
             </div>
 
             <div className="space-y-1">
@@ -185,10 +173,8 @@ export default function ChildrenAgeSelector({
                 const seatInfo = getSeatInfo(age);
 
                 return (
-                  <div key={index} className="flex items-center justify-between text-xs">
-                    <span className="text-blue-700">
-                      Niño {index + 1} ({age} {age === 1 ? "año" : "años"}) - {seatInfo.seatType}
-                    </span>
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="text-blue-700">Niño {index + 1} ({age} {age === 1 ? "año" : "años"}) - {seatInfo.seatType}</span>
                     <span className="font-medium text-blue-800">€{seatInfo.price}</span>
                   </div>
                 );
@@ -196,18 +182,11 @@ export default function ChildrenAgeSelector({
             </div>
 
             <div className="flex items-center justify-between mt-2 pt-2 border-t border-blue-200">
-              <span className="text-sm font-medium text-blue-800">Total sillas:</span>
-              <span className="text-sm font-bold text-blue-800">
-                +€{childrenAges.reduce((total, age) => {
-                  if (age === null) return total;
-                  return total + getSeatInfo(age).price;
-                }, 0)}
-              </span>
+              <span className="font-medium text-blue-800">Total sillas:</span>
+              <span className="font-bold text-blue-800">+€{childrenAges.reduce((total, age) => { if (age === null) return total; return total + getSeatInfo(age).price; }, 0)}</span>
             </div>
 
-            <p className="text-xs text-blue-700 mt-2 opacity-90">
-              Obligatorias por ley • Instalación incluida • Normativa ECE R44/04
-            </p>
+            <p className="text-xs text-blue-700 mt-2 opacity-90">Obligatorias por ley • Instalación incluida • Normativa ECE R44/04</p>
           </div>
         </div>
       )}
