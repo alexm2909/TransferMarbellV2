@@ -54,23 +54,60 @@ export default function LuggageSizeSelector({
 }: LuggageSizeSelectorProps) {
   const [luggage, setLuggage] = useState<LuggageItem[]>([]);
 
+  const [smallCount, setSmallCount] = useState(0);
+  const [mediumCount, setMediumCount] = useState(0);
+  const [largeCount, setLargeCount] = useState(0);
+  const [xlargeCount, setXlargeCount] = useState(0);
+
   useEffect(() => {
-    // Initialize luggage array based on numberOfLuggage
-    const initialLuggage: LuggageItem[] = [];
-    for (let i = 0; i < numberOfLuggage; i++) {
-      initialLuggage.push({
+    // Initialize luggage array or compact counters based on numberOfLuggage
+    if (numberOfLuggage > 2) {
+      // default: all medium
+      setSmallCount(0);
+      setMediumCount(numberOfLuggage);
+      setLargeCount(0);
+      setXlargeCount(0);
+      const items: LuggageItem[] = Array.from({ length: numberOfLuggage }).map((_, i) => ({
         index: i,
-        size: "medium",
+        size: 'medium',
         description: luggageSizes.medium.description,
         price: luggageSizes.medium.price,
-      });
+      }));
+      setLuggage(items);
+    } else {
+      const initialLuggage: LuggageItem[] = [];
+      for (let i = 0; i < numberOfLuggage; i++) {
+        initialLuggage.push({
+          index: i,
+          size: "medium",
+          description: luggageSizes.medium.description,
+          price: luggageSizes.medium.price,
+        });
+      }
+      setLuggage(initialLuggage);
     }
-    setLuggage(initialLuggage);
   }, [numberOfLuggage]);
 
   useEffect(() => {
     onLuggageChange(luggage);
   }, [luggage, onLuggageChange]);
+
+  const rebuildLuggageFromCounts = () => {
+    const counts = [] as { size: keyof typeof luggageSizes }[];
+    for (let i = 0; i < smallCount; i++) counts.push({ size: 'small' });
+    for (let i = 0; i < mediumCount; i++) counts.push({ size: 'medium' });
+    for (let i = 0; i < largeCount; i++) counts.push({ size: 'large' });
+    for (let i = 0; i < xlargeCount; i++) counts.push({ size: 'xlarge' });
+
+    const items: LuggageItem[] = counts.map((c, idx) => ({
+      index: idx,
+      size: c.size,
+      description: luggageSizes[c.size].description,
+      price: luggageSizes[c.size].price,
+    }));
+
+    setLuggage(items);
+  };
 
   const handleSizeChange = (luggageIndex: number, size: keyof typeof luggageSizes) => {
     const sizeInfo = luggageSizes[size];
