@@ -222,9 +222,10 @@ export default function BookingForm() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="p-4 rounded-lg border border-gray-200 text-center">
+                    <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
+                      <div className="p-2 bg-ocean-light/10 rounded-full inline-flex"><Users className="w-5 h-5 text-ocean" /></div>
                       <div className="text-sm text-gray-500">Adultos</div>
-                      <div className="mt-2">
+                      <div className="w-full mt-2">
                         <Select value={passengers} onValueChange={(v) => setPassengers(v)}>
                           <SelectTrigger className="w-full">
                             <SelectValue />
@@ -240,9 +241,10 @@ export default function BookingForm() {
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg border border-gray-200 text-center">
+                    <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
+                      <div className="p-2 bg-pink-50 rounded-full inline-flex"><Baby className="w-5 h-5 text-pink-600" /></div>
                       <div className="text-sm text-gray-500">Niños</div>
-                      <div className="mt-2">
+                      <div className="w-full mt-2">
                         <Select value={String(childrenCount)} onValueChange={(v) => setChildrenCount(parseInt(v, 10))}>
                           <SelectTrigger className="w-full">
                             <SelectValue />
@@ -258,9 +260,10 @@ export default function BookingForm() {
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg border border-gray-200 text-center">
+                    <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
+                      <div className="p-2 bg-coral-50 rounded-full inline-flex"><Suitcase className="w-5 h-5 text-coral" /></div>
                       <div className="text-sm text-gray-500">Maletas</div>
-                      <div className="mt-2">
+                      <div className="w-full mt-2">
                         <Select value={luggage} onValueChange={(v) => setLuggage(v)}>
                           <SelectTrigger className="w-full">
                             <SelectValue />
@@ -276,7 +279,8 @@ export default function BookingForm() {
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg border border-gray-200 text-center bg-gray-50">
+                    <div className="p-4 rounded-lg border border-gray-200 text-center bg-gray-50 flex flex-col items-center gap-2">
+                      <div className="p-2 bg-blue-50 rounded-full inline-flex"><Car className="w-5 h-5 text-blue-600" /></div>
                       <div className="text-sm text-gray-500">Coches Requeridos</div>
                       <div className="mt-2 text-2xl font-bold">{Math.max(1, Math.ceil(parseInt(passengers || '1', 10) / 4))}</div>
                       <div className="text-xs text-gray-500">coches</div>
