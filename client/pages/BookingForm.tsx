@@ -329,13 +329,7 @@ export default function BookingForm() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {[
-                      { key: 'economy', name: 'Economy', desc: 'Sedan cómodo, 4 pasajeros', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 2 maletas', bullets: ['Air conditioning','Professional driver','Free Wi-Fi'], price: '€25' },
-                      { key: 'comfort', name: 'Comfort', desc: 'Premium comfort with extra space', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 3 maletas', bullets: ['Leather seats','Extra legroom','Phone charger','Water bottles'], price: '€35' },
-                      { key: 'premium', name: 'Premium', desc: 'Luxury vehicles for special occasions', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 3 maletas', bullets: ['Luxury sedan','Premium amenities','Concierge service'], price: '€50' },
-                      { key: 'van', name: 'Van', desc: 'Spacious van for groups and families', seats: '4-8 passengers', luggage: 'Max: 8 pasajeros, 8 maletas', bullets: ['Large trunk space','Group seating','Extra luggage capacity'], price: '€65' },
-                      { key: 'luxury', name: 'Luxury', desc: 'Ultimate luxury experience', seats: '1-3 passengers', luggage: 'Max: 3 pasajeros, 2 maletas', bullets: ['Premium luxury car','VIP treatment','Red carpet service'], price: '€80' },
-                    ].map((opt) => (
+                    {vehicleOptions.map((opt) => (
                       <div
                         key={opt.key}
                         role="button"
