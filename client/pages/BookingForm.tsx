@@ -77,7 +77,11 @@ export default function BookingForm() {
       return;
     }
 
-    if (returnTrip && returnDate) {
+    if (returnTrip) {
+      if (!returnDate) {
+        alert('Por favor selecciona la fecha de regreso para el viaje de vuelta');
+        return;
+      }
       if (returnDate < date) {
         setDateError('La fecha de regreso no puede ser anterior a la fecha de ida');
         alert('La fecha de regreso no puede ser anterior a la fecha de ida');
