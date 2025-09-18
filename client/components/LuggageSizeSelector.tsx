@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { LuggageIcon } from "lucide-react";
+import { LuggageIcon, Minus, Plus } from "lucide-react";
 
 interface LuggageItem {
   index: number;
