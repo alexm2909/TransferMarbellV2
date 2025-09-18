@@ -109,6 +109,13 @@ export default function LuggageSizeSelector({
     setLuggage(items);
   };
 
+  useEffect(() => {
+    if (numberOfLuggage > 2) {
+      rebuildLuggageFromCounts();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [smallCount, mediumCount, largeCount, xlargeCount]);
+
   const handleSizeChange = (luggageIndex: number, size: keyof typeof luggageSizes) => {
     const sizeInfo = luggageSizes[size];
     setLuggage(prev =>
