@@ -303,7 +303,7 @@ export default function BookingForm() {
                     <div className="p-4 rounded-lg border border-gray-200 text-center bg-gray-50 flex flex-col items-center gap-2">
                       <div className="p-2 bg-blue-50 rounded-full inline-flex"><Car className="w-5 h-5 text-blue-600" /></div>
                       <div className="text-sm text-gray-500">Coches Requeridos</div>
-                      <div className="mt-2 text-2xl font-bold">{Math.max(1, Math.ceil(parseInt(passengers || '1', 10) / 4))}</div>
+                      <div className="mt-2 text-2xl font-bold">{requiredCars}</div>
                       <div className="text-xs text-gray-500">coches</div>
                     </div>
                   </div>
