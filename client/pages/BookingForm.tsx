@@ -194,7 +194,8 @@ export default function BookingForm() {
                       <div className="mt-3 grid grid-cols-2 gap-4">
                         <div>
                           <Label>Fecha de regreso</Label>
-                          <Input className="h-12" type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+                          <Input className="h-12" type="date" value={returnDate} min={date || undefined} onChange={(e) => { setReturnDate(e.target.value); if (date && e.target.value && e.target.value < date) setDateError('La fecha de regreso no puede ser anterior a la fecha de ida'); else setDateError(null); }} />
+                          {dateError && <div className="text-xs text-red-600 mt-1">{dateError}</div>}
                         </div>
                         <div>
                           <Label>Hora de regreso</Label>
