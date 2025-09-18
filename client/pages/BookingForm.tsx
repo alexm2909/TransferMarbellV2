@@ -222,7 +222,7 @@ export default function BookingForm() {
               {/* Passengers & Luggage */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Passengers & Luggage</CardTitle>
+                  <CardTitle className="flex items-center gap-2"><Users className="w-5 h-5 text-ocean" /> Passengers & Luggage</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-4 gap-4 mb-4">
