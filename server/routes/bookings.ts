@@ -67,6 +67,16 @@ async function ensureSchema() {
         ('luxury','Luxury',4,2,'€80','{"desc":"Limusina"}')
       `);
     }
+
+    const { rows: bcount } = await client.query('SELECT COUNT(*)::int AS c FROM bookings');
+    if (bcount[0].c === 0) {
+      await client.query(`
+        INSERT INTO bookings (reservation_tag, status, client_email, origin, destination, date, time, passengers, luggage, vehicle_type, pricing)
+        VALUES
+        ('TRMB_ABC1234','confirmed','test1@example.com', '{"address":"Aeropuerto de Málaga (AGP)"}', '{"address":"Hotel Don Pepe, Marbella"}', '2025-01-05','12:00',2,'{"large":2}','premium','{"totalPrice":65}'),
+        ('TRMB_DEF5678','pending','test2@example.com', '{"address":"Marbella Centro"}', '{"address":"Puerto Banús"}', '2025-01-10','16:30',1,'{"medium":1}','economy','{"totalPrice":25}')
+      `);
+    }
   } finally {
     client.release();
   }
