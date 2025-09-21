@@ -212,11 +212,15 @@ export default function BookingForm() {
   }, []);
 
   const handlePhoneBlur = () => {
-    if (!phone) {
+    const dialMap: Record<string, string> = { ES: '+34', GB: '+44', FR: '+33', DE: '+49' };
+    const dial = dialMap[selectedCountry] || '';
+    const full = `${dial}${dial ? ' ' : ''}${localPhone || ''}`.trim();
+    if (!localPhone) {
+      setPhone('');
       setPhoneError(null);
       return;
     }
-    const formatted = formatPhone(phone, selectedCountry);
+    const formatted = formatPhone(full, selectedCountry);
     setPhone(formatted);
     if (!isValidPhone(formatted, selectedCountry)) {
       setPhoneError(
