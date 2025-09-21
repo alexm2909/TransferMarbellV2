@@ -556,20 +556,23 @@ export default function BookingForm() {
                           <option value="DE">🇩🇪 +49</option>
                         </select>
 
+                        <span className="px-2 h-10 flex items-center rounded-md border bg-gray-50 text-gray-700">
+                          {selectedCountry === 'ES' ? '🇪🇸 +34' : selectedCountry === 'GB' ? '🇬🇧 +44' : selectedCountry === 'FR' ? '🇫🇷 +33' : selectedCountry === 'DE' ? '🇩🇪 +49' : ''}
+                        </span>
                         {(() => {
-                          const maskMap: Record<string, string | null> = {
-                            ES: "+34 999 999 999",
-                            GB: "+44 99 9999 9999",
-                            FR: "+33 9 99 99 99 99",
-                            DE: "+49 99 99999999",
+                          const localMaskMap: Record<string, string | null> = {
+                            ES: "999 999 999",
+                            GB: "99 9999 9999",
+                            FR: "9 99 99 99 99",
+                            DE: "99 99999999",
                           };
-                          const mask = maskMap[selectedCountry] || null;
+                          const mask = localMaskMap[selectedCountry] || null;
                           if (mask) {
                             return (
                               <InputMask
                                 mask={mask}
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
+                                value={localPhone}
+                                onChange={(e) => setLocalPhone(e.target.value)}
                                 onBlur={handlePhoneBlur}
                                 maskChar={null}
                               >
@@ -582,16 +585,10 @@ export default function BookingForm() {
 
                           return (
                             <Input
-                              value={phone}
-                              onChange={(e) =>
-                                setPhone(
-                                  new AsYouType(selectedCountry).input(
-                                    e.target.value,
-                                  ),
-                                )
-                              }
+                              value={localPhone}
+                              onChange={(e) => setLocalPhone(e.target.value)}
                               onBlur={handlePhoneBlur}
-                              placeholder="+34 600 123 456"
+                              placeholder="600 123 456"
                               inputMode="tel"
                             />
                           );
