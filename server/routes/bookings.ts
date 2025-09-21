@@ -159,3 +159,30 @@ export const handleGetBookings: RequestHandler = async (_req, res) => {
     return res.status(500).json({ error: "Failed to get bookings" });
   }
 };
+
+export const handleLookupBooking: RequestHandler = async (req, res) => {
+  try {
+    await ensureSchema();
+    const { tag, email, id } = req.query as any;
+    const client = await pool.connect();
+    try {
+      if (id) {
+        const r = await client.query('SELECT * FROM bookings WHERE id = $1', [id]);
+        if (r.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+        return res.json({ booking: r.rows[0] });
+      }
+      if (!tag || !email) return res.status(400).json({ error: 'Missing tag or email' });
+      const r = await client.query(
+        'SELECT * FROM bookings WHERE reservation_tag = $1 AND LOWER(client_email) = LOWER($2) LIMIT 1',
+        [tag, email]
+      );
+      if (r.rows.length === 0) return res.status(404).json({ error: 'Not found' });
+      return res.json({ booking: r.rows[0] });
+    } finally {
+      client.release();
+    }
+  } catch (err) {
+    console.error('Failed to lookup booking:', err);
+    return res.status(500).json({ error: 'Failed to lookup booking' });
+  }
+};
