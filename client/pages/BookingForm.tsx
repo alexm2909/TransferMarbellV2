@@ -287,30 +287,40 @@ export default function BookingForm() {
 
     const clientFullName = `${firstName.trim()} ${lastName.trim()}`.trim();
 
-    const newBooking = createBooking({
-      clientId: email || phone || clientFullName,
+    // Persist booking via API
+    const payload = {
       reservationTag,
-      status: "pending",
-      tripDetails: {
-        origin: { address: origin },
-        destination: { address: destination },
-        date,
-        time,
-        passengers: parseInt(passengers, 10),
-        children: childrenCount,
-        childSeats: childSeats,
-        luggage: luggageCounts,
-      },
+      status: 'pending',
+      clientEmail: email,
+      origin: { address: origin },
+      destination: { address: destination },
+      date,
+      time,
+      returnDate: returnTrip ? returnDate : null,
+      returnTime: returnTrip ? returnTime : null,
+      passengers: parseInt(passengers, 10),
+      children: childrenCount > 0 ? { count: childrenCount } : null,
+      childSeats,
+      luggage: luggageCounts,
       vehicleType,
-      pricing: { basePrice: 0, extras: [], totalPrice: 0, currency: "EUR" },
-      payment: { status: "pending" },
-      clientData: { name: clientFullName, email, phone },
-    });
+      pricing: { totalPrice: 0 },
+    };
+
+    let created: any;
+    try {
+      const resp = await fetch('/api/bookings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const json = await resp.json();
+      if (!resp.ok || !json.success) throw new Error('Booking creation failed');
+      created = json.booking;
+    } catch (err) {
+      alert('Error creando la reserva, inténtalo de nuevo');
+      return;
+    }
 
     // Store pendingBooking for confirmation page
     localStorage.setItem(
       "pendingBooking",
-      JSON.stringify({ id: newBooking.id, reservationTag, email }),
+      JSON.stringify({ id: created.id, reservationTag: created.reservation_tag, email }),
     );
 
     // Send confirmation email via server function if email provided
