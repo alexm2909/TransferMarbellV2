@@ -511,7 +511,24 @@ export default function BookingForm() {
                         <option value="DE">🇩🇪 +49</option>
                       </select>
 
-                      <Input value={phone} onChange={(e) => setPhone(new AsYouType(selectedCountry).input(e.target.value))} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />
+                      {(() => {
+                        const maskMap: Record<string, string | null> = {
+                          ES: "+34 999 999 999",
+                          GB: "+44 99 9999 9999",
+                          FR: "+33 9 99 99 99 99",
+                          DE: "+49 99 99999999",
+                        };
+                        const mask = maskMap[selectedCountry] || null;
+                        if (mask) {
+                          return (
+                            <InputMask mask={mask} value={phone} onChange={(e) => setPhone(e.target.value)} maskChar={null}>
+                              {(inputProps) => <Input {...inputProps} onBlur={handlePhoneBlur} inputMode="tel" />}
+                            </InputMask>
+                          );
+                        }
+
+                        return <Input value={phone} onChange={(e) => setPhone(new AsYouType(selectedCountry).input(e.target.value))} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />;
+                      })()}
                     </div>
                       {phoneError && <div className="text-xs text-red-600 mt-1">{phoneError}</div>}
                     </div>
