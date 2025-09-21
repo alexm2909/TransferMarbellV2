@@ -43,20 +43,20 @@ function generateReservationTag() {
 }
 
 // Phone validation and formatting using libphonenumber-js
-const isValidPhone = (s: string) => {
+const isValidPhone = (s: string, defaultCountry?: string) => {
   if (!s) return false;
   try {
-    const pn = parsePhoneNumberFromString(s || "");
+    const pn = parsePhoneNumberFromString(s || "", defaultCountry as any);
     return !!(pn && pn.isValid());
   } catch (err) {
     return false;
   }
 };
 
-const formatPhone = (s: string) => {
+const formatPhone = (s: string, defaultCountry?: string) => {
   if (!s) return "";
   try {
-    const pn = parsePhoneNumberFromString(s || "");
+    const pn = parsePhoneNumberFromString(s || "", defaultCountry as any);
     return pn ? pn.formatInternational() : s.trim();
   } catch (err) {
     return s.trim();
