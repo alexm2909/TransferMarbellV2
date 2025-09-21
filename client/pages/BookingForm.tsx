@@ -83,6 +83,7 @@ export default function BookingForm() {
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("ES");
   const [childrenCount, setChildrenCount] = useState(0);
   const [childSeats, setChildSeats] = useState<any[]>([]);
   const [luggageDetails, setLuggageDetails] = useState<any[]>([]);
