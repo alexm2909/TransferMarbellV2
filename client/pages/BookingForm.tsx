@@ -244,7 +244,7 @@ export default function BookingForm() {
       return;
     }
 
-    if (phone && !isValidPhone(phone)) {
+    if (phone && !isValidPhone(phone, selectedCountry)) {
       alert("Teléfono no válido. Usa formato internacional, ej. +34 600 123 456");
       return;
     }
