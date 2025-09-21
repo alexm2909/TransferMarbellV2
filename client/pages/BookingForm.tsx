@@ -471,7 +471,28 @@ export default function BookingForm() {
                     </div>
                     <div>
                       <Label>Teléfono (opcional si introduces correo)</Label>
-                      <Input value={phone} onChange={(e) => setPhone(new AsYouType().input(e.target.value))} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />
+                      <div className="flex items-center gap-2">
+                      <select value={selectedCountry} onChange={(e) => {
+                        const cc = e.target.value;
+                        setSelectedCountry(cc);
+                        // apply dial prefix if phone empty or replace existing international prefix
+                        const dialMap: Record<string,string> = { ES: '+34', GB: '+44', FR: '+33', DE: '+49' };
+                        const dial = dialMap[cc] || '';
+                        if (!phone) setPhone(dial + (dial ? ' ' : ''));
+                        else if (phone.startsWith('+')) {
+                          // replace existing prefix
+                          const rest = phone.replace(/^\+\d+\s?/, '');
+                          setPhone(dial + (dial ? ' ' : '') + rest);
+                        }
+                      }} className="h-10 rounded-md border p-2 bg-white">
+                        <option value="ES">🇪🇸 +34</option>
+                        <option value="GB">🇬🇧 +44</option>
+                        <option value="FR">🇫🇷 +33</option>
+                        <option value="DE">🇩🇪 +49</option>
+                      </select>
+
+                      <Input value={phone} onChange={(e) => setPhone(new AsYouType(selectedCountry).input(e.target.value))} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />
+                    </div>
                       {phoneError && <div className="text-xs text-red-600 mt-1">{phoneError}</div>}
                     </div>
                   </div>
