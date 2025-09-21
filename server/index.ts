@@ -30,6 +30,11 @@ export function createServer() {
     return handleCreateBooking(req, res);
   });
 
+  app.get("/api/bookings", async (req, res) => {
+    const { handleGetBookings } = await import("./routes/bookings");
+    return handleGetBookings(req, res);
+  });
+
   app.get("/api/vehicles", async (req, res) => {
     const { handleGetVehicles } = await import("./routes/bookings");
     return handleGetVehicles(req, res);
