@@ -65,8 +65,10 @@ export default function PaymentSummary() {
     try {
       const parsed = JSON.parse(pendingBooking);
       setBookingData(parsed);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error parsing booking data:", error);
+      setIsLoading(false);
       navigate("/book");
     }
   }, [navigate]);
@@ -374,7 +376,7 @@ export default function PaymentSummary() {
                   {costs.returnTrip > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Viaje de vuelta</span>
-                      <span className="font-medium">€{costs.returnTrip}</span>
+                      <span className="font-medium">��{costs.returnTrip}</span>
                     </div>
                   )}
                 </div>
