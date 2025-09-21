@@ -14,7 +14,16 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
     if (smtp) {
       try {
         const nodemailer = await import('nodemailer');
-        const transporter = nodemailer.createTransport(smtp as any);
+        let transportConfig: any = smtp;
+        try {
+          // Allow JSON string in env var
+          transportConfig = JSON.parse(String(smtp));
+        } catch (err) {
+          // not JSON, pass string as-is (e.g. SMTP url)
+          transportConfig = smtp;
+        }
+
+        const transporter = nodemailer.createTransport(transportConfig as any);
 
         await transporter.sendMail({
           from: process.env.FROM_EMAIL || 'no-reply@transfermarbell.com',
