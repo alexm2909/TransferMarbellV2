@@ -73,7 +73,25 @@ export default function Index() {
       const json = await resp.json();
       if (json && json.booking) {
         // save reservation tag to localStorage for later pages
-        localStorage.setItem('reservationTag', json.booking.reservation_tag || json.booking.reservationTag || '');
+        const tag = json.booking.reservation_tag || json.booking.reservationTag || '';
+        localStorage.setItem('reservationTag', tag);
+
+        // Try send confirmation email (pre-booking)
+        try {
+          await fetch('/api/send-confirmation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              to: (preBookingData as any).email || null,
+              reservationTag: tag,
+              subject: `Confirmación de reserva ${tag}`,
+              text: `Tu reserva ${tag} ha sido creada (pre-reserva). Origen: ${preBookingData.origin} - Destino: ${preBookingData.destination} - Fecha: ${preBookingData.date} ${preBookingData.time}`,
+              html: `<p>Pre-reserva: <strong>${tag}</strong></p><p>${preBookingData.origin} → ${preBookingData.destination}</p><p>${preBookingData.date} ${preBookingData.time}</p>`,
+            }),
+          });
+        } catch (err) {
+          console.warn('Failed to send pre-booking confirmation email', err);
+        }
       }
     } catch (err) {
       console.error('Failed to create pre-booking on server', err);
