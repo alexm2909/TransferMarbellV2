@@ -61,67 +61,71 @@ export default function BookingConfirmation() {
         const parsed = JSON.parse(pending);
         const tag = parsed.reservationTag || parsed.tag;
         const email = parsed.email || '';
-        try {
-          const resp = await fetch(`/api/bookings/lookup?tag=${encodeURIComponent(tag)}&email=${encodeURIComponent(email)}`);
-          const json = await resp.json();
-          if (resp.ok && json.booking) {
-            const b = json.booking;
-            setBookingDetails({
-              bookingId: b.reservation_tag,
-              origin: b.origin?.address || '',
-              destination: b.destination?.address || '',
-              date: b.date || '',
-              time: b.time || '',
-              passengers: b.passengers || 0,
-              children: (b.children && b.children.count) || 0,
-              luggage: ((b.luggage && (b.luggage.large || 0)) + (b.luggage && (b.luggage.medium || 0)) + (b.luggage && (b.luggage.small || 0))) || 0,
-              vehicleType: b.vehicle_type || '',
-              flightNumber: b.flight_number || '',
-              totalPrice: (b.pricing && b.pricing.totalPrice) || 0,
-              driverName: 'Sin asignar',
-              driverPhone: '',
-              vehiclePlate: '',
-              childSeats: [],
-            });
+        (async () => {
+          try {
+            const resp = await fetch(`/api/bookings/lookup?tag=${encodeURIComponent(tag)}&email=${encodeURIComponent(email)}`);
+            const json = await resp.json();
+            if (resp.ok && json.booking) {
+              const b = json.booking;
+              setBookingDetails({
+                bookingId: b.reservation_tag,
+                origin: b.origin?.address || '',
+                destination: b.destination?.address || '',
+                date: b.date || '',
+                time: b.time || '',
+                passengers: b.passengers || 0,
+                children: (b.children && b.children.count) || 0,
+                luggage: ((b.luggage && (b.luggage.large || 0)) + (b.luggage && (b.luggage.medium || 0)) + (b.luggage && (b.luggage.small || 0))) || 0,
+                vehicleType: b.vehicle_type || '',
+                flightNumber: b.flight_number || '',
+                totalPrice: (b.pricing && b.pricing.totalPrice) || 0,
+                driverName: 'Sin asignar',
+                driverPhone: '',
+                vehiclePlate: '',
+                childSeats: [],
+              });
+              setIsLoading(false);
+              return;
+            }
+          } catch (e) {
+            // ignore; will rely on manual lookup by user or refresh
             setIsLoading(false);
-            return;
           }
-        } catch (e) {
-          // fallback to simulated below
-        }
+        })();
       } catch (err) {
-        // fallback to simulated data below
+        setIsLoading(false);
       }
+      return;
+    } else {
+      // If no pending booking available, show simulated booking
+      const bookingIdSim =
+        searchParams.get("id") || "TM" + Date.now().toString().slice(-6);
+      setTimeout(() => {
+        const simulated = {
+          bookingId: bookingIdSim,
+          origin: "Málaga Airport (AGP)",
+          destination: "Hotel Majestic - Paseo de Sancha, Málaga",
+          date: "2024-12-28",
+          time: "14:30",
+          passengers: 2,
+          children: 1,
+          luggage: 2,
+          vehicleType: "Premium",
+          flightNumber: "IB3245",
+          totalPrice: 65,
+          driverName: "Carlos Rodríguez",
+          driverPhone: "+34 600 123 456",
+          vehiclePlate: "1234 ABC",
+          childSeats: [{ type: "Grupo I (1-4 años)", price: 12 }],
+        };
+        setBookingDetails(simulated);
+        // Generate voucher code
+        setVoucherCode(
+          `VCH-${simulated.bookingId.slice(-6)}-${Math.floor(1000 + Math.random() * 9000)}`,
+        );
+        setIsLoading(false);
+      }, 500);
     }
-
-    // If no pending booking available, show simulated booking
-    const bookingIdSim =
-      searchParams.get("id") || "TM" + Date.now().toString().slice(-6);
-    setTimeout(() => {
-      const simulated = {
-        bookingId: bookingIdSim,
-        origin: "Málaga Airport (AGP)",
-        destination: "Hotel Majestic - Paseo de Sancha, Málaga",
-        date: "2024-12-28",
-        time: "14:30",
-        passengers: 2,
-        children: 1,
-        luggage: 2,
-        vehicleType: "Premium",
-        flightNumber: "IB3245",
-        totalPrice: 65,
-        driverName: "Carlos Rodríguez",
-        driverPhone: "+34 600 123 456",
-        vehiclePlate: "1234 ABC",
-        childSeats: [{ type: "Grupo I (1-4 años)", price: 12 }],
-      };
-      setBookingDetails(simulated);
-      // Generate voucher code
-      setVoucherCode(
-        `VCH-${simulated.bookingId.slice(-6)}-${Math.floor(1000 + Math.random() * 9000)}`,
-      );
-      setIsLoading(false);
-    }, 500);
   }, [navigate, searchParams]);
 
   if (isLoading) {
