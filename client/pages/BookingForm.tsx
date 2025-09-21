@@ -145,6 +145,25 @@ export default function BookingForm() {
     },
   ];
 
+  // Inline SVGs for vehicle visuals (vector images)
+  const getVehicleSVG = (key: string) => {
+    const common = "fill='%23ffffff'";
+    switch (key) {
+      case 'economy':
+        return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='4' width='64' height='20' y='6' fill='%23007bff'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
+      case 'comfort':
+        return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='6' width='64' height='20' y='6' fill='%2300b894'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
+      case 'premium':
+        return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='6' width='64' height='20' y='6' fill='%23ff7b54'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
+      case 'van':
+        return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='2' width='64' height='20' y='6' fill='%23006688'/><rect x='8' y='2' width='24' height='10' rx='1' fill='%23006688'/><circle cx='20' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
+      case 'luxury':
+        return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='6' width='64' height='20' y='6' fill='%23000000'/><rect x='8' y='6' width='48' height='12' rx='3' fill='%23ffd166' opacity='0.15'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
+      default:
+        return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='4' width='64' height='20' y='6' fill='%23888'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
+    }
+  };
+
   const largestSeats = Math.max(...vehicleOptions.map((v) => v.seatsCapacity));
   const largestLuggage = Math.max(
     ...vehicleOptions.map((v) => v.luggageCapacity),
