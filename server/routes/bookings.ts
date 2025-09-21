@@ -82,7 +82,7 @@ export const handleCreateBooking: RequestHandler = async (req, res) => {
 
       const result = await client.query(
         `INSERT INTO bookings (reservation_tag, status, client_email, origin, destination, date, time, return_date, return_time, passengers, children, child_seats, luggage, vehicle_type, pricing)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
          RETURNING *`,
         [
           reservationTag,
