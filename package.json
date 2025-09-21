@@ -21,17 +21,18 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "zod": "^3.23.8",
-    "vite": "^6.2.2",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "typescript": "^5.5.3",
     "autoprefixer": "^10.4.21",
+    "express": "^4.18.2",
+    "libphonenumber-js": "^1.12.18",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "tailwindcss": "^3.4.11",
+    "typescript": "^5.5.3",
+    "vite": "^6.2.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -86,6 +87,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",
+    "pg": "^8.11.0",
     "prettier": "^3.5.3",
     "react-day-picker": "^8.10.1",
     "react-hook-form": "^7.53.0",
@@ -98,7 +100,6 @@
     "three": "^0.176.0",
     "tsx": "^4.7.0",
     "vaul": "^0.9.3",
-    "vitest": "^3.1.4",
-    "pg": "^8.11.0"
+    "vitest": "^3.1.4"
   }
 }
