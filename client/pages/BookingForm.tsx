@@ -734,11 +734,7 @@ export default function BookingForm() {
                         <div className="flex items-start justify-between">
                           <div className="flex items-center gap-3">
                             <div className="p-2 bg-ocean-light/10 rounded-md inline-flex">
-                              <img
-                                src={`data:image/svg+xml;utf8,${encodeURIComponent(getVehicleSVG(opt.key))}`}
-                                alt={opt.name}
-                                className="w-12 h-8 object-contain"
-                              />
+                              <Truck className="w-6 h-6 text-ocean" />
                             </div>
                             <div>
                               <div className="font-semibold text-gray-900">
