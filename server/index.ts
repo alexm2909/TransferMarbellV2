@@ -22,5 +22,16 @@ export function createServer() {
     return handleSendConfirmation(req, res);
   });
 
+  // Bookings API
+  app.post('/api/bookings', async (req, res) => {
+    const { handleCreateBooking } = await import('./routes/bookings');
+    return handleCreateBooking(req, res);
+  });
+
+  app.get('/api/vehicles', async (req, res) => {
+    const { handleGetVehicles } = await import('./routes/bookings');
+    return handleGetVehicles(req, res);
+  });
+
   return app;
 }
