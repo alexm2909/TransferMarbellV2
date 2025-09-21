@@ -145,7 +145,7 @@ export default function BookingForm() {
 
     // Send confirmation email via server function
     try {
-      await fetch("/.netlify/functions/api/send-confirmation", {
+      await fetch("/api/send-confirmation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
