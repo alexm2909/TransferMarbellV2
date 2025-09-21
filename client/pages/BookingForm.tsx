@@ -81,6 +81,7 @@ export default function BookingForm() {
   const [vehicleType, setVehicleType] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [localPhone, setLocalPhone] = useState("");
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
