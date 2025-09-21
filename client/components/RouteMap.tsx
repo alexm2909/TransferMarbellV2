@@ -361,12 +361,7 @@ export default function RouteMap({
               </div>
             </div>
           </div>
-        ) : (
-          <div className="text-center text-gray-500 p-3 mb-2">
-            El mapa está centrado en Málaga. Introduce origen/destino para ver
-            la ruta.
-          </div>
-        )}
+        ) : null}
 
         {/* Map Container (always present) */}
         <div className="relative">
