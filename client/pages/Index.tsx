@@ -48,15 +48,39 @@ export default function Index() {
     },
   ];
 
-  const handlePreBookingSubmit = (e: React.FormEvent) => {
+  const handlePreBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Store pre-booking data in localStorage for later use
     localStorage.setItem("preBookingData", JSON.stringify(preBookingData));
 
-    // If user is authenticated, go directly to booking
-    // If not authenticated, they'll be redirected to sign in from the booking page
-    navigate("/book");
+    // Send to server to create a pre-booking record
+    try {
+      const resp = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'pending',
+          clientEmail: (preBookingData as any).email || null,
+          origin: { address: preBookingData.origin },
+          destination: { address: preBookingData.destination },
+          date: preBookingData.date,
+          time: preBookingData.time,
+          passengers: 1,
+        }),
+      });
+
+      const json = await resp.json();
+      if (json && json.booking) {
+        // save reservation tag to localStorage for later pages
+        localStorage.setItem('reservationTag', json.booking.reservation_tag || json.booking.reservationTag || '');
+      }
+    } catch (err) {
+      console.error('Failed to create pre-booking on server', err);
+    }
+
+    // Navigate to booking page to continue
+    navigate('/book');
   };
 
   const isPreFormValid =
