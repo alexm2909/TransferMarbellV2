@@ -5,7 +5,9 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
     const { to, subject, html, text, reservationTag } = req.body as any;
 
     if (!to || !reservationTag) {
-      return res.status(400).json({ error: "Missing 'to' or 'reservationTag'" });
+      return res
+        .status(400)
+        .json({ error: "Missing 'to' or 'reservationTag'" });
     }
 
     // If SMTP_TRANSPORT is provided in env, try to send real email via nodemailer (dynamically imported)
@@ -13,7 +15,7 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
 
     if (smtp) {
       try {
-        const nodemailer = await import('nodemailer');
+        const nodemailer = await import("nodemailer");
         let transportConfig: any = smtp;
         try {
           // Allow JSON string in env var
@@ -26,30 +28,38 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
         const transporter = nodemailer.createTransport(transportConfig as any);
 
         await transporter.sendMail({
-          from: process.env.FROM_EMAIL || 'no-reply@transfermarbell.com',
+          from: process.env.FROM_EMAIL || "no-reply@transfermarbell.com",
           to,
           subject: subject || `Confirmación de reserva ${reservationTag}`,
-          text: text || '',
-          html: html || '',
+          text: text || "",
+          html: html || "",
           headers: {
-            'X-Reservation-Tag': reservationTag,
-          }
+            "X-Reservation-Tag": reservationTag,
+          },
         });
 
         return res.status(200).json({ success: true });
       } catch (err) {
-        console.error('Nodemailer failed to send email:', err);
+        console.error("Nodemailer failed to send email:", err);
         // Fall through to logging fallback
       }
     }
 
     // Fallback: log to server console (development mode)
-    console.log('Email not sent (SMTP not configured or failed), email payload:');
+    console.log(
+      "Email not sent (SMTP not configured or failed), email payload:",
+    );
     console.log({ to, subject, reservationTag, text, html });
 
-    return res.status(200).json({ success: true, message: 'Email logged to server console (SMTP not configured or failed)' });
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message:
+          "Email logged to server console (SMTP not configured or failed)",
+      });
   } catch (err) {
-    console.error('Failed to send confirmation email:', err);
-    return res.status(500).json({ error: 'Failed to send confirmation email' });
+    console.error("Failed to send confirmation email:", err);
+    return res.status(500).json({ error: "Failed to send confirmation email" });
   }
 };

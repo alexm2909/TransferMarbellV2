@@ -59,7 +59,8 @@ export default function LuggageSizeSelector({
   const [largeCount, setLargeCount] = useState(0);
   const [xlargeCount, setXlargeCount] = useState(0);
 
-  const totalSelectedCounts = smallCount + mediumCount + largeCount + xlargeCount;
+  const totalSelectedCounts =
+    smallCount + mediumCount + largeCount + xlargeCount;
 
   // Ensure counts never exceed numberOfLuggage by clamping them when numberOfLuggage changes
   useEffect(() => {
@@ -69,12 +70,14 @@ export default function LuggageSizeSelector({
       setMediumCount(numberOfLuggage);
       setLargeCount(0);
       setXlargeCount(0);
-      const items: LuggageItem[] = Array.from({ length: numberOfLuggage }).map((_, i) => ({
-        index: i,
-        size: "medium",
-        description: luggageSizes.medium.description,
-        price: luggageSizes.medium.price,
-      }));
+      const items: LuggageItem[] = Array.from({ length: numberOfLuggage }).map(
+        (_, i) => ({
+          index: i,
+          size: "medium",
+          description: luggageSizes.medium.description,
+          price: luggageSizes.medium.price,
+        }),
+      );
       setLuggage(items);
       return;
     }
@@ -167,7 +170,10 @@ export default function LuggageSizeSelector({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [smallCount, mediumCount, largeCount, xlargeCount]);
 
-  const handleSizeChange = (luggageIndex: number, size: keyof typeof luggageSizes) => {
+  const handleSizeChange = (
+    luggageIndex: number,
+    size: keyof typeof luggageSizes,
+  ) => {
     const sizeInfo = luggageSizes[size];
     setLuggage((prev) =>
       prev.map((item, index) =>
@@ -178,8 +184,8 @@ export default function LuggageSizeSelector({
               description: sizeInfo.description,
               price: sizeInfo.price,
             }
-          : item
-      )
+          : item,
+      ),
     );
   };
 
@@ -198,7 +204,9 @@ export default function LuggageSizeSelector({
 
   // Helper to increment a specific count without exceeding numberOfLuggage
   const canIncrement = () => {
-    return smallCount + mediumCount + largeCount + xlargeCount < numberOfLuggage;
+    return (
+      smallCount + mediumCount + largeCount + xlargeCount < numberOfLuggage
+    );
   };
 
   // Compact mode when more than 2 luggage
@@ -210,7 +218,9 @@ export default function LuggageSizeSelector({
             <LuggageIcon className="w-4 h-4 text-ocean" />
             Tamaño de Maletas
           </h4>
-          <Badge className="bg-blue-100 text-blue-700 border-blue-200">Sin coste extra</Badge>
+          <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+            Sin coste extra
+          </Badge>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -328,14 +338,27 @@ export default function LuggageSizeSelector({
         </div>
 
         <div className="text-xs text-gray-500 bg-blue-50 p-3 rounded-lg">
-          <div className="font-medium text-blue-800 mb-1">Información sobre tamaños:</div>
+          <div className="font-medium text-blue-800 mb-1">
+            Información sobre tamaños:
+          </div>
           <ul className="space-y-1">
-            <li>• <strong>Pequeña:</strong> Equipaje de mano (≤ 55cm)</li>
-            <li>• <strong>Mediana:</strong> Maleta estándar (≤ 70cm)</li>
-            <li>• <strong>Grande:</strong> Maleta grande (≤ 80cm)</li>
-            <li>• <strong>Extra Grande:</strong> Maleta muy grande (&gt; 80cm)</li>
+            <li>
+              • <strong>Pequeña:</strong> Equipaje de mano (≤ 55cm)
+            </li>
+            <li>
+              • <strong>Mediana:</strong> Maleta estándar (≤ 70cm)
+            </li>
+            <li>
+              • <strong>Grande:</strong> Maleta grande (≤ 80cm)
+            </li>
+            <li>
+              • <strong>Extra Grande:</strong> Maleta muy grande (&gt; 80cm)
+            </li>
           </ul>
-          <p className="mt-2 text-blue-700 font-medium">Esta información nos ayuda a seleccionar el vehículo más adecuado para tu equipaje.</p>
+          <p className="mt-2 text-blue-700 font-medium">
+            Esta información nos ayuda a seleccionar el vehículo más adecuado
+            para tu equipaje.
+          </p>
         </div>
       </div>
     );
@@ -348,17 +371,26 @@ export default function LuggageSizeSelector({
           <LuggageIcon className="w-4 h-4 text-ocean" />
           Tamaño de Maletas
         </h4>
-        <Badge className="bg-blue-100 text-blue-700 border-blue-200">Sin coste extra</Badge>
+        <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+          Sin coste extra
+        </Badge>
       </div>
 
       <div className="space-y-3">
         {luggage.map((item, index) => (
-          <div key={index} className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg border">
+          <div
+            key={index}
+            className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg border"
+          >
             <div className="flex items-center gap-2 min-w-0 flex-1">
               <span className="text-lg">{luggageSizes[item.size].icon}</span>
               <div className="min-w-0 flex-1">
-                <div className="text-sm font-medium text-gray-900">Maleta {index + 1}</div>
-                <div className="text-xs text-gray-500 truncate">{item.description}</div>
+                <div className="text-sm font-medium text-gray-900">
+                  Maleta {index + 1}
+                </div>
+                <div className="text-xs text-gray-500 truncate">
+                  {item.description}
+                </div>
               </div>
             </div>
 
@@ -391,14 +423,27 @@ export default function LuggageSizeSelector({
       </div>
 
       <div className="text-xs text-gray-500 bg-blue-50 p-3 rounded-lg">
-        <div className="font-medium text-blue-800 mb-1">Información sobre tamaños:</div>
+        <div className="font-medium text-blue-800 mb-1">
+          Información sobre tamaños:
+        </div>
         <ul className="space-y-1">
-          <li>• <strong>Pequeña:</strong> Equipaje de mano (≤ 55cm)</li>
-          <li>• <strong>Mediana:</strong> Maleta estándar (≤ 70cm)</li>
-          <li>• <strong>Grande:</strong> Maleta grande (≤ 80cm)</li>
-          <li>• <strong>Extra Grande:</strong> Maleta muy grande (&gt; 80cm)</li>
+          <li>
+            • <strong>Pequeña:</strong> Equipaje de mano (≤ 55cm)
+          </li>
+          <li>
+            • <strong>Mediana:</strong> Maleta estándar (≤ 70cm)
+          </li>
+          <li>
+            • <strong>Grande:</strong> Maleta grande (≤ 80cm)
+          </li>
+          <li>
+            • <strong>Extra Grande:</strong> Maleta muy grande (&gt; 80cm)
+          </li>
         </ul>
-        <p className="mt-2 text-blue-700 font-medium">Esta información nos ayuda a seleccionar el vehículo más adecuado para tu equipaje.</p>
+        <p className="mt-2 text-blue-700 font-medium">
+          Esta información nos ayuda a seleccionar el vehículo más adecuado para
+          tu equipaje.
+        </p>
       </div>
     </div>
   );

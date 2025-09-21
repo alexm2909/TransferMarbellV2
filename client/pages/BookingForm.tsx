@@ -32,7 +32,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { parsePhoneNumberFromString, AsYouType } from "libphonenumber-js";
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
 function generateReservationTag() {
   const letters = Array.from({ length: 3 })
@@ -150,15 +150,15 @@ export default function BookingForm() {
   const getVehicleSVG = (key: string) => {
     const common = "fill='%23ffffff'";
     switch (key) {
-      case 'economy':
+      case "economy":
         return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='4' width='64' height='20' y='6' fill='%23007bff'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
-      case 'comfort':
+      case "comfort":
         return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='6' width='64' height='20' y='6' fill='%2300b894'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
-      case 'premium':
+      case "premium":
         return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='6' width='64' height='20' y='6' fill='%23ff7b54'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
-      case 'van':
+      case "van":
         return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='2' width='64' height='20' y='6' fill='%23006688'/><rect x='8' y='2' width='24' height='10' rx='1' fill='%23006688'/><circle cx='20' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
-      case 'luxury':
+      case "luxury":
         return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='6' width='64' height='20' y='6' fill='%23000000'/><rect x='8' y='6' width='48' height='12' rx='3' fill='%23ffd166' opacity='0.15'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
       default:
         return `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'><rect rx='4' width='64' height='20' y='6' fill='%23888'/><circle cx='16' cy='24' r='4' fill='%23000000'/><circle cx='48' cy='24' r='4' fill='%23000000'/></svg>`;
@@ -218,7 +218,9 @@ export default function BookingForm() {
     const formatted = formatPhone(phone, selectedCountry);
     setPhone(formatted);
     if (!isValidPhone(formatted, selectedCountry)) {
-      setPhoneError("Teléfono no válido. Usa formato internacional, ej. +34 600 123 456");
+      setPhoneError(
+        "Teléfono no válido. Usa formato internacional, ej. +34 600 123 456",
+      );
     } else {
       setPhoneError(null);
     }
@@ -240,12 +242,16 @@ export default function BookingForm() {
 
     // Require at least email or phone
     if (!email.trim() && !phone.trim()) {
-      alert("Por favor introduce al menos un correo electrónico o un número de teléfono");
+      alert(
+        "Por favor introduce al menos un correo electrónico o un número de teléfono",
+      );
       return;
     }
 
     if (phone && !isValidPhone(phone, selectedCountry)) {
-      alert("Teléfono no válido. Usa formato internacional, ej. +34 600 123 456");
+      alert(
+        "Teléfono no válido. Usa formato internacional, ej. +34 600 123 456",
+      );
       return;
     }
 
@@ -479,58 +485,111 @@ export default function BookingForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Label>Nombre</Label>
-                      <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Nombre" />
+                      <Input
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        placeholder="Nombre"
+                      />
                     </div>
                     <div>
                       <Label>Apellidos</Label>
-                      <Input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Apellidos" />
+                      <Input
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        placeholder="Apellidos"
+                      />
                     </div>
                     <div>
-                      <Label>Correo electrónico (opcional si introduces teléfono)</Label>
-                      <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" />
+                      <Label>
+                        Correo electrónico (opcional si introduces teléfono)
+                      </Label>
+                      <Input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="tu@email.com"
+                      />
                     </div>
                     <div>
                       <Label>Teléfono (opcional si introduces correo)</Label>
                       <div className="flex items-center gap-2">
-                      <select value={selectedCountry} onChange={(e) => {
-                        const cc = e.target.value;
-                        setSelectedCountry(cc);
-                        // apply dial prefix if phone empty or replace existing international prefix
-                        const dialMap: Record<string,string> = { ES: '+34', GB: '+44', FR: '+33', DE: '+49' };
-                        const dial = dialMap[cc] || '';
-                        if (!phone) setPhone(dial + (dial ? ' ' : ''));
-                        else if (phone.startsWith('+')) {
-                          // replace existing prefix
-                          const rest = phone.replace(/^\+\d+\s?/, '');
-                          setPhone(dial + (dial ? ' ' : '') + rest);
-                        }
-                      }} className="h-10 rounded-md border p-2 bg-white">
-                        <option value="ES">🇪🇸 +34</option>
-                        <option value="GB">🇬🇧 +44</option>
-                        <option value="FR">🇫🇷 +33</option>
-                        <option value="DE">🇩🇪 +49</option>
-                      </select>
+                        <select
+                          value={selectedCountry}
+                          onChange={(e) => {
+                            const cc = e.target.value;
+                            setSelectedCountry(cc);
+                            // apply dial prefix if phone empty or replace existing international prefix
+                            const dialMap: Record<string, string> = {
+                              ES: "+34",
+                              GB: "+44",
+                              FR: "+33",
+                              DE: "+49",
+                            };
+                            const dial = dialMap[cc] || "";
+                            if (!phone) setPhone(dial + (dial ? " " : ""));
+                            else if (phone.startsWith("+")) {
+                              // replace existing prefix
+                              const rest = phone.replace(/^\+\d+\s?/, "");
+                              setPhone(dial + (dial ? " " : "") + rest);
+                            }
+                          }}
+                          className="h-10 rounded-md border p-2 bg-white"
+                        >
+                          <option value="ES">🇪🇸 +34</option>
+                          <option value="GB">🇬🇧 +44</option>
+                          <option value="FR">🇫🇷 +33</option>
+                          <option value="DE">🇩🇪 +49</option>
+                        </select>
 
-                      {(() => {
-                        const maskMap: Record<string, string | null> = {
-                          ES: "+34 999 999 999",
-                          GB: "+44 99 9999 9999",
-                          FR: "+33 9 99 99 99 99",
-                          DE: "+49 99 99999999",
-                        };
-                        const mask = maskMap[selectedCountry] || null;
-                        if (mask) {
+                        {(() => {
+                          const maskMap: Record<string, string | null> = {
+                            ES: "+34 999 999 999",
+                            GB: "+44 99 9999 9999",
+                            FR: "+33 9 99 99 99 99",
+                            DE: "+49 99 99999999",
+                          };
+                          const mask = maskMap[selectedCountry] || null;
+                          if (mask) {
+                            return (
+                              <InputMask
+                                mask={mask}
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                maskChar={null}
+                              >
+                                {(inputProps) => (
+                                  <Input
+                                    {...inputProps}
+                                    onBlur={handlePhoneBlur}
+                                    inputMode="tel"
+                                  />
+                                )}
+                              </InputMask>
+                            );
+                          }
+
                           return (
-                            <InputMask mask={mask} value={phone} onChange={(e) => setPhone(e.target.value)} maskChar={null}>
-                              {(inputProps) => <Input {...inputProps} onBlur={handlePhoneBlur} inputMode="tel" />}
-                            </InputMask>
+                            <Input
+                              value={phone}
+                              onChange={(e) =>
+                                setPhone(
+                                  new AsYouType(selectedCountry).input(
+                                    e.target.value,
+                                  ),
+                                )
+                              }
+                              onBlur={handlePhoneBlur}
+                              placeholder="+34 600 123 456"
+                              inputMode="tel"
+                            />
                           );
-                        }
-
-                        return <Input value={phone} onChange={(e) => setPhone(new AsYouType(selectedCountry).input(e.target.value))} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />;
-                      })()}
-                    </div>
-                      {phoneError && <div className="text-xs text-red-600 mt-1">{phoneError}</div>}
+                        })()}
+                      </div>
+                      {phoneError && (
+                        <div className="text-xs text-red-600 mt-1">
+                          {phoneError}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>
@@ -678,7 +737,11 @@ export default function BookingForm() {
                         <div className="flex items-start justify-between">
                           <div className="flex items-center gap-3">
                             <div className="p-2 bg-ocean-light/10 rounded-md inline-flex">
-                              <img src={`data:image/svg+xml;utf8,${encodeURIComponent(getVehicleSVG(opt.key))}`} alt={opt.name} className="w-12 h-8 object-contain" />
+                              <img
+                                src={`data:image/svg+xml;utf8,${encodeURIComponent(getVehicleSVG(opt.key))}`}
+                                alt={opt.name}
+                                className="w-12 h-8 object-contain"
+                              />
                             </div>
                             <div>
                               <div className="font-semibold text-gray-900">

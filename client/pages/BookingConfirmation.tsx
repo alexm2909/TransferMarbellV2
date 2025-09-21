@@ -46,26 +46,30 @@ interface BookingDetails {
 export default function BookingConfirmation() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
+  const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [voucherCode, setVoucherCode] = useState<string | null>(null);
   const [showVoucher, setShowVoucher] = useState(false);
 
   useEffect(() => {
     // Try to load pending booking from localStorage first
-    const pending = localStorage.getItem('pendingBooking');
+    const pending = localStorage.getItem("pendingBooking");
     if (pending) {
       try {
         const parsed = JSON.parse(pending);
         const bookingId = parsed.id;
-        const booking = (window as any).database?.getBookingById ? (window as any).database.getBookingById(bookingId) : null;
+        const booking = (window as any).database?.getBookingById
+          ? (window as any).database.getBookingById(bookingId)
+          : null;
         // If app's database service is available import it
         // Fallback: try to import database module
         if (!booking) {
           // try dynamic import
           try {
             // eslint-disable-next-line @typescript-eslint/no-var-requires
-            const db = require('@/services/database');
+            const db = require("@/services/database");
             const b = db.database.getBookingById(bookingId);
             if (b) {
               setBookingDetails({
@@ -76,13 +80,17 @@ export default function BookingConfirmation() {
                 time: b.tripDetails.time,
                 passengers: b.tripDetails.passengers,
                 children: b.tripDetails.children?.count || 0,
-                luggage: (b.tripDetails.luggage?.large || 0),
-                vehicleType: b.vehicleType || '',
-                flightNumber: b.tripDetails.flightNumber || '',
+                luggage: b.tripDetails.luggage?.large || 0,
+                vehicleType: b.vehicleType || "",
+                flightNumber: b.tripDetails.flightNumber || "",
                 totalPrice: b.pricing.totalPrice || 0,
-                driverName: (b.driverId && (db.database.getUserById(b.driverId)?.name)) || 'Sin asignar',
-                driverPhone: (b.driverId && db.database.getUserById(b.driverId)?.phone) || '',
-                vehiclePlate: '',
+                driverName:
+                  (b.driverId && db.database.getUserById(b.driverId)?.name) ||
+                  "Sin asignar",
+                driverPhone:
+                  (b.driverId && db.database.getUserById(b.driverId)?.phone) ||
+                  "",
+                vehiclePlate: "",
                 childSeats: [],
               });
               setIsLoading(false);
@@ -100,13 +108,13 @@ export default function BookingConfirmation() {
             time: booking.tripDetails.time,
             passengers: booking.tripDetails.passengers,
             children: booking.tripDetails.children?.count || 0,
-            luggage: (booking.tripDetails.luggage?.large || 0),
-            vehicleType: booking.vehicleType || '',
-            flightNumber: booking.tripDetails.flightNumber || '',
+            luggage: booking.tripDetails.luggage?.large || 0,
+            vehicleType: booking.vehicleType || "",
+            flightNumber: booking.tripDetails.flightNumber || "",
             totalPrice: booking.pricing.totalPrice || 0,
-            driverName: 'Sin asignar',
-            driverPhone: '',
-            vehiclePlate: '',
+            driverName: "Sin asignar",
+            driverPhone: "",
+            vehiclePlate: "",
             childSeats: [],
           });
           setIsLoading(false);
@@ -118,7 +126,8 @@ export default function BookingConfirmation() {
     }
 
     // If no pending booking available, show simulated booking
-    const bookingIdSim = searchParams.get("id") || ("TM" + Date.now().toString().slice(-6));
+    const bookingIdSim =
+      searchParams.get("id") || "TM" + Date.now().toString().slice(-6);
     setTimeout(() => {
       const simulated = {
         bookingId: bookingIdSim,
@@ -135,13 +144,13 @@ export default function BookingConfirmation() {
         driverName: "Carlos Rodríguez",
         driverPhone: "+34 600 123 456",
         vehiclePlate: "1234 ABC",
-        childSeats: [
-          { type: "Grupo I (1-4 años)", price: 12 }
-        ]
+        childSeats: [{ type: "Grupo I (1-4 años)", price: 12 }],
       };
       setBookingDetails(simulated);
       // Generate voucher code
-      setVoucherCode(`VCH-${simulated.bookingId.slice(-6)}-${Math.floor(1000 + Math.random()*9000)}`);
+      setVoucherCode(
+        `VCH-${simulated.bookingId.slice(-6)}-${Math.floor(1000 + Math.random() * 9000)}`,
+      );
       setIsLoading(false);
     }, 500);
   }, [navigate, searchParams]);
@@ -179,25 +188,25 @@ export default function BookingConfirmation() {
   }
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('es-ES', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateStr).toLocaleDateString("es-ES", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   const shareBooking = () => {
     const shareText = `Mi traslado con Transfermarbell está confirmado!\n\nReserva: ${bookingDetails.bookingId}\nFecha: ${formatDate(bookingDetails.date)} a las ${bookingDetails.time}\nConductor: ${bookingDetails.driverName}\n\n¡Nos vemos pronto!`;
-    
+
     if (navigator.share) {
       navigator.share({
-        title: 'Reserva Confirmada - Transfermarbell',
+        title: "Reserva Confirmada - Transfermarbell",
         text: shareText,
       });
     } else {
       navigator.clipboard.writeText(shareText);
-      alert('Detalles copiados al portapapeles');
+      alert("Detalles copiados al portapapeles");
     }
   };
 
@@ -234,8 +243,8 @@ export default function BookingConfirmation() {
             ��Reserva Confirmada!
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Tu traslado ha sido reservado exitosamente. Hemos enviado los detalles 
-            a tu email y SMS.
+            Tu traslado ha sido reservado exitosamente. Hemos enviado los
+            detalles a tu email y SMS.
           </p>
           <div className="mt-4">
             <Badge className="bg-success text-white text-lg px-4 py-2">
@@ -261,15 +270,23 @@ export default function BookingConfirmation() {
                     <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg border border-green-200">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       <div>
-                        <div className="text-sm font-medium text-gray-900">Origen</div>
-                        <div className="text-sm text-gray-600">{bookingDetails.origin}</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          Origen
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {bookingDetails.origin}
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg border border-red-200">
                       <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                       <div>
-                        <div className="text-sm font-medium text-gray-900">Destino</div>
-                        <div className="text-sm text-gray-600">{bookingDetails.destination}</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          Destino
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {bookingDetails.destination}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -278,23 +295,35 @@ export default function BookingConfirmation() {
                     <div className="flex items-center space-x-3">
                       <CalendarIcon className="w-5 h-5 text-ocean" />
                       <div>
-                        <div className="text-sm font-medium text-gray-900">Fecha</div>
-                        <div className="text-sm text-gray-600">{formatDate(bookingDetails.date)}</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          Fecha
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {formatDate(bookingDetails.date)}
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3">
                       <ClockIcon className="w-5 h-5 text-ocean" />
                       <div>
-                        <div className="text-sm font-medium text-gray-900">Hora</div>
-                        <div className="text-sm text-gray-600">{bookingDetails.time}</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          Hora
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {bookingDetails.time}
+                        </div>
                       </div>
                     </div>
                     {bookingDetails.flightNumber && (
                       <div className="flex items-center space-x-3">
                         <PlaneIcon className="w-5 h-5 text-ocean" />
                         <div>
-                          <div className="text-sm font-medium text-gray-900">Vuelo</div>
-                          <div className="text-sm text-gray-600">{bookingDetails.flightNumber}</div>
+                          <div className="text-sm font-medium text-gray-900">
+                            Vuelo
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {bookingDetails.flightNumber}
+                          </div>
                         </div>
                       </div>
                     )}
@@ -304,18 +333,26 @@ export default function BookingConfirmation() {
                 <div className="grid grid-cols-3 gap-4 pt-4 border-t">
                   <div className="text-center">
                     <UsersIcon className="w-6 h-6 text-ocean mx-auto mb-1" />
-                    <div className="text-sm font-medium">{bookingDetails.passengers} Adultos</div>
+                    <div className="text-sm font-medium">
+                      {bookingDetails.passengers} Adultos
+                    </div>
                     {bookingDetails.children > 0 && (
-                      <div className="text-xs text-gray-500">{bookingDetails.children} Niños</div>
+                      <div className="text-xs text-gray-500">
+                        {bookingDetails.children} Niños
+                      </div>
                     )}
                   </div>
                   <div className="text-center">
                     <LuggageIcon className="w-6 h-6 text-ocean mx-auto mb-1" />
-                    <div className="text-sm font-medium">{bookingDetails.luggage} Maletas</div>
+                    <div className="text-sm font-medium">
+                      {bookingDetails.luggage} Maletas
+                    </div>
                   </div>
                   <div className="text-center">
                     <CarIcon className="w-6 h-6 text-ocean mx-auto mb-1" />
-                    <div className="text-sm font-medium">{bookingDetails.vehicleType}</div>
+                    <div className="text-sm font-medium">
+                      {bookingDetails.vehicleType}
+                    </div>
                   </div>
                 </div>
 
@@ -328,7 +365,10 @@ export default function BookingConfirmation() {
                     </h4>
                     <div className="space-y-1">
                       {bookingDetails.childSeats.map((seat, index) => (
-                        <div key={index} className="flex justify-between items-center text-sm">
+                        <div
+                          key={index}
+                          className="flex justify-between items-center text-sm"
+                        >
                           <span className="text-gray-600">{seat.type}</span>
                           <span className="font-medium">+���{seat.price}</span>
                         </div>
@@ -351,16 +391,23 @@ export default function BookingConfirmation() {
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-ocean-light to-coral-light rounded-full flex items-center justify-center">
                     <span className="text-lg font-bold text-ocean">
-                      {bookingDetails.driverName.split(' ').map(n => n[0]).join('')}
+                      {bookingDetails.driverName
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-navy">{bookingDetails.driverName}</h3>
+                    <h3 className="text-lg font-semibold text-navy">
+                      {bookingDetails.driverName}
+                    </h3>
                     <div className="flex items-center space-x-1 text-sm text-gray-600">
                       <StarIcon className="w-4 h-4 text-yellow-500 fill-current" />
                       <span>4.9 • 234 viajes</span>
                     </div>
-                    <div className="text-sm text-gray-600">Matrícula: {bookingDetails.vehiclePlate}</div>
+                    <div className="text-sm text-gray-600">
+                      Matrícula: {bookingDetails.vehiclePlate}
+                    </div>
                   </div>
                 </div>
 
@@ -385,8 +432,9 @@ export default function BookingConfirmation() {
                   <div className="flex items-start space-x-2">
                     <div className="text-ocean">💡</div>
                     <div className="text-sm text-gray-700">
-                      <strong>Consejo:</strong> Tu conductor te contactará 30 minutos antes 
-                      de la hora de recogida para confirmar la ubicación exacta.
+                      <strong>Consejo:</strong> Tu conductor te contactará 30
+                      minutos antes de la hora de recogida para confirmar la
+                      ubicación exacta.
                     </div>
                   </div>
                 </div>
@@ -407,7 +455,14 @@ export default function BookingConfirmation() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Traslado base</span>
-                  <span>€{bookingDetails.totalPrice - bookingDetails.childSeats.reduce((sum, seat) => sum + seat.price, 0)}</span>
+                  <span>
+                    €
+                    {bookingDetails.totalPrice -
+                      bookingDetails.childSeats.reduce(
+                        (sum, seat) => sum + seat.price,
+                        0,
+                      )}
+                  </span>
                 </div>
                 {bookingDetails.childSeats.map((seat, index) => (
                   <div key={index} className="flex justify-between text-sm">
@@ -418,7 +473,9 @@ export default function BookingConfirmation() {
                 <div className="border-t pt-3">
                   <div className="flex justify-between font-semibold">
                     <span>Total Pagado</span>
-                    <span className="text-ocean">€{bookingDetails.totalPrice}</span>
+                    <span className="text-ocean">
+                      €{bookingDetails.totalPrice}
+                    </span>
                   </div>
                 </div>
                 <div className="text-xs text-gray-500 text-center">
@@ -445,7 +502,11 @@ export default function BookingConfirmation() {
                   <DownloadIcon className="w-4 h-4 mr-2" />
                   Descargar PDF
                 </Button>
-                <Button variant="outline" className="w-full justify-start" onClick={() => setShowVoucher((s) => !s)}>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  onClick={() => setShowVoucher((s) => !s)}
+                >
                   <Badge className="mr-2">Voucher</Badge>
                   Mostrar Voucher
                 </Button>
@@ -464,18 +525,35 @@ export default function BookingConfirmation() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-center space-y-3">
-                    <div className="text-sm text-gray-600">Código para mostrar al conductor</div>
-                    <div className="text-2xl font-mono font-bold tracking-wider bg-gray-100 p-3 rounded-md">{voucherCode}</div>
+                    <div className="text-sm text-gray-600">
+                      Código para mostrar al conductor
+                    </div>
+                    <div className="text-2xl font-mono font-bold tracking-wider bg-gray-100 p-3 rounded-md">
+                      {voucherCode}
+                    </div>
                     <div className="mx-auto w-full max-w-xs">
                       <div className="bg-white p-2 rounded-md border">
-                        <svg width="100%" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" dangerouslySetInnerHTML={{__html: Array.from({length: 30}).map((_,i) => {
-                          const x = 4 + i*6;
-                          const h = 20 + ((i*7) % 30);
-                          return (`<rect x="${x}" y="${30 - h/2}" width="3" height="${h}" fill="#000"/>`);
-                        }).join('') }} />
+                        <svg
+                          width="100%"
+                          height="60"
+                          viewBox="0 0 200 60"
+                          xmlns="http://www.w3.org/2000/svg"
+                          dangerouslySetInnerHTML={{
+                            __html: Array.from({ length: 30 })
+                              .map((_, i) => {
+                                const x = 4 + i * 6;
+                                const h = 20 + ((i * 7) % 30);
+                                return `<rect x="${x}" y="${30 - h / 2}" width="3" height="${h}" fill="#000"/>`;
+                              })
+                              .join(""),
+                          }}
+                        />
                       </div>
                     </div>
-                    <div className="text-xs text-gray-500">El conductor solicitará este código antes de comenzar el viaje.</div>
+                    <div className="text-xs text-gray-500">
+                      El conductor solicitará este código antes de comenzar el
+                      viaje.
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -492,21 +570,27 @@ export default function BookingConfirmation() {
                     <div className="w-2 h-2 bg-ocean rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium">Confirmación automática</div>
-                      <div className="text-gray-600">Recibirás un SMS y email con los detalles</div>
+                      <div className="text-gray-600">
+                        Recibirás un SMS y email con los detalles
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-2">
                     <div className="w-2 h-2 bg-gray-300 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium">24h antes del viaje</div>
-                      <div className="text-gray-600">Te enviaremos un recordatorio</div>
+                      <div className="text-gray-600">
+                        Te enviaremos un recordatorio
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-start space-x-2">
                     <div className="w-2 h-2 bg-gray-300 rounded-full mt-2"></div>
                     <div>
                       <div className="font-medium">30 min antes</div>
-                      <div className="text-gray-600">Tu conductor te contactará</div>
+                      <div className="text-gray-600">
+                        Tu conductor te contactará
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -532,7 +616,7 @@ export default function BookingConfirmation() {
               </Button>
             </Link>
           </div>
-          
+
           <p className="text-sm text-gray-500">
             ¿Necesitas ayuda? Contacta nuestro soporte 24/7 en{" "}
             <a href="tel:+34952123456" className="text-ocean hover:underline">

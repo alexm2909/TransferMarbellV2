@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPinIcon, ClockIcon, RouteIcon, NavigationIcon } from "lucide-react";
-import { loadGoogleMaps, isGoogleMapsLoaded, getGoogleMapsError, hasGoogleMapsError } from "@/lib/googleMapsLoader";
+import {
+  loadGoogleMaps,
+  isGoogleMapsLoaded,
+  getGoogleMapsError,
+  hasGoogleMapsError,
+} from "@/lib/googleMapsLoader";
 
 interface RouteMapProps {
   origin: string;
@@ -10,7 +15,11 @@ interface RouteMapProps {
   className?: string;
 }
 
-export default function RouteMap({ origin, destination, className = "" }: RouteMapProps) {
+export default function RouteMap({
+  origin,
+  destination,
+  className = "",
+}: RouteMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<any>(null);
   const [directionsService, setDirectionsService] = useState<any>(null);
@@ -26,7 +35,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
   // Load Google Maps script
   useEffect(() => {
     if (hasGoogleMapsError()) {
-      setError(getGoogleMapsError() || 'Error with Google Maps configuration');
+      setError(getGoogleMapsError() || "Error with Google Maps configuration");
       setIsLoading(false);
       return;
     }
@@ -36,20 +45,26 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       return;
     }
 
-    loadGoogleMaps(['places', 'geometry'])
+    loadGoogleMaps(["places", "geometry"])
       .then(() => {
         initializeMap();
       })
       .catch((error) => {
-        console.error('Failed to load Google Maps:', error);
-        setError(error.message || 'Failed to load map');
+        console.error("Failed to load Google Maps:", error);
+        setError(error.message || "Failed to load map");
         setIsLoading(false);
       });
   }, []);
 
   // Update route when origin or destination changes
   useEffect(() => {
-    if (map && directionsService && directionsRenderer && origin && destination) {
+    if (
+      map &&
+      directionsService &&
+      directionsRenderer &&
+      origin &&
+      destination
+    ) {
       // Add a small delay to ensure everything is properly initialized
       const timer = setTimeout(() => {
         calculateAndDisplayRoute();
@@ -108,11 +123,19 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         },
         {
           elementType: "labels.text.stroke",
-          stylers: [{ visibility: "on" }, { color: "#ffffff" }, { lightness: 16 }],
+          stylers: [
+            { visibility: "on" },
+            { color: "#ffffff" },
+            { lightness: 16 },
+          ],
         },
         {
           elementType: "labels.text.fill",
-          stylers: [{ saturation: 36 }, { color: "#333333" }, { lightness: 40 }],
+          stylers: [
+            { saturation: 36 },
+            { color: "#333333" },
+            { lightness: 40 },
+          ],
         },
         {
           elementType: "labels.icon",
@@ -142,17 +165,19 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
       },
     });
 
-    const directionsServiceInstance = new window.google.maps.DirectionsService();
-    const directionsRendererInstance = new window.google.maps.DirectionsRenderer({
-      suppressMarkers: true, // We'll use custom markers instead
-      draggable: false,
-      polylineOptions: {
-        strokeColor: "#006d77", // Ocean color for route line
-        strokeWeight: 6,
-        strokeOpacity: 0.8,
-        zIndex: 500,
-      },
-    });
+    const directionsServiceInstance =
+      new window.google.maps.DirectionsService();
+    const directionsRendererInstance =
+      new window.google.maps.DirectionsRenderer({
+        suppressMarkers: true, // We'll use custom markers instead
+        draggable: false,
+        polylineOptions: {
+          strokeColor: "#006d77", // Ocean color for route line
+          strokeWeight: 6,
+          strokeOpacity: 0.8,
+          zIndex: 500,
+        },
+      });
 
     directionsRendererInstance.setMap(mapInstance);
 
@@ -169,7 +194,10 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     }
   };
 
-  const calculateRoute = (directionsServiceToUse?: any, directionsRendererToUse?: any) => {
+  const calculateRoute = (
+    directionsServiceToUse?: any,
+    directionsRendererToUse?: any,
+  ) => {
     const serviceToUse = directionsServiceToUse || directionsService;
     const rendererToUse = directionsRendererToUse || directionsRenderer;
 
@@ -178,7 +206,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     setIsLoading(true);
     setError(null);
 
-    console.log('Calculating route from', origin, 'to', destination);
+    console.log("Calculating route from", origin, "to", destination);
 
     serviceToUse.route(
       {
@@ -190,11 +218,11 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         avoidTolls: false,
       },
       (response: any, status: any) => {
-        console.log('Route calculation result:', status, response);
+        console.log("Route calculation result:", status, response);
         if (status === "OK" && response.routes && response.routes.length > 0) {
           try {
             rendererToUse.setDirections(response);
-            console.log('Route set successfully');
+            console.log("Route set successfully");
 
             const route = response.routes[0];
             const leg = route.legs[0];
@@ -205,7 +233,9 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
               map: map,
               title: "Origen",
               icon: {
-                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                url:
+                  "data:image/svg+xml;charset=UTF-8," +
+                  encodeURIComponent(`
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
                     <path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8z" fill="#10B981"/>
                     <circle cx="12" cy="8" r="3" fill="white"/>
@@ -222,7 +252,9 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
               map: map,
               title: "Destino",
               icon: {
-                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                url:
+                  "data:image/svg+xml;charset=UTF-8," +
+                  encodeURIComponent(`
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32">
                     <path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8z" fill="#EF4444"/>
                     <circle cx="12" cy="8" r="3" fill="white"/>
@@ -235,8 +267,10 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
             });
 
             // Calculate estimated cost based on distance (€1.5 per km + base €15)
-            const distanceKm = parseFloat(leg.distance.text.replace(/[^\d.]/g, ''));
-            const estimatedCost = Math.round(15 + (distanceKm * 1.5));
+            const distanceKm = parseFloat(
+              leg.distance.text.replace(/[^\d.]/g, ""),
+            );
+            const estimatedCost = Math.round(15 + distanceKm * 1.5);
 
             setRouteInfo({
               distance: leg.distance.text,
@@ -245,16 +279,16 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
             });
             setIsLoading(false);
           } catch (error) {
-            console.error('Error setting directions:', error);
+            console.error("Error setting directions:", error);
             setError("Error al mostrar la ruta.");
             setIsLoading(false);
           }
         } else {
-          console.error('No route found or invalid status:', status);
+          console.error("No route found or invalid status:", status);
           setError("No se pudo calcular la ruta. Verifica las direcciones.");
           setIsLoading(false);
         }
-      }
+      },
     );
   };
 
@@ -279,21 +313,27 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
               <div className="flex items-center justify-center mb-1">
                 <NavigationIcon className="w-4 h-4 text-ocean" />
               </div>
-              <div className="text-sm font-bold text-ocean">{routeInfo.distance}</div>
+              <div className="text-sm font-bold text-ocean">
+                {routeInfo.distance}
+              </div>
               <div className="text-xs text-gray-600">Distancia</div>
             </div>
             <div className="text-center p-3 bg-coral-light/20 rounded-lg">
               <div className="flex items-center justify-center mb-1">
                 <ClockIcon className="w-4 h-4 text-coral" />
               </div>
-              <div className="text-sm font-bold text-coral">{routeInfo.duration}</div>
+              <div className="text-sm font-bold text-coral">
+                {routeInfo.duration}
+              </div>
               <div className="text-xs text-gray-600">Duración</div>
             </div>
             <div className="text-center p-3 bg-success/20 rounded-lg">
               <div className="flex items-center justify-center mb-1">
                 <span className="text-sm">💰</span>
               </div>
-              <div className="text-sm font-bold text-success">{routeInfo.estimatedCost}</div>
+              <div className="text-sm font-bold text-success">
+                {routeInfo.estimatedCost}
+              </div>
               <div className="text-xs text-gray-600">Estimado</div>
             </div>
           </div>
@@ -306,19 +346,26 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               <div className="flex-1">
                 <div className="text-sm font-medium text-gray-900">Origen</div>
-                <div className="text-xs text-gray-600 truncate">{origin || '—'}</div>
+                <div className="text-xs text-gray-600 truncate">
+                  {origin || "—"}
+                </div>
               </div>
             </div>
             <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg border border-red-200">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               <div className="flex-1">
                 <div className="text-sm font-medium text-gray-900">Destino</div>
-                <div className="text-xs text-gray-600 truncate">{destination || '—'}</div>
+                <div className="text-xs text-gray-600 truncate">
+                  {destination || "—"}
+                </div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="text-center text-gray-500 p-3 mb-2">El mapa está centrado en Málaga. Introduce origen/destino para ver la ruta.</div>
+          <div className="text-center text-gray-500 p-3 mb-2">
+            El mapa está centrado en Málaga. Introduce origen/destino para ver
+            la ruta.
+          </div>
         )}
 
         {/* Map Container (always present) */}
