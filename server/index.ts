@@ -40,5 +40,10 @@ export function createServer() {
     return handleGetVehicles(req, res);
   });
 
+  app.get("/api/bookings/lookup", async (req, res) => {
+    const { handleLookupBooking } = await import("./routes/bookings");
+    return handleLookupBooking(req, res);
+  });
+
   return app;
 }
