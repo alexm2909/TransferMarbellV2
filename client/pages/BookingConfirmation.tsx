@@ -48,6 +48,8 @@ export default function BookingConfirmation() {
   const [searchParams] = useSearchParams();
   const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [voucherCode, setVoucherCode] = useState<string | null>(null);
+  const [showVoucher, setShowVoucher] = useState(false);
 
   useEffect(() => {
     // Try to load pending booking from localStorage first
