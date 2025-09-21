@@ -120,7 +120,7 @@ export default function BookingConfirmation() {
     // If no pending booking available, show simulated booking
     const bookingIdSim = searchParams.get("id") || ("TM" + Date.now().toString().slice(-6));
     setTimeout(() => {
-      setBookingDetails({
+      const simulated = {
         bookingId: bookingIdSim,
         origin: "Málaga Airport (AGP)",
         destination: "Hotel Majestic - Paseo de Sancha, Málaga",
@@ -138,7 +138,10 @@ export default function BookingConfirmation() {
         childSeats: [
           { type: "Grupo I (1-4 años)", price: 12 }
         ]
-      });
+      };
+      setBookingDetails(simulated);
+      // Generate voucher code
+      setVoucherCode(`VCH-${simulated.bookingId.slice(-6)}-${Math.floor(1000 + Math.random()*9000)}`);
       setIsLoading(false);
     }, 500);
   }, [navigate, searchParams]);
