@@ -541,12 +541,10 @@ export default function BookingForm() {
                               DE: "+49",
                             };
                             const dial = dialMap[cc] || "";
-                            if (!phone) setPhone(dial + (dial ? " " : ""));
-                            else if (phone.startsWith("+")) {
-                              // replace existing prefix
-                              const rest = phone.replace(/^\+\d+\s?/, "");
-                              setPhone(dial + (dial ? " " : "") + rest);
-                            }
+                            // When changing country, keep local part but recompute full phone
+                            const local = localPhone || "";
+                            const full = `${dial}${dial ? ' ' : ''}${local}`.trim();
+                            setPhone(full);
                           }}
                           className="h-10 rounded-md border p-2 bg-white"
                         >
