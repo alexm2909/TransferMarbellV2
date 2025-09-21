@@ -32,6 +32,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { parsePhoneNumberFromString, AsYouType } from "libphonenumber-js";
+import InputMask from 'react-input-mask';
 
 function generateReservationTag() {
   const letters = Array.from({ length: 3 })
