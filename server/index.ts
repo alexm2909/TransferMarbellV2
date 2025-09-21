@@ -18,18 +18,20 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
   // Send confirmation email (used after booking creation)
   app.post("/api/send-confirmation", async (req, res) => {
-    const { handleSendConfirmation } = await import("./routes/sendConfirmation");
+    const { handleSendConfirmation } = await import(
+      "./routes/sendConfirmation"
+    );
     return handleSendConfirmation(req, res);
   });
 
   // Bookings API
-  app.post('/api/bookings', async (req, res) => {
-    const { handleCreateBooking } = await import('./routes/bookings');
+  app.post("/api/bookings", async (req, res) => {
+    const { handleCreateBooking } = await import("./routes/bookings");
     return handleCreateBooking(req, res);
   });
 
-  app.get('/api/vehicles', async (req, res) => {
-    const { handleGetVehicles } = await import('./routes/bookings');
+  app.get("/api/vehicles", async (req, res) => {
+    const { handleGetVehicles } = await import("./routes/bookings");
     return handleGetVehicles(req, res);
   });
 

@@ -56,11 +56,11 @@ export default function Index() {
 
     // Send to server to create a pre-booking record
     try {
-      const resp = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const resp = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          status: 'pending',
+          status: "pending",
           clientEmail: (preBookingData as any).email || null,
           origin: { address: preBookingData.origin },
           destination: { address: preBookingData.destination },
@@ -73,14 +73,15 @@ export default function Index() {
       const json = await resp.json();
       if (json && json.booking) {
         // save reservation tag to localStorage for later pages
-        const tag = json.booking.reservation_tag || json.booking.reservationTag || '';
-        localStorage.setItem('reservationTag', tag);
+        const tag =
+          json.booking.reservation_tag || json.booking.reservationTag || "";
+        localStorage.setItem("reservationTag", tag);
 
         // Try send confirmation email (pre-booking)
         try {
-          await fetch('/api/send-confirmation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+          await fetch("/api/send-confirmation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               to: (preBookingData as any).email || null,
               reservationTag: tag,
@@ -90,15 +91,15 @@ export default function Index() {
             }),
           });
         } catch (err) {
-          console.warn('Failed to send pre-booking confirmation email', err);
+          console.warn("Failed to send pre-booking confirmation email", err);
         }
       }
     } catch (err) {
-      console.error('Failed to create pre-booking on server', err);
+      console.error("Failed to create pre-booking on server", err);
     }
 
     // Navigate to booking page to continue
-    navigate('/book');
+    navigate("/book");
   };
 
   const isPreFormValid =
@@ -117,7 +118,9 @@ export default function Index() {
               <div className="w-8 h-8 bg-ocean rounded-lg flex items-center justify-center">
                 <CarIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-bold text-navy">Transfermarbell</span>
+              <span className="text-2xl font-bold text-navy">
+                Transfermarbell
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -150,7 +153,9 @@ export default function Index() {
               {/* Quick actions: view my reservation or book now */}
               <div className="flex items-center space-x-4">
                 <Link to="/mi-reserva">
-                  <Button variant="outline" className="border-ocean text-ocean">Mi reserva</Button>
+                  <Button variant="outline" className="border-ocean text-ocean">
+                    Mi reserva
+                  </Button>
                 </Link>
               </div>
             </div>
@@ -357,8 +362,12 @@ export default function Index() {
       <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-navy mb-4">{t("home.whyChoose")}</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">{t("home.whyChooseDesc")}</p>
+            <h2 className="text-3xl font-bold text-navy mb-4">
+              {t("home.whyChoose")}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {t("home.whyChooseDesc")}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -371,7 +380,9 @@ export default function Index() {
                   <div className="w-16 h-16 bg-ocean-light rounded-full flex items-center justify-center mx-auto mb-4">
                     <feature.icon className="w-8 h-8 text-ocean" />
                   </div>
-                  <h3 className="text-xl font-semibold text-navy mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold text-navy mb-2">
+                    {feature.title}
+                  </h3>
                   <p className="text-gray-600">{feature.desc}</p>
                 </CardContent>
               </Card>
@@ -386,8 +397,12 @@ export default function Index() {
           <div className="bg-ocean rounded-2xl p-8 lg:p-12 text-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4">{t("driver.title")}</h2>
-                <p className="text-lg mb-6 text-white/90">{t("driver.description")}</p>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+                  {t("driver.title")}
+                </h2>
+                <p className="text-lg mb-6 text-white/90">
+                  {t("driver.description")}
+                </p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
@@ -407,13 +422,26 @@ export default function Index() {
                   </li>
                 </ul>
                 <div className="space-y-4">
-                  <p className="text-white/80 text-sm">{t("home.readyToBookDesc")}</p>
+                  <p className="text-white/80 text-sm">
+                    {t("home.readyToBookDesc")}
+                  </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link to="/book">
-                      <Button size="lg" className="bg-white text-ocean hover:bg-gray-100 font-semibold px-6">Reservar Ahora</Button>
+                      <Button
+                        size="lg"
+                        className="bg-white text-ocean hover:bg-gray-100 font-semibold px-6"
+                      >
+                        Reservar Ahora
+                      </Button>
                     </Link>
                     <Link to="/mi-reserva">
-                      <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-ocean font-semibold px-6">Mi reserva</Button>
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="border-white text-white hover:bg-white hover:text-ocean font-semibold px-6"
+                      >
+                        Mi reserva
+                      </Button>
                     </Link>
                   </div>
                 </div>
@@ -431,8 +459,12 @@ export default function Index() {
       {/* Additional Info Section */}
       <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-navy mb-4">{t("home.readyToBook")}</h2>
-          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">{t("home.readyToBookDesc")}</p>
+          <h2 className="text-3xl font-bold text-navy mb-4">
+            {t("home.readyToBook")}
+          </h2>
+          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+            {t("home.readyToBookDesc")}
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
@@ -469,7 +501,9 @@ export default function Index() {
                 </div>
                 <span className="text-xl font-bold">Transfermarbell</span>
               </div>
-              <p className="text-gray-300">Premium private transfers across Costa del Sol</p>
+              <p className="text-gray-300">
+                Premium private transfers across Costa del Sol
+              </p>
             </div>
 
             <div>

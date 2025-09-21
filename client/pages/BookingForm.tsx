@@ -2,13 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import TimeSelector from "@/components/TimeSelector";
 import ChildrenAgeSelector from "@/components/ChildrenAgeSelector";
 import RouteMap from "@/components/RouteMap";
 import LuggageSizeSelector from "@/components/LuggageSizeSelector";
-import { ArrowLeftIcon, Users, Baby, LuggageIcon, Calendar, Car, Truck, Star, MapPin as MapPinIcon } from "lucide-react";
+import {
+  ArrowLeftIcon,
+  Users,
+  Baby,
+  LuggageIcon,
+  Calendar,
+  Car,
+  Truck,
+  Star,
+  MapPin as MapPinIcon,
+} from "lucide-react";
 import { useBookings } from "@/hooks/useDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -50,20 +66,74 @@ export default function BookingForm() {
 
   // Vehicle definitions with numeric capacities
   const vehicleOptions = [
-    { key: 'economy', name: 'Economy', desc: 'Sedan cómodo, 4 pasajeros', seatsCapacity: 4, luggageCapacity: 2, bullets: ['Air conditioning','Professional driver','Free Wi-Fi'], price: '€25' },
-    { key: 'comfort', name: 'Comfort', desc: 'Premium comfort with extra space', seatsCapacity: 4, luggageCapacity: 3, bullets: ['Leather seats','Extra legroom','Phone charger','Water bottles'], price: '€35' },
-    { key: 'premium', name: 'Premium', desc: 'Luxury vehicles for special occasions', seatsCapacity: 4, luggageCapacity: 3, bullets: ['Luxury sedan','Premium amenities','Concierge service'], price: '€50' },
-    { key: 'van', name: 'Van', desc: 'Spacious van for groups and families', seatsCapacity: 8, luggageCapacity: 8, bullets: ['Large trunk space','Group seating','Extra luggage capacity'], price: '€65' },
-    { key: 'luxury', name: 'Luxury', desc: 'Ultimate luxury experience', seatsCapacity: 4, luggageCapacity: 2, bullets: ['Premium luxury car','VIP treatment','Red carpet service'], price: '€80' },
+    {
+      key: "economy",
+      name: "Economy",
+      desc: "Sedan cómodo, 4 pasajeros",
+      seatsCapacity: 4,
+      luggageCapacity: 2,
+      bullets: ["Air conditioning", "Professional driver", "Free Wi-Fi"],
+      price: "€25",
+    },
+    {
+      key: "comfort",
+      name: "Comfort",
+      desc: "Premium comfort with extra space",
+      seatsCapacity: 4,
+      luggageCapacity: 3,
+      bullets: [
+        "Leather seats",
+        "Extra legroom",
+        "Phone charger",
+        "Water bottles",
+      ],
+      price: "€35",
+    },
+    {
+      key: "premium",
+      name: "Premium",
+      desc: "Luxury vehicles for special occasions",
+      seatsCapacity: 4,
+      luggageCapacity: 3,
+      bullets: ["Luxury sedan", "Premium amenities", "Concierge service"],
+      price: "€50",
+    },
+    {
+      key: "van",
+      name: "Van",
+      desc: "Spacious van for groups and families",
+      seatsCapacity: 8,
+      luggageCapacity: 8,
+      bullets: ["Large trunk space", "Group seating", "Extra luggage capacity"],
+      price: "€65",
+    },
+    {
+      key: "luxury",
+      name: "Luxury",
+      desc: "Ultimate luxury experience",
+      seatsCapacity: 4,
+      luggageCapacity: 2,
+      bullets: ["Premium luxury car", "VIP treatment", "Red carpet service"],
+      price: "€80",
+    },
   ];
 
-  const largestSeats = Math.max(...vehicleOptions.map(v => v.seatsCapacity));
-  const largestLuggage = Math.max(...vehicleOptions.map(v => v.luggageCapacity));
+  const largestSeats = Math.max(...vehicleOptions.map((v) => v.seatsCapacity));
+  const largestLuggage = Math.max(
+    ...vehicleOptions.map((v) => v.luggageCapacity),
+  );
 
-  const totalPeople = parseInt(passengers || '0', 10) + childrenCount;
-  const totalLuggageCount = luggageDetails && luggageDetails.length > 0 ? luggageDetails.length : (parseInt(luggage || '0', 10) || 0);
+  const totalPeople = parseInt(passengers || "0", 10) + childrenCount;
+  const totalLuggageCount =
+    luggageDetails && luggageDetails.length > 0
+      ? luggageDetails.length
+      : parseInt(luggage || "0", 10) || 0;
 
-  const requiredCars = Math.max(1, Math.ceil(totalPeople / largestSeats), Math.ceil(totalLuggageCount / largestLuggage));
+  const requiredCars = Math.max(
+    1,
+    Math.ceil(totalPeople / largestSeats),
+    Math.ceil(totalLuggageCount / largestLuggage),
+  );
 
   useEffect(() => {
     const pre = localStorage.getItem("preBookingData");
@@ -90,18 +160,24 @@ export default function BookingForm() {
     e.preventDefault();
 
     if (!origin || !destination || !date || !time || !vehicleType || !email) {
-      alert("Por favor completa todos los campos requeridos, incluyendo el correo electrónico");
+      alert(
+        "Por favor completa todos los campos requeridos, incluyendo el correo electrónico",
+      );
       return;
     }
 
     if (returnTrip) {
       if (!returnDate) {
-        alert('Por favor selecciona la fecha de regreso para el viaje de vuelta');
+        alert(
+          "Por favor selecciona la fecha de regreso para el viaje de vuelta",
+        );
         return;
       }
       if (returnDate < date) {
-        setDateError('La fecha de regreso no puede ser anterior a la fecha de ida');
-        alert('La fecha de regreso no puede ser anterior a la fecha de ida');
+        setDateError(
+          "La fecha de regreso no puede ser anterior a la fecha de ida",
+        );
+        alert("La fecha de regreso no puede ser anterior a la fecha de ida");
         return;
       }
     }
@@ -112,7 +188,7 @@ export default function BookingForm() {
     const luggageCounts = { small: 0, medium: 0, large: 0, xlarge: 0 };
     if (luggageDetails && luggageDetails.length > 0) {
       luggageDetails.forEach((it: any) => {
-        const size = it.size || 'medium';
+        const size = it.size || "medium";
         luggageCounts[size] = (luggageCounts[size] || 0) + 1;
       });
     } else {
@@ -141,7 +217,10 @@ export default function BookingForm() {
     });
 
     // Store pendingBooking for confirmation page
-    localStorage.setItem("pendingBooking", JSON.stringify({ id: newBooking.id, reservationTag, email }));
+    localStorage.setItem(
+      "pendingBooking",
+      JSON.stringify({ id: newBooking.id, reservationTag, email }),
+    );
 
     // Send confirmation email via server function
     try {
@@ -170,7 +249,10 @@ export default function BookingForm() {
           {/* Left: form and content (span 2) */}
           <div className="md:col-span-2">
             <div className="mb-4">
-              <Link to="/" className="inline-flex items-center text-ocean hover:text-coral">
+              <Link
+                to="/"
+                className="inline-flex items-center text-ocean hover:text-coral"
+              >
                 <ArrowLeftIcon className="w-4 h-4 mr-2" /> Volver
               </Link>
               <h1 className="text-2xl font-bold mt-4">Reservar Traslado</h1>
@@ -180,17 +262,28 @@ export default function BookingForm() {
               {/* Origin / Destination (kept simple) */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><MapPinIcon className="w-5 h-5 text-ocean" /> Origen y Destino</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPinIcon className="w-5 h-5 text-ocean" /> Origen y
+                    Destino
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div>
                       <Label>Origen</Label>
-                      <AddressAutocomplete value={origin} onChange={setOrigin} placeholder="Aeropuerto, hotel, dirección..." />
+                      <AddressAutocomplete
+                        value={origin}
+                        onChange={setOrigin}
+                        placeholder="Aeropuerto, hotel, dirección..."
+                      />
                     </div>
                     <div>
                       <Label>Destino</Label>
-                      <AddressAutocomplete value={destination} onChange={setDestination} placeholder="Aeropuerto, hotel, dirección..." />
+                      <AddressAutocomplete
+                        value={destination}
+                        onChange={setDestination}
+                        placeholder="Aeropuerto, hotel, dirección..."
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -199,13 +292,36 @@ export default function BookingForm() {
               {/* Trip details card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Calendar className="w-5 h-5 text-ocean" /> Detalles del viaje</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-ocean" /> Detalles del
+                    viaje
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label>Fecha</Label>
-                      <Input className="h-12" type="date" value={date} onChange={(e) => { setDate(e.target.value); if (returnTrip && returnDate && e.target.value && returnDate < e.target.value) { setDateError('La fecha de regreso no puede ser anterior a la fecha de ida'); } else { setDateError(null); } }} required />
+                      <Input
+                        className="h-12"
+                        type="date"
+                        value={date}
+                        onChange={(e) => {
+                          setDate(e.target.value);
+                          if (
+                            returnTrip &&
+                            returnDate &&
+                            e.target.value &&
+                            returnDate < e.target.value
+                          ) {
+                            setDateError(
+                              "La fecha de regreso no puede ser anterior a la fecha de ida",
+                            );
+                          } else {
+                            setDateError(null);
+                          }
+                        }}
+                        required
+                      />
                     </div>
                     <div>
                       <Label>Hora</Label>
@@ -215,7 +331,12 @@ export default function BookingForm() {
 
                   <div className="mt-4 border-t pt-4">
                     <label className="inline-flex items-center gap-2">
-                      <input type="checkbox" checked={returnTrip} onChange={(e) => setReturnTrip(e.target.checked)} className="rounded border-input text-ocean focus:ring-0" />
+                      <input
+                        type="checkbox"
+                        checked={returnTrip}
+                        onChange={(e) => setReturnTrip(e.target.checked)}
+                        className="rounded border-input text-ocean focus:ring-0"
+                      />
                       <span className="text-sm">Ida y vuelta</span>
                     </label>
 
@@ -223,12 +344,36 @@ export default function BookingForm() {
                       <div className="mt-3 grid grid-cols-2 gap-4">
                         <div>
                           <Label>Fecha de regreso</Label>
-                          <Input className="h-12" type="date" value={returnDate} min={date || undefined} onChange={(e) => { setReturnDate(e.target.value); if (date && e.target.value && e.target.value < date) setDateError('La fecha de regreso no puede ser anterior a la fecha de ida'); else setDateError(null); }} />
-                          {dateError && <div className="text-xs text-red-600 mt-1">{dateError}</div>}
+                          <Input
+                            className="h-12"
+                            type="date"
+                            value={returnDate}
+                            min={date || undefined}
+                            onChange={(e) => {
+                              setReturnDate(e.target.value);
+                              if (
+                                date &&
+                                e.target.value &&
+                                e.target.value < date
+                              )
+                                setDateError(
+                                  "La fecha de regreso no puede ser anterior a la fecha de ida",
+                                );
+                              else setDateError(null);
+                            }}
+                          />
+                          {dateError && (
+                            <div className="text-xs text-red-600 mt-1">
+                              {dateError}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <Label>Hora de regreso</Label>
-                          <TimeSelector value={returnTime} onChange={setReturnTime} />
+                          <TimeSelector
+                            value={returnTime}
+                            onChange={setReturnTime}
+                          />
                         </div>
                       </div>
                     )}
@@ -239,15 +384,23 @@ export default function BookingForm() {
               {/* Passengers & Luggage */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Users className="w-5 h-5 text-ocean" /> Passengers & Luggage</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-ocean" /> Passengers &
+                    Luggage
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-4 gap-4 mb-4">
                     <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
-                      <div className="p-2 bg-ocean-light/10 rounded-full inline-flex"><Users className="w-5 h-5 text-ocean" /></div>
+                      <div className="p-2 bg-ocean-light/10 rounded-full inline-flex">
+                        <Users className="w-5 h-5 text-ocean" />
+                      </div>
                       <div className="text-sm text-gray-500">Adultos</div>
                       <div className="w-full mt-2">
-                        <Select value={passengers} onValueChange={(v) => setPassengers(v)}>
+                        <Select
+                          value={passengers}
+                          onValueChange={(v) => setPassengers(v)}
+                        >
                           <SelectTrigger className="w-full">
                             <SelectValue />
                           </SelectTrigger>
@@ -263,17 +416,24 @@ export default function BookingForm() {
                     </div>
 
                     <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
-                      <div className="p-2 bg-pink-50 rounded-full inline-flex"><Baby className="w-5 h-5 text-pink-600" /></div>
+                      <div className="p-2 bg-pink-50 rounded-full inline-flex">
+                        <Baby className="w-5 h-5 text-pink-600" />
+                      </div>
                       <div className="text-sm text-gray-500">Niños</div>
                       <div className="w-full mt-2">
-                        <Select value={String(childrenCount)} onValueChange={(v) => setChildrenCount(parseInt(v, 10))}>
+                        <Select
+                          value={String(childrenCount)}
+                          onValueChange={(v) =>
+                            setChildrenCount(parseInt(v, 10))
+                          }
+                        >
                           <SelectTrigger className="w-full">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
                             {[0, 1, 2, 3, 4].map((n) => (
                               <SelectItem key={n} value={String(n)}>
-                                {n} niñ{n === 1 ? 'o' : 'os'}
+                                {n} niñ{n === 1 ? "o" : "os"}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -282,17 +442,22 @@ export default function BookingForm() {
                     </div>
 
                     <div className="p-4 rounded-lg border border-gray-200 text-center flex flex-col items-center gap-2">
-                      <div className="p-2 bg-coral-50 rounded-full inline-flex"><LuggageIcon className="w-5 h-5 text-coral" /></div>
+                      <div className="p-2 bg-coral-50 rounded-full inline-flex">
+                        <LuggageIcon className="w-5 h-5 text-coral" />
+                      </div>
                       <div className="text-sm text-gray-500">Maletas</div>
                       <div className="w-full mt-2">
-                        <Select value={luggage} onValueChange={(v) => setLuggage(v)}>
+                        <Select
+                          value={luggage}
+                          onValueChange={(v) => setLuggage(v)}
+                        >
                           <SelectTrigger className="w-full">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
                             {[0, 1, 2, 3, 4, 5].map((n) => (
                               <SelectItem key={n} value={String(n)}>
-                                {n} maleta{n === 1 ? '' : 's'}
+                                {n} maleta{n === 1 ? "" : "s"}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -301,22 +466,34 @@ export default function BookingForm() {
                     </div>
 
                     <div className="p-4 rounded-lg border border-gray-200 text-center bg-gray-50 flex flex-col items-center gap-2">
-                      <div className="p-2 bg-blue-50 rounded-full inline-flex"><Car className="w-5 h-5 text-blue-600" /></div>
-                      <div className="text-sm text-gray-500">Coches Requeridos</div>
-                      <div className="mt-2 text-2xl font-bold">{requiredCars}</div>
+                      <div className="p-2 bg-blue-50 rounded-full inline-flex">
+                        <Car className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        Coches Requeridos
+                      </div>
+                      <div className="mt-2 text-2xl font-bold">
+                        {requiredCars}
+                      </div>
                       <div className="text-xs text-gray-500">coches</div>
                     </div>
                   </div>
 
                   {childrenCount > 0 && (
                     <div className="mb-4">
-                      <ChildrenAgeSelector numberOfChildren={childrenCount} onChildSeatsChange={(seats) => setChildSeats(seats)} />
+                      <ChildrenAgeSelector
+                        numberOfChildren={childrenCount}
+                        onChildSeatsChange={(seats) => setChildSeats(seats)}
+                      />
                     </div>
                   )}
 
                   {parseInt(luggage || "0", 10) > 0 && (
                     <div className="mb-3">
-                      <LuggageSizeSelector numberOfLuggage={parseInt(luggage || "0", 10)} onLuggageChange={(items) => setLuggageDetails(items)} />
+                      <LuggageSizeSelector
+                        numberOfLuggage={parseInt(luggage || "0", 10)}
+                        onLuggageChange={(items) => setLuggageDetails(items)}
+                      />
                     </div>
                   )}
                 </CardContent>
@@ -325,7 +502,9 @@ export default function BookingForm() {
               {/* Vehicle selection card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Car className="w-5 h-5 text-ocean" /> Selección de Vehículo</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Car className="w-5 h-5 text-ocean" /> Selección de Vehículo
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -335,29 +514,46 @@ export default function BookingForm() {
                         role="button"
                         tabIndex={0}
                         onClick={() => setVehicleType(opt.key)}
-                        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setVehicleType(opt.key)}
-                        className={`p-4 rounded-lg cursor-pointer border ${vehicleType === opt.key ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} transition-colors`}
+                        onKeyDown={(e) =>
+                          (e.key === "Enter" || e.key === " ") &&
+                          setVehicleType(opt.key)
+                        }
+                        className={`p-4 rounded-lg cursor-pointer border ${vehicleType === opt.key ? "border-ocean bg-ocean-light/5" : "border-gray-200"} transition-colors`}
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="p-2 bg-ocean-light/10 rounded-md inline-flex"><Truck className="w-6 h-6 text-ocean" /></div>
+                            <div className="p-2 bg-ocean-light/10 rounded-md inline-flex">
+                              <Truck className="w-6 h-6 text-ocean" />
+                            </div>
                             <div>
-                              <div className="font-semibold text-gray-900">{opt.name}</div>
-                              <div className="text-xs text-gray-600">{opt.desc}</div>
+                              <div className="font-semibold text-gray-900">
+                                {opt.name}
+                              </div>
+                              <div className="text-xs text-gray-600">
+                                {opt.desc}
+                              </div>
                             </div>
                           </div>
 
                           <div className="text-right">
                             <div className="inline-flex items-center gap-2">
-                              <span className="text-sm font-bold text-gray-900">{opt.price}</span>
-                              <span className="text-xs text-white px-2 py-1 rounded-full bg-gradient-to-r from-ocean to-coral">From</span>
+                              <span className="text-sm font-bold text-gray-900">
+                                {opt.price}
+                              </span>
+                              <span className="text-xs text-white px-2 py-1 rounded-full bg-gradient-to-r from-ocean to-coral">
+                                From
+                              </span>
                             </div>
                           </div>
                         </div>
 
                         <div className="mt-3 text-xs text-gray-600">
-                          <div className="mb-2">Capacidad: {opt.seatsCapacity} pax</div>
-                          <div className="mb-2">Maletas: {opt.luggageCapacity}</div>
+                          <div className="mb-2">
+                            Capacidad: {opt.seatsCapacity} pax
+                          </div>
+                          <div className="mb-2">
+                            Maletas: {opt.luggageCapacity}
+                          </div>
                           <ul className="list-disc ml-5 space-y-1">
                             {opt.bullets.map((b) => (
                               <li key={b}>{b}</li>
@@ -373,28 +569,48 @@ export default function BookingForm() {
               {/* Additional details card */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Star className="w-5 h-5 text-ocean" /> Detalles adicionales</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Star className="w-5 h-5 text-ocean" /> Detalles adicionales
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label>Número de vuelo (opcional)</Label>
-                      <Input value={flightNumber} onChange={(e) => setFlightNumber(e.target.value)} placeholder="Ej: VY1234" />
+                      <Input
+                        value={flightNumber}
+                        onChange={(e) => setFlightNumber(e.target.value)}
+                        placeholder="Ej: VY1234"
+                      />
                     </div>
                     <div>
                       <Label>Pago</Label>
-                      <RadioGroup value={paymentOption} onValueChange={(v) => setPaymentOption(v)} className="grid grid-cols-1 gap-2">
+                      <RadioGroup
+                        value={paymentOption}
+                        onValueChange={(v) => setPaymentOption(v)}
+                        className="grid grid-cols-1 gap-2"
+                      >
                         <div className="grid grid-cols-2 gap-2">
-                          <label className={`p-3 rounded-lg border ${paymentOption === 'full' ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} cursor-pointer`}>
+                          <label
+                            className={`p-3 rounded-lg border ${paymentOption === "full" ? "border-ocean bg-ocean-light/5" : "border-gray-200"} cursor-pointer`}
+                          >
                             <RadioGroupItem value="full" id="pay-full" />
                             <div className="font-medium">Pago completo</div>
-                            <div className="text-xs text-gray-500">Paga ahora el total</div>
+                            <div className="text-xs text-gray-500">
+                              Paga ahora el total
+                            </div>
                           </label>
 
-                          <label className={`p-3 rounded-lg border ${paymentOption === 'deposit' ? 'border-ocean bg-ocean-light/5' : 'border-gray-200'} cursor-pointer`}>
+                          <label
+                            className={`p-3 rounded-lg border ${paymentOption === "deposit" ? "border-ocean bg-ocean-light/5" : "border-gray-200"} cursor-pointer`}
+                          >
                             <RadioGroupItem value="deposit" id="pay-deposit" />
-                            <div className="font-medium">Reservar 20% (depósito)</div>
-                            <div className="text-xs text-gray-500">Paga solo el 20% ahora</div>
+                            <div className="font-medium">
+                              Reservar 20% (depósito)
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              Paga solo el 20% ahora
+                            </div>
                           </label>
                         </div>
                       </RadioGroup>
@@ -403,11 +619,20 @@ export default function BookingForm() {
 
                   <div className="mt-4">
                     <Label>Solicitudes especiales</Label>
-                    <Textarea value={specialRequests} onChange={(e) => setSpecialRequests(e.target.value)} placeholder="Indica si necesitas silla de ruedas, asistencia, etc." />
+                    <Textarea
+                      value={specialRequests}
+                      onChange={(e) => setSpecialRequests(e.target.value)}
+                      placeholder="Indica si necesitas silla de ruedas, asistencia, etc."
+                    />
                   </div>
 
                   <div className="mt-4">
-                    <Button type="submit" className="w-full bg-gradient-to-r from-ocean to-coral text-white">Completar Reserva</Button>
+                    <Button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-ocean to-coral text-white"
+                    >
+                      Completar Reserva
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -417,7 +642,11 @@ export default function BookingForm() {
           {/* Right: static route card */}
           <aside className="md:col-span-1">
             <div className="sticky top-20">
-              <RouteMap origin={origin} destination={destination} className="w-full" />
+              <RouteMap
+                origin={origin}
+                destination={destination}
+                className="w-full"
+              />
             </div>
           </aside>
         </div>

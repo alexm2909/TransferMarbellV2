@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Pool } from 'pg';
+import { Pool } from "pg";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -54,7 +54,9 @@ async function ensureSchema() {
     `);
 
     // ensure some vehicle seeds
-    const { rows } = await client.query('SELECT COUNT(*)::int AS c FROM vehicles');
+    const { rows } = await client.query(
+      "SELECT COUNT(*)::int AS c FROM vehicles",
+    );
     if (rows[0].c === 0) {
       await client.query(`
         INSERT INTO vehicles (key, name, seats_capacity, luggage_capacity, price_from, meta)
@@ -84,7 +86,7 @@ export const handleCreateBooking: RequestHandler = async (req, res) => {
          RETURNING *`,
         [
           reservationTag,
-          data.status || 'pending',
+          data.status || "pending",
           data.clientEmail || data.client_email || null,
           JSON.stringify(data.origin || {}),
           JSON.stringify(data.destination || {}),
@@ -98,7 +100,7 @@ export const handleCreateBooking: RequestHandler = async (req, res) => {
           data.luggage ? JSON.stringify(data.luggage) : null,
           data.vehicleType || null,
           data.pricing ? JSON.stringify(data.pricing) : null,
-        ]
+        ],
       );
 
       const booking = result.rows[0];
@@ -107,8 +109,8 @@ export const handleCreateBooking: RequestHandler = async (req, res) => {
       client.release();
     }
   } catch (err) {
-    console.error('Failed to create booking:', err);
-    return res.status(500).json({ error: 'Failed to create booking' });
+    console.error("Failed to create booking:", err);
+    return res.status(500).json({ error: "Failed to create booking" });
   }
 };
 
@@ -117,13 +119,15 @@ export const handleGetVehicles: RequestHandler = async (_req, res) => {
     await ensureSchema();
     const client = await pool.connect();
     try {
-      const result = await client.query('SELECT key, name, seats_capacity, luggage_capacity, price_from, meta FROM vehicles ORDER BY id');
+      const result = await client.query(
+        "SELECT key, name, seats_capacity, luggage_capacity, price_from, meta FROM vehicles ORDER BY id",
+      );
       return res.json({ vehicles: result.rows });
     } finally {
       client.release();
     }
   } catch (err) {
-    console.error('Failed to get vehicles:', err);
-    return res.status(500).json({ error: 'Failed to get vehicles' });
+    console.error("Failed to get vehicles:", err);
+    return res.status(500).json({ error: "Failed to get vehicles" });
   }
 };
