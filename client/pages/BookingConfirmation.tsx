@@ -456,6 +456,31 @@ export default function BookingConfirmation() {
               </CardContent>
             </Card>
 
+            {/* Voucher display (driver) */}
+            {showVoucher && voucherCode && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Voucher de Reserva</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center space-y-3">
+                    <div className="text-sm text-gray-600">Código para mostrar al conductor</div>
+                    <div className="text-2xl font-mono font-bold tracking-wider bg-gray-100 p-3 rounded-md">{voucherCode}</div>
+                    <div className="mx-auto w-full max-w-xs">
+                      <div className="bg-white p-2 rounded-md border">
+                        <svg width="100%" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" dangerouslySetInnerHTML={{__html: Array.from({length: 30}).map((_,i) => {
+                          const x = 4 + i*6;
+                          const h = 20 + ((i*7) % 30);
+                          return (`<rect x="${x}" y="${30 - h/2}" width="3" height="${h}" fill="#000"/>`);
+                        }).join('') }} />
+                      </div>
+                    </div>
+                    <div className="text-xs text-gray-500">El conductor solicitará este código antes de comenzar el viaje.</div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Next Steps */}
             <Card>
               <CardHeader>
