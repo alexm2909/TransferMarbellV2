@@ -445,6 +445,10 @@ export default function BookingConfirmation() {
                   <DownloadIcon className="w-4 h-4 mr-2" />
                   Descargar PDF
                 </Button>
+                <Button variant="outline" className="w-full justify-start" onClick={() => setShowVoucher((s) => !s)}>
+                  <Badge className="mr-2">Voucher</Badge>
+                  Mostrar Voucher
+                </Button>
                 <Button variant="outline" className="w-full justify-start">
                   <MailIcon className="w-4 h-4 mr-2" />
                   Reenviar Email
