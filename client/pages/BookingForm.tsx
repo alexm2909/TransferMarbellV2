@@ -115,7 +115,7 @@ export default function BookingForm() {
         "Phone charger",
         "Water bottles",
       ],
-      price: "€35",
+      price: "���35",
     },
     {
       key: "premium",
@@ -555,12 +555,12 @@ export default function BookingForm() {
                                 mask={mask}
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
+                                onBlur={handlePhoneBlur}
                                 maskChar={null}
                               >
                                 {(inputProps) => (
                                   <Input
                                     {...inputProps}
-                                    onBlur={handlePhoneBlur}
                                     inputMode="tel"
                                   />
                                 )}
