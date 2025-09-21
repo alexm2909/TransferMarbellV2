@@ -10,7 +10,7 @@ export default function ReservationLookup() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -19,15 +19,14 @@ export default function ReservationLookup() {
       return;
     }
 
-    const bookings = database.getAllBookings();
-    const booking = bookings.find((b) => b.reservationTag === tag && b.clientData?.email?.toLowerCase() === email.toLowerCase());
-
-    if (!booking) {
+    try {
+      const resp = await fetch(`/api/bookings/lookup?tag=${encodeURIComponent(tag)}&email=${encodeURIComponent(email)}`);
+      const json = await resp.json();
+      if (!resp.ok) throw new Error('not-found');
+      navigate(`/mi-reserva/${json.booking.id}`);
+    } catch (err) {
       setError("No se ha encontrado ninguna reserva con esos datos");
-      return;
     }
-
-    navigate(`/mi-reserva/${booking.id}`);
   };
 
   return (
