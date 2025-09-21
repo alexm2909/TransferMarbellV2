@@ -31,6 +31,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
+import { parsePhoneNumberFromString, AsYouType } from "libphonenumber-js";
 
 function generateReservationTag() {
   const letters = Array.from({ length: 3 })
@@ -40,41 +41,25 @@ function generateReservationTag() {
   return `TRMB_${letters}${numbers}`;
 }
 
-// Helper functions for phone validation and formatting
-const normalizeDigits = (s: string) => (s || "").replace(/\D/g, "");
+// Phone validation and formatting using libphonenumber-js
 const isValidPhone = (s: string) => {
   if (!s) return false;
-  const digits = normalizeDigits(s);
-  // minimal sensible phone length and max per E.164
-  return digits.length >= 7 && digits.length <= 15;
+  try {
+    const pn = parsePhoneNumberFromString(s || "");
+    return !!(pn && pn.isValid());
+  } catch (err) {
+    return false;
+  }
 };
 
 const formatPhone = (s: string) => {
   if (!s) return "";
-  const trimmed = s.trim();
-  const hasPlus = trimmed.startsWith("+");
-  const digits = normalizeDigits(trimmed);
-  if (!digits) return trimmed;
-
-  // If Spanish number (country code 34) present or likely local 9-digit mobile, format as +34 600 123 456
-  if ((hasPlus && digits.startsWith("34")) || (!hasPlus && digits.length === 9 && /^[67]/.test(digits))) {
-    const core = hasPlus && digits.startsWith("34") ? digits.slice(2) : digits;
-    if (core.length === 9) {
-      return `+34 ${core.replace(/(\d{3})(\d{3})(\d{3})/, "$1 $2 $3")}`;
-    }
+  try {
+    const pn = parsePhoneNumberFromString(s || "");
+    return pn ? pn.formatInternational() : s.trim();
+  } catch (err) {
+    return s.trim();
   }
-
-  // Generic formatting: if has plus, keep country code (first 2-3 digits) then group rest by 3
-  if (hasPlus) {
-    // take first 2 as country code for simplicity, fallback if short
-    const cc = digits.slice(0, 2);
-    const rest = digits.slice(2);
-    const grouped = rest.replace(/(\d{3})(?=\d)/g, "$1 ").trim();
-    return `+${cc} ${grouped}`.trim();
-  }
-
-  // No plus: group by 3 for readability
-  return digits.replace(/(\d{3})(?=\d)/g, "$1 ").trim();
 };
 
 export default function BookingForm() {
@@ -485,7 +470,7 @@ export default function BookingForm() {
                     </div>
                     <div>
                       <Label>Teléfono (opcional si introduces correo)</Label>
-                      <Input value={phone} onChange={(e) => setPhone(e.target.value)} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />
+                      <Input value={phone} onChange={(e) => setPhone(new AsYouType().input(e.target.value))} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />
                       {phoneError && <div className="text-xs text-red-600 mt-1">{phoneError}</div>}
                     </div>
                   </div>
