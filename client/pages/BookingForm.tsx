@@ -215,9 +215,9 @@ export default function BookingForm() {
       setPhoneError(null);
       return;
     }
-    const formatted = formatPhone(phone);
+    const formatted = formatPhone(phone, selectedCountry);
     setPhone(formatted);
-    if (!isValidPhone(formatted)) {
+    if (!isValidPhone(formatted, selectedCountry)) {
       setPhoneError("Teléfono no válido. Usa formato internacional, ej. +34 600 123 456");
     } else {
       setPhoneError(null);
