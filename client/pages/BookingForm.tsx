@@ -30,6 +30,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
 
 function generateReservationTag() {
   const letters = Array.from({ length: 3 })
@@ -38,6 +39,43 @@ function generateReservationTag() {
   const numbers = Math.floor(1000 + Math.random() * 9000).toString();
   return `TRMB_${letters}${numbers}`;
 }
+
+// Helper functions for phone validation and formatting
+const normalizeDigits = (s: string) => (s || "").replace(/\D/g, "");
+const isValidPhone = (s: string) => {
+  if (!s) return false;
+  const digits = normalizeDigits(s);
+  // minimal sensible phone length and max per E.164
+  return digits.length >= 7 && digits.length <= 15;
+};
+
+const formatPhone = (s: string) => {
+  if (!s) return "";
+  const trimmed = s.trim();
+  const hasPlus = trimmed.startsWith("+");
+  const digits = normalizeDigits(trimmed);
+  if (!digits) return trimmed;
+
+  // If Spanish number (country code 34) present or likely local 9-digit mobile, format as +34 600 123 456
+  if ((hasPlus && digits.startsWith("34")) || (!hasPlus && digits.length === 9 && /^[67]/.test(digits))) {
+    const core = hasPlus && digits.startsWith("34") ? digits.slice(2) : digits;
+    if (core.length === 9) {
+      return `+34 ${core.replace(/(\d{3})(\d{3})(\d{3})/, "$1 $2 $3")}`;
+    }
+  }
+
+  // Generic formatting: if has plus, keep country code (first 2-3 digits) then group rest by 3
+  if (hasPlus) {
+    // take first 2 as country code for simplicity, fallback if short
+    const cc = digits.slice(0, 2);
+    const rest = digits.slice(2);
+    const grouped = rest.replace(/(\d{3})(?=\d)/g, "$1 ").trim();
+    return `+${cc} ${grouped}`.trim();
+  }
+
+  // No plus: group by 3 for readability
+  return digits.replace(/(\d{3})(?=\d)/g, "$1 ").trim();
+};
 
 export default function BookingForm() {
   const navigate = useNavigate();
@@ -57,6 +95,7 @@ export default function BookingForm() {
   const [vehicleType, setVehicleType] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [childrenCount, setChildrenCount] = useState(0);
@@ -165,6 +204,20 @@ export default function BookingForm() {
     }
   }, []);
 
+  const handlePhoneBlur = () => {
+    if (!phone) {
+      setPhoneError(null);
+      return;
+    }
+    const formatted = formatPhone(phone);
+    setPhone(formatted);
+    if (!isValidPhone(formatted)) {
+      setPhoneError("Teléfono no válido. Usa formato internacional, ej. +34 600 123 456");
+    } else {
+      setPhoneError(null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -182,6 +235,11 @@ export default function BookingForm() {
     // Require at least email or phone
     if (!email.trim() && !phone.trim()) {
       alert("Por favor introduce al menos un correo electrónico o un número de teléfono");
+      return;
+    }
+
+    if (phone && !isValidPhone(phone)) {
+      alert("Teléfono no válido. Usa formato internacional, ej. +34 600 123 456");
       return;
     }
 
@@ -427,7 +485,8 @@ export default function BookingForm() {
                     </div>
                     <div>
                       <Label>Teléfono (opcional si introduces correo)</Label>
-                      <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+34 600 123 456" />
+                      <Input value={phone} onChange={(e) => setPhone(e.target.value)} onBlur={handlePhoneBlur} placeholder="+34 600 123 456" inputMode="tel" />
+                      {phoneError && <div className="text-xs text-red-600 mt-1">{phoneError}</div>}
                     </div>
                   </div>
                 </CardContent>
