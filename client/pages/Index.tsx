@@ -110,9 +110,6 @@ export default function Index() {
                 <Link to="/mi-reserva">
                   <Button variant="outline" className="border-ocean text-ocean">Mi reserva</Button>
                 </Link>
-                <Link to="/book">
-                  <Button className="bg-ocean text-white">Reservar Ahora</Button>
-                </Link>
               </div>
             </div>
 
