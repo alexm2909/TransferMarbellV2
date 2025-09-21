@@ -138,14 +138,14 @@ export const handleGetBookings: RequestHandler = async (_req, res) => {
     const client = await pool.connect();
     try {
       const result = await client.query(
-        'SELECT id, reservation_tag, status, client_email, origin, destination, date, time, return_date, passengers, children, luggage, vehicle_type, created_at FROM bookings ORDER BY created_at DESC LIMIT 200'
+        "SELECT id, reservation_tag, status, client_email, origin, destination, date, time, return_date, passengers, children, luggage, vehicle_type, created_at FROM bookings ORDER BY created_at DESC LIMIT 200",
       );
       return res.json({ bookings: result.rows });
     } finally {
       client.release();
     }
   } catch (err) {
-    console.error('Failed to get bookings:', err);
-    return res.status(500).json({ error: 'Failed to get bookings' });
+    console.error("Failed to get bookings:", err);
+    return res.status(500).json({ error: "Failed to get bookings" });
   }
 };

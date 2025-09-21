@@ -26,7 +26,9 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
             transportConfig = smtp;
           }
 
-          const transporter = nodemailer.createTransport(transportConfig as any);
+          const transporter = nodemailer.createTransport(
+            transportConfig as any,
+          );
 
           const info = await transporter.sendMail({
             from: process.env.FROM_EMAIL || "no-reply@transfermarbell.com",
@@ -42,7 +44,10 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
           // If using a real SMTP provider, try to return a provider response
           return res.status(200).json({ success: true, info });
         } catch (err) {
-          console.error("Nodemailer failed to send email with provided SMTP_TRANSPORT:", err);
+          console.error(
+            "Nodemailer failed to send email with provided SMTP_TRANSPORT:",
+            err,
+          );
           // continue to try ethereal fallback
         }
       }
@@ -95,13 +100,10 @@ export const handleSendConfirmation: RequestHandler = async (req, res) => {
     );
     console.log({ to, subject, reservationTag, text, html });
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message:
-          "Email logged to server console (SMTP not configured or failed)",
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Email logged to server console (SMTP not configured or failed)",
+    });
   } catch (err) {
     console.error("Failed to send confirmation email:", err);
     return res.status(500).json({ error: "Failed to send confirmation email" });

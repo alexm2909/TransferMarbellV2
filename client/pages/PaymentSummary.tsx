@@ -21,7 +21,9 @@ import {
 } from "lucide-react";
 
 // Stripe test public key
-const stripePromise = loadStripe("pk_test_51234567890abcdef_test_1234567890abcdef1234567890abcdef1234567890");
+const stripePromise = loadStripe(
+  "pk_test_51234567890abcdef_test_1234567890abcdef1234567890abcdef1234567890",
+);
 
 interface BookingData {
   origin: string;
@@ -85,13 +87,16 @@ export default function PaymentSummary() {
   };
 
   const calculateCosts = () => {
-    if (!bookingData) return { subtotal: 0, childSeats: 0, returnTrip: 0, total: 0 };
+    if (!bookingData)
+      return { subtotal: 0, childSeats: 0, returnTrip: 0, total: 0 };
 
     const vehicle = getVehicleDetails(bookingData.vehicleType);
     const basePrice = vehicle.basePrice;
-    const childSeatsPrice = bookingData.childSeats?.reduce((total, seat) => total + seat.price, 0) || 0;
+    const childSeatsPrice =
+      bookingData.childSeats?.reduce((total, seat) => total + seat.price, 0) ||
+      0;
     const returnTripPrice = bookingData.hasReturnTrip ? basePrice : 0;
-    
+
     const subtotal = basePrice;
     const total = subtotal + childSeatsPrice + returnTripPrice;
 
@@ -111,19 +116,19 @@ export default function PaymentSummary() {
     try {
       // Simulate payment processing with Stripe
       const costs = calculateCosts();
-      
+
       // In a real app, you would create a payment intent on your backend
       // For demo purposes, we'll simulate different payment scenarios
-      
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // Simulate different payment outcomes based on amount
       const shouldSucceed = Math.random() > 0.1; // 90% success rate for demo
-      
+
       if (shouldSucceed) {
         // Generate booking ID
         const bookingId = "TM" + Date.now().toString().slice(-6);
-        
+
         // Save successful booking
         const successfulBooking = {
           ...bookingData,
@@ -133,10 +138,13 @@ export default function PaymentSummary() {
           paymentMethod: "card",
           confirmedAt: new Date().toISOString(),
         };
-        
-        localStorage.setItem("completedBooking", JSON.stringify(successfulBooking));
+
+        localStorage.setItem(
+          "completedBooking",
+          JSON.stringify(successfulBooking),
+        );
         localStorage.removeItem("pendingBooking");
-        
+
         navigate(`/payment-success?id=${bookingId}`);
       } else {
         // Simulate payment failure
@@ -225,9 +233,7 @@ export default function PaymentSummary() {
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
             Cambiar Método de Pago
           </Link>
-          <h1 className="text-3xl font-bold text-navy">
-            Resumen y Pago
-          </h1>
+          <h1 className="text-3xl font-bold text-navy">Resumen y Pago</h1>
           <p className="text-gray-600 mt-2">
             Revisa los detalles de tu reserva y completa el pago
           </p>
@@ -250,7 +256,9 @@ export default function PaymentSummary() {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     <div>
                       <div className="font-medium text-gray-900">Origen</div>
-                      <div className="text-sm text-gray-600">{bookingData.origin}</div>
+                      <div className="text-sm text-gray-600">
+                        {bookingData.origin}
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
@@ -270,7 +278,9 @@ export default function PaymentSummary() {
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                     <div>
                       <div className="font-medium text-gray-900">Destino</div>
-                      <div className="text-sm text-gray-600">{bookingData.destination}</div>
+                      <div className="text-sm text-gray-600">
+                        {bookingData.destination}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -279,7 +289,9 @@ export default function PaymentSummary() {
                   <div className="p-4 bg-ocean-light/10 border border-ocean/20 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
                       <RepeatIcon className="w-4 h-4 text-ocean" />
-                      <span className="font-medium text-ocean">Viaje de Vuelta</span>
+                      <span className="font-medium text-ocean">
+                        Viaje de Vuelta
+                      </span>
                     </div>
                     <div className="text-sm text-gray-600">
                       {bookingData.returnDate} a las {bookingData.returnTime}
@@ -324,26 +336,38 @@ export default function PaymentSummary() {
                 {bookingData.flightNumber && (
                   <div className="flex items-center justify-between mt-2">
                     <span className="font-medium">Vuelo:</span>
-                    <span className="text-gray-600">{bookingData.flightNumber}</span>
+                    <span className="text-gray-600">
+                      {bookingData.flightNumber}
+                    </span>
                   </div>
                 )}
 
-                {bookingData.childSeats && bookingData.childSeats.length > 0 && (
-                  <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                    <div className="font-medium text-sm mb-2">Sillas Infantiles:</div>
-                    {bookingData.childSeats.map((seat, index) => (
-                      <div key={index} className="text-xs text-gray-600 flex justify-between">
-                        <span>{seat.description}</span>
-                        <span>€{seat.price}</span>
+                {bookingData.childSeats &&
+                  bookingData.childSeats.length > 0 && (
+                    <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                      <div className="font-medium text-sm mb-2">
+                        Sillas Infantiles:
                       </div>
-                    ))}
-                  </div>
-                )}
+                      {bookingData.childSeats.map((seat, index) => (
+                        <div
+                          key={index}
+                          className="text-xs text-gray-600 flex justify-between"
+                        >
+                          <span>{seat.description}</span>
+                          <span>€{seat.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                 {bookingData.specialRequests && (
                   <div className="mt-4 p-3 bg-ocean-light/20 border border-ocean/30 rounded-lg">
-                    <div className="font-medium text-sm mb-1">Solicitudes Especiales:</div>
-                    <div className="text-xs text-gray-600">{bookingData.specialRequests}</div>
+                    <div className="font-medium text-sm mb-1">
+                      Solicitudes Especiales:
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      {bookingData.specialRequests}
+                    </div>
                   </div>
                 )}
               </CardContent>
@@ -365,14 +389,14 @@ export default function PaymentSummary() {
                     <span className="text-gray-600">Viaje principal</span>
                     <span className="font-medium">€{costs.subtotal}</span>
                   </div>
-                  
+
                   {costs.childSeats > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Sillas infantiles</span>
                       <span className="font-medium">€{costs.childSeats}</span>
                     </div>
                   )}
-                  
+
                   {costs.returnTrip > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Viaje de vuelta</span>
@@ -395,14 +419,19 @@ export default function PaymentSummary() {
                   {bookingData.selectedPaymentMethod && (
                     <div className="text-xs text-center p-2 bg-ocean-light/10 rounded border border-ocean/20">
                       <span className="text-ocean font-medium">
-                        Método: {
-                          bookingData.selectedPaymentMethod === "card" ? "Tarjeta" :
-                          bookingData.selectedPaymentMethod === "apple_pay" ? "Apple Pay" :
-                          bookingData.selectedPaymentMethod === "google_pay" ? "Google Pay" :
-                          bookingData.selectedPaymentMethod === "paypal" ? "PayPal" :
-                          bookingData.selectedPaymentMethod === "bank_transfer" ? "Transferencia" :
-                          "Tarjeta"
-                        }
+                        Método:{" "}
+                        {bookingData.selectedPaymentMethod === "card"
+                          ? "Tarjeta"
+                          : bookingData.selectedPaymentMethod === "apple_pay"
+                            ? "Apple Pay"
+                            : bookingData.selectedPaymentMethod === "google_pay"
+                              ? "Google Pay"
+                              : bookingData.selectedPaymentMethod === "paypal"
+                                ? "PayPal"
+                                : bookingData.selectedPaymentMethod ===
+                                    "bank_transfer"
+                                  ? "Transferencia"
+                                  : "Tarjeta"}
                       </span>
                     </div>
                   )}

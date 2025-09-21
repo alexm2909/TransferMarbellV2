@@ -559,10 +559,7 @@ export default function BookingForm() {
                                 maskChar={null}
                               >
                                 {(inputProps) => (
-                                  <Input
-                                    {...inputProps}
-                                    inputMode="tel"
-                                  />
+                                  <Input {...inputProps} inputMode="tel" />
                                 )}
                               </InputMask>
                             );
