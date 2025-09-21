@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,6 +56,9 @@ export default function BookingForm() {
   const [luggage, setLuggage] = useState("1");
   const [vehicleType, setVehicleType] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [childrenCount, setChildrenCount] = useState(0);
   const [childSeats, setChildSeats] = useState<any[]>([]);
   const [luggageDetails, setLuggageDetails] = useState<any[]>([]);
@@ -149,6 +151,13 @@ export default function BookingForm() {
         setVehicleType(p.vehicleType || "");
         setEmail(p.clientEmail || "");
         setChildrenCount(p.children || 0);
+        // if prebooking contains name/phone, set them
+        if (p.clientName) {
+          const parts = String(p.clientName).split(" ");
+          setFirstName(parts.shift() || "");
+          setLastName(parts.join(" ") || "");
+        }
+        if (p.clientPhone) setPhone(p.clientPhone || "");
         localStorage.removeItem("preBookingData");
       } catch (e) {
         // ignore
@@ -159,10 +168,20 @@ export default function BookingForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!origin || !destination || !date || !time || !vehicleType || !email) {
-      alert(
-        "Por favor completa todos los campos requeridos, incluyendo el correo electrónico",
-      );
+    if (!origin || !destination || !date || !time || !vehicleType) {
+      alert("Por favor completa todos los campos requeridos del viaje");
+      return;
+    }
+
+    // Require name and surname
+    if (!firstName.trim() || !lastName.trim()) {
+      alert("Por favor introduce tu nombre y apellidos");
+      return;
+    }
+
+    // Require at least email or phone
+    if (!email.trim() && !phone.trim()) {
+      alert("Por favor introduce al menos un correo electrónico o un número de teléfono");
       return;
     }
 
@@ -196,8 +215,10 @@ export default function BookingForm() {
       luggageCounts.large = parseInt(luggage, 10) || 0;
     }
 
+    const clientFullName = `${firstName.trim()} ${lastName.trim()}`.trim();
+
     const newBooking = createBooking({
-      clientId: email,
+      clientId: email || phone || clientFullName,
       reservationTag,
       status: "pending",
       tripDetails: {
@@ -213,7 +234,7 @@ export default function BookingForm() {
       vehicleType,
       pricing: { basePrice: 0, extras: [], totalPrice: 0, currency: "EUR" },
       payment: { status: "pending" },
-      clientData: { name: "", email, phone: "" },
+      clientData: { name: clientFullName, email, phone },
     });
 
     // Store pendingBooking for confirmation page
@@ -222,21 +243,23 @@ export default function BookingForm() {
       JSON.stringify({ id: newBooking.id, reservationTag, email }),
     );
 
-    // Send confirmation email via server function
-    try {
-      await fetch("/api/send-confirmation", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: email,
-          reservationTag,
-          subject: `Confirmación de reserva ${reservationTag}`,
-          text: `Tu reserva ${reservationTag} ha sido creada. Origen: ${origin} - Destino: ${destination} - Fecha: ${date} ${time}`,
-          html: `<p>Reserva: <strong>${reservationTag}</strong></p><p>${origin} → ${destination}</p><p>${date} ${time}</p>`,
-        }),
-      });
-    } catch (err) {
-      console.warn("Error enviando correo de confirmación:", err);
+    // Send confirmation email via server function if email provided
+    if (email) {
+      try {
+        await fetch("/api/send-confirmation", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            to: email,
+            reservationTag,
+            subject: `Confirmación de reserva ${reservationTag}`,
+            text: `Tu reserva ${reservationTag} ha sido creada. Origen: ${origin} - Destino: ${destination} - Fecha: ${date} ${time}`,
+            html: `<p>Reserva: <strong>${reservationTag}</strong></p><p>${origin} → ${destination}</p><p>${date} ${time}</p>`,
+          }),
+        });
+      } catch (err) {
+        console.warn("Error enviando correo de confirmación:", err);
+      }
     }
 
     navigate("/booking-confirmation");
@@ -377,6 +400,35 @@ export default function BookingForm() {
                         </div>
                       </div>
                     )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Personal data card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-ocean" /> Datos Personales
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label>Nombre</Label>
+                      <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Nombre" />
+                    </div>
+                    <div>
+                      <Label>Apellidos</Label>
+                      <Input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Apellidos" />
+                    </div>
+                    <div>
+                      <Label>Correo electrónico (opcional si introduces teléfono)</Label>
+                      <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" />
+                    </div>
+                    <div>
+                      <Label>Teléfono (opcional si introduces correo)</Label>
+                      <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+34 600 123 456" />
+                    </div>
                   </div>
                 </CardContent>
               </Card>
