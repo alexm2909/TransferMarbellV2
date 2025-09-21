@@ -262,27 +262,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
     calculateRoute();
   };
 
-  if (!origin || !destination) {
-    return (
-      <Card className={className}>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <MapPinIcon className="w-5 h-5 text-ocean" />
-            Ruta del Viaje
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center h-64 bg-gray-100 rounded-lg">
-            <div className="text-center text-gray-500">
-              <MapPinIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
-              <p>Selecciona origen y destino para ver la ruta</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
+  // Always render the map card. When origin/destination are empty the map stays centered on Málaga and no route is drawn.
   return (
     <Card className={className}>
       <CardHeader>
@@ -292,7 +272,7 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Route Info */}
+        {/* Route Info - shown only when routeInfo is available */}
         {routeInfo && (
           <div className="grid grid-cols-3 gap-3 mb-4">
             <div className="text-center p-3 bg-ocean-light/20 rounded-lg">
@@ -319,32 +299,36 @@ export default function RouteMap({ origin, destination, className = "" }: RouteM
           </div>
         )}
 
-        {/* Route Details */}
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg border border-green-200">
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <div className="flex-1">
-              <div className="text-sm font-medium text-gray-900">Origen</div>
-              <div className="text-xs text-gray-600 truncate">{origin}</div>
+        {/* Route Details - visible if provide origin/destination */}
+        {origin || destination ? (
+          <div className="space-y-2 mb-4">
+            <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="flex-1">
+                <div className="text-sm font-medium text-gray-900">Origen</div>
+                <div className="text-xs text-gray-600 truncate">{origin || '—'}</div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg border border-red-200">
+              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="flex-1">
+                <div className="text-sm font-medium text-gray-900">Destino</div>
+                <div className="text-xs text-gray-600 truncate">{destination || '—'}</div>
+              </div>
             </div>
           </div>
-          <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg border border-red-200">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-            <div className="flex-1">
-              <div className="text-sm font-medium text-gray-900">Destino</div>
-              <div className="text-xs text-gray-600 truncate">{destination}</div>
-            </div>
-          </div>
-        </div>
+        ) : (
+          <div className="text-center text-gray-500 p-3 mb-2">El mapa está centrado en Málaga. Introduce origen/destino para ver la ruta.</div>
+        )}
 
-        {/* Map Container */}
+        {/* Map Container (always present) */}
         <div className="relative">
           <div
             ref={mapRef}
             className="w-full h-64 rounded-lg border border-gray-200 overflow-hidden"
             style={{ minHeight: "250px" }}
           />
-          
+
           {/* Loading Overlay */}
           {isLoading && (
             <div className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-lg">
