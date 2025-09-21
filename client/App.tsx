@@ -54,6 +54,9 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/support" element={<PlaceholderPage title="Support Center" description="Get help with bookings, payments, account issues, or general questions. Our support team is here to assist you 24/7." icon={HelpCircleIcon} />} />
 
+            {/* Admin */}
+            <Route path="/admin" element={<AdminBookings />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
