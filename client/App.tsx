@@ -11,6 +11,7 @@ import ReservationDetails from "./pages/ReservationDetails";
 import Fleet from "./pages/Fleet";
 import Services from "./pages/Services";
 import PaymentMethod from "./pages/PaymentMethod";
+import AdminBookings from "./pages/AdminBookings";
 import PaymentSummary from "./pages/PaymentSummary";
 import PaymentApple from "./pages/PaymentApple";
 import PaymentGoogle from "./pages/PaymentGoogle";
