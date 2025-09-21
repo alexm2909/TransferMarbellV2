@@ -10,8 +10,15 @@ export default function ReservationDetails() {
 
   useEffect(() => {
     if (!id) return;
-    const b = database.getBookingById(id);
-    setBooking(b);
+    (async () => {
+      try {
+        const resp = await fetch(`/api/bookings/lookup?id=${encodeURIComponent(String(id))}`);
+        const json = await resp.json();
+        setBooking(json.booking);
+      } catch (err) {
+        setBooking(null);
+      }
+    })();
   }, [id]);
 
   if (!booking) {
