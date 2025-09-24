@@ -136,7 +136,7 @@ export default function TripManagement() {
       driverName: "Ana García",
       driverPhone: "+34 600 111 222",
       origin: "Puerto Banús",
-      destination: "M��laga Airport",
+      destination: "Málaga Airport",
       date: "2024-12-20",
       time: "16:00",
       passengers: 1,
