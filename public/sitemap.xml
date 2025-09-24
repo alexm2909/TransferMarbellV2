@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/book</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/mi-reserva</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/services</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/fleet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://586794dccf344b6288f1fab59b79aefe-bcb50ee4fc8b43b6b64170b36.fly.dev/support</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>
