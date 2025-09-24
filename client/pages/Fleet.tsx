@@ -53,7 +53,7 @@ export default function Fleet() {
       price: "€50",
       rating: 4.9,
       features: ["Wi-Fi", "Aire Acondicionado", "Asientos de Cuero", "Cargador USB", "Agua Gratis"],
-      description: "Elegante sedán premium con máximo confort y tecnolog��a avanzada.",
+      description: "Elegante sedán premium con máximo confort y tecnología avanzada.",
       available: true,
     },
     {
