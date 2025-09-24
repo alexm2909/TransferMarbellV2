@@ -7,6 +7,7 @@ declare global {
 
 // Use environment variable or empty string to force user to set their own key
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+const GOOGLE_MAPS_DISABLED = String(import.meta.env.VITE_DISABLE_GOOGLE_MAPS || "").toLowerCase() === "true";
 
 interface GoogleMapsLoaderOptions {
   libraries?: string[];
@@ -31,6 +32,15 @@ class GoogleMapsLoader {
   }
 
   async load(options: GoogleMapsLoaderOptions = {}): Promise<void> {
+    // Explicitly disabled (e.g., preview domains not whitelisted for API key)
+    if (GOOGLE_MAPS_DISABLED) {
+      const msg = 'Google Maps is disabled in this environment (VITE_DISABLE_GOOGLE_MAPS=true).';
+      console.warn(msg);
+      this.hasError = true;
+      this.errorMessage = msg;
+      throw new Error(msg);
+    }
+
     // Check if API key is available
     if (!GOOGLE_MAPS_API_KEY) {
       const error = new Error('Google Maps API key not configured. Please set VITE_GOOGLE_MAPS_API_KEY environment variable.');
