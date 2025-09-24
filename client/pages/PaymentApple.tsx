@@ -9,7 +9,8 @@ export default function PaymentApple() {
 
   useEffect(() => {
     // Check if Apple Pay is available
-    const isApplePayAvailable = window.ApplePaySession && ApplePaySession.canMakePayments();
+    const AP = (window as any).ApplePaySession;
+    const isApplePayAvailable = !!(AP && typeof AP.canMakePayments === 'function' && AP.canMakePayments());
     
     if (!isApplePayAvailable) {
       // Redirect back to payment method selection if Apple Pay is not available
