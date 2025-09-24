@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 export default function PaymentError() {
-  const { user } = useAuth();
 
   const commonErrors = [
     {
