@@ -5,15 +5,23 @@ declare global {
   }
 }
 
-const GOOGLE_MAPS_DISABLED = String(import.meta.env.VITE_DISABLE_GOOGLE_MAPS || "").toLowerCase() === "true";
+const GOOGLE_MAPS_DISABLED =
+  String(import.meta.env.VITE_DISABLE_GOOGLE_MAPS || "").toLowerCase() ===
+  "true";
 const GOOGLE_MAPS_DEV_KEY = import.meta.env.VITE_GOOGLE_MAPS_DEV_KEY;
 
 function resolveGoogleMapsApiKey(): string | null {
-  const prodKey = String(import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '').trim();
-  const devKey = String(GOOGLE_MAPS_DEV_KEY || '').trim();
+  const prodKey = String(import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "").trim();
+  const devKey = String(GOOGLE_MAPS_DEV_KEY || "").trim();
   try {
-    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-    const isPreviewOrLocal = hostname === 'localhost' || hostname.endsWith('.localhost') || hostname.endsWith('.fly.dev') || hostname.endsWith('.netlify.app') || hostname.endsWith('.vercel.app');
+    const hostname =
+      typeof window !== "undefined" ? window.location.hostname : "";
+    const isPreviewOrLocal =
+      hostname === "localhost" ||
+      hostname.endsWith(".localhost") ||
+      hostname.endsWith(".fly.dev") ||
+      hostname.endsWith(".netlify.app") ||
+      hostname.endsWith(".vercel.app");
     if (isPreviewOrLocal && devKey) return devKey;
     if (prodKey) return prodKey;
     return null;
@@ -33,7 +41,7 @@ class GoogleMapsLoader {
   private loadPromise: Promise<void> | null = null;
   private callbacks: (() => void)[] = [];
   private hasError = false;
-  private errorMessage = '';
+  private errorMessage = "";
 
   private constructor() {}
 
@@ -46,7 +54,8 @@ class GoogleMapsLoader {
 
   async load(options: GoogleMapsLoaderOptions = {}): Promise<void> {
     if (GOOGLE_MAPS_DISABLED) {
-      const msg = 'Google Maps is disabled in this environment (VITE_DISABLE_GOOGLE_MAPS=true).';
+      const msg =
+        "Google Maps is disabled in this environment (VITE_DISABLE_GOOGLE_MAPS=true).";
       console.warn(msg);
       this.hasError = true;
       this.errorMessage = msg;
@@ -55,7 +64,9 @@ class GoogleMapsLoader {
 
     const apiKey = resolveGoogleMapsApiKey();
     if (!apiKey) {
-      const error = new Error('Google Maps API key not configured. Set VITE_GOOGLE_MAPS_API_KEY (and optionally VITE_GOOGLE_MAPS_DEV_KEY).');
+      const error = new Error(
+        "Google Maps API key not configured. Set VITE_GOOGLE_MAPS_API_KEY (and optionally VITE_GOOGLE_MAPS_DEV_KEY).",
+      );
       console.error(error.message);
       this.hasError = true;
       this.errorMessage = error.message;
@@ -79,24 +90,30 @@ class GoogleMapsLoader {
     return this.loadPromise;
   }
 
-  private loadScript(options: GoogleMapsLoaderOptions, apiKey: string): Promise<void> {
+  private loadScript(
+    options: GoogleMapsLoaderOptions,
+    apiKey: string,
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
-      const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
+      const existingScript = document.querySelector(
+        'script[src*="maps.googleapis.com"]',
+      );
       if (existingScript) {
         if (window.google) {
           this.isLoaded = true;
           this.isLoading = false;
           resolve();
         } else {
-          existingScript.addEventListener('load', () => {
+          existingScript.addEventListener("load", () => {
             this.isLoaded = true;
             this.isLoading = false;
             resolve();
           });
-          existingScript.addEventListener('error', () => {
+          existingScript.addEventListener("error", () => {
             this.isLoading = false;
             this.hasError = true;
-            this.errorMessage = 'Failed to load Google Maps API - Check API key and HTTP referrer restrictions for this domain.';
+            this.errorMessage =
+              "Failed to load Google Maps API - Check API key and HTTP referrer restrictions for this domain.";
             reject(new Error(this.errorMessage));
           });
         }
@@ -104,9 +121,10 @@ class GoogleMapsLoader {
       }
 
       const { libraries = [] } = options;
-      const librariesParam = libraries.length > 0 ? `&libraries=${libraries.join(',')}` : '';
+      const librariesParam =
+        libraries.length > 0 ? `&libraries=${libraries.join(",")}` : "";
 
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}${librariesParam}&callback=initGoogleMaps&region=ES&language=es`;
       script.async = true;
       script.defer = true;
@@ -121,8 +139,9 @@ class GoogleMapsLoader {
       script.onerror = (error) => {
         this.isLoading = false;
         this.hasError = true;
-        this.errorMessage = 'Failed to load Google Maps API - Check API key and HTTP referrer restrictions for this domain.';
-        console.error('Google Maps loading error:', error);
+        this.errorMessage =
+          "Failed to load Google Maps API - Check API key and HTTP referrer restrictions for this domain.";
+        console.error("Google Maps loading error:", error);
         reject(new Error(this.errorMessage));
       };
 
@@ -131,7 +150,7 @@ class GoogleMapsLoader {
   }
 
   private executeCallbacks() {
-    this.callbacks.forEach(callback => callback());
+    this.callbacks.forEach((callback) => callback());
     this.callbacks = [];
   }
 
