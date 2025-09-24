@@ -400,7 +400,7 @@ export default function PaymentSummary() {
                   {costs.returnTrip > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">Viaje de vuelta</span>
-                      <span className="font-medium">��{costs.returnTrip}</span>
+                      <span className="font-medium">€{costs.returnTrip}</span>
                     </div>
                   )}
                 </div>
