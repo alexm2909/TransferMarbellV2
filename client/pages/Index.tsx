@@ -54,12 +54,21 @@ export default function Index() {
     // Store pre-booking data in localStorage for later use
     localStorage.setItem("preBookingData", JSON.stringify(preBookingData));
 
-    // Send to server to create a pre-booking record
+    // Generate a reservation tag client-side to avoid depending on response parsing
+    const letters = Array.from({ length: 3 })
+      .map(() => String.fromCharCode(65 + Math.floor(Math.random() * 26)))
+      .join("");
+    const numbers = Math.floor(1000 + Math.random() * 9000).toString();
+    const preTag = `TRMB_${letters}${numbers}`;
+    localStorage.setItem("reservationTag", preTag);
+
+    // Send to server to create a pre-booking record (best-effort)
     try {
       const resp = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          reservationTag: preTag,
           status: "pending",
           clientEmail: (preBookingData as any).email || null,
           origin: { address: preBookingData.origin },
@@ -70,29 +79,33 @@ export default function Index() {
         }),
       });
 
-      const json = await resp.json();
-      if (json && json.booking) {
-        // save reservation tag to localStorage for later pages
-        const tag =
-          json.booking.reservation_tag || json.booking.reservationTag || "";
-        localStorage.setItem("reservationTag", tag);
-
-        // Try send confirmation email (pre-booking)
+      // Try to parse JSON once, but ignore body reuse errors
+      if (resp.ok) {
         try {
-          await fetch("/api/send-confirmation", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              to: (preBookingData as any).email || null,
-              reservationTag: tag,
-              subject: `Confirmación de reserva ${tag}`,
-              text: `Tu reserva ${tag} ha sido creada (pre-reserva). Origen: ${preBookingData.origin} - Destino: ${preBookingData.destination} - Fecha: ${preBookingData.date} ${preBookingData.time}`,
-              html: `<p>Pre-reserva: <strong>${tag}</strong></p><p>${preBookingData.origin} → ${preBookingData.destination}</p><p>${preBookingData.date} ${preBookingData.time}</p>`,
-            }),
-          });
+          const json = await resp.json();
+          const serverTag = json?.booking?.reservation_tag || json?.booking?.reservationTag;
+          if (serverTag) localStorage.setItem("reservationTag", serverTag);
         } catch (err) {
-          console.warn("Failed to send pre-booking confirmation email", err);
+          // Ignore parse errors (e.g., body stream already read)
+          console.warn("Non-fatal response parse issue for pre-booking", err);
         }
+      }
+
+      // Try send confirmation email (pre-booking) using known tag
+      try {
+        await fetch("/api/send-confirmation", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            to: (preBookingData as any).email || null,
+            reservationTag: localStorage.getItem("reservationTag"),
+            subject: `Confirmación de reserva ${localStorage.getItem("reservationTag")}`,
+            text: `Tu reserva ${preTag} ha sido creada (pre-reserva). Origen: ${preBookingData.origin} - Destino: ${preBookingData.destination} - Fecha: ${preBookingData.date} ${preBookingData.time}`,
+            html: `<p>Pre-reserva: <strong>${preTag}</strong></p><p>${preBookingData.origin} → ${preBookingData.destination}</p><p>${preBookingData.date} ${preBookingData.time}</p>`,
+          }),
+        });
+      } catch (err) {
+        console.warn("Failed to send pre-booking confirmation email", err);
       }
     } catch (err) {
       console.error("Failed to create pre-booking on server", err);
