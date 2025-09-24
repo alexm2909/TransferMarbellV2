@@ -106,6 +106,7 @@ export default function PaymentSuccess() {
 
         addVoucher(voucher);
         setGeneratedVoucher(voucher);
+        setIsLoading(false);
       } else {
         navigate("/");
       }
@@ -239,6 +240,8 @@ Web: www.transfermarbell.com
       }
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
 
   if (isLoading) {
     return (
@@ -428,7 +431,7 @@ Web: www.transfermarbell.com
                       {booking.childSeats.map((seat, index) => (
                         <div key={index} className="text-sm flex justify-between">
                           <span>{seat.description}</span>
-                          <span className="font-medium">�����{seat.price}</span>
+                          <span className="font-medium">€{seat.price}</span>
                         </div>
                       ))}
                     </div>
