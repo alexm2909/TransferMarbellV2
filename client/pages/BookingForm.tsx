@@ -545,17 +545,13 @@ export default function BookingForm() {
                             const full = `${dial}${dial ? ' ' : ''}${local}`.trim();
                             setPhone(full);
                           }}
-                          className="h-10 rounded-md border p-2 bg-white"
+                          className="h-10 w-24 sm:w-28 rounded-md border p-2 bg-white flex-shrink-0"
                         >
                           <option value="ES">🇪🇸 +34</option>
                           <option value="GB">🇬🇧 +44</option>
                           <option value="FR">🇫🇷 +33</option>
                           <option value="DE">🇩🇪 +49</option>
                         </select>
-
-                        <span className="px-2 h-10 flex items-center rounded-md border bg-gray-50 text-gray-700">
-                          {selectedCountry === 'ES' ? '🇪🇸 +34' : selectedCountry === 'GB' ? '🇬🇧 +44' : selectedCountry === 'FR' ? '🇫🇷 +33' : selectedCountry === 'DE' ? '🇩🇪 +49' : ''}
-                        </span>
                         {(() => {
                           const localMaskMap: Record<string, string | null> = {
                             ES: "999 999 999",
@@ -572,6 +568,7 @@ export default function BookingForm() {
                               onBlur={handlePhoneBlur}
                               placeholder={mask ? mask.replace(/9/g, '0') : "600 123 456"}
                               inputMode="tel"
+                              className="flex-1"
                             />
                           );
                         })()}
