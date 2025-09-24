@@ -32,7 +32,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { parsePhoneNumberFromString, AsYouType } from "libphonenumber-js";
-import InputMask from "react-input-mask";
 
 function generateReservationTag() {
   const letters = Array.from({ length: 3 })
@@ -116,7 +115,7 @@ export default function BookingForm() {
         "Phone charger",
         "Water bottles",
       ],
-      price: "���35",
+      price: "€35",
     },
     {
       key: "premium",
@@ -565,28 +564,13 @@ export default function BookingForm() {
                             DE: "99 99999999",
                           };
                           const mask = localMaskMap[selectedCountry] || null;
-                          if (mask) {
-                            return (
-                              <InputMask
-                                mask={mask}
-                                value={localPhone}
-                                onChange={(e) => setLocalPhone(e.target.value)}
-                                onBlur={handlePhoneBlur}
-                                maskChar={null}
-                              >
-                                {(inputProps) => (
-                                  <Input {...inputProps} inputMode="tel" />
-                                )}
-                              </InputMask>
-                            );
-                          }
-
+                          // Simple input without third-party mask for broader compatibility
                           return (
                             <Input
                               value={localPhone}
                               onChange={(e) => setLocalPhone(e.target.value)}
                               onBlur={handlePhoneBlur}
-                              placeholder="600 123 456"
+                              placeholder={mask ? mask.replace(/9/g, '0') : "600 123 456"}
                               inputMode="tel"
                             />
                           );
